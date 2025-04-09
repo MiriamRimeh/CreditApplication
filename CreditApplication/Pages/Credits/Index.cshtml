@@ -1,0 +1,84 @@
+﻿@page
+@model CreditApplication.Pages.Credits.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].CreditAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].CreditBeginDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].CreditEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].InterestRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].ModifiedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit[0].CreditType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Credit) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.EGN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditBeginDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterestRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditType)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

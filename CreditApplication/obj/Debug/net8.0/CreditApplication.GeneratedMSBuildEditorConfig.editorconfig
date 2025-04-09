@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CreditApplication
 build_property.RootNamespace = CreditApplication
@@ -20,16 +28,176 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientAddresses/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50QWRkcmVzc2VzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientAddresses/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50QWRkcmVzc2VzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientAddresses/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50QWRkcmVzc2VzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientAddresses/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50QWRkcmVzc2VzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientAddresses/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50QWRkcmVzc2VzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientFinancials/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50RmluYW5jaWFsc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientFinancials/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50RmluYW5jaWFsc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientFinancials/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50RmluYW5jaWFsc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientFinancials/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50RmluYW5jaWFsc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientFinancials/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50RmluYW5jaWFsc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Clients/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Clients/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50c1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Clients/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50c1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Clients/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50c1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Clients/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Credits/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlZGl0c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Credits/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlZGl0c1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Credits/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlZGl0c1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Credits/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlZGl0c1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Credits/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlZGl0c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/FinancialOperations/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmluYW5jaWFsT3BlcmF0aW9uc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/FinancialOperations/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmluYW5jaWFsT3BlcmF0aW9uc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/FinancialOperations/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmluYW5jaWFsT3BlcmF0aW9uc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/FinancialOperations/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmluYW5jaWFsT3BlcmF0aW9uc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/FinancialOperations/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmluYW5jaWFsT3BlcmF0aW9uc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/LogTables/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nVGFibGVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/LogTables/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nVGFibGVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/LogTables/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nVGFibGVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/LogTables/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nVGFibGVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/LogTables/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nVGFibGVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Nomenclatures/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm9tZW5jbGF0dXJlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Nomenclatures/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm9tZW5jbGF0dXJlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Nomenclatures/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm9tZW5jbGF0dXJlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Nomenclatures/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm9tZW5jbGF0dXJlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Nomenclatures/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm9tZW5jbGF0dXJlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/RepaymentPlans/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwYXltZW50UGxhbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/RepaymentPlans/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwYXltZW50UGxhbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/RepaymentPlans/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwYXltZW50UGxhbnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/RepaymentPlans/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwYXltZW50UGxhbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/RepaymentPlans/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwYXltZW50UGxhbnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Shared/_ValidationScriptsPartial.cshtml]

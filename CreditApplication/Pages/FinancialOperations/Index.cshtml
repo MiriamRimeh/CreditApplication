@@ -1,0 +1,66 @@
+﻿@page
+@model CreditApplication.Pages.FinancialOperations.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FinancialOperation[0].Credit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinancialOperation[0].PayedOnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinancialOperation[0].PayedAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinancialOperation[0].OperationType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinancialOperation[0].CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinancialOperation[0].ModifiedOn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.FinancialOperation) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credit.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayedOnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayedAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OperationType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

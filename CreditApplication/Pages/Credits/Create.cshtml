@@ -1,0 +1,78 @@
+﻿@page
+@model CreditApplication.Pages.Credits.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Credit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Credit.ClientID" class="control-label"></label>
+                <select asp-for="Credit.ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Credit.CreditAmount" class="control-label"></label>
+                <input asp-for="Credit.CreditAmount" class="form-control" />
+                <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credit.CreditBeginDate" class="control-label"></label>
+                <input asp-for="Credit.CreditBeginDate" class="form-control" />
+                <span asp-validation-for="Credit.CreditBeginDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credit.CreditEndDate" class="control-label"></label>
+                <input asp-for="Credit.CreditEndDate" class="form-control" />
+                <span asp-validation-for="Credit.CreditEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credit.InterestRate" class="control-label"></label>
+                <input asp-for="Credit.InterestRate" class="form-control" />
+                <span asp-validation-for="Credit.InterestRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credit.Status" class="control-label"></label>
+                <input asp-for="Credit.Status" class="form-control" />
+                <span asp-validation-for="Credit.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Credit.CreatedOn" class="control-label"></label>
+                <input asp-for="Credit.CreatedOn" class="form-control" />
+                <span asp-validation-for="Credit.CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Credit.ModifiedOn" class="control-label"></label>
+                <input asp-for="Credit.ModifiedOn" class="form-control" />
+                <span asp-validation-for="Credit.ModifiedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Credit.CreditType" class="control-label"></label>
+                <input asp-for="Credit.CreditType" class="form-control" />
+                <span asp-validation-for="Credit.CreditType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

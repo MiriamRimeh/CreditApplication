@@ -1,0 +1,75 @@
+﻿@page
+@model CreditApplication.Pages.RepaymentPlans.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>RepaymentPlan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RepaymentPlan.CreditID" class="control-label"></label>
+                <select asp-for="RepaymentPlan.CreditID" class ="form-control" asp-items="ViewBag.CreditID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="RepaymentPlan.InstallmentNumber" class="control-label"></label>
+                <input asp-for="RepaymentPlan.InstallmentNumber" class="form-control" />
+                <span asp-validation-for="RepaymentPlan.InstallmentNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RepaymentPlan.InstallmentAmount" class="control-label"></label>
+                <input asp-for="RepaymentPlan.InstallmentAmount" class="form-control" />
+                <span asp-validation-for="RepaymentPlan.InstallmentAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RepaymentPlan.Principal" class="control-label"></label>
+                <input asp-for="RepaymentPlan.Principal" class="form-control" />
+                <span asp-validation-for="RepaymentPlan.Principal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RepaymentPlan.Interest" class="control-label"></label>
+                <input asp-for="RepaymentPlan.Interest" class="form-control" />
+                <span asp-validation-for="RepaymentPlan.Interest" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="RepaymentPlan.isPaid" /> @Html.DisplayNameFor(model => model.RepaymentPlan.isPaid)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="RepaymentPlan.PayedOnDate" class="control-label"></label>
+                <input asp-for="RepaymentPlan.PayedOnDate" class="form-control" />
+                <span asp-validation-for="RepaymentPlan.PayedOnDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="RepaymentPlan.CreatedOn" class="control-label"></label>
+                <input asp-for="RepaymentPlan.CreatedOn" class="form-control" />
+                <span asp-validation-for="RepaymentPlan.CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="RepaymentPlan.ModifiedOn" class="control-label"></label>
+                <input asp-for="RepaymentPlan.ModifiedOn" class="form-control" />
+                <span asp-validation-for="RepaymentPlan.ModifiedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

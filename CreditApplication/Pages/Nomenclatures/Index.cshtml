@@ -1,0 +1,48 @@
+﻿@page
+@model CreditApplication.Pages.Nomenclatures.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nomenclature[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nomenclature[0].CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nomenclature[0].ModifiedOn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Nomenclature) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.NomCode">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.NomCode">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.NomCode">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
