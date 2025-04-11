@@ -1,0 +1,45 @@
+﻿@page
+@model CreditApplication.Pages.ApplicationForm.EndPageModel
+@{
+    ViewData["Title"] = "Application Complete";
+}
+<div class="alert alert-success">
+    <h2>Application Submitted!</h2>
+    <p>Your loan application has been successfully recorded.</p>
+</div>
+
+<hr />
+<h4>Application Summary</h4>
+
+<h5>Personal Details</h5>
+<ul>
+    <li><strong>Full Name:</strong> @Model.Client.FirstName @Model.Client.MiddleName @Model.Client.LastName</li>
+    <li><strong>Phone Number:</strong> @Model.Client.PhoneNumber</li>
+    <li><strong>Email:</strong> @Model.Client.Email</li>
+    <li><strong>EGN:</strong> @Model.Client.EGN</li>
+</ul>
+
+<h5>Address</h5>
+<ul>
+    <li><strong>City:</strong> @Model.Address?.City</li>
+    <li><strong>Street:</strong> @Model.Address?.StreetNeighbourhood</li>
+    <li><strong>Number:</strong> @Model.Address?.Number</li>
+    <li><strong>Post Code:</strong> @Model.Address?.PostalCode</li>
+</ul>
+
+<h5>Financial Information</h5>
+<ul>
+    <li><strong>Monthly Income:</strong> @Model.Financial?.MontlyIncome.ToString("C")</li>
+    <li><strong>Monthly Expenses:</strong> @Model.Financial?.MontlyExpenses.ToString("C")</li>
+    <li><strong>Employment Type:</strong> @Model.Financial?.EmploymentType</li> <!-- Optional: map to Nomenclature -->
+</ul>
+
+<h5>Credit Request</h5>
+<ul>
+    <li><strong>Amount:</strong> @Model.Credit?.CreditAmount.ToString("C")</li>
+    <li><strong>Begin Date:</strong> @Model.Credit?.CreditBeginDate.ToShortDateString()</li>
+    <li><strong>End Date:</strong> @Model.Credit?.CreditEndDate.ToShortDateString()</li>
+    <li><strong>Status Code:</strong> @Model.Credit?.Status</li> <!-- Optional: map to Nomenclature -->
+</ul>
+
+<a asp-page="/Index" class="btn btn-primary mt-3">Back to Home</a>

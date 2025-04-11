@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Credit[0].Client)
+                @Html.DisplayNameFor(model => model.Credit[0].ClientID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Credit[0].CreditAmount)
@@ -37,9 +37,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Credit[0].ModifiedOn)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].CreditType)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,7 +44,7 @@
 @foreach (var item in Model.Credit) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Client.EGN)
+                @Html.DisplayFor(modelItem => item.ClientID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreditAmount)
@@ -69,9 +66,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreditType)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

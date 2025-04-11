@@ -1,0 +1,61 @@
+﻿@page
+@model CreditApplication.Pages.Step3Model
+
+@{
+    ViewData["Title"] = "Step3";
+}
+
+<h1>Step3</h1>
+
+<h4>ClientFinancial</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ClientFinancial.ClientID" class="control-label"></label>
+                <select asp-for="ClientFinancial.ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+            </div> *@
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ClientFinancial.MontlyIncome" class="control-label"></label>
+                <input asp-for="ClientFinancial.MontlyIncome" class="form-control" />
+                <span asp-validation-for="ClientFinancial.MontlyIncome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ClientFinancial.MontlyExpenses" class="control-label"></label>
+                <input asp-for="ClientFinancial.MontlyExpenses" class="form-control" />
+                <span asp-validation-for="ClientFinancial.MontlyExpenses" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ClientFinancial.EmploymentType" class="control-label"></label>
+                <select asp-for="ClientFinancial.EmploymentType" class ="form-control" asp-items="ViewBag.EmploymentType"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientFinancial.CreatedOn" class="control-label"></label>
+                <input asp-for="ClientFinancial.CreatedOn" class="form-control" />
+                <span asp-validation-for="ClientFinancial.CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientFinancial.ModifiedOn" class="control-label"></label>
+                <input asp-for="ClientFinancial.ModifiedOn" class="form-control" />
+                <span asp-validation-for="ClientFinancial.ModifiedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

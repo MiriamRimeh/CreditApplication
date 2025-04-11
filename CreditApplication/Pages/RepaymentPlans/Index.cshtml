@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].Credit)
+                @Html.DisplayNameFor(model => model.RepaymentPlan[0].CreditID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RepaymentPlan[0].InstallmentNumber)
@@ -47,7 +47,7 @@
 @foreach (var item in Model.RepaymentPlan) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Credit.ID)
+                @Html.DisplayFor(modelItem => item.CreditID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InstallmentNumber)

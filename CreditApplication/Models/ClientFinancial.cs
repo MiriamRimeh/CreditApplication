@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CreditApplication.Models
@@ -7,8 +8,9 @@ namespace CreditApplication.Models
     {
         public int ID { get; set; }
 
-        [Required]
+        [TempData]
         public int ClientID { get; set; }
+        [BindProperty]
         public Client Client { get; set; }
 
         [Required]
@@ -19,6 +21,8 @@ namespace CreditApplication.Models
 
         [Required]
         public int EmploymentType { get; set; }
+
+        [ForeignKey("EmploymentType")]
         public Nomenclature EmploymentTypeNomenclature { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.Now;

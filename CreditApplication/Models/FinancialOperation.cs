@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CreditApplication.Models
 {
@@ -12,7 +13,9 @@ namespace CreditApplication.Models
         public DateTime PayedOnDate { get; set; }
         public decimal PayedAmount { get; set; }
 
-        public int OperationType { get; set; } 
+        public int OperationType { get; set; }
+
+        [ForeignKey("OperationType")]
         public Nomenclature OperationTypeNomenclature { get; set; }
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.Now;

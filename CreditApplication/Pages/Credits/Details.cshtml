@@ -12,10 +12,10 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Credit.Client)
+            @Html.DisplayNameFor(model => model.Credit.ClientID)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Credit.Client.EGN)
+            @Html.DisplayFor(model => model.Credit.ClientID)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Credit.CreditAmount)
@@ -58,12 +58,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Credit.ModifiedOn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Credit.CreditType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Credit.CreditType)
         </dd>
     </dl>
 </div>

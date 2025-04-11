@@ -28,6 +28,26 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ApplicationForm/EndPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwbGljYXRpb25Gb3JtXEVuZFBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ApplicationForm/Step1_Personal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwbGljYXRpb25Gb3JtXFN0ZXAxX1BlcnNvbmFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ApplicationForm/Step2_Address.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwbGljYXRpb25Gb3JtXFN0ZXAyX0FkZHJlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ApplicationForm/Step3_Financials.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwbGljYXRpb25Gb3JtXFN0ZXAzX0ZpbmFuY2lhbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ApplicationForm/Step4_Credit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwbGljYXRpb25Gb3JtXFN0ZXA0X0NyZWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/ClientAddresses/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50QWRkcmVzc2VzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

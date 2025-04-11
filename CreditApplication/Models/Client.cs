@@ -4,6 +4,7 @@ namespace CreditApplication.Models
 {
     public class Client
     {
+        [Key]
         public int ID { get; set; }
 
         [Required]
@@ -21,7 +22,7 @@ namespace CreditApplication.Models
         [MaxLength(10)]
         public string EGN { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(100)]
         public string? Email { get; set; }
 
         [MaxLength(10)]
@@ -31,11 +32,13 @@ namespace CreditApplication.Models
         [MaxLength(20)]
         public string IDCardNumber { get; set; }
 
-        [Required]
-        public DateTime IDValidityDate { get; set; }
-
+        [DataType(DataType.Date)]
         [Required]
         public DateTime IDIssueDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [Required]
+        public DateTime IDValidityDate { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -43,5 +46,7 @@ namespace CreditApplication.Models
 
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
+
+        public ICollection<Credit> Credits { get; set; } = new List<Credit>();
     }
 }

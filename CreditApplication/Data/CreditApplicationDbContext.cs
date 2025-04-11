@@ -8,7 +8,9 @@ namespace CreditApplication.Data
         public CreditApplicationDbContext(DbContextOptions<CreditApplicationDbContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
+        // TODO: Check DB Properties, some display invalid object error, others don't open at all (when the app is started)
         public DbSet<Nomenclature> Nomenclatures { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<ClientFinancial> ClientFinancials { get; set; }
@@ -20,14 +22,19 @@ namespace CreditApplication.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Може да зададете конфигурации, ако не използвате Data Annotations
 
-            // Пример: за таблицата Nomenclature – за първичния ключ
-            modelBuilder.Entity<Nomenclature>()
-                .HasKey(n => n.NomCode);
+            modelBuilder.HasDefaultSchema("21180011");
 
-            // Ако желаете да зададете default стойности и други constraints,
-            // това може да стане тук или чрез Data Annotations във моделите.
+            modelBuilder.Entity<Client>().ToTable("Clients")
+                    .HasMany(c => c.Credits);
+            modelBuilder.Entity<ClientFinancial>().ToTable("ClientFinancials");
+            modelBuilder.Entity<ClientAddress>().ToTable("ClientAddress");
+            modelBuilder.Entity<Credit>().ToTable("Credits")
+                    .HasMany(c => c.FinancialOperations);
+            modelBuilder.Entity<RepaymentPlan>().ToTable("RepaymentPlan");
+            modelBuilder.Entity<FinancialOperation>().ToTable("FinancialOperations");
+            modelBuilder.Entity<Nomenclature>().ToTable("Nomenclature");
+
         }
     }
 }

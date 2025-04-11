@@ -24,7 +24,7 @@ namespace CreditApplication.Pages.ClientAddresses
         public async Task OnGetAsync()
         {
             ClientAddress = await _context.ClientAddresses
-                .Include(c => c.Client).ToListAsync();
+                .Include(c => c.ClientID).ToListAsync();
         }
     }
 }

@@ -19,11 +19,13 @@ namespace CreditApplication.Pages.Clients
             _context = context;
         }
 
-        public IList<Client> Client { get;set; } = default!;
+        public IList<Client> Client { get; set; }
 
         public async Task OnGetAsync()
         {
-            Client = await _context.Clients.ToListAsync();
+            Client = await _context.Clients
+               // .Include(c => c.ClientAddress)
+                .ToListAsync();
         }
     }
 }

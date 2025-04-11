@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CreditApplication.Models
 {
@@ -6,8 +8,9 @@ namespace CreditApplication.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
+        [TempData]
         public int ClientID { get; set; }
+        [BindProperty]
         public Client Client { get; set; }
         [Required]
         public decimal CreditAmount { get; set; }
@@ -15,13 +18,15 @@ namespace CreditApplication.Models
         public DateTime CreditEndDate { get; set; } // Date when the credit ends
         public decimal InterestRate { get; set; } // Interest rate for the credit
         public int Status { get; set; } // Status of the credit (e.g., active, closed, etc.)
-        public Nomenclature StatusNomenclature { get; set; } // Foreign key to the Nomenclature table
+
+        [ForeignKey("Status")]
+        public Nomenclature StatusNavigation { get; set; }
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         [Required]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
-        [Required]
-        public int CreditType { get; set; }
-        public Nomenclature CreditTypeNomenclature { get; set; }
+
+        public ICollection<FinancialOperation> FinancialOperations { get; set; } = new List<FinancialOperation>();
+
     }
 }

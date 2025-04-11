@@ -1,0 +1,96 @@
+﻿@page
+@model CreditApplication.Pages.ApplicationForm.Step1Model
+
+@{
+    ViewData["Title"] = "Step1";
+}
+
+<h1>Step1</h1>
+
+<h4>Client</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Client.FirstName" class="control-label">First Name</label>
+                <input asp-for="Client.FirstName" class="form-control" />
+                <span asp-validation-for="Client.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.MiddleName" class="control-label">Middle Name</label>
+                <input asp-for="Client.MiddleName" class="form-control" />
+                <span asp-validation-for="Client.MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Client.LastName" class="control-label">Last Name</label>
+                <input asp-for="Client.LastName" class="form-control" />
+                <span asp-validation-for="Client.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Client.EGN" class="control-label">EGN</label>
+                <input asp-for="Client.EGN" class="form-control" />
+                <span asp-validation-for="Client.EGN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.Email" class="control-label">Email</label>
+                <input asp-for="Client.Email" class="form-control" />
+                <span asp-validation-for="Client.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.PhoneNumber" class="control-label">Phone Number</label>
+                <input asp-for="Client.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Client.IDCardNumber" class="control-label">ID Card Number</label>
+                <input asp-for="Client.IDCardNumber" class="form-control" />
+                <span asp-validation-for="Client.IDCardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Client.IDIssueDate" class="control-label">Issue Date</label>
+                <input asp-for="Client.IDIssueDate" class="form-control" />
+                <span asp-validation-for="Client.IDIssueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Client.IDValidityDate" class="control-label">Valid to</label>
+                <input asp-for="Client.IDValidityDate" class="form-control" />
+                <span asp-validation-for="Client.IDValidityDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Client.IDIssuer" class="control-label">Issued By</label>
+                <input asp-for="Client.IDIssuer" class="form-control" />
+                <span asp-validation-for="Client.IDIssuer" class="text-danger"></span>
+            </div>
+@*             <div class="form-group">
+                <label asp-for="Client.CreatedOn" class="control-label"></label>
+                <input asp-for="Client.CreatedOn" class="form-control" />
+                <span asp-validation-for="Client.CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.ModifiedOn" class="control-label"></label>
+                <input asp-for="Client.ModifiedOn" class="form-control" />
+                <span asp-validation-for="Client.ModifiedOn" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
