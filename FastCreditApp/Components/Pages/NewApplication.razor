@@ -1,0 +1,218 @@
+﻿@page "/apply"
+@using FastCreditApp.Data
+@using FastCreditApp.Data.Entities
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.EntityFrameworkCore
+@using System.ComponentModel.DataAnnotations
+@using System.Linq
+@using System.Collections.Generic
+@* @inherits NewApplicationBase; *@
+
+
+<h3>Кандидатстване за бърз кредит</h3>
+<p>Стъпка @currentStep от @maxStep</p>
+
+<EditForm Model="Model" OnValidSubmit="HandleValidSubmit" FormName="applyForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    @* Стъпка 1: Лични данни *@
+    @if (currentStep == 1)
+    {
+        <fieldset class="border p-3 mb-3">
+            <legend>Лични данни</legend>
+            <InputText class="form-control mb-2" @bind-Value="Model.FirstName" placeholder="Име" />
+            <InputText class="form-control mb-2" @bind-Value="Model.MiddleName" placeholder="Презиме (по желание)" />
+            <InputText class="form-control mb-2" @bind-Value="Model.LastName" placeholder="Фамилия" />
+            <InputText class="form-control mb-2" @bind-Value="Model.EGN" placeholder="ЕГН" />
+            <InputText class="form-control mb-2" @bind-Value="Model.Email" placeholder="Email" />
+            <InputText class="form-control mb-2" @bind-Value="Model.PhoneNumber" placeholder="Телефон" />
+            <InputText class="form-control mb-2" @bind-Value="Model.IDCardNumber" placeholder="Номер на лична карта" />
+            <InputDate class="form-control mb-2" @bind-Value="Model.IDIssueDate" placeholder="Издадена на дата" />
+            <InputDate class="form-control mb-2" @bind-Value="Model.IDValidityDate" placeholder="Валидна до дата" />
+            <InputText class="form-control mb-2" @bind-Value="Model.IDIssuer" placeholder="Издал МВР (лична карта)" />
+        </fieldset>
+        <button type="button" class="btn btn-secondary" disabled>Назад</button>
+        <button class="btn btn-primary" @onclick="Next">Напред</button>
+    }
+    @* Стъпка 2: Адрес *@
+    @if (currentStep == 2)
+    {
+        <fieldset class="border p-3 mb-3">
+            <legend>Адрес</legend>
+            <InputText class="form-control mb-2" @bind-Value="Model.City" placeholder="Град" />
+            <InputText class="form-control mb-2" @bind-Value="Model.StreetNeighbourhood" placeholder="Улица/Квартал" />
+            <InputText class="form-control mb-2" @bind-Value="Model.Number" placeholder="№" />
+            <InputText class="form-control mb-2" @bind-Value="Model.PostCode" placeholder="Пощенски код" />
+        </fieldset>
+        <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
+        <button type="button" class="btn btn-primary" @onclick="Next">Напред</button>
+    }
+    @* Стъпка 3: Финансови данни *@
+    @if (currentStep == 3)
+    {
+        <fieldset class="border p-3 mb-3">
+            <legend>Финансови данни</legend>
+            <InputNumber class="form-control mb-2" @bind-Value="Model.MonthlyIncome" placeholder="Месечни доходи" />
+            <InputNumber class="form-control mb-2" @bind-Value="Model.MonthlyExpenses" placeholder="Месечни разходи" />
+
+            <label>Тип заетост</label>
+            <InputSelect class="form-select mb-2" @bind-Value="Model.EmploymentType">
+                <option value="">-- Изберете --</option>
+                @foreach (var e in EmploymentTypes)
+                {
+                    <option value="@e.NomCode">@e.Description</option>
+                }
+            </InputSelect>
+        </fieldset>
+        <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
+        <button type="button" class="btn btn-primary" @onclick="Next">Напред</button>
+    }
+
+    @* Стъпка 4: Данни за кредита и финален Submit *@
+    @if (currentStep == 4)
+    {
+        <fieldset class="border p-3 mb-3">
+            <legend>Данни за кредита</legend>
+            <InputNumber class="form-control mb-2" @bind-Value="Model.CreditAmount" placeholder="Сума на кредита" />
+            <InputNumber class="form-control mb-2" @bind-Value="Model.InterestRate" placeholder="Лихвен процент" />
+            <InputDate class="form-control mb-2" @bind-Value="Model.CreditBeginDate" placeholder="Желана дата за начало на кредита"  />
+            <InputDate class="form-control mb-2" @bind-Value="Model.CreditEndDate" placeholder="Желана дата за край на кредита"/>
+        </fieldset>
+        <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
+        <button type="submit" class="btn btn-primary">Кандидатствай</button>
+    }
+
+    <p>DEBUG: currentStep=@currentStep</p>
+
+
+</EditForm>
+
+@code {
+
+    [Inject] protected FastCreditDbContext Db { get; set; }
+    [Inject] protected NavigationManager Nav { get; set; }
+
+    protected ApplicationModel Model { get; set; } = new();
+    protected List<Nomenclature> EmploymentTypes { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Зареждаме само стойностите от Nomenclature за типове заетост (301–306)
+        EmploymentTypes = await Db.Nomenclature
+            .Where(n => n.NomCode >= 301 && n.NomCode <= 306)
+            .ToListAsync();
+    }
+
+    int currentStep = 1;
+    const int maxStep = 4;
+
+    protected void Next()
+    {
+        if (currentStep < maxStep)
+            currentStep++;
+    }
+
+    protected void Prev()
+    {
+        if (currentStep > 1)
+            currentStep--;
+    }
+
+    async Task HandleValidSubmit()
+    {
+        if (currentStep < maxStep)
+        {
+            Next();
+            return;
+        }
+        using var tx = await Db.Database.BeginTransactionAsync();
+        try
+        {
+            var client = new Client
+                {
+                    FirstName = Model.FirstName,
+                    MiddleName = Model.MiddleName,
+                    LastName = Model.LastName,
+                    EGN = Model.EGN,
+                    Email = Model.Email,
+                    PhoneNumber = Model.PhoneNumber,
+                    IDCardNumber = Model.IDCardNumber,
+                    IDIssueDate = DateOnly.FromDateTime(Model.IDIssueDate),
+                    IDValidityDate = DateOnly.FromDateTime(Model.IDValidityDate),
+                    IDIssuer = Model.IDIssuer
+                };
+            Db.Clients.Add(client);
+            await Db.SaveChangesAsync();
+
+            var addr = new ClientAddress
+                {
+                    ClientID = client.ID,
+                    City = Model.City,
+                    StreetNeighbourhood = Model.StreetNeighbourhood,
+                    Number = Model.Number,
+                    PostCode = Model.PostCode
+                };
+            Db.ClientAddresses.Add(addr);
+            await Db.SaveChangesAsync();
+
+            var fin = new ClientFinancial
+                {
+                    ClientID = client.ID,
+                    MontlyIncome = Model.MonthlyIncome,
+                    MontlyExpenses = Model.MonthlyExpenses,
+                    EmploymentType = Model.EmploymentType.Value
+                };
+            Db.ClientFinancials.Add(fin);
+            await Db.SaveChangesAsync();
+
+            var credit = new Credit
+                {
+                    ClientID = client.ID,
+                    CreditAmount = Model.CreditAmount,
+                    InterestRate = Model.InterestRate,
+                    CreditBeginDate = Model.CreditBeginDate.HasValue ? DateOnly.FromDateTime(Model.CreditBeginDate.Value) : null,
+                    CreditEndDate = Model.CreditEndDate.HasValue ? DateOnly.FromDateTime(Model.CreditEndDate.Value) : null,
+                    Status = 101 // NomCode за “Очакващ решение”
+                };
+            Db.Credits.Add(credit);
+            await Db.SaveChangesAsync();
+
+            await tx.CommitAsync();
+            Nav.NavigateTo($"/application-success/{credit.ID}");
+        }
+        catch
+        {
+            await tx.RollbackAsync();
+            // TODO: покажете грешка на потребителя
+        }
+    }
+
+    public class ApplicationModel
+    {
+        [Required] public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        [Required] public string LastName { get; set; }
+        [Required, StringLength(10)] public string EGN { get; set; }
+        [EmailAddress] public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        [Required] public string IDCardNumber { get; set; }
+        [Required] public DateTime IDIssueDate { get; set; }
+        [Required] public DateTime IDValidityDate { get; set; }
+        [Required] public string IDIssuer { get; set; }
+
+        [Required] public string City { get; set; }
+        [Required] public string StreetNeighbourhood { get; set; }
+        [Required] public string Number { get; set; }
+        [Required] public string PostCode { get; set; }
+
+        [Range(0, double.MaxValue)] public decimal MonthlyIncome { get; set; }
+        [Range(0, double.MaxValue)] public decimal MonthlyExpenses { get; set; }
+        public int? EmploymentType { get; set; }
+
+        [Range(1, double.MaxValue)] public decimal CreditAmount { get; set; }
+        [Range(0.01, double.MaxValue)] public decimal InterestRate { get; set; }
+        public DateTime? CreditBeginDate { get; set; }
+        public DateTime? CreditEndDate { get; set; }
+    }
+}
