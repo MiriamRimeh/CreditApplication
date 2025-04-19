@@ -46,7 +46,7 @@
             <InputText class="form-control mb-2" @bind-Value="Model.PostCode" placeholder="Пощенски код" />
         </fieldset>
         <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
-        <button type="button" class="btn btn-primary" @onclick="Next">Напред</button>
+        <button class="btn btn-primary" @onclick="Next">Напред</button>
     }
     @* Стъпка 3: Финансови данни *@
     @if (currentStep == 3)
@@ -66,7 +66,7 @@
             </InputSelect>
         </fieldset>
         <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
-        <button type="button" class="btn btn-primary" @onclick="Next">Напред</button>
+        <button class="btn btn-primary" @onclick="Next">Напред</button>
     }
 
     @* Стъпка 4: Данни за кредита и финален Submit *@
