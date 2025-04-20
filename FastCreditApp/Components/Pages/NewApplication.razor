@@ -6,19 +6,39 @@
 @using System.ComponentModel.DataAnnotations
 @using System.Linq
 @using System.Collections.Generic
+@rendermode InteractiveServer
+
 @* @inherits NewApplicationBase; *@
 
 
 <h3>Кандидатстване за бърз кредит</h3>
-<p>Стъпка @currentStep от @maxStep</p>
+@* <p>Стъпка @currentStep от @maxStep</p> *@
 
-<EditForm Model="Model" OnSubmit="HandleValidSubmit" FormName="applicationForm">
+@if (DisplayAlert)
+{
+    @if (IsSuccess)
+    {
+        <Alert Color="AlertColor.Success">
+            <Icon Name="IconName.CheckCircleFill" class="me-2" />
+            Заявката е изпратена успешно!
+        </Alert>
+    }
+    else
+    {
+        <Alert Color="AlertColor.Danger">
+            <Icon Name="IconName.ExclamationTriangleFill" class="me-2" />
+            Възникна грешка – моля проверете въвеждането или опитайте по-късно.
+        </Alert>
+    }
+}
+
+<EditForm Model="Model"
+          OnValidSubmit="HandleValidSubmit"
+          OnInvalidSubmit="HandleInvalidSubmit"
+          FormName="applicationForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    @* Стъпка 1: Лични данни *@
-    @if (currentStep == 1)
-    {
         <fieldset class="border p-3 mb-3">
             <legend>Лични данни</legend>
             <InputText class="form-control mb-2" @bind-Value="Model.FirstName" placeholder="Име" />
@@ -32,12 +52,7 @@
             <InputDate class="form-control mb-2" @bind-Value="Model.IDValidityDate" placeholder="Валидна до дата" />
             <InputText class="form-control mb-2" @bind-Value="Model.IDIssuer" placeholder="Издал МВР (лична карта)" />
         </fieldset>
-        <button type="button" class="btn btn-secondary" disabled>Назад</button>
-        <button class="btn btn-primary" @onclick="Next">Напред</button>
-    }
-    @* Стъпка 2: Адрес *@
-    @if (currentStep == 2)
-    {
+
         <fieldset class="border p-3 mb-3">
             <legend>Адрес</legend>
             <InputText class="form-control mb-2" @bind-Value="Model.City" placeholder="Град" />
@@ -45,12 +60,7 @@
             <InputText class="form-control mb-2" @bind-Value="Model.Number" placeholder="№" />
             <InputText class="form-control mb-2" @bind-Value="Model.PostCode" placeholder="Пощенски код" />
         </fieldset>
-        <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
-        <button class="btn btn-primary" @onclick="Next">Напред</button>
-    }
-    @* Стъпка 3: Финансови данни *@
-    @if (currentStep == 3)
-    {
+
         <fieldset class="border p-3 mb-3">
             <legend>Финансови данни</legend>
             <InputNumber class="form-control mb-2" @bind-Value="Model.MonthlyIncome" placeholder="Месечни доходи" />
@@ -65,13 +75,7 @@
                 }
             </InputSelect>
         </fieldset>
-        <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
-        <button class="btn btn-primary" @onclick="Next">Напред</button>
-    }
 
-    @* Стъпка 4: Данни за кредита и финален Submit *@
-    @if (currentStep == 4)
-    {
         <fieldset class="border p-3 mb-3">
             <legend>Данни за кредита</legend>
             <InputNumber class="form-control mb-2" @bind-Value="Model.CreditAmount" placeholder="Сума на кредита" />
@@ -79,50 +83,35 @@
             <InputDate class="form-control mb-2" @bind-Value="Model.CreditBeginDate" placeholder="Желана дата за начало на кредита" />
             <InputDate class="form-control mb-2" @bind-Value="Model.CreditEndDate" placeholder="Желана дата за край на кредита" />
         </fieldset>
-        <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
-        <button type="submit" class="btn btn-primary">Кандидатствай</button>
-    }
-
+    <button type="submit" class="btn btn-primary">Кандидатствай</button>
 </EditForm>
 
 @code {
-
     [Inject] protected FastCreditDbContext Db { get; set; }
     [Inject] protected NavigationManager Nav { get; set; }
+
+    bool DisplayAlert { get; set; }
+    bool IsSuccess { get; set; }
+    bool IsReadOnly { get; set; }
 
     protected ApplicationModel Model { get; set; } = new();
     protected List<Nomenclature> EmploymentTypes { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
-        // Зареждаме само стойностите от Nomenclature за типове заетост (301–306)
         EmploymentTypes = await Db.Nomenclature
             .Where(n => n.NomCode >= 301 && n.NomCode <= 306)
             .ToListAsync();
     }
 
-    int currentStep = 1;
-    const int maxStep = 4;
-
-    protected void Next()
+    void HandleInvalidSubmit(EditContext ctx)
     {
-        if (currentStep < maxStep)
-            currentStep++;
-    }
-
-    protected void Prev()
-    {
-        if (currentStep > 1)
-            currentStep--;
+        DisplayAlert = true;
+        IsSuccess = false;
     }
 
     async Task HandleValidSubmit()
     {
-        if (currentStep < maxStep)
-        {
-            Next();
-            return;
-        }
         using var tx = await Db.Database.BeginTransactionAsync();
         try
         {
@@ -158,7 +147,7 @@
                     ClientID = client.ID,
                     MontlyIncome = Model.MonthlyIncome,
                     MontlyExpenses = Model.MonthlyExpenses,
-                    EmploymentType = Model.EmploymentType.Value
+                    EmploymentType = Model.EmploymentType ?? 0 // предпазване от null
                 };
             Db.ClientFinancials.Add(fin);
             await Db.SaveChangesAsync();
@@ -170,18 +159,28 @@
                     InterestRate = Model.InterestRate,
                     CreditBeginDate = Model.CreditBeginDate.HasValue ? DateOnly.FromDateTime(Model.CreditBeginDate.Value) : null,
                     CreditEndDate = Model.CreditEndDate.HasValue ? DateOnly.FromDateTime(Model.CreditEndDate.Value) : null,
-                    Status = 101 // NomCode за “Очакващ решение”
+                    Status = 101 // Очакващ решение
                 };
             Db.Credits.Add(credit);
             await Db.SaveChangesAsync();
 
             await tx.CommitAsync();
+
+            DisplayAlert = true;
+            IsSuccess = true;
+            IsReadOnly = true;
+
+            await Task.Delay(3000); 
             Nav.NavigateTo($"/application-success/{credit.ID}");
         }
-        catch
+        catch (Exception ex)
         {
             await tx.RollbackAsync();
-            // TODO: покажете грешка на потребителя
+
+            DisplayAlert = true;
+            IsSuccess = false;
+
+            Console.Error.WriteLine($"[ERROR] Submit failed: {ex.Message}");
         }
     }
 

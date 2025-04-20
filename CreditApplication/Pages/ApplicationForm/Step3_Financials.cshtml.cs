@@ -31,18 +31,14 @@ namespace CreditApplication.Pages
         [TempData]
         public int ClientId { get; set; }
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid) return Page();
 
+            ClientFinancial.ClientID = ClientId;
             _context.ClientFinancials.Add(ClientFinancial);
             await _context.SaveChangesAsync();
 
-            ClientFinancial.ClientID = ClientId;
 
             return RedirectToPage("Step4_Credit");
         }

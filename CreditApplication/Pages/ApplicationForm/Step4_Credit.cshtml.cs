@@ -33,19 +33,18 @@ namespace CreditApplication.Pages
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-
-
-            _context.Credits.Add(Credit);
-            await _context.SaveChangesAsync();
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
 
             Credit.ClientID = ClientId;
             Credit.CreatedOn = DateTime.Now;
             Credit.ModifiedOn = DateTime.Now;
+            Credit.InterestRate = 0.4M; // Fixed: Added 'M' suffix to indicate a decimal literal
+            Credit.Status = 101; // 101 is the status for "for review" 
+            _context.Credits.Add(Credit);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("EndPage");
         }

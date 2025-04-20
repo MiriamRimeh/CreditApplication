@@ -21,7 +21,7 @@ namespace CreditApplication.Models
         public string? Number { get; set; }
         [Required]
         [MaxLength(20)]
-        public string PostalCode { get; set; }
+        public string PostCode { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
     }

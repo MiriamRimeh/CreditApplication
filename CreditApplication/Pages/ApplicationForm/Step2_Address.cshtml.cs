@@ -20,29 +20,25 @@ namespace CreditApplication.Pages.ApplicationForm
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            TempData.Keep("ClientId");
-            return Page();
-        }
-
         [BindProperty]
         public ClientAddress ClientAddress { get; set; }
 
         [TempData]
         public int ClientId { get; set; }
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        public IActionResult OnGet()
+        {
+            TempData.Keep("ClientId");
+            return Page();
+        }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid) return Page();
-            
-            // Check if the ClientId is set
-            
+            //if (!ModelState.IsValid) return Page();
+
+            ClientAddress.ClientID = ClientId;
             _context.ClientAddresses.Add(ClientAddress);
             await _context.SaveChangesAsync();
 
-            ClientAddress.ClientID = ClientId;
 
             return RedirectToPage("Step3_Financials");
         }
