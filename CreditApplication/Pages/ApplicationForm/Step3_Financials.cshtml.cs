@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CreditApplication.Data;
 using CreditApplication.Models;
 using Microsoft.VisualBasic;
+using Microsoft.EntityFrameworkCore;
 
 namespace CreditApplication.Pages
 {
@@ -23,6 +24,7 @@ namespace CreditApplication.Pages
         public IActionResult OnGet()
         {
             TempData.Keep("ClientId");
+            _ = LoadEmploymentTypesAsync();
             return Page();
         }
 
@@ -39,8 +41,17 @@ namespace CreditApplication.Pages
             _context.ClientFinancials.Add(ClientFinancial);
             await _context.SaveChangesAsync();
 
-
             return RedirectToPage("Step4_Credit");
+        }
+
+        private async Task LoadEmploymentTypesAsync()
+        {
+            var employmentTypes = await _context.Nomenclatures
+                .Where(n => n.NomCode >= 301 && n.NomCode <= 306) // Fixed property name from 'ID' to 'NomCode'
+                .OrderBy(n => n.Description)
+                .ToListAsync();
+
+            ViewData["EmploymentTypes"] = new SelectList(employmentTypes, "NomCode", "Description"); // Updated to match the correct property
         }
     }
 }

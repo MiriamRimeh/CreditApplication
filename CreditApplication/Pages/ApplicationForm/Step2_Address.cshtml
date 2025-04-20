@@ -13,11 +13,6 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-@*             <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientAddress.ClientID" class="control-label"></label>
-                <select asp-for="ClientAddress.ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
-            </div> *@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="ClientAddress.City" class="control-label"></label>
@@ -41,16 +36,6 @@
                 <input asp-for="ClientAddress.PostCode" class="form-control" />
                 <span asp-validation-for="ClientAddress.PostCode" class="text-danger"></span>
             </div>
-@*             <div class="form-group">
-                <label asp-for="ClientAddress.CreatedOn" class="control-label"></label>
-                <input asp-for="ClientAddress.CreatedOn" class="form-control" />
-                <span asp-validation-for="ClientAddress.CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClientAddress.ModifiedOn" class="control-label"></label>
-                <input asp-for="ClientAddress.ModifiedOn" class="form-control" />
-                <span asp-validation-for="ClientAddress.ModifiedOn" class="text-danger"></span>
-            </div> *@
             <div class="form-group">
                 <input type="submit" value="Next" class="btn btn-primary" />
             </div>

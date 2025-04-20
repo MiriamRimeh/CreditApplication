@@ -31,7 +31,7 @@
 <ul>
     <li><strong>Monthly Income:</strong> @Model.Financial?.MontlyIncome.ToString("C")</li>
     <li><strong>Monthly Expenses:</strong> @Model.Financial?.MontlyExpenses.ToString("C")</li>
-    <li><strong>Employment Type:</strong> @Model.Financial?.EmploymentType</li> <!-- Optional: map to Nomenclature -->
+    <li><strong>Employment Type:</strong> @Model.ClientEmploymentType</li>
 </ul>
 
 <h5>Credit Request</h5>
@@ -39,7 +39,7 @@
     <li><strong>Amount:</strong> @Model.Credit?.CreditAmount.ToString("C")</li>
     <li><strong>Begin Date:</strong> @Model.Credit?.CreditBeginDate</li>
     <li><strong>End Date:</strong> @Model.Credit?.CreditEndDate</li>
-    <li><strong>Status Code:</strong> @Model.Credit?.Status</li> <!-- Optional: map to Nomenclature -->
+    <li><strong>Status:</strong> @Model.CreditStatusDescription</li> <!-- Optional: map to Nomenclature -->
 </ul>
 
 <a asp-page="/Index" class="btn btn-primary mt-3">Back to Home</a>
