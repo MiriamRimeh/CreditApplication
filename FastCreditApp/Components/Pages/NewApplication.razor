@@ -12,7 +12,7 @@
 <h3>Кандидатстване за бърз кредит</h3>
 <p>Стъпка @currentStep от @maxStep</p>
 
-<EditForm Model="Model" OnValidSubmit="HandleValidSubmit" FormName="applyForm">
+<EditForm Model="Model" OnSubmit="HandleValidSubmit" FormName="applicationForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -76,15 +76,12 @@
             <legend>Данни за кредита</legend>
             <InputNumber class="form-control mb-2" @bind-Value="Model.CreditAmount" placeholder="Сума на кредита" />
             <InputNumber class="form-control mb-2" @bind-Value="Model.InterestRate" placeholder="Лихвен процент" />
-            <InputDate class="form-control mb-2" @bind-Value="Model.CreditBeginDate" placeholder="Желана дата за начало на кредита"  />
-            <InputDate class="form-control mb-2" @bind-Value="Model.CreditEndDate" placeholder="Желана дата за край на кредита"/>
+            <InputDate class="form-control mb-2" @bind-Value="Model.CreditBeginDate" placeholder="Желана дата за начало на кредита" />
+            <InputDate class="form-control mb-2" @bind-Value="Model.CreditEndDate" placeholder="Желана дата за край на кредита" />
         </fieldset>
         <button type="button" class="btn btn-secondary" @onclick="Prev">Назад</button>
         <button type="submit" class="btn btn-primary">Кандидатствай</button>
     }
-
-    <p>DEBUG: currentStep=@currentStep</p>
-
 
 </EditForm>
 
