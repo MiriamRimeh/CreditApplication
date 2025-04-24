@@ -4,7 +4,56 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+@* <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+ *@
+<div class="container mt-5">
+    <h1 class="mb-4">Калкулатор за кредити</h1>
+    <div class="card shadow-sm p-4">
+        <div class="mb-3">
+            <label asp-for="Amount" class="form-label">Сума (лв.)</label>
+            <input asp-for="Amount" type="number" class="form-control" id="amount" min="300" step="100" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="PeriodMonths" class="form-label">Период (месеци)</label>
+            <input asp-for="PeriodMonths" type="number" class="form-control" id="period" min="5" step="1" />
+        </div>
+        <div class="mt-4 p-3 bg-light rounded">
+            <p>Месечна вноска: <strong id="monthlyPayment">0.00 лв.</strong></p>
+            <p>Общо за плащане: <strong id="totalPayment">0.00 лв.</strong></p>
+        </div>
+        <div class="mt-4 text-end">
+            <a class="btn btn-primary btn-lg" href="/ApplicationForm/Step1_Personal">Кандидатствай</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const amountInput = document.getElementById('amount');
+        const periodInput = document.getElementById('period');
+        const monthlyLabel = document.getElementById('monthlyPayment');
+        const totalLabel = document.getElementById('totalPayment');
+        const interestRate = 0.40; 
+
+        function calculate() {
+            const principal = parseFloat(amountInput.value) || 0;
+            const months = parseInt(periodInput.value) || 0;
+            if (principal < 300 || principal > 5000 || months < 5 || months > 48) {
+                monthlyLabel.textContent = '0.00 лв.';
+                totalLabel.textContent = '0.00 лв.';
+                return;
+            }
+            const monthlyRate = interestRate / 12;
+            const monthly = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+            const total = monthly * months;
+            monthlyLabel.textContent = monthly.toFixed(2) + ' лв.';
+            totalLabel.textContent = total.toFixed(2) + ' лв.';
+        }
+
+        amountInput.addEventListener('input', calculate);
+        periodInput.addEventListener('input', calculate);
+    </script>
+}

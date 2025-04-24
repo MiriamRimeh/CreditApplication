@@ -5,9 +5,9 @@
     ViewData["Title"] = "Step1";
 }
 
-<h1>Step1</h1>
+<h1>Стъпка 1/4</h1>
 
-<h4>Client</h4>
+<h4>Лични данни на клиент</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,58 +15,58 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Client.FirstName" class="control-label">First Name</label>
+                <label asp-for="Client.FirstName" class="control-label">Първо име:</label>
                 <input asp-for="Client.FirstName" class="form-control" />
                 <span asp-validation-for="Client.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Client.MiddleName" class="control-label">Middle Name</label>
+                <label asp-for="Client.MiddleName" class="control-label">Бащино име:</label>
                 <input asp-for="Client.MiddleName" class="form-control" />
                 <span asp-validation-for="Client.MiddleName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Client.LastName" class="control-label">Last Name</label>
+                <label asp-for="Client.LastName" class="control-label">Фамилия:</label>
                 <input asp-for="Client.LastName" class="form-control" />
                 <span asp-validation-for="Client.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Client.EGN" class="control-label">EGN</label>
+                <label asp-for="Client.EGN" class="control-label">ЕГН:</label>
                 <input asp-for="Client.EGN" class="form-control" />
                 <span asp-validation-for="Client.EGN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Client.Email" class="control-label">Email</label>
+                <label asp-for="Client.Email" class="control-label">Имейл:</label>
                 <input asp-for="Client.Email" class="form-control" />
                 <span asp-validation-for="Client.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Client.PhoneNumber" class="control-label">Phone Number</label>
+                <label asp-for="Client.PhoneNumber" class="control-label">Телефон:</label>
                 <input asp-for="Client.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Client.IDCardNumber" class="control-label">ID Card Number</label>
+                <label asp-for="Client.IDCardNumber" class="control-label">№ на лична карта:</label>
                 <input asp-for="Client.IDCardNumber" class="form-control" />
                 <span asp-validation-for="Client.IDCardNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Client.IDIssueDate" class="control-label">Issue Date</label>
+                <label asp-for="Client.IDIssueDate" class="control-label">Дата на издаване:</label>
                 <input asp-for="Client.IDIssueDate" class="form-control" />
                 <span asp-validation-for="Client.IDIssueDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Client.IDValidityDate" class="control-label">Valid to</label>
+                <label asp-for="Client.IDValidityDate" class="control-label">Дата на валидност:</label> @* TODO: add a validation for the date, the date cannot be before issue date *@
                 <input asp-for="Client.IDValidityDate" class="form-control" />
                 <span asp-validation-for="Client.IDValidityDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Client.IDIssuer" class="control-label">Issued By</label>
+                <label asp-for="Client.IDIssuer" class="control-label">Издадена от МВР:</label>
                 <input asp-for="Client.IDIssuer" class="form-control" />
                 <span asp-validation-for="Client.IDIssuer" class="text-danger"></span>
             </div>

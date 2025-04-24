@@ -29,6 +29,12 @@ namespace CreditApplication.Models
         public ICollection<FinancialOperation> FinancialOperations { get; set; } = new List<FinancialOperation>();
 
         public DateOnly ActivationDate { get; set; } 
+        public int CreditPeriod { get; set; } // Credit period in months
+        public decimal MonthlyInstallment { get; set; } // Monthly payment amount
+        public decimal TotalCreditAmount { get; set; } // Total amount to be paid back
+
+        //[NotMapped]
+        //public DateTime EstimatedEndDate { get; set; }
 
     }
 }

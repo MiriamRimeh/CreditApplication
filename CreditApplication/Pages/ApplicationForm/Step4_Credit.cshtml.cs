@@ -43,6 +43,12 @@ namespace CreditApplication.Pages
             Credit.ModifiedOn = DateTime.Now;
             Credit.InterestRate = 0.4M; // Fixed: Added 'M' suffix to indicate a decimal literal
             Credit.Status = 101; // 101 is the status for "for review" 
+
+            // Calculate the estimated end date based on the credit period
+            Credit.TotalCreditAmount = Credit.CreditAmount + Credit.CreditAmount * Credit.InterestRate;
+            Credit.MonthlyInstallment = Credit.TotalCreditAmount / Credit.CreditPeriod;
+
+
             _context.Credits.Add(Credit);
             await _context.SaveChangesAsync();
 

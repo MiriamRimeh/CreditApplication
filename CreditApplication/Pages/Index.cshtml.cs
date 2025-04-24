@@ -12,6 +12,11 @@ namespace CreditApplication.Pages
             _logger = logger;
         }
 
+        [BindProperty]
+        public decimal Amount { get; set; } = 300;
+        [BindProperty]
+        public int PeriodMonths { get; set; } = 5;
+
         public void OnGet()
         {
 

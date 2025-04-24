@@ -5,9 +5,9 @@
     ViewData["Title"] = "Step2";
 }
 
-<h1>Step2</h1>
+<h1>Стъпка 2/4</h1>
 
-<h4>ClientAddress</h4>
+<h4>Данни за адрес</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,24 +15,24 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="ClientAddress.City" class="control-label"></label>
+                <label asp-for="ClientAddress.City" class="control-label">Град:</label>
                 <input asp-for="ClientAddress.City" class="form-control" />
                 <span asp-validation-for="ClientAddress.City" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="ClientAddress.StreetNeighbourhood" class="control-label"></label>
+                <label asp-for="ClientAddress.StreetNeighbourhood" class="control-label">Улица/Жилищен Комплекс:</label>
                 <input asp-for="ClientAddress.StreetNeighbourhood" class="form-control" />
                 <span asp-validation-for="ClientAddress.StreetNeighbourhood" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientAddress.Number" class="control-label"></label>
+                <label asp-for="ClientAddress.Number" class="control-label">Номер:</label>
                 <input asp-for="ClientAddress.Number" class="form-control" />
                 <span asp-validation-for="ClientAddress.Number" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="ClientAddress.PostCode" class="control-label"></label>
+                <label asp-for="ClientAddress.PostCode" class="control-label">Пощенски код:</label>
                 <input asp-for="ClientAddress.PostCode" class="form-control" />
                 <span asp-validation-for="ClientAddress.PostCode" class="text-danger"></span>
             </div>
