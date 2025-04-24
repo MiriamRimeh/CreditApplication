@@ -1,45 +1,47 @@
 ﻿@page
 @model CreditApplication.Pages.ApplicationForm.EndPageModel
+@using System.Globalization
 @{
     ViewData["Title"] = "Application Complete";
+    var bg = CultureInfo.GetCultureInfo("bg-BG");
 }
 <div class="alert alert-success">
-    <h2>Application Submitted!</h2>
-    <p>Your loan application has been successfully recorded.</p>
+    <h2>Поздравления, кандидатурата е записана успешно!</h2>
+    <p>Твоята кандидатура е записана успешно и очаква решение.</p>
 </div>
 
 <hr />
-<h4>Application Summary</h4>
+<h4>Информация за кандидатура</h4>
 
-<h5>Personal Details</h5>
+<h5>Лични данни</h5>
 <ul>
-    <li><strong>Full Name:</strong> @Model.Client.FirstName @Model.Client.MiddleName @Model.Client.LastName</li>
-    <li><strong>Phone Number:</strong> @Model.Client.PhoneNumber</li>
-    <li><strong>Email:</strong> @Model.Client.Email</li>
-    <li><strong>EGN:</strong> @Model.Client.EGN</li>
+    <li><strong>Име:</strong> @Model.Client.FirstName @Model.Client.MiddleName @Model.Client.LastName</li>
+    <li><strong>Телефон:</strong> @Model.Client.PhoneNumber</li>
+    <li><strong>Имейл:</strong> @Model.Client.Email</li>
+    <li><strong>ЕГН:</strong> @Model.Client.EGN</li>
 </ul>
 
-<h5>Address</h5>
+<h5>Адрес</h5>
 <ul>
-    <li><strong>City:</strong> @Model.Address?.City</li>
-    <li><strong>Street:</strong> @Model.Address?.StreetNeighbourhood</li>
-    <li><strong>Number:</strong> @Model.Address?.Number</li>
-    <li><strong>Post Code:</strong> @Model.Address?.PostCode</li>
+    <li><strong>Град:</strong> @Model.Address?.City</li>
+    <li><strong>Улица/Жилищен комплекс:</strong> @Model.Address?.StreetNeighbourhood</li>
+    <li><strong>Номер:</strong> @Model.Address?.Number</li>
+    <li><strong>Пощенски код:</strong> @Model.Address?.PostCode</li>
 </ul>
 
-<h5>Financial Information</h5>
+<h5>Финансова информация</h5>
 <ul>
-    <li><strong>Monthly Income:</strong> @Model.Financial?.MontlyIncome.ToString("C")</li>
-    <li><strong>Monthly Expenses:</strong> @Model.Financial?.MontlyExpenses.ToString("C")</li>
-    <li><strong>Employment Type:</strong> @Model.ClientEmploymentType</li>
+    <li><strong>Месечни доходи:</strong> @Model.Financial?.MontlyIncome.ToString("C", bg)</li>
+    <li><strong>Месечни разходи:</strong> @Model.Financial?.MontlyExpenses.ToString("C", bg)</li>
+    <li><strong>Тип на заетост:</strong> @Model.ClientEmploymentType</li>
 </ul>
 
-<h5>Credit Request</h5>
+<h5>Кандидатура за кредит</h5>
 <ul>
-    <li><strong>Amount:</strong> @Model.Credit?.CreditAmount.ToString("C")</li>
-    <li><strong>Begin Date:</strong> @Model.Credit?.CreditBeginDate</li>
-    @* <li><strong>End Date:</strong> @Model.Credit?.CreditEndDate</li> *@
-    <li><strong>Status:</strong> @Model.CreditStatusDescription</li> <!-- Optional: map to Nomenclature -->
+    <li><strong>Желана сума:</strong> @Model.Credit?.CreditAmount.ToString("C", bg)</li>
+    <li><strong>Желана дата на първа вноска:</strong> @Model.Credit?.CreditBeginDate</li>
+    <li><strong>Брой месечни вноски:</strong> @Model.Credit?.CreditPeriod</li>
+    <li><strong>Текущ статус на кредит:</strong> @Model.CreditStatusDescription</li> <!-- Optional: map to Nomenclature -->
 </ul>
 
 <a asp-page="/Index" class="btn btn-primary mt-3">Back to Home</a>
