@@ -1,1 +1,114 @@
-﻿
+﻿Роли:
+
+Клиент
+	- да кандидатства за кредит
+	- да вижда собствените си кредити
+	- да вижда собствените си плащания
+	- да редактира собствените си лични данни
+	- да редактира собствените си данни за контакт
+
+Служител каса
+	- да преглежда кандидатстванията за кредит
+	- да преглежда кредитите на клиентите
+	- да преглежда плащанията на клиентите
+	- да редактира данните за контакт на клиентите
+	- да одобрява кандидатстванията за кредит
+	- да приключава кредити
+
+Администратор
+	- да извършва всички възможни CRUD операции за клиенти, кредити, служители каса и плащания
+
+
+------------
+TODO:
+
+Добави таблица за служителите и номенклатура дали са администратор или не
+
+Трябва ли да изтрия поле InterestRate от Credits, ако лихвата е постоянна?
+
+
+
+
+
+
+------------
+Примерен тригер за създаване на RepaymentPlan
+
+CREATE TRIGGER trg_CreateRepaymentPlan
+ON [CreditApplication].[21180011].[Credits]
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE 
+        @CreditID           INT,
+        @CreditAmount       DECIMAL(18,2),
+        @BeginDate          DATE,
+        @InterestRate       DECIMAL(5,4), -- например 0.0850 за 8.5%
+        @PeriodMonths       INT,
+        @InstallmentAmount  DECIMAL(18,2);
+
+    -- Курсор за всички нововъведени кредити (в случай на пакетно вмъкване)
+    DECLARE credit_cursor CURSOR LOCAL FAST_FORWARD
+    FOR
+    SELECT 
+        ID,
+        CreditAmount,
+        CreditBeginDate,
+        InterestRate,
+        CreditPeriod,
+        MonthlyInstallment
+    FROM inserted;
+
+    OPEN credit_cursor;
+    FETCH NEXT FROM credit_cursor INTO 
+        @CreditID, @CreditAmount, @BeginDate, @InterestRate, @PeriodMonths, @InstallmentAmount;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        DECLARE 
+            @RemainingBalance DECIMAL(18,2) = @CreditAmount,
+            @i                INT               = 1;
+
+        WHILE @i <= @PeriodMonths
+        BEGIN
+            -- Дата на i-тата вноска (едномесечно отместване)
+            DECLARE @InstDate DATE = DATEADD(MONTH, @i, @BeginDate);
+
+            -- Калкулиране на лихвата за оставащия баланс
+            DECLARE @Interest DECIMAL(18,2) = 
+                ROUND(@RemainingBalance * (@InterestRate/12), 2);
+
+            -- Принципал = фиксирана вноска – лихва
+            DECLARE @Principal DECIMAL(18,2) = 
+                ROUND(@InstallmentAmount - @Interest, 2);
+
+            -- Актуализиране на оставащ баланс
+            SET @RemainingBalance = 
+                ROUND(@RemainingBalance - @Principal, 2);
+
+            -- Вмъкване на ред в погасителния план
+            INSERT INTO [CreditApplication].[21180011].[RepaymentPlan]
+                (CreditID, InstallmentNumber, InstallmentDate, 
+                 InstallmentAmount, Principal, Interest, 
+                 isPaid, CreatedOn, ModifiedOn)
+            VALUES
+                (@CreditID, @i, @InstDate,
+                 @InstallmentAmount, @Principal, @Interest,
+                 0,           -- isPaid = false
+                 GETDATE(),   -- CreatedOn
+                 GETDATE()    -- ModifiedOn
+                );
+
+            SET @i = @i + 1;
+        END
+
+        FETCH NEXT FROM credit_cursor INTO 
+            @CreditID, @CreditAmount, @BeginDate, @InterestRate, @PeriodMonths, @InstallmentAmount;
+    END
+
+    CLOSE credit_cursor;
+    DEALLOCATE credit_cursor;
+END;
+GO

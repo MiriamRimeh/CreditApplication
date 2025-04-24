@@ -13,9 +13,10 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Full Name</th>
-            <th>Phone Number</th>
-            <th>Address</th>
+            <th>Име на клиент</th>
+            <th>ЕГН</th>
+            <th>Имейл</th>
+            <th>Телефон</th>
             <th></th> <!-- For buttons -->
         </tr>
     </thead>
@@ -24,6 +25,8 @@
         {
             <tr>
                 <td>@item.FirstName @item.MiddleName @item.LastName</td>
+                <td>@item.EGN</td>
+                <td>@item.Email</td>
                 <td>@item.PhoneNumber</td>
                 <td>
                     <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-sm btn-primary">Details</a>
