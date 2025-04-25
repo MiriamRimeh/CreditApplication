@@ -21,11 +21,30 @@ namespace CreditApplication.Pages.Clients
 
         public IList<Client> Client { get; set; }
 
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchName { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchEGN { get; set; }
         public async Task OnGetAsync()
         {
-            Client = await _context.Clients
-               // .Include(c => c.ClientAddress)
-                .ToListAsync();
+            var query = _context.Clients.AsQueryable();
+
+            if (!string.IsNullOrEmpty(SearchName))
+            {
+                query = query.Where(c => c.FirstName.Contains(SearchName) || c.LastName.Contains(SearchName));
+            }
+
+            if (!string.IsNullOrEmpty(SearchEGN))
+            {
+                query = query.Where(c => c.EGN.Contains(SearchEGN));
+            }
+            Client = await query.ToListAsync();
+
+            //Client = await _context.Clients
+            //   // .Include(c => c.ClientAddress)
+            //    .ToListAsync();
         }
     }
 }
