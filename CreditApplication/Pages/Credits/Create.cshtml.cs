@@ -36,50 +36,13 @@ namespace CreditApplication.Pages.Credits
 
         public async Task<IActionResult> OnPostAsync()
         {
-            ViewData["EgnList"] = _context.Clients
-                                         .Select(c => c.EGN)
-                                         .ToList();
-
-            // Проверка: попълнено ли е ЕГН
-            if (string.IsNullOrWhiteSpace(SelectedEgn))
-            {
-                ModelState.AddModelError(nameof(SelectedEgn), "Моля въведете ЕГН на клиент.");
-            }
-            else
-            {
-                // Търсим клиента по ЕГН
-                var client = await _context.Clients
-                                           .FirstOrDefaultAsync(c => c.EGN == SelectedEgn);
-                if (client == null)
-                {
-                    ModelState.AddModelError(nameof(SelectedEgn), "Няма клиент с това ЕГН.");
-                }
-                else
-                {
-                    // Свързваме ClientID със съответния ID от таблицата Clients
-                    Credit.ClientID = client.ID;
-                }
-            }
-
-
+            
             //if (!ModelState.IsValid)
             //{
             //    return Page();
             //}
 
-            Credit.CreatedOn = DateTime.Now;
-            Credit.ModifiedOn = DateTime.Now;
-            Credit.InterestRate = 0.4M; // Fixed: Added 'M' suffix to indicate a decimal literal
-            Credit.Status = 101; // 101 is the status for "for review" 
-
-            // Calculate the estimated end date based on the credit period
-            Credit.TotalCreditAmount = Credit.CreditAmount + Credit.CreditAmount * Credit.InterestRate;
-            Credit.MonthlyInstallment = (Credit.TotalCreditAmount / Credit.CreditPeriod);
-
-            _context.Credits.Add(Credit);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+          
         }
     }
 }
