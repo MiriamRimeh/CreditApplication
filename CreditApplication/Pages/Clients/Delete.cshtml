@@ -5,90 +5,62 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Изтриване</h1>
+<div class="container py-4">
+    <div class="card shadow-sm">
+        <div class="card-header text-center">
+            <h2 class="h4 mb-0">Изтриване на клиент</h2>
+        </div>
+        <div class="card-body">
+            <p class="lead text-center text-danger fw-bold">Сигурни ли сте, че искате да изтриете този клиент?</p>
+            <hr />
+            <dl class="row g-3">
+                <dt class="col-md-4">Първо име</dt>
+                <dd class="col-md-8">@Model.Client.FirstName</dd>
 
-<h3>Сигурни ли сте, че искате да изтриете този елемент?</h3>
-<div>
-    <h4>Клиент</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.MiddleName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.MiddleName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.EGN)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.EGN)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.PhoneNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.PhoneNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.IDCardNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.IDCardNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.IDValidityDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.IDValidityDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.IDIssueDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.IDIssueDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.IDIssuer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.IDIssuer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.CreatedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.CreatedOn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.ModifiedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ModifiedOn)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Client.ID" />
-        <input type="submit" value="Изтрий" class="btn btn-danger" /> |
-        <a asp-page="./Index" class="btn btn-dark mt-2">Назад</a>
-    </form>
+                <dt class="col-md-4">Бащино име</dt>
+                <dd class="col-md-8">@Model.Client.MiddleName</dd>
+
+                <dt class="col-md-4">Фамилия</dt>
+                <dd class="col-md-8">@Model.Client.LastName</dd>
+
+                <dt class="col-md-4">ЕГН</dt>
+                <dd class="col-md-8">@Model.Client.EGN</dd>
+
+                <dt class="col-md-4">Имейл</dt>
+                <dd class="col-md-8">@Model.Client.Email</dd>
+
+                <dt class="col-md-4">Телефон</dt>
+                <dd class="col-md-8">@Model.Client.PhoneNumber</dd>
+
+                <dt class="col-md-4">Номер на лична карта</dt>
+                <dd class="col-md-8">@Model.Client.IDCardNumber</dd>
+
+                <dt class="col-md-4">Дата на издаване</dt>
+                <dd class="col-md-8">@Model.Client.IDIssueDate.ToString("dd.MM.yyyy")</dd>
+
+                <dt class="col-md-4">Дата на валидност</dt>
+                <dd class="col-md-8">@Model.Client.IDValidityDate.ToString("dd.MM.yyyy")</dd>
+
+                <dt class="col-md-4">Издадена от</dt>
+                <dd class="col-md-8">@Model.Client.IDIssuer</dd>
+
+                <dt class="col-md-4">Създадено на</dt>
+                <dd class="col-md-8">@Model.Client.CreatedOn.ToString("dd.MM.yyyy HH:mm")</dd>
+
+                <dt class="col-md-4">Последна промяна</dt>
+                <dd class="col-md-8">@Model.Client.ModifiedOn.ToString("dd.MM.yyyy HH:mm")</dd>
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <form method="post" class="d-inline">
+                <input type="hidden" asp-for="Client.ID" />
+                <button type="submit" class="btn btn-danger btn-lg px-4 me-2">
+                    <i class="bi bi-trash-fill"></i> Изтрий
+                </button>
+            </form>
+            <a asp-page="./Index" class="btn btn-dark btn-lg px-4">
+                <i class="bi bi-arrow-left"></i> Назад
+            </a>
+        </div>
+    </div>
 </div>

@@ -46,7 +46,7 @@ namespace CreditApplication.Pages
 
             // Calculate the estimated end date based on the credit period
             Credit.TotalCreditAmount = Credit.CreditAmount + Credit.CreditAmount * Credit.InterestRate;
-            Credit.MonthlyInstallment = Credit.TotalCreditAmount / Credit.CreditPeriod;
+            Credit.MonthlyInstallment = (Credit.TotalCreditAmount / Credit.CreditPeriod);
 
 
             _context.Credits.Add(Credit);

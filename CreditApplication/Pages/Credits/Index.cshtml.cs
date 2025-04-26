@@ -21,10 +21,37 @@ namespace CreditApplication.Pages.Credits
 
         public IList<Credit> Credit { get;set; } = default!;
 
+
+        [BindProperty(SupportsGet = true)]
+        public int? SearchClientId { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchStatus { get; set; }
+
         public async Task OnGetAsync()
         {
-            Credit = await _context.Credits
-                .Include(c => c.Client).ToListAsync();
+            var query = _context.Credits
+                            .Include(c => c.StatusNavigation)
+                            .AsQueryable();
+
+            if (SearchClientId.HasValue)
+            {
+                query = query.Where(c => c.ClientID == SearchClientId.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(SearchStatus))
+            {
+                // Convert NomCode to string before using EF.Functions.Like
+                query = query.Where(c =>
+                    c.StatusNavigation != null &&
+                    EF.Functions.Like(c.StatusNavigation.Description, $"%{SearchStatus}%")
+                );
+            }
+
+            // Sort by creation date
+            query = query.OrderByDescending(c => c.CreatedOn);
+
+            Credit = await query.ToListAsync();
         }
     }
 }

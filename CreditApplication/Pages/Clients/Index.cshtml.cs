@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreditApplication.Data;
 using CreditApplication.Models;
+using System.Drawing.Printing;
 
 namespace CreditApplication.Pages.Clients
 {
@@ -19,17 +20,35 @@ namespace CreditApplication.Pages.Clients
             _context = context;
         }
 
+        private const int PageSize = 20;
+
         public IList<Client> Client { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int? SearchClientId { get; set; }
 
 
         [BindProperty(SupportsGet = true)]
         public string SearchName { get; set; }
 
+
         [BindProperty(SupportsGet = true)]
         public string SearchEGN { get; set; }
+
+
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
+        public int TotalPages { get; private set; }
+
+
         public async Task OnGetAsync()
         {
             var query = _context.Clients.AsQueryable();
+
+            if (SearchClientId.HasValue)
+            {
+                query = query.Where(c => c.ID == SearchClientId.Value);
+            }
 
             if (!string.IsNullOrEmpty(SearchName))
             {
@@ -40,7 +59,16 @@ namespace CreditApplication.Pages.Clients
             {
                 query = query.Where(c => c.EGN.Contains(SearchEGN));
             }
-            Client = await query.ToListAsync();
+
+            query = query.OrderByDescending(c => c.CreatedOn);
+
+            var count = await query.CountAsync();
+            TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+
+            Client = await query
+                 .Skip((PageIndex - 1) * PageSize)
+                 .Take(PageSize)
+                 .ToListAsync();
 
             //Client = await _context.Clients
             //   // .Include(c => c.ClientAddress)

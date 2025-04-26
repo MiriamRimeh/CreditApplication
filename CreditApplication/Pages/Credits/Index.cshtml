@@ -5,74 +5,82 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">Кредити</h1>
+        <a asp-page="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i> Създай нов
+        </a>
+    </div>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].ClientID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].CreditAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].CreditBeginDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].CreditEndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].InterestRate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit[0].ModifiedOn)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Credit) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreditAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreditBeginDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreditEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InterestRate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row gx-2 gy-3 align-items-end">
+                <div class="col-md-5">
+                    <label asp-for="SearchClientId" class="form-label">Търсене по клиент №</label>
+                    <input asp-for="SearchClientId" type="number" class="form-control" placeholder="Номер на клиент" />
+                </div>
+                <div class="col-md-5">
+                    <label asp-for="SearchStatus" class="form-label">Търсене по статус</label>
+                    <input asp-for="SearchStatus" class="form-control" placeholder="Име на статус" />
+                </div>
+                <div class="col-md-2 d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg> Търси
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Клиент №</th>
+                    <th scope="col">Сума</th>
+                    <th scope="col">Начална дата</th>
+                    <th scope="col">Крайна дата</th>
+                    <th scope="col">Лихва (%)</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col" class="text-end">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Credit)
+                {
+                    <tr>
+                        <td>@item.ClientID</td>
+                        <td>@item.CreditAmount.ToString("N2")</td>
+                        <td>@item.CreditBeginDate</td>
+                        <td>@item.CreditEndDate</td>
+                        <td>@item.InterestRate</td>
+                        <td>
+                            @* Покажи името вместо числото *@
+                            @(item.StatusNavigation?.Description ?? "—")
+                        </td>
+                        <td class="text-end">
+                            <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                                </svg>
+                            </a>
+                            <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-warning me-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                </svg>
+                            </a>
+                            <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

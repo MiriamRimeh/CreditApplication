@@ -8,30 +8,29 @@ namespace CreditApplication.Models
     {
         [Key]
         public int ID { get; set; }
-        [TempData]
         public int ClientID { get; set; }
         [BindProperty]
         public Client Client { get; set; }
         [Required]
         public decimal CreditAmount { get; set; }
-        public DateTime? CreditBeginDate { get; set; } // Date when the credit begins
-        public DateTime? CreditEndDate { get; set; } // Date when the credit ends
-        public decimal InterestRate { get; set; } // Interest rate for the credit
-        public int Status { get; set; } // Status of the credit (e.g., active, closed, etc.)
+        public DateTime? CreditBeginDate { get; set; } 
+        public DateTime? CreditEndDate { get; set; } 
+        public decimal? InterestRate { get; set; } 
+        public int Status { get; set; } 
 
         [ForeignKey("Status")]
         public Nomenclature StatusNavigation { get; set; }
         [Required]
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTime? CreatedOn { get; set; } = DateTime.Now;
         [Required]
-        public DateTime ModifiedOn { get; set; } = DateTime.Now;
+        public DateTime? ModifiedOn { get; set; } = DateTime.Now;
         
         public ICollection<FinancialOperation> FinancialOperations { get; set; } = new List<FinancialOperation>();
 
-        public DateOnly ActivationDate { get; set; } 
-        public int CreditPeriod { get; set; } // Credit period in months
-        public decimal MonthlyInstallment { get; set; } // Monthly payment amount
-        public decimal TotalCreditAmount { get; set; } // Total amount to be paid back
+        public DateOnly? ActivationDate { get; set; } 
+        public int? CreditPeriod { get; set; } // Credit period in months
+        public decimal? MonthlyInstallment { get; set; } // Monthly payment amount
+        public decimal? TotalCreditAmount { get; set; } // Total amount to be paid back
 
         //[NotMapped]
         //public DateTime EstimatedEndDate { get; set; }
