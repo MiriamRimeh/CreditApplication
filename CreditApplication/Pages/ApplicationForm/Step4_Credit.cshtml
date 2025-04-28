@@ -76,7 +76,7 @@
                 const amount = parseFloat(amountInput.value) || 0;
                 const period = parseInt(periodInput.value)   || 0;
            
-                if (amount >= 300 && amount <= 5000 && period >= 5 && period <= 48 ) {
+                if (amount >= 300 && amount <= 5000 && period >= 5 && period <= 24 ) {
 
                     const monthlyRate = interestRate / 12;
                     const monthly = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));

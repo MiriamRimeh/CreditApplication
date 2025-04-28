@@ -14,11 +14,11 @@
     <div class="card shadow-sm p-4">
         <div class="mb-3">
             <label asp-for="Amount" class="form-label">Сума (лв.)</label>
-            <input asp-for="Amount" type="number" class="form-control" id="amount" min="300" step="100" />
+            <input asp-for="Amount" type="number" class="form-control" id="amount" min="300" max="5000" step="100" />
         </div>
         <div class="mb-3">
             <label asp-for="PeriodMonths" class="form-label">Период (месеци)</label>
-            <input asp-for="PeriodMonths" type="number" class="form-control" id="period" min="5" step="1" />
+            <input asp-for="PeriodMonths" type="number" class="form-control" id="period" min="5" max="24" step="1" />
         </div>
         <div class="mt-4 p-3 bg-light rounded">
             <p>Месечна вноска: <strong id="monthlyPayment">0.00 лв.</strong></p>
@@ -41,7 +41,7 @@
         function calculate() {
             const principal = parseFloat(amountInput.value) || 0;
             const months = parseInt(periodInput.value) || 0;
-            if (principal < 300 || principal > 5000 || months < 5 || months > 48) {
+            if (principal < 300 || principal > 5000 || months < 5 || months > 24) {
                 monthlyLabel.textContent = '0.00 лв.';
                 totalLabel.textContent = '0.00 лв.';
                 return;

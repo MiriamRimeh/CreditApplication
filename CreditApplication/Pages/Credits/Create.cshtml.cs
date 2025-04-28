@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,42 +6,57 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CreditApplication.Data;
 using CreditApplication.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace CreditApplication.Pages.Credits
 {
     public class CreateModel : PageModel
     {
-        private readonly CreditApplication.Data.CreditApplicationDbContext _context;
+        private readonly CreditApplicationDbContext _context;
 
-        public CreateModel(CreditApplication.Data.CreditApplicationDbContext context)
+        public CreateModel(CreditApplicationDbContext context)
         {
             _context = context;
-        }
-
-        public IActionResult OnGet()
-        {
-            ViewData["EgnList"] = _context.Clients
-                                              .Select(c => c.EGN)
-                                              .ToList();
-            return Page();
         }
 
         [BindProperty]
         public Credit Credit { get; set; } = default!;
 
-        [BindProperty]
-        public string SelectedEgn { get; set; }
+        public SelectList ClientList { get; set; } = default!;
+
+        public IActionResult OnGet()
+        {
+            // Използваме ЕГН като текст за избор
+            ClientList = new SelectList(
+                _context.Clients.OrderBy(c => c.EGN)
+                           .Select(c => new { c.ID, c.EGN }),
+                "ID", "EGN");
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            if (!ModelState.IsValid)
+            {
+                ClientList = new SelectList(
+                    _context.Clients.OrderBy(c => c.EGN)
+                               .Select(c => new { c.ID, c.EGN }),
+                    "ID", "EGN");
+                return Page();
+            }
 
-          
+            Credit.CreatedOn = DateTime.Now;
+            Credit.ModifiedOn = DateTime.Now;
+            Credit.InterestRate = 0.40M;
+            Credit.Status = 101; // "For review"
+
+            // Compute totals
+            Credit.TotalCreditAmount = Credit.CreditAmount + Credit.CreditAmount * Credit.InterestRate;
+            Credit.MonthlyInstallment = Credit.TotalCreditAmount / Credit.CreditPeriod;
+
+            _context.Credits.Add(Credit);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("/Credits/Index");
         }
     }
 }
