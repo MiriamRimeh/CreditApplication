@@ -66,7 +66,7 @@ namespace CreditApplication.Pages.Account
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity));
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Pages/Index");
         }
     }
 }
