@@ -1,0 +1,48 @@
+﻿@page
+@model CreditApplication.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="card-title mb-4 text-center">Регистрация</h2>
+                    <form method="post" novalidate>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control @(ViewData.ModelState["Input.Email"]?.Errors.Count>0 ? "is-invalid" : "")" placeholder="Имейл" />
+                            <label asp-for="Input.Email">Имейл</label>
+                            <div class="invalid-feedback">
+                                <span asp-validation-for="Input.Email"></span>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" type="password" class="form-control @(ViewData.ModelState["Input.Password"]?.Errors.Count>0 ? "is-invalid" : "")" placeholder="Парола" />
+                            <label asp-for="Input.Password">Парола</label>
+                            <div class="invalid-feedback">
+                                <span asp-validation-for="Input.Password"></span>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input asp-for="Input.ConfirmPassword" type="password" class="form-control @(ViewData.ModelState["Input.ConfirmPassword"]?.Errors.Count>0 ? "is-invalid" : "")" placeholder="Повтори парола" />
+                            <label asp-for="Input.ConfirmPassword">Повтори парола</label>
+                            <div class="invalid-feedback">
+                                <span asp-validation-for="Input.ConfirmPassword"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Регистрирай се</button>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <a asp-page="/Account/Login">Вече имаш акаунт? Вход</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
