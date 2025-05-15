@@ -35,7 +35,7 @@ namespace CreditApplication.Pages.Credits
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 ClientList = new SelectList(
                     _context.Clients.OrderBy(c => c.EGN)

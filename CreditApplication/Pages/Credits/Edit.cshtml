@@ -5,70 +5,113 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Credit</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Credit.ID" />
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Credit.ClientID" class="control-label"></label>
-                <select asp-for="Credit.ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
-                <span asp-validation-for="Credit.ClientID" class="text-danger"></span>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="mb-0">Промяна на детайли на кредит</h2>
+                </div>
+
+                <div class="card-body">
+                    <form method="post" class="row g-3">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <input type="hidden" asp-for="Credit.ID" />
+
+                        <!-- Select existing client by filtered list -->
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Credit.ClientID" class="control-label"></label>
+                            <select asp-for="Credit.ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
+                            <span asp-validation-for="Credit.ClientID" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Credit.CreditAmount" class="control-label">Желана сума на кредит:</label>
+                            <input asp-for="Credit.CreditAmount" class="form-control" />
+                            <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <label asp-for="Credit.CreditBeginDate" class="control-label">Желана дата за първа вноска:</label>
+                            <input asp-for="Credit.CreditBeginDate" class="form-control" asp-format="{0:dd.MM.yyyy}" />
+                            <span asp-validation-for="Credit.CreditBeginDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита (месеци):</label>
+                            <input asp-for="Credit.CreditPeriod" class="form-control" />
+                            <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>
+                        </div>
+
+                        @* <div class="form-group col-12">
+                            <label asp-for="Credit.TotalCreditAmount" class="control-label">Общо дължимо в края на периода:</label>
+                            <input asp-for="Credit.TotalCreditAmount" class="form-control" readonly />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="Credit.MonthlyInstallment" class="control-label">Месечна вноска:</label>
+                            <input asp-for="Credit.MonthlyInstallment" class="form-control" readonly />
+                        </div> *@
+
+                        <div class="form-group col-12 text-center mt-4">
+                            <input type="submit" value="Запази" class="btn btn-primary btn-lg px-5" />
+                            <a asp-page="./Index" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Credit.CreditAmount" class="control-label"></label>
-                <input asp-for="Credit.CreditAmount" class="form-control" />
-                <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Credit.CreditBeginDate" class="control-label"></label>
-                <input asp-for="Credit.CreditBeginDate" class="form-control" />
-                <span asp-validation-for="Credit.CreditBeginDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Credit.CreditEndDate" class="control-label"></label>
-                <input asp-for="Credit.CreditEndDate" class="form-control" />
-                <span asp-validation-for="Credit.CreditEndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Credit.InterestRate" class="control-label"></label>
-                <input asp-for="Credit.InterestRate" class="form-control" />
-                <span asp-validation-for="Credit.InterestRate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Credit.Status" class="control-label"></label>
-                <input asp-for="Credit.Status" class="form-control" />
-                <span asp-validation-for="Credit.Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Credit.CreatedOn" class="control-label"></label>
-                <input asp-for="Credit.CreatedOn" class="form-control" />
-                <span asp-validation-for="Credit.CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Credit.ModifiedOn" class="control-label"></label>
-                <input asp-for="Credit.ModifiedOn" class="form-control" />
-                <span asp-validation-for="Credit.ModifiedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Filter client options by EGN
+        document.getElementById('searchEGN').addEventListener('input', function() {
+            var filter = this.value.toLowerCase();
+            var options = document.getElementById('ClientSelect').options;
+            for (var i = 0; i < options.length; i++) {
+                var text = options[i].text.toLowerCase();
+                options[i].style.display = text.includes(filter) ? '' : 'none';
+            }
+        });
+
+        // Recalculate totals and installment
+        (() => {
+            const amountInput         = document.getElementById('Credit_CreditAmount');
+            const periodInput         = document.getElementById('Credit_CreditPeriod');
+            const totalAmountInput    = document.getElementById('Credit_TotalCreditAmount');
+            const monthlyPaymentInput = document.getElementById('Credit_MonthlyInstallment');
+            const interestRate        = 0.40;
+
+            function recalc() {
+                const amount = parseFloat(amountInput.value) || 0;
+                const months = parseInt(periodInput.value)   || 0;
+
+                if (amount >= 300 && amount <= 5000 && months >= 5 && months <= 24) {
+                    const monthlyRate = interestRate / 12;
+                    const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+                    const total   = monthly * months;
+                    totalAmountInput.value    = total.toFixed(2);
+                    monthlyPaymentInput.value = monthly.toFixed(2);
+                } else {
+                    totalAmountInput.value    = '';
+                    monthlyPaymentInput.value = '';
+                }
+            }
+
+            amountInput.addEventListener('input', recalc);
+            periodInput.addEventListener('input', recalc);
+        })();
+    </script>
 }
