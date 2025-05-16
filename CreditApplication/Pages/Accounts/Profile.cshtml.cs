@@ -23,6 +23,8 @@ namespace CreditApplication.Pages.Accounts
         public List<Credit> ActiveCredits { get; set; }
         public List<Credit> CompletedCredits { get; set; }
 
+        public List<Credit> RejectedCredits { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
             var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -65,6 +67,10 @@ namespace CreditApplication.Pages.Accounts
             CompletedCredits = await creditsQuery
                 .Where(c => c.StatusNavigation != null && c.StatusNavigation.NomCode == 103) // Приключен
                 .ToListAsync();
+
+            RejectedCredits = await creditsQuery
+            .Where(c => c.StatusNavigation != null && c.StatusNavigation.NomCode == 104) // Приключен
+            .ToListAsync();
 
             return Page();
         }

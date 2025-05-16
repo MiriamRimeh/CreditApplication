@@ -47,6 +47,7 @@
                 }
             </ul>
         </div>
+
         <div class="col-md-4">
             <h5>Активен</h5>
             <ul class="list-group">
@@ -63,10 +64,24 @@
                 }
             </ul>
         </div>
+
         <div class="col-md-4">
             <h5>Приключен</h5>
             <ul class="list-group">
                 @foreach (var c in Model.CompletedCredits)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @c.CreditAmount лв.
+                        <span class="badge bg-dark ms-2">@c.StatusNavigation.Description</span>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <h5>Отхвърлен</h5>
+            <ul class="list-group">
+                @foreach (var c in Model.RejectedCredits)
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @c.CreditAmount лв.
