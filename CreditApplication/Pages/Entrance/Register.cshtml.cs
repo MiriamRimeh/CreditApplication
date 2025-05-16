@@ -42,7 +42,7 @@ namespace CreditApplication.Pages.Account
             if (!ModelState.IsValid)
                 return Page();
 
-            if (await _context.Users.AnyAsync(u => u.Username == Input.Email))
+            if (await _context.Accounts.AnyAsync(u => u.Username == Input.Email))
             {
                 ModelState.AddModelError(string.Empty, "Имейлът вече е регистриран.");
                 return Page();
@@ -53,17 +53,34 @@ namespace CreditApplication.Pages.Account
             var salt = derive.Salt; // Convert byte[] to string
             var hash = derive.GetBytes(32); // Convert byte[] to string
 
-            var user = new Users
+            bool isEmployee = Input.Email.EndsWith("@unwe.bg",
+                                         StringComparison.OrdinalIgnoreCase);
+
+            int? clientId = null;
+            var role = isEmployee
+                            ? AccountRole.Employee
+                            : AccountRole.Client;
+
+            if (!isEmployee)
+            {
+                // за клиент – вкаряме Client и взимаме client.Id
+                var client = new Client { CreatedOn = DateTime.UtcNow /*…*/ };
+                _context.Clients.Add(client);
+                await _context.SaveChangesAsync();
+                clientId = client.ID;
+            }
+
+            var account = new CreditApplication.Models.Account
             {
                 Username = Input.Email,
-                ClientID = 0,
-                PasswordHash = hash, // Now a string
-                PasswordSalt = salt, // Now a string
-                UserType = 0,      // 0 = клиент
+                ClientID = clientId,
+                PasswordSalt = salt,
+                PasswordHash = hash,
+                Role = role,
                 IsActive = true
             };
 
-            _context.Users.Add(user);
+            _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("/Account/Login");

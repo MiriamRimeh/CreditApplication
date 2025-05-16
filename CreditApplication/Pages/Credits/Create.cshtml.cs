@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CreditApplication.Data;
 using CreditApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreditApplication.Pages.Credits
 {
+    [Authorize(Roles = "Admin, User")]
     public class CreateModel : PageModel
     {
         private readonly CreditApplicationDbContext _context;

@@ -19,7 +19,7 @@ namespace CreditApplication.Data
         public DbSet<RepaymentPlan> RepaymentPlans { get; set; }
         public DbSet<FinancialOperation> FinancialOperations { get; set; }
         public DbSet<LogTable> LogTables { get; set; }
-        public DbSet<Users> Users { get; set; } // Added Users DbSet
+        public DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace CreditApplication.Data
             modelBuilder.Entity<FinancialOperation>().ToTable("FinancialOperations");
             modelBuilder.Entity<Nomenclature>().ToTable("Nomenclature");
             modelBuilder.Entity<LogTable>().ToTable("LogTable");
-            modelBuilder.Entity<Users>().ToTable("Users");
+            modelBuilder.Entity<Account>().ToTable("Accounts");
 
         }
     }

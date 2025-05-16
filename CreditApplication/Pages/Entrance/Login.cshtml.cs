@@ -36,37 +36,40 @@ namespace CreditApplication.Pages.Account
             if (!ModelState.IsValid)
                 return Page();
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == Input.Email && u.IsActive);
-            if (user == null)
+            var account = await _context.Accounts
+                    .FirstOrDefaultAsync(a => a.Username == Input.Email && a.IsActive);
+
+            if (account == null)
             {
-               // ModelState.AddModelError(string.Empty, "Невалиден имейл или парола.");
                 ModelState.AddModelError("Input.Email", "Този имейл не съществува.");
                 return Page();
             }
 
-            // Convert the PasswordSalt from string to byte[] before using it
-            using var derive = new Rfc2898DeriveBytes(Input.Password, user.PasswordSalt, 100_000, HashAlgorithmName.SHA256);
+            using var derive = new Rfc2898DeriveBytes(
+                Input.Password, account.PasswordSalt, 100_000, HashAlgorithmName.SHA256);
             var hash = derive.GetBytes(32);
 
-            if (!CryptographicOperations.FixedTimeEquals(hash,user.PasswordHash))
+            if (!CryptographicOperations.FixedTimeEquals(hash, account.PasswordHash))
             {
-                ModelState.AddModelError(string.Empty, "Невалиден имейл или парола.");
+                ModelState.AddModelError(string.Empty, "Невалидна парола.");
                 return Page();
             }
 
+            // логваме с ролята като ClaimTypes.Role
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim("UserType", user.UserType.ToString())
-            };
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        new Claim(ClaimTypes.NameIdentifier, account.ID.ToString()),
+        new Claim(ClaimTypes.Name, account.Username),
+        new Claim(ClaimTypes.Role, account.Role.ToString())
+    };
+            var identity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity));
 
-            return RedirectToPage("/Pages/Index");
+            return RedirectToPage("~/");
         }
     }
 }

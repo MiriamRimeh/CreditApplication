@@ -10,6 +10,7 @@ using CreditApplication.Models;
 
 namespace CreditApplication.Pages.Credits
 {
+
     public class DetailsModel : PageModel
     {
         private readonly CreditApplication.Data.CreditApplicationDbContext _context;
@@ -28,7 +29,10 @@ namespace CreditApplication.Pages.Credits
                 return NotFound();
             }
 
-            var credit = await _context.Credits.FirstOrDefaultAsync(m => m.ID == id);
+            var credit = await _context.Credits
+                .Include(c => c.StatusNavigation) 
+                .Include(c => c.Client)
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (credit == null)
             {
                 return NotFound();
@@ -38,6 +42,39 @@ namespace CreditApplication.Pages.Credits
                 Credit = credit;
             }
             return Page();
+        }
+        public async Task<IActionResult> OnPostApproveAsync(int id)
+        {
+            var credit = await _context.Credits.FindAsync(id);
+            if (credit == null) return NotFound();
+
+            credit.Status = 102;              // Активен
+            credit.ModifiedOn = DateTime.Now;
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage(new { id });
+        }
+
+        public async Task<IActionResult> OnPostRejectAsync(int id)
+        {
+            var credit = await _context.Credits.FindAsync(id);
+            if (credit == null) return NotFound();
+            credit.Status = 104;              // Отхвърлен
+            credit.ModifiedOn = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return RedirectToPage(new { id });
+        }
+
+        public async Task<IActionResult> OnPostFinishAsync(int id)
+        {
+            var credit = await _context.Credits.FindAsync(id);
+            if (credit == null) return NotFound();
+
+            credit.Status = 103;              // Приключен
+            credit.ModifiedOn = DateTime.Now;
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage(new { id });
         }
     }
 }

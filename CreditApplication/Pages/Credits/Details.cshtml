@@ -13,8 +13,15 @@
         </div>
         <div class="card-body">
             <dl class="row g-3 mb-0">
-                <dt class="col-md-4">Номер на клиент</dt>
-                <dd class="col-md-8">@Model.Credit.ClientID</dd>
+                <dt class="col-md-4">Номер на кредит</dt>
+                <dd class="col-md-8">@Model.Credit.ID</dd>
+
+                <dt class="col-md-4">Клиент</dt>
+                <dd class="col-md-8">
+                    <a asp-page="/Clients/Details" asp-route-id="@Model.Credit.ClientID">
+                        @Model.Credit.Client.EGN
+                    </a>
+                </dd>
 
                 <dt class="col-md-4">Сума на кредит</dt>
                 <dd class="col-md-8">@Model.Credit.CreditAmount</dd>
@@ -29,7 +36,7 @@
                 <dd class="col-md-8">@Model.Credit.InterestRate</dd>
 
                 <dt class="col-md-4">Статус на кредит</dt>
-                <dd class="col-md-8">@Model.Credit.Status</dd>
+                <dd class="col-md-8">@Model.Credit.StatusNavigation.Description</dd>
 
                 <dt class="col-md-4">Създадено на</dt>
                 <dd class="col-md-8">@Model.Credit.CreatedOn</dd>
@@ -38,6 +45,29 @@
                 <dd class="col-md-8">@Model.Credit.ModifiedOn</dd>
             </dl>
         </div>
+
+        <div>
+            @* Само при "Очакващ решение" (101) *@
+            @if (Model.Credit.Status == 101)
+            {
+                <form method="post" asp-page-handler="Approve" asp-route-id="@Model.Credit.ID" class="d-inline">
+                    <button type="submit" class="btn btn-success">Одобри</button>
+                </form>
+                <form method="post" asp-page-handler="Reject" asp-route-id="@Model.Credit.ID" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Откажи</button>
+                </form>
+            }
+            @* Само при "Активен" (102) *@
+            else if (Model.Credit.Status == 102)
+            {
+                <form method="post" asp-page-handler="Finish" asp-route-id="@Model.Credit.ID">
+                    <button type="submit" class="btn btn-primary">Приключи</button>
+                </form>
+            }
+        </div>
+
+
+
         <div class="card-footer text-center">
             <a asp-page="./Edit" asp-route-id="@Model.Credit.ID" class="btn btn-primary me-2">
                 <i class="bi bi-pencil-square"></i> Редактирай
