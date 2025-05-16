@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CreditApplication.Pages.Credits
 {
-    [Authorize(Roles = "Admin, User")]
+    //[Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly CreditApplicationDbContext _context;

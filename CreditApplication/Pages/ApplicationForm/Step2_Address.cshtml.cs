@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CreditApplication.Data;
 using CreditApplication.Models;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 namespace CreditApplication.Pages.ApplicationForm
 {
@@ -26,20 +27,42 @@ namespace CreditApplication.Pages.ApplicationForm
         [TempData]
         public int ClientId { get; set; }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             TempData.Keep("ClientId");
+            var existing = await _context.ClientAddresses
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.ClientID == ClientId);
+            if (existing != null)
+            {
+                ClientAddress = existing;
+            }
+
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
             //if (!ModelState.IsValid) return Page();
 
-            ClientAddress.ClientID = ClientId;
-            _context.ClientAddresses.Add(ClientAddress);
+            var existing = await _context.ClientAddresses
+                .FirstOrDefaultAsync(a => a.ClientID == ClientId);
+
+            if (existing == null)
+            {
+                ClientAddress.ClientID = ClientId;
+                _context.ClientAddresses.Add(ClientAddress);
+            }
+            else
+            {
+                existing.City = ClientAddress.City;
+                existing.StreetNeighbourhood = ClientAddress.StreetNeighbourhood;
+                existing.Number = ClientAddress.Number;
+                existing.PostCode = ClientAddress.PostCode;
+                _context.ClientAddresses.Update(existing);
+            }
+
+
             await _context.SaveChangesAsync();
-
-
             return RedirectToPage("Step3_Financials");
         }
     }

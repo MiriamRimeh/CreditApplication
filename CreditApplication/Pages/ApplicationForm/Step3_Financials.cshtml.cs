@@ -21,24 +21,56 @@ namespace CreditApplication.Pages
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            TempData.Keep("ClientId");
-            _ = LoadEmploymentTypesAsync();
-            return Page();
-        }
-
         [BindProperty]
         public ClientFinancial ClientFinancial { get; set; } = default!;
         [TempData]
         public int ClientId { get; set; }
 
+        public SelectList EmploymentTypes { get; set; }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            TempData.Keep("ClientId");
+            var existing = await _context.ClientFinancials
+                .AsNoTracking()
+                .FirstOrDefaultAsync(f => f.ClientID == ClientId);
+
+            if (existing != null)
+                ClientFinancial = existing;
+
+            // 2) След като първата заявка е приключила, зареждаме типовете заетост
+            var nomList = await _context.Nomenclatures
+                .AsNoTracking()
+                .Where(n => n.NomCode >= 301 && n.NomCode <= 306)
+                .OrderBy(n => n.Description)
+                .ToListAsync();
+
+            EmploymentTypes = new SelectList(nomList, "NomCode", "Description");
+            ViewData["EmploymentTypes"] = EmploymentTypes;
+
+
+            return Page();
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             //if (!ModelState.IsValid) return Page();
 
-            ClientFinancial.ClientID = ClientId;
-            _context.ClientFinancials.Add(ClientFinancial);
+            var existing = await _context.ClientFinancials
+                            .FirstOrDefaultAsync(f => f.ClientID == ClientId);
+
+            if (existing == null)
+            {
+                ClientFinancial.ClientID = ClientId;
+                _context.ClientFinancials.Add(ClientFinancial);
+            }
+            else
+            {
+                existing.MontlyIncome = ClientFinancial.MontlyIncome;
+                existing.MontlyExpenses = ClientFinancial.MontlyExpenses;
+                existing.EmploymentType = ClientFinancial.EmploymentType;
+                _context.ClientFinancials.Update(existing);
+            }
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("Step4_Credit");

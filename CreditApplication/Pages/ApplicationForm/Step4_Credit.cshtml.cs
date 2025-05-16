@@ -30,7 +30,6 @@ namespace CreditApplication.Pages
         [TempData]
         public int ClientId { get; set; }
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             //if (!ModelState.IsValid)

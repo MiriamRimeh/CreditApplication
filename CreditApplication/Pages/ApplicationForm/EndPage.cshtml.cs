@@ -29,9 +29,19 @@ namespace CreditApplication.Pages.ApplicationForm
         public async Task<IActionResult> OnGetAsync()
         {
             Client = await _context.Clients.FindAsync(ClientId);
-            Address = await _context.ClientAddresses.FirstOrDefaultAsync(a => a.ClientID == ClientId);
-            Financial = await _context.ClientFinancials.FirstOrDefaultAsync(f => f.ClientID == ClientId);
-            Credit = await _context.Credits.FirstOrDefaultAsync(c => c.ClientID == ClientId);
+            Address = await _context.ClientAddresses
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.ClientID == ClientId);
+            Financial = await _context.ClientFinancials
+                .AsNoTracking()
+                .FirstOrDefaultAsync(f => f.ClientID == ClientId);
+
+            // Взимаме **най-скоро** подаденото заявление
+            Credit = await _context.Credits
+                .AsNoTracking()
+                .Where(c => c.ClientID == ClientId)
+                .OrderByDescending(c => c.ID)  // или .OrderByDescending(c => c.ID)
+                .FirstOrDefaultAsync();
 
             if (Credit != null)
             {
@@ -45,6 +55,7 @@ namespace CreditApplication.Pages.ApplicationForm
                     .Select(n => n.Description)
                     .FirstOrDefaultAsync();
             }
+
 
             return Page();
         }
