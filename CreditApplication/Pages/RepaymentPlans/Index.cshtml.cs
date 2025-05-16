@@ -19,12 +19,27 @@ namespace CreditApplication.Pages.RepaymentPlans
             _context = context;
         }
 
+        [BindProperty(SupportsGet = true)]
+        public int? CreditId { get; set; }
         public IList<RepaymentPlan> RepaymentPlan { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            RepaymentPlan = await _context.RepaymentPlans
-                .Include(r => r.Credit).ToListAsync();
+            //RepaymentPlan = await _context.RepaymentPlans
+            //    .Include(r => r.Credit).ToListAsync();
+
+            var query = _context.RepaymentPlans
+                            .Include(r => r.Credit)
+                            .AsQueryable();
+
+            if (CreditId.HasValue)
+            {
+                query = query.Where(rp => rp.CreditID == CreditId.Value);
+            }
+
+            RepaymentPlan = await query
+                .OrderBy(rp => rp.InstallmentNumber)
+                .ToListAsync();
         }
     }
 }

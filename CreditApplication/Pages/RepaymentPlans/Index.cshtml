@@ -1,84 +1,45 @@
 ﻿@page
 @model CreditApplication.Pages.RepaymentPlans.IndexModel
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Погасителен план";
 }
 
-<h1>Index</h1>
+<h2>Погасителен план @if (Model.CreditId.HasValue)
+    {
+        <text>за кредит № @Model.CreditId.Value</text>
+    }</h2>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].CreditID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].InstallmentNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].InstallmentAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].Principal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].Interest)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].isPaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].PayedOnDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepaymentPlan[0].ModifiedOn)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.RepaymentPlan) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreditID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InstallmentNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InstallmentAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Principal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Interest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isPaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayedOnDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+@if (!Model.RepaymentPlan.Any())
+{
+    <div class="alert alert-info">
+        Няма записи за погасителен план.
+    </div>
 }
-    </tbody>
-</table>
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Дата</th>
+                <th>Вноска</th>
+                <th>Главница</th>
+                <th>Лихва</th>
+                <th>Платено на</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rp in Model.RepaymentPlan)
+            {
+                <tr>
+                    <td>@rp.InstallmentNumber</td>
+                    <td>@rp.InstallmentDate.ToString("dd.MM.yyyy")</td>
+                    <td>@rp.InstallmentAmount.ToString("F2")</td>
+                    <td>@rp.Principal.ToString("F2")</td>
+                    <td>@rp.Interest.ToString("F2")</td>
+                    <td>@rp.PayedOnDate.ToString("dd.MM.yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

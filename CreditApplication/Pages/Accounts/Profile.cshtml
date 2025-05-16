@@ -58,13 +58,13 @@
                             @c.CreditAmount лв.
                             <span class="badge bg-success ms-2">@c.StatusNavigation.Description</span>
                         </div>
-                        <a asp-page="/Credits/RepaymentPlan" asp-route-creditId="@c.ID"
+                        <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@c.ID"
                            class="btn btn-sm btn-outline-secondary">План</a>
                     </li>
                 }
             </ul>
         </div>
-
+            
         <div class="col-md-4">
             <h5>Приключен</h5>
             <ul class="list-group">

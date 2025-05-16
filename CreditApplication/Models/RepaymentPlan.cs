@@ -10,6 +10,8 @@ namespace CreditApplication.Models
         public Credit Credit { get; set; }
 
         public int InstallmentNumber { get; set; } // Number of the installment in the repayment plan
+
+        public DateOnly InstallmentDate { get; set; } // Date when the installment is due
         public decimal InstallmentAmount { get; set; } // Amount to be paid in each installment (total)
         public decimal Principal { get; set; } // Amount of the principal in the installment from the total
         public decimal Interest { get; set; } // Amount of the interest in the installment from the total
