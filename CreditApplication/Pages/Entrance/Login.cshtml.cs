@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace CreditApplication.Pages.Account
 {
@@ -33,8 +34,8 @@ namespace CreditApplication.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-                return Page();
+            //if (!ModelState.IsValid)
+            //    return Page();
 
             var account = await _context.Accounts
                     .FirstOrDefaultAsync(a => a.Username == Input.Email && a.IsActive);
@@ -42,6 +43,7 @@ namespace CreditApplication.Pages.Account
             if (account == null)
             {
                 ModelState.AddModelError("Input.Email", "Този имейл не съществува.");
+                Console.WriteLine("Emaila ne sushtestvuva");
                 return Page();
             }
 
@@ -52,24 +54,28 @@ namespace CreditApplication.Pages.Account
             if (!CryptographicOperations.FixedTimeEquals(hash, account.PasswordHash))
             {
                 ModelState.AddModelError(string.Empty, "Невалидна парола.");
+                Console.WriteLine("Nevalidna parola");
                 return Page();
             }
 
             // логваме с ролята като ClaimTypes.Role
             var claims = new[]
             {
-        new Claim(ClaimTypes.NameIdentifier, account.ID.ToString()),
-        new Claim(ClaimTypes.Name, account.Username),
-        new Claim(ClaimTypes.Role, account.Role.ToString())
-    };
+                new Claim(ClaimTypes.NameIdentifier, account.ID.ToString()),
+                new Claim(ClaimTypes.Name, account.Username),
+                new Claim(ClaimTypes.Role, account.Role.ToString())
+            };
+
             var identity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(identity));
+                     IdentityConstants.ApplicationScheme,
+                     new ClaimsPrincipal(identity));
 
-            return RedirectToPage("~/");
+            Console.WriteLine("Should be working?");
+
+            return RedirectToPage("/Accounts/Profile");
         }
     }
 }

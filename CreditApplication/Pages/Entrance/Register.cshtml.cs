@@ -56,34 +56,35 @@ namespace CreditApplication.Pages.Account
             bool isEmployee = Input.Email.EndsWith("@unwe.bg",
                                          StringComparison.OrdinalIgnoreCase);
 
-            int? clientId = null;
-            var role = isEmployee
-                            ? AccountRole.Employee
-                            : AccountRole.Client;
+            //int? clientId = null;
+            //var role = isEmployee
+            //                ? AccountRole.Employee
+            //                : AccountRole.Client;
 
-            if (!isEmployee)
-            {
-                // за клиент – вкаряме Client и взимаме client.Id
-                var client = new Client { CreatedOn = DateTime.UtcNow /*…*/ };
-                _context.Clients.Add(client);
-                await _context.SaveChangesAsync();
-                clientId = client.ID;
-            }
+            //if (!isEmployee)
+            //{
+            //    // за клиент – вкаряме Client и взимаме client.Id
+            //    var client = new Client { CreatedOn = DateTime.UtcNow /*…*/ };
+            //    _context.Clients.Add(client);
+            //    await _context.SaveChangesAsync();
+            //    clientId = client.ID;
+            //}
 
             var account = new CreditApplication.Models.Account
             {
                 Username = Input.Email,
-                ClientID = clientId,
+                ClientID = null,                   // няма Client профил още
                 PasswordSalt = salt,
                 PasswordHash = hash,
-                Role = role,
-                IsActive = true
+                Role = AccountRole.Client,
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow
             };
 
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Account/Login");
+            return RedirectToPage("/Entrance/Login");
         }
     }
 }
