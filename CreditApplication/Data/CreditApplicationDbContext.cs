@@ -30,9 +30,19 @@ namespace CreditApplication.Data
                     .HasMany(c => c.Credits);
             modelBuilder.Entity<ClientFinancial>().ToTable("ClientFinancials");
             modelBuilder.Entity<ClientAddress>().ToTable("ClientAddress");
-            modelBuilder.Entity<Credit>().ToTable("Credits")
-                    .HasMany(c => c.FinancialOperations);
-            modelBuilder.Entity<RepaymentPlan>().ToTable("RepaymentPlan");
+            modelBuilder.Entity<Credit>(entity =>
+            {
+                entity.ToTable("Credits", tb => tb.HasTrigger("trg_Credit_Activate"));
+                entity.HasMany(c => c.FinancialOperations)
+                      .WithOne(f => f.Credit)
+                      .HasForeignKey(f => f.CreditID);
+            });
+
+            // Погасителен план
+            modelBuilder.Entity<RepaymentPlan>(entity =>
+                entity.ToTable("RepaymentPlan")
+                      .HasOne(r => r.Credit)
+            );
             modelBuilder.Entity<FinancialOperation>().ToTable("FinancialOperations");
             modelBuilder.Entity<Nomenclature>().ToTable("Nomenclature");
             modelBuilder.Entity<LogTable>().ToTable("LogTable");

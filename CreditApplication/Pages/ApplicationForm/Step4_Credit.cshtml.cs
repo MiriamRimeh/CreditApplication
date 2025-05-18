@@ -30,6 +30,10 @@ namespace CreditApplication.Pages
         [TempData]
         public int ClientId { get; set; }
 
+        public string MonthlyInstallment { get; set; }
+        public string TotalCreditAmount { get; set; }
+
+
         public async Task<IActionResult> OnPostAsync()
         {
             //if (!ModelState.IsValid)
@@ -43,10 +47,12 @@ namespace CreditApplication.Pages
             Credit.InterestRate = 0.4M; // Fixed: Added 'M' suffix to indicate a decimal literal
             Credit.Status = 101; // 101 is the status for "for review" 
 
-            // Calculate the estimated end date based on the credit period
-            Credit.TotalCreditAmount = Credit.CreditAmount + Credit.CreditAmount * Credit.InterestRate;
-            Credit.MonthlyInstallment = (Credit.TotalCreditAmount / Credit.CreditPeriod);
+            decimal monthlyRate = Credit.InterestRate.Value / 12M; // Ensure consistent use of decimal
+            decimal monthly = (Credit.CreditAmount * monthlyRate) / (1 - (decimal)Math.Pow((double)(1 + monthlyRate), -Credit.CreditPeriod.Value));
+            decimal total = monthly * Credit.CreditPeriod.Value;
 
+            Credit.MonthlyInstallment = monthly;
+            Credit.TotalCreditAmount = total;
 
             _context.Credits.Add(Credit);
             await _context.SaveChangesAsync();

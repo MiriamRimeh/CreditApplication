@@ -33,11 +33,11 @@ else
             {
                 <tr>
                     <td>@rp.InstallmentNumber</td>
-                    <td>@rp.InstallmentDate.ToString("dd.MM.yyyy")</td>
-                    <td>@rp.InstallmentAmount.ToString("F2")</td>
-                    <td>@rp.Principal.ToString("F2")</td>
-                    <td>@rp.Interest.ToString("F2")</td>
-                    <td>@rp.PayedOnDate.ToString("dd.MM.yyyy")</td>
+                    <td>@rp.InstallmentDate?.ToString("dd.MM.yyyy")</td>
+                    <td>@rp.InstallmentAmount?.ToString("F2")</td>
+                    <td>@rp.Principal?.ToString("F2")</td>
+                    <td>@rp.Interest?.ToString("F2")</td>
+                    <td>@rp.PayedOnDate?.ToString("dd.MM.yyyy")</td>
                 </tr>
             }
         </tbody>

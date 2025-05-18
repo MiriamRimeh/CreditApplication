@@ -66,27 +66,27 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         (() => {
-            const amountInput          = document.getElementById('Credit_CreditAmount');
-            const periodInput          = document.getElementById('Credit_CreditPeriod');
-            const totalAmountInput     = document.getElementById('Credit_TotalCreditAmount');
-            const monthlyPaymentInput  = document.getElementById('Credit_MonthlyInstallment');
+            const amountInput = document.getElementById('Credit_CreditAmount');
+            const periodInput = document.getElementById('Credit_CreditPeriod');
+            const monthlyLabel = document.getElementById('Credit_MonthlyInstallment');
+            const totalLabel = document.getElementById('Credit_TotalCreditAmount');
             const interestRate = 0.40;
 
             function recalc() {
                 const amount = parseFloat(amountInput.value) || 0;
-                const period = parseInt(periodInput.value)   || 1;
-           
-                if (amount >= 300 && amount <= 5000 && period >= 5 && period <= 24 ) {
+                const months = parseInt(periodInput.value)   || 0;
 
-                    const monthlyRate = interestRate / 12;
-                    const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -period));
-                    const total   = monthly * period;
-                    totalAmountInput.value    = total.toFixed(2);
-                    monthlyPaymentInput.value = monthly.toFixed(2);
-                } else {
-                    totalAmountInput.value    = '';
-                    monthlyPaymentInput.value = '';
+                if (amount < 300 || amount > 5000 || months < 5 || months > 24 ) {
+                    totalLabel.value    = '';
+                    monthlyLabel.value = '';
+                    return;
                 }
+
+                const monthlyRate = interestRate / 12;
+                const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+                const total = monthly * months;
+                monthlyLabel.textContent = monthly.toFixed(2);
+                totalLabel.textContent = total.toFixed(2);
             }
 
             recalc();
