@@ -79,16 +79,17 @@
                 if (amount >= 300 && amount <= 5000 && period >= 5 && period <= 24 ) {
 
                     const monthlyRate = interestRate / 12;
-                    const monthly = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-                    const total = monthly * months;
-                    totalAmountInput.value = total.toFixed(2);
-                    monthlyPaymentInput.value = monthly.toFixed(2) : '';
+                    const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -period));
+                    const total   = monthly * period;
+                    totalAmountInput.value    = total.toFixed(2);
+                    monthlyPaymentInput.value = monthly.toFixed(2);
                 } else {
-                    totalAmountInput.value = '';
+                    totalAmountInput.value    = '';
                     monthlyPaymentInput.value = '';
                 }
             }
 
+            recalc();
             amountInput.addEventListener('input',  recalc);
             periodInput.addEventListener('input',  recalc);
         })();
