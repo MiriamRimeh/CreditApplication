@@ -54,7 +54,7 @@ namespace CreditApplication.Pages.ApplicationForm
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid) return Page();
+            
 
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userIdClaim == null ||
@@ -67,6 +67,21 @@ namespace CreditApplication.Pages.ApplicationForm
 
             if (account == null)
                 return Forbid();
+
+            if (Client.IDValidityDate < Client.IDIssueDate)
+            {
+                ModelState.AddModelError(
+                    "Client.IDValidityDate",
+                    "Дата на валидност трябва да бъде след датата на издаване."
+                );
+            }
+            if (Client.IDValidityDate > Client.IDIssueDate.AddYears(10))
+            {
+                ModelState.AddModelError(
+                    "Client.IDValidityDate",
+                    "Дата на валидност не може да бъде повече от 10 години след датата на издаване."
+                );
+            }
 
             // 2) Ако още няма клиент, създаваме нов, иначе – обновяваме
             if (account.ClientID == null)
@@ -96,6 +111,8 @@ namespace CreditApplication.Pages.ApplicationForm
 
                 ClientId = existing.ID;
             }
+
+            if (!ModelState.IsValid) return Page();
 
             return RedirectToPage("Step2_Address");
         }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreditApplication.Data;
 using CreditApplication.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CreditApplication.Pages.Credits
 {
@@ -48,7 +49,10 @@ namespace CreditApplication.Pages.Credits
             var credit = await _context.Credits.FindAsync(id);
             if (credit == null) return NotFound();
 
-            credit.Status = 102;              // Активен
+            credit.Status = 102; //Активен
+            //credit.ActivationDate = DateOnly.FromDateTime(DateTime.Now); 
+
+            credit.CreditBeginDate = DateTime.Now; //Date of activation of the credit
             credit.ModifiedOn = DateTime.Now;
             await _context.SaveChangesAsync();
 
@@ -71,6 +75,7 @@ namespace CreditApplication.Pages.Credits
             if (credit == null) return NotFound();
 
             credit.Status = 103;              // Приключен
+            credit.CreditEndDate = DateTime.Now;
             credit.ModifiedOn = DateTime.Now;
             await _context.SaveChangesAsync();
 

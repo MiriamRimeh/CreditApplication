@@ -17,19 +17,19 @@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Credit.CreditAmount" class="control-label">Желана сума на кредит:</label>
-                <input asp-for="Credit.CreditAmount" class="form-control" />
+                <input asp-for="Credit.CreditAmount" class="form-control" id="Credit_CreditAmount" />
                 <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
             </div>
-            <div class="form-group">
+@*             <div class="form-group">
                 <label asp-for="Credit.CreditBeginDate" class="control-label">Желана дата за първа вноска:</label>
                 <input asp-for="Credit.CreditBeginDate" class="form-control" />
                 <span asp-validation-for="Credit.CreditBeginDate" class="text-danger"></span>
-            </div>
+            </div> *@
 
             <!-- 3. Credit period (months) -->
             <div class="form-group">
                 <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита:</label>
-                <input asp-for="Credit.CreditPeriod" class="form-control" />
+                <input asp-for="Credit.CreditPeriod" class="form-control" id="Credit_CreditPeriod" />
                 <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>
             </div>
 
@@ -42,13 +42,13 @@
             <!-- 5. Total to repay (auto-fill – read-only) -->
             <div class="form-group">
                 <label asp-for="Credit.TotalCreditAmount" class="control-label">Общо дължимо в края на периода:</label>
-                <input asp-for="Credit.TotalCreditAmount" class="form-control" readonly />
+                <input asp-for="Credit.TotalCreditAmount" class="form-control" id="Credit_TotalCreditAmount" readonly />
             </div>
 
             <!-- 6. Monthly instalment (auto-fill – read-only) -->
             <div class="form-group">
                 <label asp-for="Credit.MonthlyInstallment" class="control-label">Месечна вноска:</label>
-                <input asp-for="Credit.MonthlyInstallment" class="form-control" readonly />
+                <input asp-for="Credit.MonthlyInstallment" class="form-control" id="Credit_MonthlyInstallment" readonly />
             </div>
 
             <div class="form-group">
@@ -74,7 +74,7 @@
 
             function recalc() {
                 const amount = parseFloat(amountInput.value) || 0;
-                const period = parseInt(periodInput.value)   || 0;
+                const period = parseInt(periodInput.value)   || 1;
            
                 if (amount >= 300 && amount <= 5000 && period >= 5 && period <= 24 ) {
 

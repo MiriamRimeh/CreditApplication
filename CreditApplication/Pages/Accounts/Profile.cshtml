@@ -10,23 +10,23 @@
 
     <div class="card mb-4">
         <div class="card-body">
-            <h4>Лични данни <a asp-page="EditPersonal" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
+            <h4>Лични данни <a asp-page="/Clients/Edit" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
             <p><strong>Име:</strong> @Model.Client.FirstName @Model.Client.LastName</p>
-            <p><strong>EGN:</strong> @Model.Client.EGN</p>
+            <p><strong>ЕГН:</strong> @Model.Client.EGN</p>
             <p><strong>Телефон:</strong> @Model.Client.PhoneNumber</p>
         </div>
     </div>
 
     <div class="card mb-4">
         <div class="card-body">
-            <h4>Адрес <a asp-page="EditAddress" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
-            <p>@Model.Address.City, ул. @Model.Address.StreetNeighbourhood @Model.Address.Number, @Model.Address.PostCode</p>
+            <h4>Адрес <a asp-page="/ClientAddresses/Edit" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
+            <p>@Model.Address.City, @Model.Address.StreetNeighbourhood @Model.Address.Number, @Model.Address.PostCode</p>
         </div>
     </div>
 
     <div class="card mb-4">
         <div class="card-body">
-            <h4>Финансова информация <a asp-page="EditFinancial" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
+            <h4>Финансова информация <a asp-page="/ClientFinancials/Edit" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
             <p><strong>Доход:</strong> @Model.Financials.MontlyIncome лв.</p>
             <p><strong>Разходи:</strong> @Model.Financials.MontlyExpenses лв.</p>
             <p><strong>Тип заетост:</strong> @Model.Financials.EmploymentType</p>
@@ -35,27 +35,27 @@
 
     <h3>Моите кредити</h3>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h5>Очакващ решение</h5>
             <ul class="list-group">
                 @foreach (var c in Model.PendingCredits)
                 {
                     <li class="list-group-item">
-                        @c.CreditAmount лв. (@c.CreditBeginDate?.ToString("dd.MM.yyyy"))
+                        @c.CreditAmount лв.
                         <span class="badge bg-secondary ms-2">@c.StatusNavigation.Description</span>
                     </li>
                 }
             </ul>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h5>Активен</h5>
             <ul class="list-group">
                 @foreach (var c in Model.ActiveCredits)
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            @c.CreditAmount лв.
+                            @c.CreditAmount лв. (@c.CreditBeginDate?.ToString("dd.MM.yyyy"))
                             <span class="badge bg-success ms-2">@c.StatusNavigation.Description</span>
                         </div>
                         <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@c.ID"
@@ -65,7 +65,7 @@
             </ul>
         </div>
             
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h5>Приключен</h5>
             <ul class="list-group">
                 @foreach (var c in Model.CompletedCredits)
@@ -78,7 +78,7 @@
             </ul>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h5>Отхвърлен</h5>
             <ul class="list-group">
                 @foreach (var c in Model.RejectedCredits)

@@ -34,10 +34,12 @@ namespace CreditApplication.Models
 
         [DataType(DataType.Date)]
         [Required]
+        [Display(Name = "Дата на издаване")]
         public DateTime IDIssueDate { get; set; }
 
         [DataType(DataType.Date)]
         [Required]
+        [Display(Name = "Дата на валидност")]
         public DateTime IDValidityDate { get; set; }
 
         [Required]
@@ -48,5 +50,7 @@ namespace CreditApplication.Models
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
 
         public ICollection<Credit> Credits { get; set; } = new List<Credit>();
+
+        
     }
 }

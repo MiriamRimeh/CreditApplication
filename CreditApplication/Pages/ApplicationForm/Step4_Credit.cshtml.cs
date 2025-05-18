@@ -32,10 +32,10 @@ namespace CreditApplication.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             Credit.ClientID = ClientId;
             Credit.CreatedOn = DateTime.Now;
