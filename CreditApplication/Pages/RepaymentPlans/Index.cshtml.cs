@@ -23,6 +23,9 @@ namespace CreditApplication.Pages.RepaymentPlans
         public int? CreditId { get; set; }
         public IList<RepaymentPlan> RepaymentPlan { get;set; } = default!;
 
+        [TempData]
+        public string? StatusMessage { get; set; }
+
         public async Task OnGetAsync()
         {
             //RepaymentPlan = await _context.RepaymentPlans
@@ -40,6 +43,45 @@ namespace CreditApplication.Pages.RepaymentPlans
             RepaymentPlan = await query
                 .OrderBy(rp => rp.InstallmentNumber)
                 .ToListAsync();
+        }
+
+        public async Task<IActionResult> OnPostPayAsync(int id)
+        {
+            var rp = await _context.RepaymentPlans.FindAsync(id);
+            if (rp == null)
+                return NotFound();
+
+            // Update the payment date
+            rp.PayedOnDate = DateTime.Today;
+            await _context.SaveChangesAsync();
+
+            // Calculate the difference in days
+            if (rp.InstallmentDate.HasValue)
+            {
+                // Convert DateOnly to DateTime for comparison
+                DateTime installmentDate = rp.InstallmentDate.Value.ToDateTime(TimeOnly.MinValue);
+                int diff = (DateTime.Today - installmentDate).Days;
+
+                if (diff < 0)
+                {
+                    StatusMessage = $"Вноската е платена {-diff} дни предварително";
+                }
+                else if (diff > 0)
+                {
+                    StatusMessage = $"Вноската е платена с {diff} дни закъснение";
+                }
+                else
+                {
+                    StatusMessage = "Вноската е платена днес";
+                }
+            }
+            else
+            {
+                StatusMessage = "Вноската е маркирана като платена";
+            }
+
+            // Redirect back to OnGet to see the updated list
+            return RedirectToPage(new { CreditId = this.CreditId });
         }
     }
 }

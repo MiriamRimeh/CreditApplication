@@ -9,6 +9,14 @@
         <text>за кредит № @Model.CreditId.Value</text>
     }</h2>
 
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success">
+        @Model.StatusMessage
+    </div>
+}
+
 @if (!Model.RepaymentPlan.Any())
 {
     <div class="alert alert-info">
@@ -38,6 +46,24 @@ else
                     <td>@rp.Principal?.ToString("F2")</td>
                     <td>@rp.Interest?.ToString("F2")</td>
                     <td>@rp.PayedOnDate?.ToString("dd.MM.yyyy")</td>
+                    <td>
+                        @if (rp.PayedOnDate.HasValue)
+                        {
+                            <button class="btn btn-secondary btn-sm" disabled>Платено</button>
+                        }
+                        else
+                        {
+                            <form method="post" asp-page-handler="Pay">
+                                <input type="hidden" name="id" value="@rp.ID" />
+                                @* Пренасяме и текущия CreditId, за да останем на същата филтрирана страница *@
+                                @if (Model.CreditId.HasValue)
+                                {
+                                    <input type="hidden" name="CreditId" value="@Model.CreditId" />
+                                }
+                                <button type="submit" class="btn btn-primary btn-sm">Плати вноска</button>
+                            </form>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
