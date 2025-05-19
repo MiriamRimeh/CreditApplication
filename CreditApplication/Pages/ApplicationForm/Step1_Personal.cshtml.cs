@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CreditApplication.Pages.ApplicationForm
 {
-    [Authorize]
     public class Step1Model : PageModel
     {
         private readonly CreditApplication.Data.CreditApplicationDbContext _context;
