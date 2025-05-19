@@ -7,42 +7,42 @@ namespace CreditApplication.Models
         [Key]
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Моля, въведете име.")]
         [MaxLength(50)]
         public string FirstName { get; set; }
 
         [MaxLength(50)]
         public string? MiddleName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете фамилия.")]
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете ЕГН.")]
         [MaxLength(10)]
         public string EGN { get; set; }
 
-        [MaxLength(100)]
         public string? Email { get; set; }
 
+        [Required(ErrorMessage = "Моля, въведете телефонен номер.")]
         [MaxLength(10)]
-        public string? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете № на лична карта.")]
         [MaxLength(20)]
         public string IDCardNumber { get; set; }
 
         [DataType(DataType.Date)]
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете дата на издаване на лична карта.")]
         [Display(Name = "Дата на издаване")]
         public DateTime IDIssueDate { get; set; }
 
         [DataType(DataType.Date)]
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете дата на валидност на лична карта.")]
         [Display(Name = "Дата на валидност")]
         public DateTime IDValidityDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете място на издаване на лична карта.")]
         [MaxLength(50)]
         public string IDIssuer { get; set; }
 

@@ -13,13 +13,13 @@ namespace CreditApplication.Models
         [BindProperty]
         public Client Client { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете размер на доходи.")]
         public decimal MontlyIncome { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете размер на разходи.")]
         public decimal MontlyExpenses { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете вид заетост.")]
         public int EmploymentType { get; set; }
 
         [ForeignKey("EmploymentType")]

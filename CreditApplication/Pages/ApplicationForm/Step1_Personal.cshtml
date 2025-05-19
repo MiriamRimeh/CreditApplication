@@ -2,97 +2,90 @@
 @model CreditApplication.Pages.ApplicationForm.Step1Model
 
 @{
-    ViewData["Title"] = "Step1";
+    ViewData["Title"] = "Лични данни";
 }
 
-<h1>Стъпка 1/4</h1>
+<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar" style="width: 25%">Стъпка 1</div>
+</div>
 
-<h4>Лични данни на клиент</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.FirstName" class="control-label">Първо име:</label>
-                <input asp-for="Client.FirstName" class="form-control" />
-                <span asp-validation-for="Client.FirstName" class="text-danger"></span>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="mb-0">Лични данни</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="row g-3 needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Client.FirstName" class="control-label">Име:</label>
+                            <input asp-for="Client.FirstName" class="form-control" required="" />
+                            <span asp-validation-for="Client.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <label asp-for="Client.MiddleName" class="control-label">Бащино име:</label>
+                            <input asp-for="Client.MiddleName" class="form-control" />
+                            <span asp-validation-for="Client.MiddleName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Client.LastName" class="control-label">Фамилия:</label>
+                            <input asp-for="Client.LastName" class="form-control" required=" " />
+                            <span asp-validation-for="Client.LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Client.EGN" class="control-label">ЕГН:</label>
+                            <input asp-for="Client.EGN" class="form-control" required=" " />
+                            <span asp-validation-for="Client.EGN" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <label asp-for="Client.Email" class="control-label">Имейл:</label>
+                            <input asp-for="Client.Email" class="form-control" />
+                            <span asp-validation-for="Client.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Client.PhoneNumber" class="control-label">Телефон:</label>
+                            <input asp-for="Client.PhoneNumber" class="form-control" required="" />
+                            <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Client.IDCardNumber" class="control-label">№ на лична карта:</label>
+                            <input asp-for="Client.IDCardNumber" class="form-control" required="" />
+                            <span asp-validation-for="Client.IDCardNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Client.IDIssueDate" class="control-label">Дата на издаване:</label>
+                            <input asp-for="Client.IDIssueDate" class="form-control" type="date" required="" />
+                            <span asp-validation-for="Client.IDIssueDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Client.IDValidityDate" class="control-label">Дата на валидност:</label>
+                            <input asp-for="Client.IDValidityDate" class="form-control" type="date" required="" />
+                            <span asp-validation-for="Client.IDValidityDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Client.IDIssuer" class="control-label">Издадена от (МВР):</label>
+                            <input asp-for="Client.IDIssuer" class="form-control" required="" />
+                            <span asp-validation-for="Client.IDIssuer" class="text-danger"></span>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-primary float-md-end">Напред</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.MiddleName" class="control-label">Бащино име:</label>
-                <input asp-for="Client.MiddleName" class="form-control" />
-                <span asp-validation-for="Client.MiddleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.LastName" class="control-label">Фамилия:</label>
-                <input asp-for="Client.LastName" class="form-control" />
-                <span asp-validation-for="Client.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.EGN" class="control-label">ЕГН:</label>
-                <input asp-for="Client.EGN" class="form-control" />
-                <span asp-validation-for="Client.EGN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.Email" class="control-label">Имейл:</label>
-                <input asp-for="Client.Email" class="form-control" />
-                <span asp-validation-for="Client.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.PhoneNumber" class="control-label">Телефон:</label>
-                <input asp-for="Client.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.IDCardNumber" class="control-label">№ на лична карта:</label>
-                <input asp-for="Client.IDCardNumber" class="form-control" />
-                <span asp-validation-for="Client.IDCardNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.IDIssueDate" class="control-label">Дата на издаване:</label>
-                <input asp-for="Client.IDIssueDate" class="form-control" type="date" />
-                <span asp-validation-for="Client.IDIssueDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.IDValidityDate" class="control-label">Дата на валидност:</label>
-                <input asp-for="Client.IDValidityDate" class="form-control" type="date" />
-                <span asp-validation-for="Client.IDValidityDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Client.IDIssuer" class="control-label">Издадена от МВР:</label>
-                <input asp-for="Client.IDIssuer" class="form-control" />
-                <span asp-validation-for="Client.IDIssuer" class="text-danger"></span>
-            </div>
-@*             <div class="form-group">
-                <label asp-for="Client.CreatedOn" class="control-label"></label>
-                <input asp-for="Client.CreatedOn" class="form-control" />
-                <span asp-validation-for="Client.CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Client.ModifiedOn" class="control-label"></label>
-                <input asp-for="Client.ModifiedOn" class="form-control" />
-                <span asp-validation-for="Client.ModifiedOn" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <input type="submit" value="Next" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
