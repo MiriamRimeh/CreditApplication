@@ -9,8 +9,9 @@
     <h1>Моят профил</h1>
 
     <div class="card mb-4">
+        <div class="card-header"><h5><strong>Лични данни</strong> <a asp-page="/Clients/Edit" class="btn btn-sm btn-secondary ms-2 float-end">Редактирай</a></h5></div>
+        
         <div class="card-body">
-            <h4>Лични данни <a asp-page="/Clients/Edit" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
             <p><strong>Име:</strong> @Model.Client.FirstName @Model.Client.LastName</p>
             <p><strong>ЕГН:</strong> @Model.Client.EGN</p>
             <p><strong>Телефон:</strong> @Model.Client.PhoneNumber</p>
@@ -18,15 +19,15 @@
     </div>
 
     <div class="card mb-4">
+        <div class="card-header"><h5><strong>Адрес</strong> <a asp-page="/ClientAddresses/Edit" class="btn btn-sm btn-secondary ms-2 float-end">Редактирай</a></h5></div>
         <div class="card-body">
-            <h4>Адрес <a asp-page="/ClientAddresses/Edit" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
             <p>@Model.Address.City, @Model.Address.StreetNeighbourhood @Model.Address.Number, @Model.Address.PostCode</p>
         </div>
     </div>
 
     <div class="card mb-4">
+        <div class="card-header"><h5><strong>Финансова информация</strong> <a asp-page="/ClientFinancials/Edit" class="btn btn-sm btn-secondary ms-2 float-end">Редактирай</a></h5></div>
         <div class="card-body">
-            <h4>Финансова информация <a asp-page="/ClientFinancials/Edit" class="btn btn-sm btn-outline-primary ms-2">Редактирай</a></h4>
             <p><strong>Доход:</strong> @Model.Financials.MontlyIncome лв.</p>
             <p><strong>Разходи:</strong> @Model.Financials.MontlyExpenses лв.</p>
             <p><strong>Тип заетост:</strong> @Model.Financials.EmploymentType</p>

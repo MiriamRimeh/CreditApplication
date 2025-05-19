@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace CreditApplication.Pages.Accounts
 {
-    [Authorize(Policy = "RequireClient")]
+    [Authorize(Roles = "Client,Admin")]
     public class ProfileModel : PageModel
     {
         private readonly CreditApplicationDbContext _context;
