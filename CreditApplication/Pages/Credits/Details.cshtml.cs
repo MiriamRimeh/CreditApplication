@@ -53,16 +53,15 @@ namespace CreditApplication.Pages.Credits
             credit.CreditBeginDate = DateTime.Now;
             credit.ModifiedOn = DateTime.Now;
 
-            // Correctly initialize the FinancialOperation object
             var finOp = new FinancialOperation
             {
-                CreditID = credit.ID,                         // номер на кредита
-                PayedOnDate = DateTime.Now,                   // дата на операцията
-                PayedAmount = -(credit.CreditAmount),         // усвоена сума
-                OperationType = 201                           // код 201 – Усвояване на кредит
+                CreditID = credit.ID,
+                PayedOnDate = DateTime.Now,
+                PayedAmount = -(credit.CreditAmount),
+                OperationType = 201
             };
 
-            // Add the financial operation to the context
+
             _context.FinancialOperations.Add(finOp);
 
             await _context.SaveChangesAsync();
@@ -74,7 +73,7 @@ namespace CreditApplication.Pages.Credits
         {
             var credit = await _context.Credits.FindAsync(id);
             if (credit == null) return NotFound();
-            credit.Status = 104;              // Отхвърлен
+            credit.Status = 104;    
             credit.ModifiedOn = DateTime.Now;
             await _context.SaveChangesAsync();
             return RedirectToPage(new { id });
@@ -85,7 +84,7 @@ namespace CreditApplication.Pages.Credits
             var credit = await _context.Credits.FindAsync(id);
             if (credit == null) return NotFound();
 
-            credit.Status = 103;              // Приключен
+            credit.Status = 103;
             credit.CreditEndDate = DateTime.Now;
             credit.ModifiedOn = DateTime.Now;
             await _context.SaveChangesAsync();

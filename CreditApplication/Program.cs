@@ -35,6 +35,7 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
+bool hasAppJustStarted = true;
 
 if (!app.Environment.IsDevelopment())
 {
@@ -50,12 +51,19 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+
 app.Use(async (context, next) =>
 {
-    if (context.User.Identity.IsAuthenticated)
+    if (hasAppJustStarted)
     {
-        await context.SignOutAsync("Identity.Application");
+        if (context.User.Identity.IsAuthenticated)
+        {
+            await context.SignOutAsync("Identity.Application");
+        }
+        hasAppJustStarted = false;
     }
+
     await next();
 });
 

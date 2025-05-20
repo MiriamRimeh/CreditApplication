@@ -33,14 +33,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Credits/Index">Кредити</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Accounts/Profile">Профил</a>
+                        </li>
                         @if (User.Identity.IsAuthenticated) {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-page="/ApplicationForm/Step1_Personal">Форма за кандидатстване</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Accounts/Profile">Профил</a>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-page="/Entrance/Logout">Изход</a>
                             </li>
