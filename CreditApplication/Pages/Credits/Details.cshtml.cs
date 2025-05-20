@@ -23,6 +23,7 @@ namespace CreditApplication.Pages.Credits
 
         public Credit Credit { get; set; } = default!;
 
+        public FinancialOperation FinancialOperation { get; set; } = default!;
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -48,12 +49,22 @@ namespace CreditApplication.Pages.Credits
         {
             var credit = await _context.Credits.FindAsync(id);
             if (credit == null) return NotFound();
-
-            credit.Status = 102; //Активен
-            //credit.ActivationDate = DateOnly.FromDateTime(DateTime.Now); 
-
-            credit.CreditBeginDate = DateTime.Now; //Date of activation of the credit
+            credit.Status = 102;
+            credit.CreditBeginDate = DateTime.Now;
             credit.ModifiedOn = DateTime.Now;
+
+            // Correctly initialize the FinancialOperation object
+            var finOp = new FinancialOperation
+            {
+                CreditID = credit.ID,                         // номер на кредита
+                PayedOnDate = DateTime.Now,                   // дата на операцията
+                PayedAmount = -(credit.CreditAmount),         // усвоена сума
+                OperationType = 201                           // код 201 – Усвояване на кредит
+            };
+
+            // Add the financial operation to the context
+            _context.FinancialOperations.Add(finOp);
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage(new { id });

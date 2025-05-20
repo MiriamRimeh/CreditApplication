@@ -53,6 +53,17 @@ namespace CreditApplication.Pages.RepaymentPlans
 
             // Update the payment date
             rp.PayedOnDate = DateTime.Today;
+
+            var finOp = new FinancialOperation
+            {
+                CreditID = rp.CreditID,                         // номер на кредита
+                PayedOnDate = rp.PayedOnDate.Value,                 // дата на операцията
+                PayedAmount = rp.InstallmentAmount ?? 0m,           // заплатена сума
+                OperationType = 202                                   // код 202 – Вноска по кредит
+            };
+
+            _context.FinancialOperations.Add(finOp);
+
             await _context.SaveChangesAsync();
 
             // Calculate the difference in days
