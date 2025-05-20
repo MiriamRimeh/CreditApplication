@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 
 namespace CreditApplication.Pages.Account
 {
@@ -43,7 +44,6 @@ namespace CreditApplication.Pages.Account
             if (account == null)
             {
                 ModelState.AddModelError("Input.Email", "Този имейл не съществува.");
-                Console.WriteLine("Emaila ne sushtestvuva");
                 return Page();
             }
 
@@ -54,7 +54,6 @@ namespace CreditApplication.Pages.Account
             if (!CryptographicOperations.FixedTimeEquals(hash, account.PasswordHash))
             {
                 ModelState.AddModelError(string.Empty, "Невалидна парола.");
-                Console.WriteLine("Nevalidna parola");
                 return Page();
             }
 
@@ -66,14 +65,15 @@ namespace CreditApplication.Pages.Account
                 new Claim(ClaimTypes.Role, account.Role.ToString())
             };
 
-            var identity = new ClaimsIdentity(
-                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var identity = new ClaimsIdentity(claims, "Identity.Application");
+            var principal = new ClaimsPrincipal(identity);
 
-            await HttpContext.SignInAsync(
-                     IdentityConstants.ApplicationScheme,
-                     new ClaimsPrincipal(identity));
+            var props = new AuthenticationProperties
+            {
+                IsPersistent = false // Важно: не пазим сесия между рестарти
+            };
 
-            Console.WriteLine("Should be working?");
+            await HttpContext.SignInAsync("Identity.Application", principal, props);
 
             return RedirectToPage("/Accounts/Profile");
         }
