@@ -46,29 +46,31 @@
             </dl>
         </div>
 
-        <div>
-            @* Само при "Очакващ решение" (101) *@
-            @if (Model.Credit.Status == 101)
-            {
-                <form method="post" asp-page-handler="Approve" asp-route-id="@Model.Credit.ID" class="d-inline">
-                    <button type="submit" class="btn btn-success">Одобри</button>
-                </form>
-                <form method="post" asp-page-handler="Reject" asp-route-id="@Model.Credit.ID" class="d-inline">
-                    <button type="submit" class="btn btn-danger">Откажи</button>
-                </form>
-            }
-            @* Само при "Активен" (102) *@
-            else if (Model.Credit.Status == 102)
-            {
-                <form method="post" asp-page-handler="Finish" asp-route-id="@Model.Credit.ID">
-                    <button type="submit" class="btn btn-primary">Приключи</button>
-                </form>
-            }
-        </div>
+        
 
 
 
         <div class="card-footer text-center">
+                @* Само при "Очакващ решение" (101) *@
+                @if (Model.Credit.Status == 101)
+                {
+                    <form method="post" asp-page-handler="Approve" asp-route-id="@Model.Credit.ID" class="d-inline">
+                        <button type="submit" class="btn btn-success">Одобри</button>
+                    </form>
+                    <form method="post" asp-page-handler="Reject" asp-route-id="@Model.Credit.ID" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Откажи</button>
+                    </form>
+                }
+                @* Само при "Активен" (102) *@
+                else if (Model.Credit.Status == 102)
+                {
+                    <form method="post" asp-page-handler="Finish" asp-route-id="@Model.Credit.ID">
+                        <button type="submit" class="btn btn-danger me-2">Приключи</button>
+                        <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@Model.Credit.ID"
+                           class="btn btn-secondary">План</a>
+                    </form>
+                }
+
             <a asp-page="./Edit" asp-route-id="@Model.Credit.ID" class="btn btn-primary me-2">
                  Редактирай
             </a>
