@@ -10,9 +10,7 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 mb-0">Кредити</h1>
-        <a asp-page="Create" class="btn btn-primary">
-            <i class="bi bi-plus-circle me-1"></i> Създай нов
-        </a>
+        <a asp-page="Create" class="btn btn-primary">Създай нов</a>
     </div>
 
     <div class="card mb-4">
@@ -41,10 +39,87 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr>
+                    <th scope="col">
+                        <a asp-route-SortOrder="@Model.CreditIdSort"
+                           asp-route-SearchClientId="@Model.SearchClientId"
+                           asp-route-SearchStatus="@Model.SearchStatus"
+                           class="text-decoration-none">
+                            Кредит №
+                            @if (Model.SortOrder == "id")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                </svg>
+                            }
+                            else if (Model.SortOrder == "id_desc")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                </svg>
+                            }
+                        </a>
+                    </th>
                     <th scope="col">Клиент №</th>
-                    <th scope="col">Сума</th>
-                    <th scope="col">Начална дата</th>
-                    <th scope="col">Крайна дата</th>
+                    <th scope="col">
+                        <a asp-route-SortOrder="@Model.CreditAmountSort"
+                           asp-route-SearchClientId="@Model.SearchClientId"
+                           asp-route-SearchStatus="@Model.SearchStatus"
+                           class="text-decoration-none">
+                            Сума
+                            @if (Model.SortOrder == "Amount")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                </svg>
+                            }
+                            else if (Model.SortOrder == "amount_desc")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                </svg>
+                            }
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-SortOrder="@Model.BeginDateSort"
+                           asp-route-SearchClientId="@Model.SearchClientId"
+                           asp-route-SearchStatus="@Model.SearchStatus"
+                           class="text-decoration-none">
+                            Начална дата
+                            @if (Model.SortOrder == "CreditBeginDate")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                </svg>
+                            }
+                            else if (Model.SortOrder == "creditBeginDate_desc")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                </svg>
+                            }
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-SortOrder="@Model.EndDateSort"
+                           asp-route-SearchClientId="@Model.SearchClientId"
+                           asp-route-SearchStatus="@Model.SearchStatus"
+                           class="text-decoration-none">
+                            Крайна дата
+                            @if (Model.SortOrder == "EndDate")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                </svg>
+                            }
+                            else if (Model.SortOrder == "end_desc")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                </svg>
+                            }
+                        </a>
+                    </th>
                     <th scope="col">Лихва (%)</th>
                     <th scope="col">Статус</th>
                     <th scope="col" class="text-end">Действия</th>
@@ -54,13 +129,13 @@
                 @foreach (var item in Model.Credit)
                 {
                     <tr>
+                        <td>@item.ID</td>
                         <td>@item.ClientID</td>
                         <td>@item.CreditAmount.ToString("N2")</td>
-                        <td>@item.CreditBeginDate</td>
-                        <td>@item.CreditEndDate</td>
-                        <td>@item.InterestRate</td>
+                        <td>@item.CreditBeginDate?.ToString("dd.MM.yyyy")</td>
+                        <td>@item.CreditEndDate?.ToString("dd.MM.yyyy")</td>
+                        <td>@item.InterestRate?.ToString("P")</td>
                         <td>
-                            @* Покажи името вместо числото *@
                             @(item.StatusNavigation?.Description ?? "—")
                         </td>
                         <td class="text-end">
@@ -85,4 +160,43 @@
             </tbody>
         </table>
     </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+                    <a class="page-link"
+                       asp-route-PageIndex="@(Model.PageIndex - 1)"
+                       asp-route-SortOrder="@Model.SortOrder"
+                       asp-route-SearchClientId="@Model.SearchClientId"
+                       asp-route-SearchStatus="@Model.SearchStatus">
+                        ‹ Предишна
+                    </a>
+                </li>
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                        <a class="page-link"
+                           asp-route-PageIndex="@i"
+                           asp-route-SortOrder="@Model.SortOrder"
+                           asp-route-SearchClientId="@Model.SearchClientId"
+                           asp-route-SearchStatus="@Model.SearchStatus">
+                            @i
+                        </a>
+                    </li>
+                }
+                <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link"
+                       asp-route-PageIndex="@(Model.PageIndex + 1)"
+                       asp-route-SortOrder="@Model.SortOrder"
+                       asp-route-SearchClientId="@Model.SearchClientId"
+                       asp-route-SearchStatus="@Model.SearchStatus">
+                        Следваща ›
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+
 </div>

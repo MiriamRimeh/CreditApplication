@@ -33,16 +33,16 @@
                 <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditEndDate?.ToString("dd.MM.yyyy")</dd>
 
                 <dt class="col-md-4">Лихва по кредит</dt>
-                <dd class="col-md-8">@Model.Credit.InterestRate</dd>
+                <dd class="col-md-8">@Model.Credit.InterestRate?.ToString("P")</dd>
 
                 <dt class="col-md-4">Статус на кредит</dt>
                 <dd class="col-md-8">@Model.Credit.StatusNavigation.Description</dd>
 
                 <dt class="col-md-4">Създадено на</dt>
-                <dd class="col-md-8">@Model.Credit.CreatedOn</dd>
+                <dd class="col-md-8">@Model.Credit.CreatedOn?.ToString("dd.MM.yyyy HH:mm:ss")</dd>
 
                 <dt class="col-md-4">Последна промяна</dt>
-                <dd class="col-md-8">@Model.Credit.ModifiedOn</dd>
+                <dd class="col-md-8">@Model.Credit.ModifiedOn?.ToString("dd.MM.yyyy HH:mm:ss")</dd>
             </dl>
         </div>
 

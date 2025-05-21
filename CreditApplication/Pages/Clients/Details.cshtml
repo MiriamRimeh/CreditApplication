@@ -1,8 +1,10 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Employee,Admin")]
 @model CreditApplication.Pages.Clients.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли за клиент";
 }
 
 <div class="container py-4">

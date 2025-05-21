@@ -1,8 +1,10 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Employee,Admin")]
 @model CreditApplication.Pages.Clients.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Изтрий клиент";
 }
 
 <div class="container py-4">
