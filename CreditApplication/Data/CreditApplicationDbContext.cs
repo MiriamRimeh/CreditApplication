@@ -26,27 +26,49 @@ namespace CreditApplication.Data
 
             modelBuilder.HasDefaultSchema("21180011");
 
-            modelBuilder.Entity<Client>().ToTable("Clients")
-                    .HasMany(c => c.Credits);
-            modelBuilder.Entity<ClientFinancial>().ToTable("ClientFinancials");
-            modelBuilder.Entity<ClientAddress>().ToTable("ClientAddress");
+            modelBuilder.Entity<Client>()
+                 .ToTable("Clients", tb => tb.HasTrigger("trg_21180011_Clients_Log"))
+                 .HasMany(c => c.Credits)
+                 .WithOne(c => c.Client)
+                 .HasForeignKey(c => c.ClientID);
+
+            modelBuilder.Entity<ClientFinancial>()
+                .ToTable("ClientFinancials", tb => tb.HasTrigger("trg_21180011_ClientFinancials_Log"));
+
+            modelBuilder.Entity<ClientAddress>()
+                 .ToTable("ClientAddress", tb => tb.HasTrigger("trg_21180011_ClientAddress_Log"));
+
             modelBuilder.Entity<Credit>(entity =>
             {
-                entity.ToTable("Credits", tb => tb.HasTrigger("trg_Credit_Activate"));
+                entity.ToTable("Credits", tb =>
+                {
+                    tb.HasTrigger("trg_21180011_Credits_Log");
+                    tb.HasTrigger("trg_Credit_Activate");
+                });
                 entity.HasMany(c => c.FinancialOperations)
                       .WithOne(f => f.Credit)
                       .HasForeignKey(f => f.CreditID);
             });
 
-            // Погасителен план
             modelBuilder.Entity<RepaymentPlan>(entity =>
-                entity.ToTable("RepaymentPlan")
-                      .HasOne(r => r.Credit)
-            );
-            modelBuilder.Entity<FinancialOperation>().ToTable("FinancialOperations");
-            modelBuilder.Entity<Nomenclature>().ToTable("Nomenclature");
+            {
+                entity.ToTable("RepaymentPlan", tb => tb.HasTrigger("trg_21180011_RepaymentPlan_Log"));
+                entity.HasOne(r => r.Credit);
+            });
+
+            modelBuilder.Entity<FinancialOperation>()
+                            .ToTable("FinancialOperations", tb => tb.HasTrigger("trg_21180011_FinancialOperations_Log"))
+                            .HasOne(f => f.Credit)
+                            .WithMany(c => c.FinancialOperations)
+                            .HasForeignKey(f => f.CreditID);
+
+            modelBuilder.Entity<Nomenclature>()
+               .ToTable("Nomenclature", tb => tb.HasTrigger("trg_21180011_Nomenclature_Log"));
+
             modelBuilder.Entity<LogTable>().ToTable("LogTable");
-            modelBuilder.Entity<Account>().ToTable("Accounts");
+
+            modelBuilder.Entity<Account>()
+                .ToTable("Accounts", tb => tb.HasTrigger("trg_21180011_Accounts_Log"));
 
         }
     }
