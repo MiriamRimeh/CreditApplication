@@ -56,20 +56,19 @@ namespace CreditApplication.Pages.RepaymentPlans
 
             var finOp = new FinancialOperation
             {
-                CreditID = rp.CreditID,                         // номер на кредита
-                PayedOnDate = rp.PayedOnDate.Value,                 // дата на операцията
-                PayedAmount = rp.InstallmentAmount ?? 0m,           // заплатена сума
-                OperationType = 202                                   // код 202 – Вноска по кредит
+                CreditID = rp.CreditID,                         
+                PayedOnDate = rp.PayedOnDate.Value,                 
+                PayedAmount = rp.InstallmentAmount ?? 0m,           
+                OperationType = 202                                  
             };
 
             _context.FinancialOperations.Add(finOp);
 
             await _context.SaveChangesAsync();
 
-            // Calculate the difference in days
+
             if (rp.InstallmentDate.HasValue)
             {
-                // Convert DateOnly to DateTime for comparison
                 DateTime installmentDate = rp.InstallmentDate.Value.ToDateTime(TimeOnly.MinValue);
                 int diff = (DateTime.Today - installmentDate).Days;
 
@@ -91,7 +90,6 @@ namespace CreditApplication.Pages.RepaymentPlans
                 StatusMessage = "Вноската е маркирана като платена";
             }
 
-            // Redirect back to OnGet to see the updated list
             return RedirectToPage(new { CreditId = this.CreditId });
         }
     }

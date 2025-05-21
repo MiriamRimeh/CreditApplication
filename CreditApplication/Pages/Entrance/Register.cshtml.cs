@@ -53,22 +53,22 @@ namespace CreditApplication.Pages.Account
             var salt = derive.Salt; // Convert byte[] to string
             var hash = derive.GetBytes(32); // Convert byte[] to string
 
+            AccountRole role;
+            if (Input.Email.EndsWith("@emp.creditapp.bg", StringComparison.OrdinalIgnoreCase))
+            {
+                role = AccountRole.Employee;
+            }
+            else if (Input.Email.EndsWith("@admin.creditapp.bg", StringComparison.OrdinalIgnoreCase))
+            {
+                role = AccountRole.Admin;
+            }
+            else
+            {
+                role = AccountRole.Client;
+            }
+
             bool isEmployee = Input.Email.EndsWith("@unwe.bg",
                                          StringComparison.OrdinalIgnoreCase);
-
-            //int? clientId = null;
-            //var role = isEmployee
-            //                ? AccountRole.Employee
-            //                : AccountRole.Client;
-
-            //if (!isEmployee)
-            //{
-            //    // за клиент – вкаряме Client и взимаме client.Id
-            //    var client = new Client { CreatedOn = DateTime.UtcNow /*…*/ };
-            //    _context.Clients.Add(client);
-            //    await _context.SaveChangesAsync();
-            //    clientId = client.ID;
-            //}
 
             var account = new CreditApplication.Models.Account
             {
@@ -76,7 +76,7 @@ namespace CreditApplication.Pages.Account
                 ClientID = null,                   // няма Client профил още
                 PasswordSalt = salt,
                 PasswordHash = hash,
-                Role = AccountRole.Client,
+                Role = role,
                 IsActive = true,
                 CreatedAt = DateTime.UtcNow
             };

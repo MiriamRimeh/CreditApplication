@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Client,Employee,Admin")]
 @model CreditApplication.Pages.RepaymentPlans.IndexModel
 @{
     ViewData["Title"] = "Погасителен план";
@@ -56,7 +58,6 @@ else
                         {
                             <form method="post" asp-page-handler="Pay">
                                 <input type="hidden" name="id" value="@rp.ID" />
-                                @* Пренасяме и текущия CreditId, за да останем на същата филтрирана страница *@
                                 @if (Model.CreditId.HasValue)
                                 {
                                     <input type="hidden" name="CreditId" value="@Model.CreditId" />
@@ -70,3 +71,4 @@ else
         </tbody>
     </table>
 }
+

@@ -27,10 +27,10 @@
                 <dd class="col-md-8">@Model.Credit.CreditAmount</dd>
 
                 <dt class="col-md-4">Начална дата на кредит</dt>
-                <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditBeginDate</dd>
+                <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditBeginDate?.ToString("dd.MM.yyyy")</dd>
 
                 <dt class="col-md-4">Крайна дата на кредит</dt>
-                <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditEndDate</dd>
+                <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditEndDate?.ToString("dd.MM.yyyy")</dd>
 
                 <dt class="col-md-4">Лихва по кредит</dt>
                 <dd class="col-md-8">@Model.Credit.InterestRate</dd>

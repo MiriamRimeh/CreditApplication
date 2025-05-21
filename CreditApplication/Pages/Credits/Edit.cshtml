@@ -35,26 +35,12 @@
                             <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
-                            <label asp-for="Credit.CreditBeginDate" class="control-label">Желана дата за първа вноска:</label>
-                            <input asp-for="Credit.CreditBeginDate" class="form-control" asp-format="{0:dd.MM.yyyy}" />
-                            <span asp-validation-for="Credit.CreditBeginDate" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
                             <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита (месеци):</label>
                             <input asp-for="Credit.CreditPeriod" class="form-control" />
                             <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>
                         </div>
 
-                        @* <div class="form-group col-12">
-                            <label asp-for="Credit.TotalCreditAmount" class="control-label">Общо дължимо в края на периода:</label>
-                            <input asp-for="Credit.TotalCreditAmount" class="form-control" readonly />
-                        </div>
-
-                        <div class="form-group col-12">
-                            <label asp-for="Credit.MonthlyInstallment" class="control-label">Месечна вноска:</label>
-                            <input asp-for="Credit.MonthlyInstallment" class="form-control" readonly />
-                        </div> *@
 
                         <div class="form-group col-12 text-center mt-4">
                             <input type="submit" value="Запази" class="btn btn-primary btn-lg px-5" />
