@@ -30,10 +30,14 @@ else
     <div class="card mb-4">
         <div class="card-body">
             <form method="get" class="row gx-2 gy-2 align-items-end">
-                <div class="col-sm-3">
-                    <label asp-for="CreditId" class="form-label">ID на кредита</label>
-                    <input asp-for="CreditId" type="number" class="form-control" placeholder="Номер на кредит" />
-                </div>
+            @using Microsoft.AspNetCore.Identity
+                @if (!User.IsInRole("Client"))
+                {
+                    <div class="col-sm-3">
+                        <label asp-for="CreditId" class="form-label">ID на кредита</label>
+                        <input asp-for="CreditId" type="number" class="form-control" placeholder="Номер на кредит" />
+                    </div>
+                }
                 <div class="col-sm-3">
                     <label asp-for="SearchInstallmentDate" class="form-label">Дата на вноска</label>
                     <input asp-for="SearchInstallmentDate" type="date" class="form-control" />
@@ -59,6 +63,17 @@ else
             <thead class="table-light">
                 <tr>
                     <th scope="col">
+                        <a asp-page="./Index"
+                           asp-route-sortOrder="@Model.CreditIDSort"
+                           asp-route-CreditId="@Model.CreditId"
+                           asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                           asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                           asp-route-PageIndex="1">
+                            № на кредит
+                        </a>
+
+                    </th>
+                    <th scope="col">
 
                         <a asp-page="./Index"
                            asp-route-sortOrder="@Model.InstallmentNumberSort"
@@ -70,16 +85,7 @@ else
                         </a>
                     </th>
                     <th scope="col">
-                        <a asp-page="./Index"
-                           asp-route-sortOrder="@Model.CreditIDSort"
-                           asp-route-CreditId="@Model.CreditId"
-                           asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-PageIndex="1">
-                            № на кредит
-                        </a>
-                    </th>
-                    <th scope="col">
+
                         <a asp-page="./Index"
                            asp-route-sortOrder="@Model.InstallmentDateSort"
                            asp-route-CreditId="@Model.CreditId"
@@ -132,14 +138,7 @@ else
                             }
                             else
                             {
-                                <form method="post" asp-page-handler="Pay">
-                                    <input type="hidden" name="id" value="@rp.ID" />
-                                    @if (Model.CreditId.HasValue)
-                                    {
-                                        <input type="hidden" name="CreditId" value="@Model.CreditId" />
-                                    }
-                                    <button type="submit" class="btn btn-primary btn-sm">Плати вноска</button>
-                                </form>
+                                <button class="btn btn-primary btn-sm" onclick="openPaymentModal(@rp.ID)">Плати вноска</button>
                             }
                         </td>
                     </tr>
@@ -189,3 +188,129 @@ else
         </li>
     </ul>
 </nav>
+
+
+<form method="post" asp-page-handler="Pay" id="hiddenPayForm">
+    <input type="hidden" name="id" id="paymentInstallmentId" />
+    @if (Model.CreditId.HasValue)
+    {
+        <input type="hidden" name="CreditId" value="@Model.CreditId" />
+    }
+</form>
+
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Форма за плащане</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+            </div>
+            <div class="modal-body">
+                <form id="uiPaymentForm">
+                    <div class="mb-3">
+                        <label for="cardholderName" class="form-label">Име на картодържател</label>
+                        <input type="text" class="form-control text-uppercase" id="cardholderName" placeholder="JOHN DOE" required />
+                        <div class="invalid-feedback">Моля въведете име на картодържателя</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cardNumber" class="form-label">Номер на карта</label>
+                        <input type="text" class="form-control" id="cardNumber" placeholder="0000 0000 0000 0000" required maxlength="19" />
+                        <div class="invalid-feedback">Невалиден номер на карта</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expiryDate" class="form-label">Валидност</label>
+                        <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" pattern="^(0[1-9]|1[0-2])\/\d{2}$" required />
+                        <div class="invalid-feedback">Моля въведете валидна дата във формат MM/YY</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cvv" class="form-label">CVV2</label>
+                        <input type="text" class="form-control" id="cvv" maxlength="4" pattern="\d{3,4}" required />
+                        <div class="invalid-feedback">Моля въведете валиден CVV код</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отказ</button>
+                <button type="button" class="btn btn-primary" onclick="confirmPayment()">Потвърди</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let selectedInstallmentId = null;
+
+        function openPaymentModal(id) {
+            selectedInstallmentId = id;
+            const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            modal.show();
+        }
+
+        function luhnCheck(cardNumber) {
+            const digits = cardNumber.replace(/\D/g, '');
+            let sum = 0, shouldDouble = false;
+            for (let i = digits.length - 1; i >= 0; i--) {
+                let digit = parseInt(digits[i]);
+                if (shouldDouble) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                }
+                sum += digit;
+                shouldDouble = !shouldDouble;
+            }
+            return (sum % 10) === 0;
+        }
+
+        function confirmPayment() {
+        let isValid = true;
+
+            const name = document.getElementById('cardholderName');
+            const cardNumber = document.getElementById('cardNumber');
+            const expiry = document.getElementById('expiryDate');
+            const cvv = document.getElementById('cvv');
+
+            // Cardholder Name
+            if (!name.value.trim()) {
+                name.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                name.classList.remove("is-invalid");
+            }
+
+            // Card Number (with Luhn check)
+            if (!cardNumber.value.trim() || !luhnCheck(cardNumber.value)) {
+                cardNumber.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                cardNumber.classList.remove("is-invalid");
+            }
+
+            // Expiry Date
+            const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+            if (!expiryRegex.test(expiry.value.trim())) {
+                expiry.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                expiry.classList.remove("is-invalid");
+            }
+
+            // CVV
+            const cvvRegex = /^\d{3,4}$/;
+            if (!cvvRegex.test(cvv.value.trim())) {
+                cvv.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                cvv.classList.remove("is-invalid");
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Everything is valid - proceed with post
+            document.getElementById('paymentInstallmentId').value = selectedInstallmentId;
+            document.getElementById('hiddenPayForm').submit();
+        }
+    </script>
+}
