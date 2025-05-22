@@ -7,6 +7,11 @@
     ViewData["Title"] = "Index";
 }
 
+@if (!string.IsNullOrEmpty(@Model.StatusMessage))
+{
+    <div class="alert alert-info">@Model.StatusMessage</div>
+}
+
 <h1>Index</h1>
 
 <p>
@@ -15,6 +20,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FinancialOperation[0].ID)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.FinancialOperation[0].CreditID)
             </th>
@@ -40,6 +48,9 @@
 @foreach (var item in Model.FinancialOperation) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.CreditID)
             </td>
             <td>
@@ -60,9 +71,57 @@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    <form asp-page-handler="Storno" method="post">
+                       <input type="hidden" asp-for="@item.ID" />
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#stornoModal" data-id="@item.ID">
+                            Сторнирай
+                        </button>
+                    </form>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<form method="post" asp-page-handler="Storno">
+    <div class="modal fade" id="stornoModal" tabindex="-1" aria-labelledby="stornoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Сторниране</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+                </div>
+                <div class="modal-body">
+                    Сигурни ли сте, че искате да сторнирате тази операция?
+                </div>
+                <input type="hidden" name="id" id="stornoOperationId" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отказ</button>
+                    <button type="submit" class="btn btn-danger">Сторнирай</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @* <script>
+        $(document).ready(function () {
+            $('#stornoModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var operationId = button.data('id');
+                var modal = $(this);
+                modal.find('#stornoOperationId').val(operationId);
+            });
+        });
+    </script> *@
+
+    <script>
+        const stornoModal = document.getElementById('stornoModal');
+        stornoModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const id = button.getAttribute('data-id');
+            const input = document.getElementById('stornoOperationId');
+            input.value = id;
+        });
+    </script>
+}

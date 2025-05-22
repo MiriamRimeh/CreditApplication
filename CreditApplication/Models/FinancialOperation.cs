@@ -10,7 +10,7 @@ namespace CreditApplication.Models
         [Required]
         public int CreditID { get; set; }
         public Credit Credit { get; set; }
-        public DateTime PayedOnDate { get; set; }
+        public DateTime? PayedOnDate { get; set; }
         public decimal PayedAmount { get; set; }
 
         public int OperationType { get; set; }
