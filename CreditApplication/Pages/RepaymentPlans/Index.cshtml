@@ -76,7 +76,7 @@ else
                            asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
                            asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                            asp-route-PageIndex="1">
-                            № на кредита
+                            № на кредит
                         </a>
                     </th>
                     <th scope="col">
@@ -119,12 +119,11 @@ else
                 {
                     <tr>
                         <th>@rp.CreditID</th>
-                        <th>@rp.ID</th>
                         <td>@rp.InstallmentNumber</td>
                         <td>@rp.InstallmentDate?.ToString("dd.MM.yyyy")</td>
-                        <td>@rp.InstallmentAmount?.ToString("F2")</td>
-                        <td>@rp.Principal?.ToString("F2")</td>
-                        <td>@rp.Interest?.ToString("F2")</td>
+                        <td>@rp.InstallmentAmount?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
+                        <td>@rp.Principal?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
+                        <td>@rp.Interest?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
                         <td>@rp.PayedOnDate?.ToString("dd.MM.yyyy")</td>
                         <td>
                             @if (rp.PayedOnDate.HasValue)

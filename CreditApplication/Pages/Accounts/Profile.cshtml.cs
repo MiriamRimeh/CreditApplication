@@ -46,6 +46,7 @@ namespace CreditApplication.Pages.Accounts
                                  .AsNoTracking()
                                  .FirstOrDefaultAsync(a => a.ClientID == Account.ClientID.Value);
             Financials = await _context.ClientFinancials
+                                 .Include(f => f.EmploymentTypeNomenclature)
                                  .AsNoTracking()
                                  .FirstOrDefaultAsync(f => f.ClientID == Account.ClientID.Value);
 

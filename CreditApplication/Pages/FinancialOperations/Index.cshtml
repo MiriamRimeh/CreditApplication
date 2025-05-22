@@ -4,7 +4,7 @@
 @model CreditApplication.Pages.FinancialOperations.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Финансови операции";
 }
 
 @if (!string.IsNullOrEmpty(@Model.StatusMessage))
@@ -17,31 +17,74 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form method="get" class="mb-4">
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label asp-for="CreditId">ID на кредита</label>
+            <input asp-for="CreditId" class="form-control" />
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="SearchPayedOnDate">Дата на плащане</label>
+            <input asp-for="SearchPayedOnDate" type="date" class="form-control" />
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="OperationType">Тип операция</label>
+            <input asp-for="OperationType" type="number" class="form-control" />
+        </div>
+        <div class="form-group col-md-2 align-self-end">
+            <button type="submit" class="btn btn-primary">Търси</button>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
+            <th>№ на операция</th>
             <th>
-                @Html.DisplayNameFor(model => model.FinancialOperation[0].ID)
+                <a asp-page="./Index"
+                   asp-route-sortOrder="@Model.CreditIDSort"
+                   asp-route-CreditId="@Model.CreditId"
+                   asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                   asp-route-OperationType="@Model.OperationType"
+                   asp-route-PageIndex="1">
+                    № на кредита
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FinancialOperation[0].CreditID)
+                <a asp-page="./Index"
+                   asp-route-sortOrder="@Model.PayedOnDateSort"
+                   asp-route-CreditId="@Model.CreditId"
+                   asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                   asp-route-OperationType="@Model.OperationType"
+                   asp-route-PageIndex="1">
+                    Дата на плащане
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FinancialOperation[0].PayedOnDate)
+                <a asp-page="./Index"
+                   asp-route-sortOrder="@Model.PayedAmountSort"
+                   asp-route-CreditId="@Model.CreditId"
+                   asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                   asp-route-OperationType="@Model.OperationType"
+                   asp-route-PageIndex="1">
+                    Сума
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FinancialOperation[0].PayedAmount)
+                <a asp-page="./Index"
+                   asp-route-sortOrder="@Model.OperationTypeSort"
+                   asp-route-CreditId="@Model.CreditId"
+                   asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                   asp-route-OperationType="@Model.OperationType"
+                   asp-route-PageIndex="1">
+                    Тип операция
+                </a>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FinancialOperation[0].OperationType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FinancialOperation[0].CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FinancialOperation[0].ModifiedOn)
-            </th>
-            <th></th>
+            <th>Създаден на</th>
+            <th>Последна промяна</th>
+            <th>Действие</th>
         </tr>
     </thead>
     <tbody>
@@ -53,35 +96,69 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CreditID)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayedOnDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayedAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OperationType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>
+                <td>@item.PayedOnDate?.ToString("dd.MM.yyyy")</td>
+            <td>@item.PayedAmount.ToString("C",CultureInfo.GetCultureInfo("bg-BG"))</td>
+            <td>@item.OperationTypeNomenclature.Description</td>
+            <td>@item.CreatedOn</td>
+            <td>@item.ModifiedOn</td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                    <form asp-page-handler="Storno" method="post">
-                       <input type="hidden" asp-for="@item.ID" />
-                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#stornoModal" data-id="@item.ID">
-                            Сторнирай
-                        </button>
+                    <form method="post"
+                          asp-page-handler="Storno"
+                          asp-route-id="@item.ID"
+                          asp-route-CreditId="@Model.CreditId"
+                          asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                          asp-route-OperationType="@Model.OperationType"
+                          asp-route-sortOrder="@Model.SortOrder"
+                          asp-route-PageIndex="@Model.PageIndex">
+                        <button type="submit" class="btn btn-sm btn-danger">Сторнирай</button>
                     </form>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+            <a class="page-link"
+               asp-page="./Index"
+               asp-route-PageIndex="@(Model.PageIndex - 1)"
+               asp-route-sortOrder="@Model.SortOrder"
+               asp-route-CreditId="@Model.CreditId"
+               asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+               asp-route-OperationType="@Model.OperationType">
+                Предишна
+            </a>
+        </li>
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                <a class="page-link"
+                   asp-page="./Index"
+                   asp-route-PageIndex="@i"
+                   asp-route-sortOrder="@Model.SortOrder"
+                   asp-route-CreditId="@Model.CreditId"
+                   asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                   asp-route-OperationType="@Model.OperationType">
+                    @i
+                </a>
+            </li>
+        }
+        <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link"
+               asp-page="./Index"
+               asp-route-PageIndex="@(Model.PageIndex + 1)"
+               asp-route-sortOrder="@Model.SortOrder"
+               asp-route-CreditId="@Model.CreditId"
+               asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+               asp-route-OperationType="@Model.OperationType">
+                Следваща
+            </a>
+        </li>
+    </ul>
+</nav>
 
 <form method="post" asp-page-handler="Storno">
     <div class="modal fade" id="stornoModal" tabindex="-1" aria-labelledby="stornoModalLabel" aria-hidden="true">
