@@ -4,7 +4,7 @@
 @model CreditApplication.Pages.Credits.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Кредити";
 }
 
 <div class="container py-4">
@@ -161,42 +161,42 @@
         </table>
     </div>
 
-    @if (Model.TotalPages > 1)
-    {
-        <nav aria-label="Page navigation" class="mt-4">
-            <ul class="pagination justify-content-center">
-                <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+@if (Model.TotalPages > 1)
+{
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+                <a class="page-link"
+                    asp-route-PageIndex="@(Model.PageIndex - 1)"
+                    asp-route-SortOrder="@Model.SortOrder"
+                    asp-route-SearchClientId="@Model.SearchClientId"
+                    asp-route-SearchStatus="@Model.SearchStatus">
+                    ‹ Предишна
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(Model.PageIndex == i ? "active" : "")">
                     <a class="page-link"
-                       asp-route-PageIndex="@(Model.PageIndex - 1)"
-                       asp-route-SortOrder="@Model.SortOrder"
-                       asp-route-SearchClientId="@Model.SearchClientId"
-                       asp-route-SearchStatus="@Model.SearchStatus">
-                        ‹ Предишна
+                        asp-route-PageIndex="@i"
+                        asp-route-SortOrder="@Model.SortOrder"
+                        asp-route-SearchClientId="@Model.SearchClientId"
+                        asp-route-SearchStatus="@Model.SearchStatus">
+                        @i
                     </a>
                 </li>
-                @for (int i = 1; i <= Model.TotalPages; i++)
-                {
-                    <li class="page-item @(Model.PageIndex == i ? "active" : "")">
-                        <a class="page-link"
-                           asp-route-PageIndex="@i"
-                           asp-route-SortOrder="@Model.SortOrder"
-                           asp-route-SearchClientId="@Model.SearchClientId"
-                           asp-route-SearchStatus="@Model.SearchStatus">
-                            @i
-                        </a>
-                    </li>
-                }
-                <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
-                    <a class="page-link"
-                       asp-route-PageIndex="@(Model.PageIndex + 1)"
-                       asp-route-SortOrder="@Model.SortOrder"
-                       asp-route-SearchClientId="@Model.SearchClientId"
-                       asp-route-SearchStatus="@Model.SearchStatus">
-                        Следваща ›
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    }
+            }
+            <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+                <a class="page-link"
+                    asp-route-PageIndex="@(Model.PageIndex + 1)"
+                    asp-route-SortOrder="@Model.SortOrder"
+                    asp-route-SearchClientId="@Model.SearchClientId"
+                    asp-route-SearchStatus="@Model.SearchStatus">
+                    Следваща ›
+                </a>
+            </li>
+        </ul>
+    </nav>
+}
 
 </div>

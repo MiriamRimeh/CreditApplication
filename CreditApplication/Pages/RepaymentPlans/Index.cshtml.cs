@@ -124,9 +124,6 @@ namespace CreditApplication.Pages.RepaymentPlans
                 .Take(PageSize)
                 .ToListAsync();
 
-            //RepaymentPlan = await query
-            //    .OrderBy(rp => rp.InstallmentNumber)
-            //    .ToListAsync();
         }
 
         public async Task<IActionResult> OnPostPayAsync(int id)
@@ -143,7 +140,8 @@ namespace CreditApplication.Pages.RepaymentPlans
                 CreditID = rp.CreditID,                         
                 PayedOnDate = rp.PayedOnDate.Value,                 
                 PayedAmount = rp.InstallmentAmount ?? 0m,           
-                OperationType = 202                                  
+                OperationType = 202,
+                RepaymentPlanID = rp.ID
             };
 
             _context.FinancialOperations.Add(finOp);

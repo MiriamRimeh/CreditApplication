@@ -31,12 +31,14 @@ namespace CreditApplication.Pages.FinancialOperations
         public DateTime? SearchPayedOnDate { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int? OperationType { get; set; }
+        public string? SearchOperationType { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int? SearchOperationId { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SortOrder { get; set; }
-
+        public string SortId { get; set; }
         public string CreditIDSort { get; set; }
         public string OperationTypeSort { get; set; }
         public string PayedOnDateSort { get; set; }
@@ -51,7 +53,8 @@ namespace CreditApplication.Pages.FinancialOperations
 
         public async Task OnGetAsync()
         {
-            CreditIDSort = String.IsNullOrEmpty(SortOrder) ? "credit_desc" : "";
+            SortId = String.IsNullOrEmpty(SortOrder) ? "SortId" : "";
+            CreditIDSort = SortOrder == "CreditIDSort" ? "credit_desc" : "CreditIDSort";
             OperationTypeSort = SortOrder == "OperationType" ? "otype_desc" : "OperationType";
             PayedOnDateSort = SortOrder == "PayedOnDate" ? "payedon_desc" : "PayedOnDate";
             PayedAmountSort = SortOrder == "PayedAmount" ? "amount_desc" : "PayedAmount";
@@ -61,6 +64,8 @@ namespace CreditApplication.Pages.FinancialOperations
                                 .Include(f=> f.OperationTypeNomenclature)
                                 .AsQueryable();
 
+            if (SearchOperationId.HasValue)
+                query = query.Where(f => f.ID == SearchOperationId.Value);
 
             if (CreditId.HasValue)
                 query = query.Where(f => f.CreditID == CreditId.Value);
@@ -72,8 +77,9 @@ namespace CreditApplication.Pages.FinancialOperations
                                       && f.PayedOnDate.Value.Date == d);
             }
 
-            if (OperationType.HasValue)
-                query = query.Where(f => f.OperationType == OperationType.Value);
+            if (!string.IsNullOrWhiteSpace(SearchOperationType))
+                query = query.Where(f => f.OperationTypeNomenclature != null && EF.Functions.Like(f.OperationTypeNomenclature.Description, $"%{SearchOperationType}%"));
+
 
             switch (SortOrder)
             {
@@ -98,8 +104,14 @@ namespace CreditApplication.Pages.FinancialOperations
                 case "amount_desc":
                     query = query.OrderByDescending(f => f.PayedAmount);
                     break;
-                default:
+                case "SortId":
                     query = query.OrderBy(f => f.ID);
+                    break;
+                case "CreditIDSort":
+                    query = query.OrderBy(f => f.CreditID);
+                    break;
+                default:
+                    query = query.OrderByDescending(f => f.ID);
                     break;
             }
 
@@ -120,25 +132,23 @@ namespace CreditApplication.Pages.FinancialOperations
             var stornoOp = new FinancialOperation
             {
                 CreditID = originalOp.CreditID,
-                //PayedOnDate = originalOp.PayedOnDate,
-                PayedOnDate = null,
+                PayedOnDate = originalOp.PayedOnDate,
                 PayedAmount = -originalOp.PayedAmount,
-                OperationType = 203
+                OperationType = 203,
+                RepaymentPlanID = originalOp.ID
             };
             _context.FinancialOperations.Add(stornoOp);
 
-            //// 2) Нулира PayedOnDate в RepaymentPlan, за да се активира отново бутон „Плати“
-            var rp = await _context.RepaymentPlans
-                .FirstOrDefaultAsync(r =>
-                    r.CreditID == originalOp.CreditID
-                    && r.PayedOnDate == originalOp.PayedOnDate
-                    && r.InstallmentAmount == originalOp.PayedAmount
-                );
-            if (rp != null)
+            if (originalOp.RepaymentPlanID.HasValue)
             {
-                rp.PayedOnDate = null;
-                _context.RepaymentPlans.Update(rp);
+                var rp = await _context.RepaymentPlans.FindAsync(originalOp.RepaymentPlanID.Value);
+                if (rp != null)
+                {
+                    rp.PayedOnDate = null;
+                    _context.RepaymentPlans.Update(rp);
+                }
             }
+
 
             await _context.SaveChangesAsync();
             StatusMessage = "Операцията беше сторнирана успешно.";

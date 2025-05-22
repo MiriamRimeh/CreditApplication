@@ -17,6 +17,10 @@ namespace CreditApplication.Models
 
         [ForeignKey("OperationType")]
         public Nomenclature OperationTypeNomenclature { get; set; }
+
+        public int? RepaymentPlanID { get; set; }
+        public RepaymentPlan? RepaymentPlan { get; set; }
+
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         [Required]
