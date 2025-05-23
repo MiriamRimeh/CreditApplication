@@ -31,17 +31,17 @@ namespace CreditApplication.Pages.ClientAddresses
             }
 
             var clientaddress =  await _context.ClientAddresses.FirstOrDefaultAsync(m => m.ID == id);
+           
             if (clientaddress == null)
             {
                 return NotFound();
             }
+
             ClientAddress = clientaddress;
-           ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -67,7 +67,14 @@ namespace CreditApplication.Pages.ClientAddresses
                 }
             }
 
-            return RedirectToPage("./Index");
+            if (User.IsInRole("Admin,Еmployee"))
+            {
+                return RedirectToPage("./Index");
+            }
+            else
+            {
+                return RedirectToPage("/Accounts/Profile");
+            }
         }
 
         private bool ClientAddressExists(int id)

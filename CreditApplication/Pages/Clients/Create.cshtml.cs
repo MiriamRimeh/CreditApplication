@@ -38,7 +38,14 @@ namespace CreditApplication.Pages.Clients
             _context.Clients.Add(Client);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            if (User.IsInRole("Admin,Еmployee"))
+            {
+                return RedirectToPage("./Index");
+            }
+            else
+            {
+                return RedirectToPage("/Accounts/Profile");
+            }
         }
     }
 }

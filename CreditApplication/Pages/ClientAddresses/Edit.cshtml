@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Client,Admin")]
 @model CreditApplication.Pages.ClientAddresses.EditModel
 
 @{
@@ -13,13 +15,13 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ClientAddress.ID" />
-            <div class="form-group">
+            <input type="hidden" asp-for="ClientAddress.ClientID" />
+@*             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="ClientAddress.ClientID" class="control-label"></label>
                 <select asp-for="ClientAddress.ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
                 <span asp-validation-for="ClientAddress.ClientID" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="ClientAddress.City" class="control-label"></label>
@@ -43,26 +45,26 @@
                 <input asp-for="ClientAddress.PostCode" class="form-control" />
                 <span asp-validation-for="ClientAddress.PostCode" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ClientAddress.CreatedOn" class="control-label"></label>
-                <input asp-for="ClientAddress.CreatedOn" class="form-control" />
-                <span asp-validation-for="ClientAddress.CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClientAddress.ModifiedOn" class="control-label"></label>
-                <input asp-for="ClientAddress.ModifiedOn" class="form-control" />
-                <span asp-validation-for="ClientAddress.ModifiedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="form-group col-12 text-center mt-4">
+                <input type="submit" value="Запази" class="btn btn-primary btn-lg px-5" />
+
+                @using Microsoft.AspNetCore.Identity
+                @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                {
+                    <a asp-page="./Index" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+
+                }
+                else
+                {
+                    <a asp-page="/Accounts/Profile" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+                }
+
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,6 +1,6 @@
 ﻿@page
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize(Roles = "Admin")]
+@attribute [Authorize(Roles = "Client,Admin")]
 @model CreditApplication.Pages.Clients.EditModel
 
 @{
@@ -80,7 +80,17 @@
                         </div>
                         <div class="form-group col-12 text-center mt-4">
                             <input type="submit" value="Запази" class="btn btn-primary btn-lg px-5" />
-                            <a asp-page="./Index" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+                            @using Microsoft.AspNetCore.Identity
+                            @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                            {
+                                <a asp-page="./Index" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+
+                            }
+                            else
+                            {
+                                <a asp-page="/Accounts/Profile" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+                            }
+                            
                         </div>
                     </form>
                 </div>

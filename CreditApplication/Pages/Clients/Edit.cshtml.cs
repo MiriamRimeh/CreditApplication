@@ -64,7 +64,14 @@ namespace CreditApplication.Pages.Clients
                 }
             }
 
-            return RedirectToPage("./Index");
+            if (User.IsInRole("Admin,Еmployee"))
+            {
+                return RedirectToPage("./Index");
+            }
+            else
+            {
+                return RedirectToPage("/Accounts/Profile");
+            }
         }
 
         private bool ClientExists(int id)
