@@ -28,7 +28,11 @@ namespace CreditApplication.Pages.Clients
                 return NotFound();
             }
 
-            var client = await _context.Clients.FirstOrDefaultAsync(m => m.ID == id);
+            var client = await _context.Clients
+                .Include(c => c.ClientAddress)
+                .Include(c => c.ClientFinancial)
+                .Include(c => c.ClientFinancial.EmploymentTypeNomenclature)
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (client == null)
             {
                 return NotFound();

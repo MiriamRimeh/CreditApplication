@@ -52,7 +52,10 @@ namespace CreditApplication.Data
 
             modelBuilder.Entity<RepaymentPlan>(entity =>
             {
-                entity.ToTable("RepaymentPlan", tb => tb.HasTrigger("trg_21180011_RepaymentPlan_Log"));
+                entity.ToTable("RepaymentPlan", tb => {
+                    tb.HasTrigger("trg_21180011_RepaymentPlan_Log");
+                    tb.HasTrigger("trg_RepaymentPlan_OnPayedOnDateUpdate");
+                });
                 entity.HasOne(r => r.Credit);
             });
 

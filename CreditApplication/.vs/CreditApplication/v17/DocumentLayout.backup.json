@@ -3,12 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clients\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clients\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clients\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clients\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clients\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clients\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\accounts\\profile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\accounts\\profile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\credits\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\credits\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clients\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clients\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clientfinancials\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clientfinancials\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\credits\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\credits\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\credits\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\credits\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clients\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clients\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\repaymentplans\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\repaymentplans\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clientfinancials\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clientfinancials\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clientfinancials\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clientfinancials\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\credits\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\credits\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|c:\\users\\miria\\source\\repos\\creditapplication\\creditapplication\\pages\\clients\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22CFBA58-4BA4-42B1-9570-F9415CC4B1DB}|CreditApplication.csproj|solutionrelative:pages\\clients\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +66,188 @@
       "DocumentGroups": [
         {
           "DockedWidth": 296,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Index.cshtml",
-              "RelativeDocumentMoniker": "Pages\\Clients\\Index.cshtml",
-              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Index.cshtml*",
-              "RelativeToolTip": "Pages\\Clients\\Index.cshtml*",
-              "ViewState": "AgIAAF4AAAAAAAAAAAD4v2cAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-22T12:53:54.435Z",
+              "DocumentIndex": 1,
+              "Title": "Profile.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Accounts\\Profile.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Accounts\\Profile.cshtml.cs",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Accounts\\Profile.cshtml.cs",
+              "RelativeToolTip": "Pages\\Accounts\\Profile.cshtml.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA9wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T08:52:59.427Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Index.cshtml.cs",
-              "RelativeDocumentMoniker": "Pages\\Clients\\Index.cshtml.cs",
-              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Index.cshtml.cs",
-              "RelativeToolTip": "Pages\\Clients\\Index.cshtml.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAmwBwAAAA0AAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Clients\\Edit.cshtml.cs",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Edit.cshtml.cs*",
+              "RelativeToolTip": "Pages\\Clients\\Edit.cshtml.cs*",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T12:53:54.227Z",
+              "WhenOpened": "2025-05-23T08:51:26.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Credits\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Credits\\Edit.cshtml.cs",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Credits\\Edit.cshtml.cs",
+              "RelativeToolTip": "Pages\\Credits\\Edit.cshtml.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T08:51:15.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\ClientFinancials\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\ClientFinancials\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\ClientFinancials\\Index.cshtml.cs",
+              "RelativeToolTip": "Pages\\ClientFinancials\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T08:35:52.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\ClientFinancials\\Details.cshtml",
+              "RelativeDocumentMoniker": "Pages\\ClientFinancials\\Details.cshtml",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\ClientFinancials\\Details.cshtml",
+              "RelativeToolTip": "Pages\\ClientFinancials\\Details.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T08:35:44.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\ClientFinancials\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\ClientFinancials\\Index.cshtml",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\ClientFinancials\\Index.cshtml",
+              "RelativeToolTip": "Pages\\ClientFinancials\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T08:35:38.31Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Details.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Details.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Clients\\Details.cshtml.cs",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Details.cshtml.cs",
+              "RelativeToolTip": "Pages\\Clients\\Details.cshtml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T08:29:53.623Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Details.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Clients\\Details.cshtml",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Details.cshtml*",
+              "RelativeToolTip": "Pages\\Clients\\Details.cshtml*",
+              "ViewState": "AgIAACIAAAAAAAAAAAAYwEIAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T08:29:51.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Details.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Credits\\Details.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Credits\\Details.cshtml.cs",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Credits\\Details.cshtml.cs",
+              "RelativeToolTip": "Pages\\Credits\\Details.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T08:27:53.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Models\\Client.cs",
+              "RelativeDocumentMoniker": "Models\\Client.cs",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Models\\Client.cs",
+              "RelativeToolTip": "Models\\Client.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAA4wDYAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T08:26:44.409Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Credits\\Details.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Credits\\Details.cshtml",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Credits\\Details.cshtml",
+              "RelativeToolTip": "Pages\\Credits\\Details.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T08:12:31.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Credits\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Credits\\Index.cshtml",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Credits\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Credits\\Index.cshtml",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T08:11:30.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\RepaymentPlans\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\RepaymentPlans\\Index.cshtml",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\RepaymentPlans\\Index.cshtml",
+              "RelativeToolTip": "Pages\\RepaymentPlans\\Index.cshtml",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAIIAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T08:07:29.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Clients\\Index.cshtml",
+              "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\Clients\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Clients\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T12:53:54.435Z",
               "EditorCaption": ""
             }
           ]

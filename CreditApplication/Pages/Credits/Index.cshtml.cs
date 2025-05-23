@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreditApplication.Data;
 using CreditApplication.Models;
+using ClosedXML.Excel;
 
 namespace CreditApplication.Pages.Credits
 {
@@ -109,6 +110,70 @@ namespace CreditApplication.Pages.Credits
                  .Skip((PageIndex - 1) * PageSize)
                  .Take(PageSize)
                  .ToListAsync();
+        }
+
+        public async Task<IActionResult> OnPostExportToExcelAsync()
+        {
+            var credits = await _context.Credits.ToListAsync();
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Credits");
+
+            var headers = new[]
+            {
+                "ID", 
+                "Клиент", 
+                "Сума", 
+                "Начална дата", 
+                "Крайна дата",
+                "Лихва", 
+                "Статус", 
+                "Период",
+                "Обща сума", 
+                "Месечна вноска", 
+                "Създаден на",
+                "Последна промяна"
+            };
+            for (int col = 0; col < headers.Length; col++)
+            {
+                worksheet.Cell(1, col + 1).Value = headers[col];
+                worksheet.Cell(1, col + 1).Style.Font.Bold = true;
+            }
+
+            for (int i = 0; i < credits.Count; i++)
+            {
+                var c = credits[i];
+
+                worksheet.Cell(i + 2, 1).Value = c.ID;
+                worksheet.Cell(i + 2, 2).Value = c.ClientID;
+                worksheet.Cell(i + 2, 3).Value = c.CreditAmount;
+                worksheet.Cell(i + 2, 4).Value = c.CreditBeginDate?.ToString("yyyy-MM-dd");
+                worksheet.Cell(i + 2, 5).Value = c.CreditEndDate?.ToString("yyyy-MM-dd");
+                worksheet.Cell(i + 2, 6).Value = c.InterestRate;
+                worksheet.Cell(i + 2, 7).Value = c.Status;
+                worksheet.Cell(i + 2, 8).Value = c.CreditPeriod;
+                worksheet.Cell(i + 2, 9).Value = c.TotalCreditAmount;
+                worksheet.Cell(i + 2, 10).Value = c.MonthlyInstallment;
+                worksheet.Cell(i + 2, 11).Value = 
+                    c.CreatedOn != default(DateTime)
+                        ? c.CreatedOn?.ToString("yyyy-MM-dd HH:mm:ss")
+                        : string.Empty;
+                worksheet.Cell(i + 2, 12).Value =
+                    c.ModifiedOn != default(DateTime)
+                        ? c.ModifiedOn?.ToString("yyyy-MM-dd HH:mm:ss")
+                        : string.Empty;
+            }
+
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+
+            var fileName = $"Credits_{DateTime.Now:yyyyMMdd_HHmmss}_21180011.xlsx";
+            return File(
+                stream.ToArray(),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                fileName
+            );
         }
     }
 }

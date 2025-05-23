@@ -31,6 +31,7 @@ namespace CreditApplication.Pages.Clients
             }
 
             var client =  await _context.Clients.FirstOrDefaultAsync(m => m.ID == id);
+
             if (client == null)
             {
                 return NotFound();
@@ -38,9 +39,6 @@ namespace CreditApplication.Pages.Clients
             Client = client;
             return Page();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

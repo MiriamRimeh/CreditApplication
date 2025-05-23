@@ -24,6 +24,7 @@ namespace CreditApplication.Pages.ClientFinancials
         public async Task OnGetAsync()
         {
             ClientFinancial = await _context.ClientFinancials
+                .Include(f => f.EmploymentTypeNomenclature)
                 .Include(c => c.Client).ToListAsync();
         }
     }

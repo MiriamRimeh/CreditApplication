@@ -50,7 +50,6 @@ namespace CreditApplication.Pages.Accounts
                                  .AsNoTracking()
                                  .FirstOrDefaultAsync(f => f.ClientID == Account.ClientID.Value);
 
-            // Зареждаме кредити с навигация на статус
             var creditsQuery = _context.Credits
                 .Where(c => c.ClientID == Account.ClientID.Value)
                 .Include(c => c.StatusNavigation)

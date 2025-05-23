@@ -44,17 +44,45 @@
                 <dt class="col-md-4">Издадена от</dt>
                 <dd class="col-md-8">@Model.Client.IDIssuer</dd>
 
-                <dt class="col-md-4">Създадено на</dt>
-                <dd class="col-md-8">@Model.Client.CreatedOn.ToString("dd.MM.yyyy HH:mm")</dd>
+                <dt class="col-md-4">Адрес</dt>
+                <dd class="col-md-8">
+                    @(Model.Client.ClientAddress != null
+                            ? $"{Model.Client.ClientAddress.City}, {Model.Client.ClientAddress.StreetNeighbourhood}, {Model.Client.ClientAddress.Number}"
+                            : string.Empty)
 
-                <dt class="col-md-4">Последна промяна</dt>
-                <dd class="col-md-8">@Model.Client.ModifiedOn.ToString("dd.MM.yyyy HH:mm")</dd>
+                    <dt class="col-md-4">Месечен доход</dt>
+                    <dd class="col-md-8">
+                        @(Model.Client.ClientFinancial?.MontlyIncome != null
+                            ? Model.Client.ClientFinancial.MontlyIncome.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))
+                                : string.Empty)
+
+                        <dt class="col-md-4">Месечни разходи</dt>
+                        <dd class="col-md-8">
+                            @(Model.Client.ClientFinancial?.MontlyExpenses != null
+                                ? Model.Client.ClientFinancial.MontlyExpenses.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))
+                                : string.Empty)
+                        </dd>
+                        <dt class="col-md-4">Трудов статус</dt>
+                        <dd class="col-md-8">
+                            @(Model.Client.ClientFinancial?.EmploymentTypeNomenclature != null
+                                    ? Model.Client.ClientFinancial.EmploymentTypeNomenclature.Description
+                                    : string.Empty)
+
+                            <dt class="col-md-4">Създадено на</dt>
+                            <dd class="col-md-8">@Model.Client.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
+
+                            <dt class="col-md-4">Последна промяна</dt>
+                            <dd class="col-md-8">@Model.Client.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
             </dl>
         </div>
         <div class="card-footer text-center">
-            <a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="btn btn-primary me-2">
-                <i class="bi bi-pencil-square"></i> Редактирай
-            </a>
+            @using Microsoft.AspNetCore.Identity
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="btn btn-primary me-2">
+                    <i class="bi bi-pencil-square"></i> Редактирай
+                </a>
+            }
             <a asp-page="./Index" class="btn btn-dark">
                 Назад
             </a>

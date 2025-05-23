@@ -51,6 +51,9 @@ namespace CreditApplication.Models
 
         public ICollection<Credit> Credits { get; set; } = new List<Credit>();
 
-        
+        public ClientAddress? ClientAddress { get; set; }
+        public ClientFinancial? ClientFinancial { get; set; }
+
+
     }
 }

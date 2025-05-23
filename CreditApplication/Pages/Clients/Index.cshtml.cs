@@ -140,13 +140,13 @@ namespace CreditApplication.Pages.Clients
                 worksheet.Cell(i + 2, 10).Value = c.IDValidityDate.ToString("yyyy-MM-dd");
                 worksheet.Cell(i + 2, 11).Value = c.IDIssuer ?? string.Empty;
                 worksheet.Cell(i + 2, 12).Value = c.CreatedOn != default(DateTime)
-                        ? c.CreatedOn.ToString("yyyy-MM-dd HH:mm")
+                        ? c.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss")
                         : string.Empty;
 
                 // Ако искате празно при „нулева“ дата:
                 worksheet.Cell(i + 2, 13).Value =
                     c.ModifiedOn != default(DateTime)
-                        ? c.ModifiedOn.ToString("yyyy-MM-dd HH:mm")
+                        ? c.ModifiedOn.ToString("yyyy-MM-dd HH:mm:ss")
                         : string.Empty;
             }
 
@@ -154,7 +154,7 @@ namespace CreditApplication.Pages.Clients
             workbook.SaveAs(stream);
             stream.Position = 0;
 
-            var fileName = $"Clients_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            var fileName = $"Clients_{DateTime.Now:yyyyMMdd_HHmmss}_21180011.xlsx";
             return File(
                 stream.ToArray(),
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
