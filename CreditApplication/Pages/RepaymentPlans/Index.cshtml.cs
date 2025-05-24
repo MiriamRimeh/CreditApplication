@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreditApplication.Data;
 using CreditApplication.Models;
+using ClosedXML.Excel;
 
 namespace CreditApplication.Pages.RepaymentPlans
 {
@@ -173,6 +174,91 @@ namespace CreditApplication.Pages.RepaymentPlans
             }
 
             return RedirectToPage(new { CreditId = this.CreditId });
+        }
+
+        public async Task<IActionResult> OnPostExportFilteredToExcelAsync()
+        {
+            var query = _context.RepaymentPlans
+                .Include(r => r.Credit)
+                .AsQueryable();
+
+            if (CreditID.HasValue)
+                query = query.Where(rp => rp.CreditID == CreditID.Value);
+            if (SearchInstallmentDate.HasValue)
+            {
+                var d = DateOnly.FromDateTime(SearchInstallmentDate.Value);
+                query = query.Where(rp => rp.InstallmentDate.HasValue && rp.InstallmentDate.Value == d);
+            }
+            if (SearchPayedOnDate.HasValue)
+            {
+                var d = SearchPayedOnDate.Value.Date;
+                query = query.Where(rp => rp.PayedOnDate.HasValue && rp.PayedOnDate.Value.Date == d);
+            }
+
+            var data = await query.ToListAsync();
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("RepaymentPlans");
+            var headers = new[] { "CreditID", "InstallmentNumber", "InstallmentDate", "InstallmentAmount", "PayedOnDate" };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                worksheet.Cell(1, i + 1).Value = headers[i];
+                worksheet.Cell(1, i + 1).Style.Font.Bold = true;
+            }
+            for (int i = 0; i < data.Count; i++)
+            {
+                var r = data[i];
+                var row = i + 2;
+                worksheet.Cell(row, 1).Value = r.CreditID;
+                worksheet.Cell(row, 2).Value = r.InstallmentNumber;
+                worksheet.Cell(row, 3).Value = r.InstallmentDate?.ToString("yyyy-MM-dd");
+                worksheet.Cell(row, 4).Value = r.InstallmentAmount;
+                worksheet.Cell(row, 5).Value = r.PayedOnDate?.ToString("yyyy-MM-dd");
+            }
+
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+            var fileName = $"RepaymentPlans_Filtered_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            return File(
+                stream.ToArray(),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                fileName);
+        }
+
+        public async Task<IActionResult> OnPostExportAllToExcelAsync()
+        {
+            var data = await _context.RepaymentPlans
+                .Include(r => r.Credit)
+                .ToListAsync();
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("RepaymentPlans");
+            var headers = new[] { "CreditID", "InstallmentNumber", "InstallmentDate", "InstallmentAmount", "PayedOnDate" };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                worksheet.Cell(1, i + 1).Value = headers[i];
+                worksheet.Cell(1, i + 1).Style.Font.Bold = true;
+            }
+            for (int i = 0; i < data.Count; i++)
+            {
+                var r = data[i];
+                var row = i + 2;
+                worksheet.Cell(row, 1).Value = r.CreditID;
+                worksheet.Cell(row, 2).Value = r.InstallmentNumber;
+                worksheet.Cell(row, 3).Value = r.InstallmentDate?.ToString("yyyy-MM-dd");
+                worksheet.Cell(row, 4).Value = r.InstallmentAmount;
+                worksheet.Cell(row, 5).Value = r.PayedOnDate?.ToString("yyyy-MM-dd");
+            }
+
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+            var fileName = $"RepaymentPlans_All_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            return File(
+                stream.ToArray(),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                fileName);
         }
     }
 }

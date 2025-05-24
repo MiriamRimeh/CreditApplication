@@ -80,12 +80,10 @@
             @if (User.IsInRole("Admin"))
             {
                 <a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="btn btn-primary me-2">
-                    <i class="bi bi-pencil-square"></i> Редактирай
+                     Редактирай
                 </a>
             }
-            <a asp-page="./Index" class="btn btn-dark">
-                Назад
-            </a>
+            <a asp-page="./Index" class="btn btn-dark me-2">Назад</a>
         </div>
     </div>
 </div>
