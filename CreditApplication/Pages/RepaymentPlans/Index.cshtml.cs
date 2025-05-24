@@ -199,7 +199,7 @@ namespace CreditApplication.Pages.RepaymentPlans
 
             using var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("RepaymentPlans");
-            var headers = new[] { "CreditID", "InstallmentNumber", "InstallmentDate", "InstallmentAmount", "PayedOnDate" };
+            var headers = new[] { "№ на кредит", "№ на вноска", "Дата на вноска", "Сума", "Дата на плащане" };
             for (int i = 0; i < headers.Length; i++)
             {
                 worksheet.Cell(1, i + 1).Value = headers[i];

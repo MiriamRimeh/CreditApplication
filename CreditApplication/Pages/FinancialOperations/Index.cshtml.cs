@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CreditApplication.Data;
 using CreditApplication.Models;
+using ClosedXML.Excel;
 
 namespace CreditApplication.Pages.FinancialOperations
 {
@@ -153,6 +154,91 @@ namespace CreditApplication.Pages.FinancialOperations
             await _context.SaveChangesAsync();
             StatusMessage = "Операцията беше сторнирана успешно.";
             return RedirectToPage();
+        }
+
+
+        public async Task<IActionResult> OnPostExportFilteredToExcelAsync()
+        {
+            var query = _context.FinancialOperations
+                                .Include(f => f.Credit)
+                                .Include(f => f.OperationTypeNomenclature)
+                                .AsQueryable();
+
+            if (SearchOperationId.HasValue)
+                query = query.Where(f => f.ID == SearchOperationId.Value);
+            if (CreditId.HasValue)
+                query = query.Where(f => f.CreditID == CreditId.Value);
+            if (SearchPayedOnDate.HasValue)
+            {
+                var d = SearchPayedOnDate.Value.Date;
+                query = query.Where(f => f.PayedOnDate.HasValue && f.PayedOnDate.Value.Date == d);
+            }
+            if (!string.IsNullOrWhiteSpace(SearchOperationType))
+                query = query.Where(f => f.OperationTypeNomenclature.Description.Contains(SearchOperationType));
+
+            var data = await query.ToListAsync();
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Operations_Filtered");
+            var headers = new[] { "ID", "CreditID", "Тип", "Дата плащане", "Сума" };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                worksheet.Cell(1, i + 1).Value = headers[i];
+                worksheet.Cell(1, i + 1).Style.Font.Bold = true;
+            }
+            for (int i = 0; i < data.Count; i++)
+            {
+                var f = data[i];
+                var row = i + 2;
+                worksheet.Cell(row, 1).Value = f.ID;
+                worksheet.Cell(row, 2).Value = f.CreditID;
+                worksheet.Cell(row, 3).Value = f.OperationTypeNomenclature?.Description;
+                worksheet.Cell(row, 4).Value = f.PayedOnDate?.ToString("yyyy-MM-dd");
+                worksheet.Cell(row, 5).Value = f.PayedAmount;
+            }
+
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+            var fileName = $"FinancialOperations_Filtered_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            return File(stream.ToArray(),
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        fileName);
+        }
+
+        public async Task<IActionResult> OnPostExportAllToExcelAsync()
+        {
+            var data = await _context.FinancialOperations
+                                      .Include(f => f.Credit)
+                                      .Include(f => f.OperationTypeNomenclature)
+                                      .ToListAsync();
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Operations_All");
+            var headers = new[] { "№", "№ на кредит", "Тип", "Дата плащане", "Сума" };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                worksheet.Cell(1, i + 1).Value = headers[i];
+                worksheet.Cell(1, i + 1).Style.Font.Bold = true;
+            }
+            for (int i = 0; i < data.Count; i++)
+            {
+                var f = data[i];
+                var row = i + 2;
+                worksheet.Cell(row, 1).Value = f.ID;
+                worksheet.Cell(row, 2).Value = f.CreditID;
+                worksheet.Cell(row, 3).Value = f.OperationTypeNomenclature?.Description;
+                worksheet.Cell(row, 4).Value = f.PayedOnDate?.ToString("yyyy-MM-dd");
+                worksheet.Cell(row, 5).Value = f.PayedAmount;
+            }
+
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+            var fileName = $"FinancialOperations_All_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            return File(stream.ToArray(),
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        fileName);
         }
     }
 }
