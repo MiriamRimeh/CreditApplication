@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zK+40WImdnnq/xdxBZxFyZzikjWJqnzJgrV0gqpSRgI=",
+  "Hash": "U88gCx2ittoz5GOOEKwRaAUv3Kb86wiGkKQeUXqdVak=",
   "Source": "CreditApplication",
   "BasePath": "_content/CreditApplication",
   "Mode": "Default",
@@ -99,6 +99,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\homePage.jpg",
+      "SourceId": "CreditApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\",
+      "BasePath": "_content/CreditApplication",
+      "RelativePath": "images/homePage#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "y07j72pejw",
+      "Integrity": "UmlJi6AhTV819Vkxbq17SWvgtmNXenG9xCPT9m8Whuk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\homePage.jpg"
     },
     {
       "Identity": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\site.js",
@@ -1645,6 +1666,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "images/homePage.jpg",
+      "AssetFile": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\homePage.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "216369"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UmlJi6AhTV819Vkxbq17SWvgtmNXenG9xCPT9m8Whuk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 24 May 2025 17:04:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-UmlJi6AhTV819Vkxbq17SWvgtmNXenG9xCPT9m8Whuk="
+        }
+      ]
+    },
+    {
+      "Route": "images/homePage.y07j72pejw.jpg",
+      "AssetFile": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\homePage.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "216369"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UmlJi6AhTV819Vkxbq17SWvgtmNXenG9xCPT9m8Whuk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 24 May 2025 17:04:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "y07j72pejw"
+        },
+        {
+          "Name": "label",
+          "Value": "images/homePage.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-UmlJi6AhTV819Vkxbq17SWvgtmNXenG9xCPT9m8Whuk="
         }
       ]
     },

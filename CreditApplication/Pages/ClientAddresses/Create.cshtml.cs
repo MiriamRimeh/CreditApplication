@@ -28,13 +28,12 @@ namespace CreditApplication.Pages.ClientAddresses
         [BindProperty]
         public ClientAddress ClientAddress { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
 
             _context.ClientAddresses.Add(ClientAddress);
             await _context.SaveChangesAsync();

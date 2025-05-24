@@ -10,26 +10,33 @@
 </div>
  *@
 <div class="container mt-5">
-    <h1 class="mb-4">Калкулатор за кредити</h1>
-    <div class="card shadow-sm p-4">
-        <div class="mb-3">
-            <label asp-for="Amount" class="form-label">Сума (лв.)</label>
-            <input asp-for="Amount" type="number" class="form-control" id="amount" min="300" max="5000" step="100" />
+    <div class="row" >
+        <div class="col-md-4">
+            <h2 class="mb-4">Калкулатор</h2>
+            <div class="card shadow-sm p-4">
+                <div class="mb-3">
+                    <label asp-for="Amount" class="form-label">Сума (лв.)</label>
+                    <input asp-for="Amount" type="number" class="form-control" id="amount" min="300" max="5000" step="100" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="PeriodMonths" class="form-label">Период (месеци)</label>
+                    <input asp-for="PeriodMonths" type="number" class="form-control" id="period" min="5" max="24" step="1" />
+                </div>
+                <div class="mt-4 p-3 bg-light rounded">
+                    <p>Месечна вноска: <strong id="monthlyPayment">0.00 лв.</strong></p>
+                    <p>Общо за плащане: <strong id="totalPayment">0.00 лв.</strong></p>
+                    <p class="text-secondary"><small>ГЛП: 40% </small></p>
+
+                </div>
+                <div class="mt-4 text-end">
+                    <a class="btn btn-primary btn-lg rounded-pill text-capitalize" href="/ApplicationForm/Step1_Personal">Вземи сега</a>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label asp-for="PeriodMonths" class="form-label">Период (месеци)</label>
-            <input asp-for="PeriodMonths" type="number" class="form-control" id="period" min="5" max="24" step="1" />
+        <div class="col-md-8 d-flex align-items-center justify-content-center h-100 overflow-auto p-0">
+            <img src="~/images/homePage.jpg" class="img-fluid" style="object-fit: cover;" alt="Начална страница" />
         </div>
-        <div class="mt-4 p-3 bg-light rounded">
-            <p>Месечна вноска: <strong id="monthlyPayment">0.00 лв.</strong></p>
-            <p>Общо за плащане: <strong id="totalPayment">0.00 лв.</strong></p>
-            <p class="text-secondary"><small>ГЛП: 40% </small></p>
-            
-        </div>
-        <div class="mt-4 text-end">
-            <a class="btn btn-primary btn-lg" href="/ApplicationForm/Step1_Personal">Кандидатствай</a>
-        </div>
-    </div>
+    </div>  
 </div>
 
 @section Scripts {

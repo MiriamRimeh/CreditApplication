@@ -4,78 +4,100 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CreditApplication</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CreditApplication.styles.css" asp-append-version="true" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">CreditApplication</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Начало</a>
-                        </li>   
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Поверителност</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">
+                                
+                                Начало
+                            </a>
                         </li>
-                       
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Clients/Index">Клиенти</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Credits/Index">Кредити</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Accounts/Profile">Профил</a>
-                        </li>
-                        @if (User.Identity.IsAuthenticated) {
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/ApplicationForm/Step1_Personal">Форма за кандидатстване</a>
+                                <a class="nav-link text-primary" asp-page="/ApplicationForm/Step1_Personal">
+
+                                    Кандидатствай
+                                </a>
                             </li>
 
+                            @using Microsoft.AspNetCore.Identity
+                            @if (!User.IsInRole("Client"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a id="clientsDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                        Информация за Клиенти
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="clientsDropdown">
+                                        <li><a class="dropdown-item" asp-page="/Clients/Index">Лични данни</a></li>
+                                        <li><a class="dropdown-item" asp-page="/ClientFinancials/Index">Финансови данни</a></li>
+                                        <li><a class="dropdown-item" asp-page="/ClientAddresses/Index">Данни за адреси</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a id="creditsDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                        Информация за Кредити
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="creditsDropdown">
+                                        <li><a class="dropdown-item" asp-page="/Credits/Index">Всички кредити</a></li>
+                                        <li><a class="dropdown-item" asp-page="/FinancialOperations/Index">Финансови операции</a></li>
+                                        <li><a class="dropdown-item" asp-page="/RepaymentPlans/Index">Погасителни планове</a></li>
+                                    </ul>
+                                </li>
+                            }
+
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Entrance/Logout">Изход</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Поверителност </a>
                             </li>
+
+                            <li class="nav-item dropdown" >
+                                <a id="profileDropDown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                    </svg>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="creditsDropdown">
+                                    <li><a class="dropdown-item" asp-page="/Accounts/Profile">Профил</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Entrance/Logout">Изход</a></li>
+                                </ul>
+                            </li>
+
                         }
-                        else {
+                        else
+                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-page="/Entrance/Login">Вход</a>
                             </li>
                         }
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/FinancialOperations/Index">ФО</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/RepaymentPlans/Index">ПП</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/ClientFinancials/Index">Фин Данни</a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/ClientAddresses/Index">Адреси</a>
-                        </li>
-
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         </main>
     </div>
 
@@ -85,10 +107,10 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Bundle JS (includes Popper) -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom scripts -->
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

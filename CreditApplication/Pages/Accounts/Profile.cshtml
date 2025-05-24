@@ -11,8 +11,8 @@
     <h3>Моят профил</h3>
 
     <div class="card mb-4">
-        <div class="card-header"><h5><strong>Лични данни</strong> 
-            <a asp-page="/Clients/Edit" asp-route-id="@Model.Client.ID" class="btn btn-sm btn-secondary ms-2 float-end">
+        <div class="card-header"><h5><strong>Лични данни</strong>
+                <a asp-page="/Clients/Edit" asp-route-id="@Model.Client.ID" class="btn btn-sm btn-warning ms-2 float-end">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
                     </svg>
@@ -36,7 +36,7 @@
         <div class="card-header">
             <h5>
                 <strong>Адрес</strong> 
-                <a asp-page="/ClientAddresses/Edit" asp-route-id="@Model.Address.ClientID" class="btn btn-sm btn-secondary ms-2 float-end">
+                <a asp-page="/ClientAddresses/Edit" asp-route-id="@Model.Address.ClientID" class="btn btn-sm btn-warning ms-2 float-end">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
                     </svg>
@@ -52,7 +52,7 @@
     <div class="card mb-4">
         <div class="card-header">
             <h5>
-                <strong>Финансова информация</strong> <a asp-page="/ClientFinancials/Edit" asp-route-id="@Model.Financials.ClientID" class="btn btn-sm btn-secondary ms-2 float-end">
+                <strong>Финансова информация</strong> <a asp-page="/ClientFinancials/Edit" asp-route-id="@Model.Financials.ClientID" class="btn btn-sm btn-warning ms-2 float-end">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
                     </svg>
@@ -89,9 +89,12 @@
             <ul class="list-group">
                 @foreach (var c in Model.PendingCredits)
                 {
-                    <li class="list-group-item">
-                        @c.CreditAmount лв.
-                        <span class="badge bg-secondary ms-2">@c.StatusNavigation.Description</span>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            @c.CreditAmount лв. 
+                            <span class="badge bg-warning ms-2">@c.StatusNavigation.Description</span>
+                        </div>
+                        Кандидатурата е подадена на @c.CreatedOn?.ToString("dd.MM.yyyy HH:mm")
                     </li>
                 }
             </ul>
@@ -103,11 +106,14 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            @c.CreditAmount лв. (@c.CreditBeginDate?.ToString("dd.MM.yyyy"))
+                            @c.CreditAmount лв
                             <span class="badge bg-success ms-2">@c.StatusNavigation.Description</span>
+                            
                         </div>
                         <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@c.ID"
-                           class="btn btn-sm btn-outline-secondary">План</a>
+                           class="btn btn-sm btn-outline-secondary rounded-pill">
+                            Погасителен план
+                        </a>
                     </li>
                 }
             </ul>
@@ -118,8 +124,14 @@
                 @foreach (var c in Model.CompletedCredits)
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @c.CreditAmount лв.
-                        <span class="badge bg-dark ms-2">@c.StatusNavigation.Description</span>
+                        <div>
+                            @c.CreditAmount лв.
+                            <span class="badge bg-danger ms-2">@c.StatusNavigation.Description</span>
+                        </div>
+                        <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@c.ID"
+                           class="btn btn-sm btn-outline-secondary rounded-pill">
+                            Погасителен план
+                        </a>
                     </li>
                 }
             </ul>
@@ -130,8 +142,10 @@
                 @foreach (var c in Model.RejectedCredits)
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @c.CreditAmount лв.
-                        <span class="badge bg-dark ms-2">@c.StatusNavigation.Description</span>
+                        <div>
+                            @c.CreditAmount лв.
+                            <span class="badge bg-dark ms-2">@c.StatusNavigation.Description</span>
+                        </div>
                     </li>
                 }
             </ul>

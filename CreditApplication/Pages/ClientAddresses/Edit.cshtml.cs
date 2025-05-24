@@ -44,12 +44,25 @@ namespace CreditApplication.Pages.ClientAddresses
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
+
+            //_context.Attach(ClientAddress).State = EntityState.Modified;
+
+            var addressToUpdate = await _context.ClientAddresses
+                                        .FirstOrDefaultAsync(a => a.ID == ClientAddress.ID);
+
+            if (addressToUpdate == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(ClientAddress).State = EntityState.Modified;
+            _context.Entry(addressToUpdate)
+                    .CurrentValues
+                    .SetValues(ClientAddress);
+
 
             try
             {
@@ -67,7 +80,7 @@ namespace CreditApplication.Pages.ClientAddresses
                 }
             }
 
-            if (User.IsInRole("Admin,Еmployee"))
+            if (!User.IsInRole("Client"))
             {
                 return RedirectToPage("./Index");
             }

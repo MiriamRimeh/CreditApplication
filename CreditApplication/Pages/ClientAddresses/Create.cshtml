@@ -5,51 +5,53 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>ClientAddress</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientAddress.ClientID" class="control-label"></label>
-                <select asp-for="ClientAddress.ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="mb-0">Данни за адрес</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientAddress.ClientID" class="control-label">Изберете клиент</label>
+                            <select asp-for="ClientAddress.ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+                        </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientAddress.City" class="control-label">Населено място</label>
+                            <input asp-for="ClientAddress.City" class="form-control" />
+                            <span asp-validation-for="ClientAddress.City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientAddress.StreetNeighbourhood" class="control-label">Улица/Квартал</label>
+                            <input asp-for="ClientAddress.StreetNeighbourhood" class="form-control" />
+                            <span asp-validation-for="ClientAddress.StreetNeighbourhood" class="text-danger"></span>
+                        </div>
+                            <div class="form-group col-12">
+                            <label asp-for="ClientAddress.Number" class="control-label">Номер</label>
+                            <input asp-for="ClientAddress.Number" class="form-control" />
+                            <span asp-validation-for="ClientAddress.Number" class="text-danger"></span>
+                        </div>
+                            <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientAddress.PostCode" class="control-label">Пощенски код</label>
+                            <input asp-for="ClientAddress.PostCode" class="form-control" />
+                            <span asp-validation-for="ClientAddress.PostCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-12 text-center mt-4">
+                            <input type="submit" value="Създай" class="btn btn-primary px-5" />
+                            <a asp-page="./Index" class="btn btn-dark px-4 ms-2">Назад</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientAddress.City" class="control-label"></label>
-                <input asp-for="ClientAddress.City" class="form-control" />
-                <span asp-validation-for="ClientAddress.City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientAddress.StreetNeighbourhood" class="control-label"></label>
-                <input asp-for="ClientAddress.StreetNeighbourhood" class="form-control" />
-                <span asp-validation-for="ClientAddress.StreetNeighbourhood" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClientAddress.Number" class="control-label"></label>
-                <input asp-for="ClientAddress.Number" class="form-control" />
-                <span asp-validation-for="ClientAddress.Number" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientAddress.PostCode" class="control-label"></label>
-                <input asp-for="ClientAddress.PostCode" class="form-control" />
-                <span asp-validation-for="ClientAddress.PostCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

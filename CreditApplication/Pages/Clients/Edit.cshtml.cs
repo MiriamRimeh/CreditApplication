@@ -36,11 +36,29 @@ namespace CreditApplication.Pages.Clients
             {
                 return NotFound();
             }
+
             Client = client;
             return Page();
         }
+
+
         public async Task<IActionResult> OnPostAsync()
         {
+            if (Client.IDValidityDate < Client.IDIssueDate)
+            {
+                ModelState.AddModelError(
+                    "Client.IDValidityDate",
+                    "Дата на валидност трябва да бъде след датата на издаване."
+                );
+            }
+            if (!(Client.IDValidityDate == Client.IDIssueDate.AddYears(10)))
+            {
+                ModelState.AddModelError(
+                    "Client.IDValidityDate",
+                    "Дата на валидност трябва да бъде 10 години след датата на издаване."
+                );
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -64,7 +82,9 @@ namespace CreditApplication.Pages.Clients
                 }
             }
 
-            if (User.IsInRole("Admin,Еmployee"))
+
+
+            if (!User.IsInRole("Client"))
             {
                 return RedirectToPage("./Index");
             }

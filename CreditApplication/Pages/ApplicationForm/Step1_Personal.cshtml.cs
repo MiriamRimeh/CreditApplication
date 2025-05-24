@@ -52,9 +52,7 @@ namespace CreditApplication.Pages.ApplicationForm
         }
 
         public async Task<IActionResult> OnPostAsync()
-        {
-            
-
+        {          
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userIdClaim == null ||
                 !int.TryParse(userIdClaim, out var userId))
@@ -74,22 +72,19 @@ namespace CreditApplication.Pages.ApplicationForm
                     "Дата на валидност трябва да бъде след датата на издаване."
                 );
             }
-            if (Client.IDValidityDate > Client.IDIssueDate.AddYears(10))
+            if (!(Client.IDValidityDate == Client.IDIssueDate.AddYears(10)))
             {
                 ModelState.AddModelError(
                     "Client.IDValidityDate",
-                    "Дата на валидност не може да бъде повече от 10 години след датата на издаване."
+                    "Дата на валидност трябва да бъде 10 години след датата на издаване."
                 );
             }
 
-            // 2) Ако още няма клиент, създаваме нов, иначе – обновяваме
             if (account.ClientID == null)
             {
-                // създаваме нов запис
                 _context.Clients.Add(Client);
                 await _context.SaveChangesAsync();
 
-                // записваме ClientId и в акаунта
                 account.ClientID = Client.ID;
                 ClientId = Client.ID;
 
@@ -98,7 +93,6 @@ namespace CreditApplication.Pages.ApplicationForm
             }
             else
             {
-                // ъпдейтваме вече съществуващия
                 var existing = account.Client!;
                 existing.FirstName = Client.FirstName;
                 existing.LastName = Client.LastName;
