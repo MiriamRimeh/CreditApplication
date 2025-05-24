@@ -134,16 +134,12 @@ namespace CreditApplication.Pages.Clients
                 worksheet.Cell(i + 2, 6).Value = c.Email ?? string.Empty;
                 worksheet.Cell(i + 2, 7).Value = c.PhoneNumber ?? string.Empty;
                 worksheet.Cell(i + 2, 8).Value = c.IDCardNumber ?? string.Empty;
-
-                // Не-Nullable DateTime — винаги работи
                 worksheet.Cell(i + 2, 9).Value = c.IDIssueDate.ToString("yyyy-MM-dd");
                 worksheet.Cell(i + 2, 10).Value = c.IDValidityDate.ToString("yyyy-MM-dd");
                 worksheet.Cell(i + 2, 11).Value = c.IDIssuer ?? string.Empty;
                 worksheet.Cell(i + 2, 12).Value = c.CreatedOn != default(DateTime)
                         ? c.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss")
                         : string.Empty;
-
-                // Ако искате празно при „нулева“ дата:
                 worksheet.Cell(i + 2, 13).Value =
                     c.ModifiedOn != default(DateTime)
                         ? c.ModifiedOn.ToString("yyyy-MM-dd HH:mm:ss")

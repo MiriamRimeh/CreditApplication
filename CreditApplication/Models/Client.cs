@@ -54,6 +54,8 @@ namespace CreditApplication.Models
         public ClientAddress? ClientAddress { get; set; }
         public ClientFinancial? ClientFinancial { get; set; }
 
+        //public ICollection<ClientAddress> Addresses { get; set; }
+
 
     }
 }

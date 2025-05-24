@@ -82,7 +82,8 @@
                         asp-route-CreditId="@Model.CreditId"
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
-                        asp-route-PageIndex="1">
+                        asp-route-PageIndex="1"
+                           class="text-decoration-none">
                             Oперация
                         </a>
                     </th>
@@ -92,7 +93,8 @@
                         asp-route-CreditId="@Model.CreditId"
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
-                        asp-route-PageIndex="1" >
+                        asp-route-PageIndex="1"
+                           class="text-decoration-none">
                             Kредит
                         </a>
                     </th>
@@ -103,7 +105,8 @@
                         asp-route-CreditId="@Model.CreditId"
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
-                        asp-route-PageIndex="1">
+                        asp-route-PageIndex="1"
+                           class="text-decoration-none">
                             Дата на плащане
                         </a>
                     </th>
@@ -113,7 +116,8 @@
                         asp-route-CreditId="@Model.CreditId"
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
-                        asp-route-PageIndex="1">
+                        asp-route-PageIndex="1"
+                           class="text-decoration-none">
                             Сума
                         </a>
                     </th>
@@ -123,7 +127,8 @@
                         asp-route-CreditId="@Model.CreditId"
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
-                        asp-route-PageIndex="1">
+                        asp-route-PageIndex="1"
+                           class="text-decoration-none">
                             Тип операция
                         </a>
                     </th>
@@ -135,14 +140,14 @@
             <tbody>
                 @foreach (var item in Model.FinancialOperation) {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.ID)</td>
-                        <td>@Html.DisplayFor(modelItem => item.CreditID)</td>
-                        <td>@Html.DisplayFor(modelItem => item.RepaymentPlanID)</td>
-                        <td>@item.PayedOnDate?.ToString("dd.MM.yyyy")</td>
-                        <td>@item.PayedAmount.ToString("C",CultureInfo.GetCultureInfo("bg-BG"))</td>
-                        <td>@item.OperationTypeNomenclature.Description</td>
-                        <td>@item.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</td>
-                        <td>@item.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td align="right">@Html.DisplayFor(modelItem => item.ID)</td>
+                        <td align="right">@Html.DisplayFor(modelItem => item.CreditID)</td>
+                        <td align="right">@Html.DisplayFor(modelItem => item.RepaymentPlanID)</td>
+                        <td align="center">@item.PayedOnDate?.ToString("dd.MM.yyyy")</td>
+                        <td align="right">@item.PayedAmount.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
+                        <td align="center">@item.OperationTypeNomenclature.Description</td>
+                        <td align="center">@item.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td align="center">@item.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</td>
                         <td>
 @*                             <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                             <a asp-page="./Details" asp-route-id="@item.ID">Details</a> | *@

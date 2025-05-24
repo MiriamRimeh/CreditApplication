@@ -61,7 +61,7 @@
     <table class="table table-hover align-middle mb-0">
         <thead class="table-light">
             <tr>
-                <th>
+                <th scope="col">
                     <a asp-route-SortOrder="@Model.ClientIdSort"
                        asp-route-SearchClientId="@Model.SearchClientId"
                        asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
@@ -79,77 +79,75 @@
                         }
                     </a>
                 </th>
-            <th>
-               <a asp-route-SortOrder="@Model.MonthlyIncomeSort"
-                       asp-route-SearchClientId="@Model.SearchClientId"
-                       asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
-                       asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
-                       asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
-                       class="text-decoration-none">
-                        Доход
-                        @if (Model.SortOrder == "monthlyincome")
-                        {
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
-                        }
-                        else if (Model.SortOrder == "monthlyincome_desc")
-                        {
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
-                        }
+               <th scope="col">
+                   <a asp-route-SortOrder="@Model.MonthlyIncomeSort"
+                           asp-route-SearchClientId="@Model.SearchClientId"
+                           asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
+                           asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
+                           asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
+                           class="text-decoration-none">
+                            Доход
+                            @if (Model.SortOrder == "monthlyincome")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
+                            }
+                            else if (Model.SortOrder == "monthlyincome_desc")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
+                            }
+                        </a>
+                </th>
+                <th scope="col">
+                    <a asp-route-SortOrder="@Model.MonthlyExpensesSort"
+                           asp-route-SearchClientId="@Model.SearchClientId"
+                           asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
+                           asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
+                           asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
+                           class="text-decoration-none">
+                            Разходи
+                            @if (Model.SortOrder == "monthlyexpenses")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
+                            }
+                            else if (Model.SortOrder == "monthlyexpenses_desc")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
+                            }
                     </a>
-            </th>
-            <th>
-                <a asp-route-SortOrder="@Model.MonthlyExpensesSort"
-                       asp-route-SearchClientId="@Model.SearchClientId"
-                       asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
-                       asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
-                       asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
-                       class="text-decoration-none">
-                        Разходи
-                        @if (Model.SortOrder == "monthlyexpenses")
-                        {
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
-                        }
-                        else if (Model.SortOrder == "monthlyexpenses_desc")
-                        {
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
-                        }
+                </th>
+                <th scope="col">
+                    <a asp-route-SortOrder="@Model.EmploymentTypeSort"
+                           asp-route-SearchClientId="@Model.SearchClientId"
+                           asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
+                           asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
+                           asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
+                           class="text-decoration-none">
+                            Вид заетост
+                            @if (Model.SortOrder == "employmenttype")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
+                            }
+                            else if (Model.SortOrder == "employmenttype_desc")
+                            {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
+                            }
                     </a>
-            </th>
-            <th>
-                <a asp-route-SortOrder="@Model.EmploymentTypeSort"
-                       asp-route-SearchClientId="@Model.SearchClientId"
-                       asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
-                       asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
-                       asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
-                       class="text-decoration-none">
-                        Вид заетост
-                        @if (Model.SortOrder == "employmenttype")
-                        {
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
-                        }
-                        else if (Model.SortOrder == "employmenttype_desc")
-                        {
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
-                        }
-                    </a>
-            </th>
-@*             <th>
-                @Html.DisplayNameFor(model => model.ClientFinancial[0].CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientFinancial[0].ModifiedOn)
-            </th> *@
-                <th class="text-end">Действия</th>
+                </th>
+                <th scope="col">Създадено на</th>
+                <th scope="col">Последна промяна</th>
+                <th scope="col" class="text-end">Действия</th>
         </tr>
     </thead>
     <tbody>
             @foreach (var item in Model.ClientFinancial ?? Enumerable.Empty<CreditApplication.Models.ClientFinancial>())
             {
                 <tr>
-                    <td>@item.ClientID</td>
-                    <td>@item.MontlyIncome</td>
-                    <td>@item.MontlyExpenses</td>
-                    <td>@item.EmploymentTypeNomenclature?.Description</td>
+                        <td align="center">@item.ClientID</td>
+                        <td align="right">@item.MontlyIncome.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
+                        <td align="right">@item.MontlyExpenses.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
+                        <td align="center">@item.EmploymentTypeNomenclature?.Description</td>
+                        <td align="center">@item.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td align="center">@item.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</td>
                     <td class="text-end">
                         <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">

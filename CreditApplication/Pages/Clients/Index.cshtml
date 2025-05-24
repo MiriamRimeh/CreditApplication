@@ -103,6 +103,8 @@
                     <th scope="col">ЕГН</th>
                     <th scope="col">Имейл</th>
                     <th scope="col">Телефон</th>
+                    <th scope="col">Създадено на</th>
+                    <th scope="col">Последна промяна</th>
                     <th scope="col" class="text-end">Действия</th>
                 </tr>
             </thead>
@@ -119,7 +121,8 @@
                         <td>@item.EGN</td>
                         <td>@(item.Email ?? "—")</td>
                         <td>@item.PhoneNumber</td>
-
+                        <td>@item.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td>@item.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</td>
                         <td class="text-end">
                             <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
@@ -147,7 +150,6 @@
         </table>
     </div>
 
-    @* Pagination *@
     @if (Model.TotalPages > 1)
     {
         <nav aria-label="Page navigation" class="mt-4">

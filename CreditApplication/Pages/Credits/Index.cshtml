@@ -134,9 +134,11 @@
                             }
                         </a>
                     </th>
-                    <th scope="col" align="center">Лихва (%)</th>
-                    <th scope="col" align="center">Статус</th>
-                    <th scope="col" class="text-end" align="center">Действия</th>
+                    <th scope="col" >Лихва (%)</th>
+                    <th scope="col" >Статус</th>
+                    <th scope="col" >Създадено на</th>
+                    <th scope="col" >Последна промяна</th>
+                    <th scope="col" class="text-end" >Действия</th>
                 </tr>
             </thead>
             <tbody>
@@ -152,6 +154,8 @@
                         <td>
                             @(item.StatusNavigation?.Description ?? "—")
                         </td>
+                        <td>@item.CreatedOn?.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td>@item.ModifiedOn?.ToString("dd.MM.yyyy HH:mm:ss")</td>
                         <td class="text-end">
                             <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
