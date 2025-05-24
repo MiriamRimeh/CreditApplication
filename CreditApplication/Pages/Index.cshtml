@@ -1,18 +1,14 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Начало";
 }
 
-@* <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
- *@
+
 <div class="container mt-5">
     <div class="row" >
         <div class="col-md-4">
-            <h2 class="mb-4">Калкулатор</h2>
+            <h2 class="mb-6">Калкулатор</h2>
             <div class="card shadow-sm p-4">
                 <div class="mb-3">
                     <label asp-for="Amount" class="form-label">Сума (лв.)</label>
@@ -29,7 +25,7 @@
 
                 </div>
                 <div class="mt-4 text-end">
-                    <a class="btn btn-primary btn-lg rounded-pill text-capitalize" href="/ApplicationForm/Step1_Personal">Вземи сега</a>
+                    <a class="btn btn-primary-miriam btn-lg rounded-pill " href="/ApplicationForm/Step1_Personal">Вземи сега</a>
                 </div>
             </div>
         </div>

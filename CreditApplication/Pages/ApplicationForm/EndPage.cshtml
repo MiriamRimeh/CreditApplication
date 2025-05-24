@@ -2,45 +2,78 @@
 @model CreditApplication.Pages.ApplicationForm.EndPageModel
 @using System.Globalization
 @{
-    ViewData["Title"] = "Application Complete";
-    var bg = CultureInfo.GetCultureInfo("bg-BG");
+    ViewData["Title"] = "Успешно заявление!";
 }
-<div class="alert alert-success">
-    <h2>Поздравления, кандидатурата е записана успешно!</h2>
-    <p>Твоята кандидатура е записана успешно и очаква решение.</p>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="alert alert-success mb-0">
+            <h5 class="mb-2"><strong>Поздравления!</strong></h5>
+            <p class="mb-0">Кандидатурата е записана успешно и очаква решение.</p>
+        </div>
+    </div>
 </div>
 
-<hr />
-<h4>Информация за кандидатура</h4>
+@if (Model.Client != null)
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><strong>Лични данни</strong></h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Име:</strong> @Model.Client.FirstName @Model.Client.MiddleName @Model.Client.LastName</p>
+            <p><strong>Телефон:</strong> @Model.Client.PhoneNumber</p>
+            <p><strong>Имейл:</strong> @Model.Client.Email</p>
+            <p><strong>ЕГН:</strong> @Model.Client.EGN</p>
+            <p><strong>Номер на лична карта:</strong>@Model.Client.IDCardNumber</p>
+            <p><strong>Издадена на:</strong>@Model.Client.IDIssueDate</p>
+            <p><strong>Валидна до:</strong>@Model.Client.IDValidityDate</p>
+            <p><strong>Издадена от МВР:</strong>@Model.Client.IDIssuer</p>
+        </div>
+    </div>
+}
 
-<h5>Лични данни</h5>
-<ul>
-    <li><strong>Име:</strong> @Model.Client.FirstName @Model.Client.MiddleName @Model.Client.LastName</li>
-    <li><strong>Телефон:</strong> @Model.Client.PhoneNumber</li>
-    <li><strong>Имейл:</strong> @Model.Client.Email</li>
-    <li><strong>ЕГН:</strong> @Model.Client.EGN</li>
-</ul>
+@if (Model.Address != null)
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><strong>Адрес</strong></h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Град:</strong> @Model.Address.City</p>
+            <p><strong>Улица/Квартал:</strong> @Model.Address.StreetNeighbourhood</p>
+            <p><strong>Номер:</strong> @Model.Address.Number</p>
+            <p><strong>Пощенски код:</strong> @Model.Address.PostCode</p>
+        </div>
+    </div>
+}
 
-<h5>Адрес</h5>
-<ul>
-    <li><strong>Град:</strong> @Model.Address?.City</li>
-    <li><strong>Улица/Жилищен комплекс:</strong> @Model.Address?.StreetNeighbourhood</li>
-    <li><strong>Номер:</strong> @Model.Address?.Number</li>
-    <li><strong>Пощенски код:</strong> @Model.Address?.PostCode</li>
-</ul>
+@if (Model.Financial != null)
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><strong>Финансова информация</strong></h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Месечни доходи:</strong> @Model.Financial.MontlyIncome.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</p>
+            <p><strong>Месечни разходи:</strong> @Model.Financial.MontlyExpenses.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</p>
+            <p><strong>Тип на заетост:</strong> @Model.ClientEmploymentType</p>
+        </div>
+    </div>
+}
 
-<h5>Финансова информация</h5>
-<ul>
-    <li><strong>Месечни доходи:</strong> @Model.Financial?.MontlyIncome.ToString("C", bg)</li>
-    <li><strong>Месечни разходи:</strong> @Model.Financial?.MontlyExpenses.ToString("C", bg)</li>
-    <li><strong>Тип на заетост:</strong> @Model.ClientEmploymentType</li>
-</ul>
+@if (Model.Credit != null)
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><strong>Информация за кандидатура за кредит</strong></h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Желана сума:</strong> @Model.Credit.CreditAmount.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</p>
+            <p><strong>Брой месечни вноски:</strong> @Model.Credit.CreditPeriod</p>
+            <p><strong>Текущ статус на кредит:</strong> @Model.CreditStatusDescription</p>
+        </div>
+    </div>
+}
 
-<h5>Кандидатура за кредит</h5>
-<ul>
-    <li><strong>Желана сума:</strong> @Model.Credit?.CreditAmount.ToString("C", bg)</li>
-    <li><strong>Брой месечни вноски:</strong> @Model.Credit?.CreditPeriod</li>
-    <li><strong>Текущ статус на кредит:</strong> @Model.CreditStatusDescription</li>
-</ul>
 
-<a asp-page="/Index" class="btn btn-primary mt-3">Back to Home</a>
+<a asp-page="/Index" class="btn btn-primary-miriam mt-3">Назад към Начало</a>

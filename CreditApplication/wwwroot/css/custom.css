@@ -1,0 +1,11 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
+
+:root {
+    --bs-font-sans-serif: 'Sofia Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --bs-body-font-family: var(--bs-font-sans-serif);
+}
+
+body {
+    /* Гарантирано ще се използва Roboto върху всички елементи */
+    font-family: var(--bs-body-font-family) !important;
+}
