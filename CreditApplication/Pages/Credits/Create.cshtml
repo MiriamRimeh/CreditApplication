@@ -20,11 +20,10 @@
                 <input type="text" id="searchEGN" class="form-control" placeholder="Въведете ЕГН..." />
             </div>
 
-            <!-- Select existing client by filtered list -->
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Credit.ClientID" class="control-label">Изберете клиент:</label>
-                <select asp-for="Credit.ClientID" id="ClientSelect" class="form-control" asp-items="Model.ClientList">
+                <select asp-for="Credit.ClientID" id="ClientSelect" class="form-control" asp-items="Model.ClientList" required>
                     <option value="">-- Изберете --</option>
                 </select>
                 <span asp-validation-for="Credit.ClientID" class="text-danger"></span>
@@ -32,19 +31,14 @@
 
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Credit.CreditAmount" class="control-label">Желана сума на кредит:</label>
-                <input asp-for="Credit.CreditAmount" class="form-control" />
+                <label asp-for="Credit.CreditAmount" class="control-label">Сума на кредит:</label>
+                <input asp-for="Credit.CreditAmount" class="form-control" required />
                 <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Credit.CreditBeginDate" class="control-label">Желана дата за първа вноска:</label>
-                <input asp-for="Credit.CreditBeginDate" class="form-control" />
-                <span asp-validation-for="Credit.CreditBeginDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита (месеци):</label>
-                <input asp-for="Credit.CreditPeriod" class="form-control" />
+                <input asp-for="Credit.CreditPeriod" class="form-control" required />
                 <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>
             </div>
 
@@ -80,32 +74,33 @@
             }
         });
 
-        // Recalculate totals and installment
         (() => {
-            const amountInput         = document.getElementById('Credit_CreditAmount');
-            const periodInput         = document.getElementById('Credit_CreditPeriod');
-            const totalAmountInput    = document.getElementById('Credit_TotalCreditAmount');
-            const monthlyPaymentInput = document.getElementById('Credit_MonthlyInstallment');
-            const interestRate        = 0.40;
+             const amountInput = document.getElementById('Credit_CreditAmount');
+             const periodInput = document.getElementById('Credit_CreditPeriod');
+             const monthlyLabel = document.getElementById('Credit_MonthlyInstallment');
+             const totalLabel = document.getElementById('Credit_TotalCreditAmount');
+             const interestRate = 0.40;
 
-            function recalc() {
-                const amount = parseFloat(amountInput.value) || 0;
-                const months = parseInt(periodInput.value)   || 0;
+             function recalc() {
+                 const amount = parseFloat(amountInput.value) || 0;
+                 const months = parseInt(periodInput.value)   || 0;
 
-                if (amount >= 300 && amount <= 5000 && months >= 5 && months <= 24) {
-                    const monthlyRate = interestRate / 12;
-                    const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-                    const total   = monthly * months;
-                    totalAmountInput.value    = total.toFixed(2);
-                    monthlyPaymentInput.value = monthly.toFixed(2);
-                } else {
-                    totalAmountInput.value    = '';
-                    monthlyPaymentInput.value = '';
-                }
-            }
+                 if (amount < 300 || amount > 5000 || months < 5 || months > 24 ) {
+                     totalLabel.value    = '';
+                     monthlyLabel.value = '';
+                     return;
+                 }
 
-            amountInput.addEventListener('input', recalc);
-            periodInput.addEventListener('input', recalc);
-        })();
+                 const monthlyRate = interestRate / 12;
+                 const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+                 const total = monthly * months;
+                 monthlyLabel.value = monthly.toFixed(2);
+                 totalLabel.value = total.toFixed(2);
+             }
+
+             recalc();
+             amountInput.addEventListener('input',  recalc);
+             periodInput.addEventListener('input',  recalc);
+         })();
     </script>
 }

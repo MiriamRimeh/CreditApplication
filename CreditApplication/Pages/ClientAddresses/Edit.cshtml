@@ -56,12 +56,12 @@
                             @using Microsoft.AspNetCore.Identity
                             @if (!User.IsInRole("Client"))
                             {
-                                <a asp-page="./Index" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+                                <a asp-page="./Index" class="btn btn-dark px-4 ms-2">Назад</a>
 
                             }
                             else
                             {
-                                <a asp-page="/Accounts/Profile" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+                                <a asp-page="/Accounts/Profile" class="btn btn-dark px-4 ms-2">Назад</a>
                             }
 
                         </div>
