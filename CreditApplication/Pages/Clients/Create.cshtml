@@ -22,7 +22,7 @@
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Client.FirstName" class="control-label">Име:</label>
-                            <input asp-for="Client.FirstName" class="form-control" />
+                            <input asp-for="Client.FirstName" class="form-control" required/>
                             <span asp-validation-for="Client.FirstName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
@@ -33,13 +33,13 @@
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Client.LastName" class="control-label">Фамилия:</label>
-                            <input asp-for="Client.LastName" class="form-control" />
+                            <input asp-for="Client.LastName" class="form-control" required />
                             <span asp-validation-for="Client.LastName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Client.EGN" class="control-label">ЕГН:</label>
-                            <input asp-for="Client.EGN" class="form-control" />
+                            <input asp-for="Client.EGN" class="form-control" required />
                             <span asp-validation-for="Client.EGN" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
@@ -50,37 +50,37 @@
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Client.PhoneNumber" class="control-label">Телефон:</label>
-                            <input asp-for="Client.PhoneNumber" class="form-control" />
+                            <input asp-for="Client.PhoneNumber" class="form-control" required />
                             <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Client.IDCardNumber" class="control-label">Номер на лична карта:</label>
-                            <input asp-for="Client.IDCardNumber" class="form-control" />
+                            <input asp-for="Client.IDCardNumber" class="form-control" required />
                             <span asp-validation-for="Client.IDCardNumber" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <span class="text-danger">*</span>
-                            <label asp-for="Client.IDValidityDate" class="control-label">Дата на валидност:</label>
-                            <input asp-for="Client.IDValidityDate" class="form-control" type="date"/>
-                            <span asp-validation-for="Client.IDValidityDate" class="text-danger"></span>
+                            <label asp-for="Client.IDIssueDate" class="control-label">Дата на издаване:</label>
+                            <input asp-for="Client.IDIssueDate" class="form-control" type="date" required />
+                            <span asp-validation-for="Client.IDIssueDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <span class="text-danger">*</span>
-                            <label asp-for="Client.IDIssueDate" class="control-label">Дата на издаване:</label>
-                            <input asp-for="Client.IDIssueDate" class="form-control" type="date" />
-                            <span asp-validation-for="Client.IDIssueDate" class="text-danger"></span>
+                            <label asp-for="Client.IDValidityDate" class="control-label">Дата на валидност:</label>
+                            <input asp-for="Client.IDValidityDate" class="form-control" type="date" required />
+                            <span asp-validation-for="Client.IDValidityDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Client.IDIssuer" class="control-label">Издадена от (МВР):</label>
-                            <input asp-for="Client.IDIssuer" class="form-control" />
+                            <input asp-for="Client.IDIssuer" class="form-control" required />
                             <span asp-validation-for="Client.IDIssuer" class="text-danger"></span>
                         </div>
 
                         <div class="col-12 text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg px-5">Създай</button>
-                            <a asp-page="Index" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+                            <button type="submit" class="btn btn-primary-miriam px-5">Създай</button>
+                            <a asp-page="./Index" class="btn btn-dark px-4 ms-2">Назад</a>
                         </div>
                     </form>
                 </div>

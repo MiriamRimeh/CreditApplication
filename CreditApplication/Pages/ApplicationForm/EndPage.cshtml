@@ -24,10 +24,10 @@
             <p><strong>Телефон:</strong> @Model.Client.PhoneNumber</p>
             <p><strong>Имейл:</strong> @Model.Client.Email</p>
             <p><strong>ЕГН:</strong> @Model.Client.EGN</p>
-            <p><strong>Номер на лична карта:</strong>@Model.Client.IDCardNumber</p>
-            <p><strong>Издадена на:</strong>@Model.Client.IDIssueDate</p>
-            <p><strong>Валидна до:</strong>@Model.Client.IDValidityDate</p>
-            <p><strong>Издадена от МВР:</strong>@Model.Client.IDIssuer</p>
+            <p><strong>Номер на лична карта:</strong> @Model.Client.IDCardNumber</p>
+            <p><strong>Издадена на:</strong> @Model.Client.IDIssueDate.ToString("dd.MM.yyyy")</p>
+            <p><strong>Валидна до:</strong> @Model.Client.IDValidityDate.ToString("dd.MM.yyyy")</p>
+            <p><strong>Издадена от МВР:</strong> @Model.Client.IDIssuer</p>
         </div>
     </div>
 }

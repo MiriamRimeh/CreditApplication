@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CreditApplication.Data;
 using CreditApplication.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace CreditApplication.Pages.Clients
 {
@@ -27,9 +29,48 @@ namespace CreditApplication.Pages.Clients
         [BindProperty]
         public Client Client { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+
         public async Task<IActionResult> OnPostAsync()
         {
+
+
+            if (Client.IDValidityDate < Client.IDIssueDate)
+            {
+                ModelState.AddModelError(
+                    "Client.IDValidityDate",
+                    "Дата на валидност трябва да бъде след датата на издаване."
+                );
+            }
+            if (!(Client.IDValidityDate == Client.IDIssueDate.AddYears(10)))
+            {
+                ModelState.AddModelError(
+                    "Client.IDValidityDate",
+                    "Дата на валидност трябва да бъде 10 години след датата на издаване."
+                );
+            }
+
+            if (string.IsNullOrWhiteSpace(Client.EGN) ||
+                !Regex.IsMatch(Client.EGN, @"^\d{10}$"))
+            {
+                ModelState.AddModelError(
+                    "Client.EGN",
+                    "ЕГН трябва да съдържа точно 10 цифри."
+                );
+            }
+            else
+            {
+                bool exists = await _context.Clients
+                    .AnyAsync(c => c.EGN == Client.EGN);
+
+                if (exists)
+                {
+                    ModelState.AddModelError(
+                        "Client.EGN",
+                        "Вече съществува клиент с това ЕГН."
+                    );
+                }
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -38,7 +79,7 @@ namespace CreditApplication.Pages.Clients
             _context.Clients.Add(Client);
             await _context.SaveChangesAsync();
 
-            if (User.IsInRole("Admin,Еmployee"))
+            if (!User.IsInRole("Client"))
             {
                 return RedirectToPage("./Index");
             }
