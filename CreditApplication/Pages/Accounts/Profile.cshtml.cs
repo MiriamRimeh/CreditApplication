@@ -15,9 +15,9 @@ namespace CreditApplication.Pages.Accounts
         public ProfileModel(CreditApplicationDbContext context) => _context = context;
 
         public Models.Account Account { get; set; }
-        public Client Client { get; set; }
-        public ClientAddress Address { get; set; }
-        public ClientFinancial Financials { get; set; }
+        public Client? Client { get; set; }
+        public List<ClientAddress> Addresses { get; set; }
+        public List<ClientFinancial> Financials { get; set; }
 
         public List<Credit> PendingCredits { get; set; }
         public List<Credit> ActiveCredits { get; set; }
@@ -42,13 +42,15 @@ namespace CreditApplication.Pages.Accounts
             Client = await _context.Clients
                                  .AsNoTracking()
                                  .FirstOrDefaultAsync(c => c.ID == Account.ClientID.Value);
-            Address = await _context.ClientAddresses
-                                 .AsNoTracking()
-                                 .FirstOrDefaultAsync(a => a.ClientID == Account.ClientID.Value);
+            Addresses = await _context.ClientAddresses
+                                .AsNoTracking()
+                                .Where(a => a.ClientID == Account.ClientID.Value)
+                                .ToListAsync();
             Financials = await _context.ClientFinancials
                                  .Include(f => f.EmploymentTypeNomenclature)
                                  .AsNoTracking()
-                                 .FirstOrDefaultAsync(f => f.ClientID == Account.ClientID.Value);
+                                 .Where(f => f.ClientID == Account.ClientID.Value)
+                                 .ToListAsync();
 
             var creditsQuery = _context.Credits
                 .Where(c => c.ClientID == Account.ClientID.Value)
