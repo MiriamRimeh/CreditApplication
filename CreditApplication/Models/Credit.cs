@@ -33,12 +33,10 @@ namespace CreditApplication.Models
 
         [Required(ErrorMessage = "Периодът на кредита е задължителен.")]
         [Range(5, 24, ErrorMessage = "Периодът трябва да е между 5 и 24 месеца.")]
-        public int? CreditPeriod { get; set; } // Credit period in months
-        public decimal? MonthlyInstallment { get; set; } // Monthly payment amount
-        public decimal? TotalCreditAmount { get; set; } // Total amount to be paid back
+        public int? CreditPeriod { get; set; } 
+        public decimal? MonthlyInstallment { get; set; }
+        public decimal? TotalCreditAmount { get; set; }
 
-        //[NotMapped]
-        //public DateTime EstimatedEndDate { get; set; }
 
     }
 }

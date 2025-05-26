@@ -37,6 +37,7 @@ namespace CreditApplication.Pages.Credits
 
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (ModelState.IsValid)
             {
                 ClientList = new SelectList(
@@ -46,12 +47,27 @@ namespace CreditApplication.Pages.Credits
                 return Page();
             }
 
+
+            if (Credit.CreditAmount < 300 || Credit.CreditAmount > 5000)
+            {
+                ModelState.AddModelError(
+                    "Credit.CreditAmount",
+                    "Сумата на кредита трябва да бъде между 300 лв и 5000 лв."
+                );
+            }
+            if (Credit.CreditPeriod < 5 || Credit.CreditPeriod > 24)
+            {
+                ModelState.AddModelError(
+                    "Credit.CreditPeriod",
+                    "Периодът на кредита трябва да е между 5 и 24 месеца."
+                );
+            }
+
             Credit.CreatedOn = DateTime.Now;
             Credit.ModifiedOn = DateTime.Now;
             Credit.InterestRate = 0.40M;
-            Credit.Status = 101; // "For review"
+            Credit.Status = 101;
 
-            // Compute totals
             Credit.TotalCreditAmount = Credit.CreditAmount + Credit.CreditAmount * Credit.InterestRate;
             Credit.MonthlyInstallment = Credit.TotalCreditAmount / Credit.CreditPeriod;
 

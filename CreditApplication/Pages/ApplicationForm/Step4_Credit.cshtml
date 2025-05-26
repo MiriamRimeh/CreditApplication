@@ -18,20 +18,22 @@
                 </div>
                 <div class="card-body">
                     <form method="post" class="row g-3 needs-validation" novalidate>
+                        @Html.AntiForgeryToken()
+                        <input asp-for="ClientId" type="hidden" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Credit.CreditAmount" class="control-label">Желана сума на кредит:</label>
-                            <input asp-for="Credit.CreditAmount" class="form-control" id="Credit_CreditAmount" type="number" required="" />
-                            <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
+                            <input asp-for="Credit.CreditAmount" class="form-control" id="Credit_CreditAmount" type="number" min="300" max="5000" step="100" required />
+                            <span asp-validation-for="Credit.CreditAmount" class="text-secondary">Сумата трябва да бъде между 300 лв. и 5000 лв.</span>
                         </div>
 
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита:</label>
-                            <input asp-for="Credit.CreditPeriod" class="form-control" id="Credit_CreditPeriod" type="number" required="" />
-                            <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>
+                            <input asp-for="Credit.CreditPeriod" class="form-control" id="Credit_CreditPeriod" type="number" min="5" max="24" step="1" required />
+                            <span asp-validation-for="Credit.CreditPeriod" class="text-secondary">Периодът трябва да бъде между 5 и 24 месеца.</span>
                         </div>
 
                         <div class="form-group col-12">
@@ -57,6 +59,24 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        (function () {
+          'use strict';
+          var forms = document.querySelectorAll('.needs-validation');
+          Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+              form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+        })();
+    </script>
+
     <script>
         (() => {
             const amountInput = document.getElementById('Credit_CreditAmount');

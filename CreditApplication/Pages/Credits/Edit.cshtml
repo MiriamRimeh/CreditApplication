@@ -72,32 +72,32 @@
             }
         });
 
-        // Recalculate totals and installment
-        (() => {
-            const amountInput         = document.getElementById('Credit_CreditAmount');
-            const periodInput         = document.getElementById('Credit_CreditPeriod');
-            const totalAmountInput    = document.getElementById('Credit_TotalCreditAmount');
-            const monthlyPaymentInput = document.getElementById('Credit_MonthlyInstallment');
-            const interestRate        = 0.40;
+        // // Recalculate totals and installment
+        // (() => {
+        //     const amountInput         = document.getElementById('Credit_CreditAmount');
+        //     const periodInput         = document.getElementById('Credit_CreditPeriod');
+        //     const totalAmountInput    = document.getElementById('Credit_TotalCreditAmount');
+        //     const monthlyPaymentInput = document.getElementById('Credit_MonthlyInstallment');
+        //     const interestRate        = 0.40;
 
-            function recalc() {
-                const amount = parseFloat(amountInput.value) || 0;
-                const months = parseInt(periodInput.value)   || 0;
+        //     function recalc() {
+        //         const amount = parseFloat(amountInput.value) || 0;
+        //         const months = parseInt(periodInput.value)   || 0;
 
-                if (amount >= 300 && amount <= 5000 && months >= 5 && months <= 24) {
-                    const monthlyRate = interestRate / 12;
-                    const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-                    const total   = monthly * months;
-                    totalAmountInput.value    = total.toFixed(2);
-                    monthlyPaymentInput.value = monthly.toFixed(2);
-                } else {
-                    totalAmountInput.value    = '';
-                    monthlyPaymentInput.value = '';
-                }
-            }
+        //         if (amount >= 300 && amount <= 5000 && months >= 5 && months <= 24) {
+        //             const monthlyRate = interestRate / 12;
+        //             const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+        //             const total   = monthly * months;
+        //             totalAmountInput.value    = total.toFixed(2);
+        //             monthlyPaymentInput.value = monthly.toFixed(2);
+        //         } else {
+        //             totalAmountInput.value    = '';
+        //             monthlyPaymentInput.value = '';
+        //         }
+        //     }
 
-            amountInput.addEventListener('input', recalc);
-            periodInput.addEventListener('input', recalc);
-        })();
+        //     amountInput.addEventListener('input', recalc);
+        //     periodInput.addEventListener('input', recalc);
+        // })();
     </script>
 }

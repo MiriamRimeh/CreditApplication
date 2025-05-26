@@ -33,7 +33,6 @@ namespace CreditApplication.Pages.Clients
         public async Task<IActionResult> OnPostAsync()
         {
 
-
             if (Client.IDValidityDate < Client.IDIssueDate)
             {
                 ModelState.AddModelError(

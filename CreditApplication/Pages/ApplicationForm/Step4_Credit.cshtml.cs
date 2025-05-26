@@ -19,11 +19,6 @@ namespace CreditApplication.Pages
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            TempData.Keep("ClientId");
-            return Page();
-        }
 
         [BindProperty]
         public Credit Credit { get; set; } = default!;
@@ -33,21 +28,23 @@ namespace CreditApplication.Pages
         public string MonthlyInstallment { get; set; }
         public string TotalCreditAmount { get; set; }
 
+        public IActionResult OnGet()
+        {
+            TempData.Keep("ClientId");
+            return Page();
+        }
+
 
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
 
             Credit.ClientID = ClientId;
             Credit.CreatedOn = DateTime.Now;
             Credit.ModifiedOn = DateTime.Now;
-            Credit.InterestRate = 0.4M; // Fixed: Added 'M' suffix to indicate a decimal literal
-            Credit.Status = 101; // 101 is the status for "for review" 
+            Credit.InterestRate = 0.4M;
+            Credit.Status = 101;
 
-            decimal monthlyRate = Credit.InterestRate.Value / 12M; // Ensure consistent use of decimal
+            decimal monthlyRate = Credit.InterestRate.Value / 12M;
             decimal monthly = (Credit.CreditAmount * monthlyRate) / (1 - (decimal)Math.Pow((double)(1 + monthlyRate), -Credit.CreditPeriod.Value));
             decimal total = monthly * Credit.CreditPeriod.Value;
 
@@ -57,7 +54,10 @@ namespace CreditApplication.Pages
             _context.Credits.Add(Credit);
             await _context.SaveChangesAsync();
 
+
+
             return RedirectToPage("EndPage");
         }
+
     }
 }

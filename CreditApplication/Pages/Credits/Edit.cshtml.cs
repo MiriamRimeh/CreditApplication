@@ -44,10 +44,28 @@ namespace CreditApplication.Pages.Credits
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+
+            if (Credit.CreditAmount < 300 || Credit.CreditAmount > 5000)
+            {
+                ModelState.AddModelError(
+                    "Credit.CreditAmount",
+                    "Сумата на кредита трябва да бъде между 300 лв и 5000 лв."
+                );
+            }
+            if (Credit.CreditPeriod < 5 || Credit.CreditPeriod > 24)
+            {
+                ModelState.AddModelError(
+                    "Credit.CreditPeriod",
+                    "Периодът на кредита трябва да е между 5 и 24 месеца."
+                );
+            }
+
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
 
             _context.Attach(Credit).State = EntityState.Modified;
 
