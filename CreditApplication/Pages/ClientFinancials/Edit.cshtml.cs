@@ -23,12 +23,19 @@ namespace CreditApplication.Pages.ClientFinancials
         [BindProperty]
         public ClientFinancial ClientFinancial { get; set; } = default!;
 
+        public SelectList EmploymentTypes { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+            var nomList = await _context.Nomenclatures
+                .AsNoTracking()
+                .Where(n => n.NomCode >= 301 && n.NomCode <= 306)
+                .OrderBy(n => n.Description)
+                .ToListAsync();
 
             var clientfinancial =  await _context.ClientFinancials.FirstOrDefaultAsync(m => m.ID == id);
             if (clientfinancial == null)
@@ -66,7 +73,7 @@ namespace CreditApplication.Pages.ClientFinancials
                 }
             }
 
-            if (User.IsInRole("Admin,Еmployee"))
+            if (!User.IsInRole("Client"))
             {
                 return RedirectToPage("./Index");
             }
@@ -79,6 +86,16 @@ namespace CreditApplication.Pages.ClientFinancials
         private bool ClientFinancialExists(int id)
         {
             return _context.ClientFinancials.Any(e => e.ID == id);
+        }
+
+        private async Task LoadEmploymentTypesAsync()
+        {
+            var employmentTypes = await _context.Nomenclatures
+                .Where(n => n.NomCode >= 301 && n.NomCode <= 306) // Fixed property name from 'ID' to 'NomCode'
+                .OrderBy(n => n.Description)
+                .ToListAsync();
+
+            ViewData["EmploymentTypes"] = new SelectList(employmentTypes, "NomCode", "Description"); // Updated to match the correct property
         }
     }
 }

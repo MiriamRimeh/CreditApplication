@@ -38,7 +38,6 @@ namespace CreditApplication.Pages
             if (existing != null)
                 ClientFinancial = existing;
 
-            // 2) След като първата заявка е приключила, зареждаме типовете заетост
             var nomList = await _context.Nomenclatures
                 .AsNoTracking()
                 .Where(n => n.NomCode >= 301 && n.NomCode <= 306)

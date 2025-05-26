@@ -40,10 +40,9 @@ namespace CreditApplication.Pages.Credits
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
 
             if (Credit.CreditAmount < 300 || Credit.CreditAmount > 5000)
             {
@@ -51,6 +50,7 @@ namespace CreditApplication.Pages.Credits
                     "Credit.CreditAmount",
                     "Сумата на кредита трябва да бъде между 300 лв и 5000 лв."
                 );
+                return Page();
             }
             if (Credit.CreditPeriod < 5 || Credit.CreditPeriod > 24)
             {
@@ -58,14 +58,8 @@ namespace CreditApplication.Pages.Credits
                     "Credit.CreditPeriod",
                     "Периодът на кредита трябва да е между 5 и 24 месеца."
                 );
-            }
-
-
-            if (!ModelState.IsValid)
-            {
                 return Page();
             }
-
 
             _context.Attach(Credit).State = EntityState.Modified;
 

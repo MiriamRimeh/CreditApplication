@@ -1,5 +1,6 @@
 using CreditApplication.Data;
 using CreditApplication.Models;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,9 +15,9 @@ namespace CreditApplication.Pages.Accounts
         public ProfileModel(CreditApplicationDbContext context) => _context = context;
 
         public Models.Account Account { get; set; }
-        public Client? Client { get; set; }
-        public List<ClientAddress> Addresses { get; set; }
-        public List<ClientFinancial> Financials { get; set; }
+        public Client Client { get; set; }
+        public ClientAddress Address { get; set; }
+        public ClientFinancial Financials { get; set; }
 
         public List<Credit> PendingCredits { get; set; }
         public List<Credit> ActiveCredits { get; set; }
@@ -37,26 +38,28 @@ namespace CreditApplication.Pages.Accounts
             if (Account?.ClientID == null)
                 return RedirectToPage("/Index");
 
-            // Зареждаме профилните данни
             Client = await _context.Clients
                                  .AsNoTracking()
                                  .FirstOrDefaultAsync(c => c.ID == Account.ClientID.Value);
-            Addresses = await _context.ClientAddresses
-                                .AsNoTracking()
-                                .Where(a => a.ClientID == Account.ClientID.Value)
-                                .ToListAsync();
+
+           
+            Address = await _context.ClientAddresses
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.ClientID == Account.ClientID.Value)
+                ?? new ClientAddress();
+
             Financials = await _context.ClientFinancials
-                                 .Include(f => f.EmploymentTypeNomenclature)
-                                 .AsNoTracking()
-                                 .Where(f => f.ClientID == Account.ClientID.Value)
-                                 .ToListAsync();
+                                .Include(f => f.EmploymentTypeNomenclature)
+                                .AsNoTracking()
+                                .FirstOrDefaultAsync(f => f.ClientID == Account.ClientID.Value) ?? new ClientFinancial();
+
+
 
             var creditsQuery = _context.Credits
                 .Where(c => c.ClientID == Account.ClientID.Value)
                 .Include(c => c.StatusNavigation)
                 .AsNoTracking();
 
-            // Филтрираме по кодове:
             PendingCredits = await creditsQuery
                 .Where(c => c.StatusNavigation != null && c.StatusNavigation.NomCode == 101) // Очакващ решение
                 .ToListAsync();

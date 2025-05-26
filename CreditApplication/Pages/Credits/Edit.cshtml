@@ -20,10 +20,9 @@
 
                         <input type="hidden" asp-for="Credit.ID" />
 
-                        <!-- Select existing client by filtered list -->
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
-                            <label asp-for="Credit.ClientID" class="control-label"></label>
+                            <label asp-for="Credit.ClientID" class="control-label">ЕГН на клиент</label>
                             <select asp-for="Credit.ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
                             <span asp-validation-for="Credit.ClientID" class="text-danger"></span>
                         </div>
@@ -43,8 +42,8 @@
 
 
                         <div class="form-group col-12 text-center mt-4">
-                            <input type="submit" value="Запази" class="btn btn-primary btn-lg px-5" />
-                            <a asp-page="./Index" class="btn btn-dark btn-lg px-4 ms-2">Назад</a>
+                            <input type="submit" value="Запази" class="btn btn-primary px-5" />
+                            <a asp-page="./Index" class="btn btn-dark px-4 ms-2">Назад</a>
                         </div>
                     </form>
                 </div>
