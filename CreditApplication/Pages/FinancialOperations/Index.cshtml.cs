@@ -130,6 +130,48 @@ namespace CreditApplication.Pages.FinancialOperations
             var originalOp = await _context.FinancialOperations.FindAsync(id);
             if (originalOp == null) return NotFound();
 
+            bool alreadyReversed = await _context.FinancialOperations
+                                                 .AnyAsync(f => f.OperationType == 203 && f.RepaymentPlanID == originalOp.ID);
+            if (alreadyReversed)
+            {
+                StatusMessage = "Тази операция вече е сторнирана и не може да се сторнира повторно.";
+                return RedirectToPage();
+            }
+
+            if (originalOp.OperationType == 201)
+            {
+                if (!User.IsInRole("Admin"))
+                {
+                    StatusMessage = "Нямате права да сторнирате усвояване на кредит.";
+                    return RedirectToPage();
+                }
+
+                bool hasInstallments = await _context.FinancialOperations
+                    .AnyAsync(f => f.CreditID == originalOp.CreditID && f.OperationType == 202);
+                if (hasInstallments)
+                {
+                    StatusMessage = "Не може да сторнирате усвояване, тъй като има платени вноски по кредита.";
+                    return RedirectToPage();
+                }
+
+                int nonStornoCount = await _context.FinancialOperations
+                    .CountAsync(f => f.CreditID == originalOp.CreditID && f.OperationType != 203);
+                if (nonStornoCount == 1)
+                {
+                    var credit = await _context.Credits.FindAsync(originalOp.CreditID);
+                    if (credit != null)
+                    {
+                        credit.Status = 101;                          
+                        credit.CreditBeginDate = null;                
+                        _context.Credits.Update(credit);
+                    }
+
+                    var plans = _context.RepaymentPlans
+                        .Where(rp => rp.CreditID == originalOp.CreditID);
+                    _context.RepaymentPlans.RemoveRange(plans);
+                }
+            }
+
             var stornoOp = new FinancialOperation
             {
                 CreditID = originalOp.CreditID,
