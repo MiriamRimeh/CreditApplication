@@ -60,6 +60,18 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"y07j72pejw"},{"Name":"integrity","Value":"sha256-UmlJi6AhTV819Vkxbq17SWvgtmNXenG9xCPT9m8Whuk="},{"Name":"label","Value":"_content/CreditApplication/images/homePage.jpg"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"216369"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022UmlJi6AhTV819Vkxbq17SWvgtmNXenG9xCPT9m8Whuk=\u0022"},{"Name":"Last-Modified","Value":"Sat, 24 May 2025 17:04:30 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/CreditApplication/js/calculator.i67swbir7o.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\calculator.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"i67swbir7o"},{"Name":"integrity","Value":"sha256-Wh8Uk7vsaJIsresL5wbMWKM959jHB\u002Br6ByJavHDbHXU="},{"Name":"label","Value":"_content/CreditApplication/js/calculator.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1456"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022Wh8Uk7vsaJIsresL5wbMWKM959jHB\u002Br6ByJavHDbHXU=\u0022"},{"Name":"Last-Modified","Value":"Mon, 26 May 2025 17:51:28 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/CreditApplication/js/calculator.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\calculator.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Wh8Uk7vsaJIsresL5wbMWKM959jHB\u002Br6ByJavHDbHXU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1456"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022Wh8Uk7vsaJIsresL5wbMWKM959jHB\u002Br6ByJavHDbHXU=\u0022"},{"Name":"Last-Modified","Value":"Mon, 26 May 2025 17:51:28 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/CreditApplication/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

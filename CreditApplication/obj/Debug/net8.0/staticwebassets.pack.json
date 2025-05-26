@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\images\\homePage.jpg"
     },
     {
+      "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\calculator.js",
+      "PackagePath": "staticwebassets\\js\\calculator.js"
+    },
+    {
       "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

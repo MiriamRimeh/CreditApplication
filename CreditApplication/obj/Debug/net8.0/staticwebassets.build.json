@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "U7wDnx8iewaizK1vYEQpTwSh2j7SF72Vzz/B7SyB8dw=",
+  "Hash": "RjhigQIlkGM3qCu/yX/o7JrMzlkz1fIABgipkNC0xKA=",
   "Source": "CreditApplication",
   "BasePath": "_content/CreditApplication",
   "Mode": "Default",
@@ -141,6 +141,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\homePage.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\calculator.js",
+      "SourceId": "CreditApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\",
+      "BasePath": "_content/CreditApplication",
+      "RelativePath": "js/calculator#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "i67swbir7o",
+      "Integrity": "Wh8Uk7vsaJIsresL5wbMWKM959jHB+r6ByJavHDbHXU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\calculator.js"
     },
     {
       "Identity": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\site.js",
@@ -1851,6 +1872,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-UmlJi6AhTV819Vkxbq17SWvgtmNXenG9xCPT9m8Whuk="
+        }
+      ]
+    },
+    {
+      "Route": "js/calculator.i67swbir7o.js",
+      "AssetFile": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\calculator.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1456"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Wh8Uk7vsaJIsresL5wbMWKM959jHB+r6ByJavHDbHXU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 17:51:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "i67swbir7o"
+        },
+        {
+          "Name": "label",
+          "Value": "js/calculator.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wh8Uk7vsaJIsresL5wbMWKM959jHB+r6ByJavHDbHXU="
+        }
+      ]
+    },
+    {
+      "Route": "js/calculator.js",
+      "AssetFile": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\calculator.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1456"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Wh8Uk7vsaJIsresL5wbMWKM959jHB+r6ByJavHDbHXU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 May 2025 17:51:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wh8Uk7vsaJIsresL5wbMWKM959jHB+r6ByJavHDbHXU="
         }
       ]
     },

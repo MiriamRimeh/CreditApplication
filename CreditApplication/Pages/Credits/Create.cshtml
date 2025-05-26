@@ -5,56 +5,48 @@
     ViewData["Title"] = "Create Credit";
 }
 
-<h1>Създаване на кредит</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="mb-0">Данни за кредит</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="row g-3 needs-validation">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group col-12">
+                            <label for="searchEGN">Търсене по ЕГН на клиента:</label>
+                            <input type="text" id="searchEGN" class="form-control" placeholder="Въведете ЕГН..." />
+                        </div>
 
-<h4>Данни за кредит</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Credit.ClientID" class="control-label">Изберете клиент:</label>
+                            <select asp-for="Credit.ClientID" id="ClientSelect" class="form-control" asp-items="Model.ClientList"  required>
+                                <option value="">-- Изберете --</option>
+                            </select>
+                            <span asp-validation-for="Credit.ClientID" class="text-danger"></span>
+                        </div>
 
-            <!-- Search by EGN -->
-            <div class="form-group">
-                <label for="searchEGN">Търсене по ЕГН на клиента:</label>
-                <input type="text" id="searchEGN" class="form-control" placeholder="Въведете ЕГН..." />
-            </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Credit.CreditAmount" class="control-label">Сума на кредит:</label>
+                            <input asp-for="Credit.CreditAmount" type="number" class="form-control" id="amount" min="300" max="5000" step="100" required />
+                            <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
+                        </div>
 
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Credit.ClientID" class="control-label">Изберете клиент:</label>
-                <select asp-for="Credit.ClientID" id="ClientSelect" class="form-control" asp-items="Model.ClientList" required>
-                    <option value="">-- Изберете --</option>
-                </select>
-                <span asp-validation-for="Credit.ClientID" class="text-danger"></span>
-            </div>
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита (месеци):</label>
+                            <input asp-for="Credit.CreditPeriod" type="number" class="form-control" id="period" min="5" max="24" step="1" required />
+                            <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>
+                        </div>
 
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Credit.CreditAmount" class="control-label">Сума на кредит:</label>
-                <input asp-for="Credit.CreditAmount" class="form-control" required />
-                <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита (месеци):</label>
-                <input asp-for="Credit.CreditPeriod" class="form-control" required />
-                <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Credit.TotalCreditAmount" class="control-label">Общо дължимо в края на периода:</label>
-                <input asp-for="Credit.TotalCreditAmount" class="form-control" readonly />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Credit.MonthlyInstallment" class="control-label">Месечна вноска:</label>
-                <input asp-for="Credit.MonthlyInstallment" class="form-control" readonly />
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Създай" class="btn btn-primary" />
-            </div>
+                        <div class="col-12 text-center mt-4">
+                            <input type="submit" value="Създай" class="btn btn-primary float-md-end" />
+                            <a asp-page="./Index" class="btn btn-outline-dark float-md-start">Назад</a>
+                        </div>
         </form>
     </div>
 </div>
@@ -64,7 +56,6 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
-        // Filter client options by EGN
         document.getElementById('searchEGN').addEventListener('input', function() {
             var filter = this.value.toLowerCase();
             var options = document.getElementById('ClientSelect').options;
@@ -74,33 +65,21 @@
             }
         });
 
-        (() => {
-             const amountInput = document.getElementById('Credit_CreditAmount');
-             const periodInput = document.getElementById('Credit_CreditPeriod');
-             const monthlyLabel = document.getElementById('Credit_MonthlyInstallment');
-             const totalLabel = document.getElementById('Credit_TotalCreditAmount');
-             const interestRate = 0.40;
-
-             function recalc() {
-                 const amount = parseFloat(amountInput.value) || 0;
-                 const months = parseInt(periodInput.value)   || 0;
-
-                 if (amount < 300 || amount > 5000 || months < 5 || months > 24 ) {
-                     totalLabel.value    = '';
-                     monthlyLabel.value = '';
-                     return;
-                 }
-
-                 const monthlyRate = interestRate / 12;
-                 const monthly = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-                 const total = monthly * months;
-                 monthlyLabel.value = monthly.toFixed(2);
-                 totalLabel.value = total.toFixed(2);
-             }
-
-             recalc();
-             amountInput.addEventListener('input',  recalc);
-             periodInput.addEventListener('input',  recalc);
-         })();
+        (function () {
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+        });
+    })();
     </script>
+
+    <script src="~/js/calculator.js"></script>
+    <script>loanCalculator.init('#amount', '#period');</script>
 }
