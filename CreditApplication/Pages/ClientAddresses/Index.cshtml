@@ -22,6 +22,10 @@
                     <label asp-for="SearchClientId" class="form-label">Търсене по клиент</label>
                     <input asp-for="SearchClientId" type="number" class="form-control" placeholder="Въведете номер..." />
                 </div>
+                <div class="col-md-3">
+                    <label asp-for="SearchEGN" class="form-label">ЕГН на клиент</label>
+                    <input asp-for="SearchEGN" class="form-control" placeholder="Въведете ЕГН..." />
+                </div>
                 <div class="col-sm-3">
                     <label asp-for="SearchCity" class="form-label">Търсене по град</label>
                     <input asp-for="SearchCity" class="form-control" placeholder="Въведете град..." />
@@ -30,7 +34,7 @@
                     <label asp-for="SearchPostalCode" class="form-label">Търсене по пощенски код</label>
                     <input asp-for="SearchPostalCode" class="form-control" placeholder="Въведете код..." />
                 </div>
-                <div class="col-sm-3 d-grid">
+                <div class="col-sm-2 d-grid">
                     <button type="submit" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
@@ -78,6 +82,7 @@
                             }
                         </a>
                     </th>
+                    <th>ЕГН</th>
                     <th>
                         <a asp-route-SortOrder="@Model.CitySort"
                            asp-route-SearchClientId="@Model.SearchClientId"
@@ -154,6 +159,7 @@
                 {
                     <tr>
                         <td>@item.ClientID</td>
+                        <td>@item.Client?.EGN</td>
                         <td>@item.City</td>
                         <td>@item.StreetNeighbourhood</td>
                         <td>@item.Number</td>

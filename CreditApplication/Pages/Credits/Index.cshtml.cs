@@ -29,7 +29,14 @@ namespace CreditApplication.Pages.Credits
         public int? SearchClientId { get; set; }
 
         [BindProperty(SupportsGet = true)]
+        public int? CreditId { get; set; }
+
+        [BindProperty(SupportsGet = true)]
         public string SearchStatus { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchEGN { get; set; }
+
 
 
         [BindProperty(SupportsGet = true)]
@@ -56,12 +63,20 @@ namespace CreditApplication.Pages.Credits
 
             var query = _context.Credits
                             .Include(c => c.StatusNavigation)
+                            .Include(c => c.Client)
                             .AsQueryable();
+
+            if (CreditId.HasValue)
+                query = query.Where(f => f.ID == CreditId.Value);
 
             if (SearchClientId.HasValue)
             {
                 query = query.Where(c => c.ClientID == SearchClientId.Value);
             }
+
+            if (!string.IsNullOrWhiteSpace(SearchEGN))
+                query = query.Where(c => c.Client != null
+                                      && EF.Functions.Like(c.Client.EGN, $"%{SearchEGN}%"));
 
             if (!string.IsNullOrWhiteSpace(SearchStatus))
             {

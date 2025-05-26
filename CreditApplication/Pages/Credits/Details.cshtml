@@ -64,12 +64,12 @@
                 @* Само при "Активен" (102) *@
                 else if (Model.Credit.Status == 102)
                 {
-                    <form method="post" asp-page-handler="Finish" asp-route-id="@Model.Credit.ID">
+                <form method="post" asp-page-handler="Finish" asp-route-id="@Model.Credit.ID" class="d-inline">
                         <button type="submit" class="btn btn-danger btn-sm me-2">Приключи</button>
                         <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@Model.Credit.ID" class="btn btn-secondary btn-sm me-2">План</a>
                     </form>
                 }
-
+            <span class="me-2 text-secondary">|</span>
             <a asp-page="./Edit" asp-route-id="@Model.Credit.ID" class="btn btn-primary btn-sm me-2">Редактирай</a>
             <a asp-page="./Index" class="btn btn-dark btn-sm">Назад</a>
         </div>

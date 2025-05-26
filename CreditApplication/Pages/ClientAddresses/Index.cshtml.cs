@@ -25,6 +25,10 @@ namespace CreditApplication.Pages.ClientAddresses
 
         [BindProperty(SupportsGet = true)]
         public int? SearchClientId { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchEGN { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string SearchCity { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -54,6 +58,10 @@ namespace CreditApplication.Pages.ClientAddresses
 
             if (SearchClientId.HasValue)
                 query = query.Where(ca => ca.ClientID == SearchClientId.Value);
+
+            if (!string.IsNullOrWhiteSpace(SearchEGN))
+                query = query.Where(c => c.Client != null
+                                      && EF.Functions.Like(c.Client.EGN, $"%{SearchEGN}%"));
 
             if (!string.IsNullOrEmpty(SearchCity))
                 query = query.Where(ca => EF.Functions.Like(ca.City, $"%{SearchCity}%"));

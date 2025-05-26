@@ -26,6 +26,10 @@ namespace CreditApplication.Pages.ClientFinancials
 
         [BindProperty(SupportsGet = true)]
         public int? SearchClientId { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchEGN { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public decimal? SearchMonthlyIncome { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -58,6 +62,9 @@ namespace CreditApplication.Pages.ClientFinancials
 
             if (SearchClientId.HasValue)
                 query = query.Where(f => f.ClientID == SearchClientId.Value);
+            if (!string.IsNullOrWhiteSpace(SearchEGN))
+                query = query.Where(c => c.Client != null
+                                      && EF.Functions.Like(c.Client.EGN, $"%{SearchEGN}%"));
             if (SearchMonthlyIncome.HasValue)
                 query = query.Where(f => f.MontlyIncome == SearchMonthlyIncome.Value);
             if (SearchMonthlyExpenses.HasValue)
