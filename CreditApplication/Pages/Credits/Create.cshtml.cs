@@ -25,42 +25,45 @@ namespace CreditApplication.Pages.Credits
 
         public SelectList ClientList { get; set; } = default!;
 
+        private void PopulateClients()
+        {
+            ClientList = new SelectList(
+                _context.Clients
+                        .OrderBy(c => c.EGN)
+                        .Select(c => new { c.ID, c.EGN }),
+                "ID", "EGN");
+        }
+
         public IActionResult OnGet()
         {
-            // Използваме ЕГН като текст за избор
-            ClientList = new SelectList(
-                _context.Clients.OrderBy(c => c.EGN)
-                           .Select(c => new { c.ID, c.EGN }),
-                "ID", "EGN");
+            PopulateClients();
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-
-            if (ModelState.IsValid)
-            {
-                ClientList = new SelectList(
-                    _context.Clients.OrderBy(c => c.EGN)
-                               .Select(c => new { c.ID, c.EGN }),
-                    "ID", "EGN");
-                return Page();
-            }
-
+            PopulateClients();
 
             if (Credit.CreditAmount < 300 || Credit.CreditAmount > 5000)
             {
                 ModelState.AddModelError(
                     "Credit.CreditAmount",
-                    "Сумата на кредита трябва да бъде между 300 лв и 5000 лв."
-                );
+                    "Сумата на кредита трябва да бъде между 300 лв и 5000 лв.");
+                return Page();
             }
             if (Credit.CreditPeriod < 5 || Credit.CreditPeriod > 24)
             {
                 ModelState.AddModelError(
-                    "Credit.CreditPeriod",
-                    "Периодът на кредита трябва да е между 5 и 24 месеца."
-                );
+                   "Credit.CreditPeriod",
+                    "Периодът на кредита трябва да е между 5 и 24 месеца.");
+                return Page();
+            }
+            if (Credit.ClientID == 0)
+            {
+                ModelState.AddModelError(
+                    "Credit.ClientID",
+                    "Моля изберете клиент от списъка.");
+                return Page();
             }
 
             Credit.CreatedOn = DateTime.Now;
