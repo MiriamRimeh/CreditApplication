@@ -12,8 +12,8 @@ namespace CreditApplication.Models
         [BindProperty]
         public Client Client { get; set; }
 
-        [Required(ErrorMessage = "Желаната сума е задължителна.")]
-        [Range(300, 5000, ErrorMessage = "Желаната сума трябва да е между 300 и 5000 лв.")]
+        [Required(ErrorMessage = "Моля, въведете желаната сума.")]
+        [Range(300, 5000, ErrorMessage = "Сумата трябва да е между 300 и 5000 лв.")]
         public decimal CreditAmount { get; set; }
         public DateTime? CreditBeginDate { get; set; } 
         public DateTime? CreditEndDate { get; set; } 
@@ -31,8 +31,8 @@ namespace CreditApplication.Models
 
         public DateOnly? ActivationDate { get; set; }
 
-        [Required(ErrorMessage = "Периодът на кредита е задължителен.")]
-        [Range(5, 24, ErrorMessage = "Периодът трябва да е между 5 и 24 месеца.")]
+        [Required(ErrorMessage = "Моля, въведете периода на кредита.")]
+        [Range(5, 24, ErrorMessage = "Периодът трябва да бъде между 5 и 24 месеца.")]
         public int? CreditPeriod { get; set; } 
         public decimal? MonthlyInstallment { get; set; }
         public decimal? TotalCreditAmount { get; set; }
