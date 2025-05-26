@@ -21,6 +21,8 @@ namespace CreditApplication.Pages.Accounts
 
         public IList<CreditApplication.Models.Account> Account { get;set; } = default!;
 
+        public AccountRole? SearchAccountRole { get; set; }
+
         public async Task OnGetAsync()
         {
             Account = await _context.Accounts
