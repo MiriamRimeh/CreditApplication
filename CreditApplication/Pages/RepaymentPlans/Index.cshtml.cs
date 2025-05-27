@@ -81,7 +81,6 @@ namespace CreditApplication.Pages.RepaymentPlans
                                       && rp.PayedOnDate.Value.Date == d);
             }
 
-            // 4) Сортиране
             switch (SortOrder)
             {
                 case "credit_desc":
@@ -116,7 +115,6 @@ namespace CreditApplication.Pages.RepaymentPlans
                     break;
             }
 
-            // 5) Пагинация
             var count = await query.CountAsync();
             TotalPages = (int)Math.Ceiling(count / (double)PageSize);
 
@@ -133,7 +131,6 @@ namespace CreditApplication.Pages.RepaymentPlans
             if (rp == null)
                 return NotFound();
 
-            // Update the payment date
             rp.PayedOnDate = DateTime.Today;
 
             var finOp = new FinancialOperation

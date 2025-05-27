@@ -87,11 +87,11 @@ else
         {
             <form method="post" asp-page-handler="ExportAllToExcel" asp-antiforgery="true">
                 <button type="submit" class="btn btn-success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filetype-xlsx" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM7.86 14.841a1.13 1.13 0 0 0 .401.823q.195.162.479.252.284.091.665.091.507 0 .858-.158.355-.158.54-.44a1.17 1.17 0 0 0 .187-.656q0-.336-.135-.56a1 1 0 0 0-.375-.357 2 2 0 0 0-.565-.21l-.621-.144a1 1 0 0 1-.405-.176.37.37 0 0 1-.143-.299q0-.234.184-.384.188-.152.513-.152.214 0 .37.068a.6.6 0 0 1 .245.181.56.56 0 0 1 .12.258h.75a1.1 1.1 0 0 0-.199-.566 1.2 1.2 0 0 0-.5-.41 1.8 1.8 0 0 0-.78-.152q-.44 0-.777.15-.336.149-.527.421-.19.273-.19.639 0 .302.123.524t.351.367q.229.143.54.213l.618.144q.31.073.462.193a.39.39 0 0 1 .153.326.5.5 0 0 1-.085.29.56.56 0 0 1-.255.193q-.168.07-.413.07-.176 0-.32-.04a.8.8 0 0 1-.249-.115.58.58 0 0 1-.255-.384zm-3.726-2.909h.893l-1.274 2.007 1.254 1.992h-.908l-.85-1.415h-.035l-.853 1.415H1.5l1.24-2.016-1.228-1.983h.931l.832 1.438h.036zm1.923 3.325h1.697v.674H5.266v-3.999h.791zm7.636-3.325h.893l-1.274 2.007 1.254 1.992h-.908l-.85-1.415h-.035l-.853 1.415h-.861l1.24-2.016-1.228-1.983h.931l.832 1.438h.036z" />
-                </svg>
-            </button>
-        </form>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filetype-xlsx" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM7.86 14.841a1.13 1.13 0 0 0 .401.823q.195.162.479.252.284.091.665.091.507 0 .858-.158.355-.158.54-.44a1.17 1.17 0 0 0 .187-.656q0-.336-.135-.56a1 1 0 0 0-.375-.357 2 2 0 0 0-.565-.21l-.621-.144a1 1 0 0 1-.405-.176.37.37 0 0 1-.143-.299q0-.234.184-.384.188-.152.513-.152.214 0 .37.068a.6.6 0 0 1 .245.181.56.56 0 0 1 .12.258h.75a1.1 1.1 0 0 0-.199-.566 1.2 1.2 0 0 0-.5-.41 1.8 1.8 0 0 0-.78-.152q-.44 0-.777.15-.336.149-.527.421-.19.273-.19.639 0 .302.123.524t.351.367q.229.143.54.213l.618.144q.31.073.462.193a.39.39 0 0 1 .153.326.5.5 0 0 1-.085.29.56.56 0 0 1-.255.193q-.168.07-.413.07-.176 0-.32-.04a.8.8 0 0 1-.249-.115.58.58 0 0 1-.255-.384zm-3.726-2.909h.893l-1.274 2.007 1.254 1.992h-.908l-.85-1.415h-.035l-.853 1.415H1.5l1.24-2.016-1.228-1.983h.931l.832 1.438h.036zm1.923 3.325h1.697v.674H5.266v-3.999h.791zm7.636-3.325h.893l-1.274 2.007 1.254 1.992h-.908l-.85-1.415h-.035l-.853 1.415h-.861l1.24-2.016-1.228-1.983h.931l.832 1.438h.036z" />
+                    </svg>
+                </button>
+            </form>
         }
     </div>
 
@@ -101,12 +101,12 @@ else
                 <tr>
                     <th scope="col">
                         <a asp-page="./Index"
-                           asp-route-sortOrder="@Model.CreditIDSort"
-                           asp-route-CreditId="@Model.CreditId"
-                           asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-PageIndex="1"
-                           class="text-decoration-none">
+                        asp-route-sortOrder="@Model.CreditIDSort"
+                        asp-route-CreditId="@Model.CreditId"
+                        asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-PageIndex="1"
+                        class="text-decoration-none">
                             Кредит №
                         </a>
 
@@ -114,12 +114,12 @@ else
                     <th scope="col">
 
                         <a asp-page="./Index"
-                           asp-route-sortOrder="@Model.InstallmentNumberSort"
-                           asp-route-CreditId="@Model.CreditId"
-                           asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-PageIndex="1"
-                           class="text-decoration-none">
+                        asp-route-sortOrder="@Model.InstallmentNumberSort"
+                        asp-route-CreditId="@Model.CreditId"
+                        asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-PageIndex="1"
+                        class="text-decoration-none">
 
                             № вноска
                         </a>
@@ -127,24 +127,24 @@ else
                     <th scope="col">
 
                         <a asp-page="./Index"
-                           asp-route-sortOrder="@Model.InstallmentDateSort"
-                           asp-route-CreditId="@Model.CreditId"
-                           asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-PageIndex="1"
-                           class="text-decoration-none">
+                        asp-route-sortOrder="@Model.InstallmentDateSort"
+                        asp-route-CreditId="@Model.CreditId"
+                        asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-PageIndex="1"
+                        class="text-decoration-none">
 
                             Дата на вноска
                         </a>
                     </th>
                     <th scope="col">
                         <a asp-page="./Index"
-                           asp-route-sortOrder="@Model.AmountSort"
-                           asp-route-CreditId="@Model.CreditId"
-                           asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-PageIndex="1"
-                           class="text-decoration-none">
+                        asp-route-sortOrder="@Model.AmountSort"
+                        asp-route-CreditId="@Model.CreditId"
+                        asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-PageIndex="1"
+                        class="text-decoration-none">
 
                             Сума на вноска
                         </a>
@@ -153,12 +153,12 @@ else
                     <th scope="col">Лихва</th>
                     <th scope="col">
                         <a asp-page="./Index"
-                           asp-route-sortOrder="@Model.PayedOnDateSort"
-                           asp-route-CreditId="@Model.CreditId"
-                           asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
-                           asp-route-PageIndex="1"
-                           class="text-decoration-none">
+                        asp-route-sortOrder="@Model.PayedOnDateSort"
+                        asp-route-CreditId="@Model.CreditId"
+                        asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                        asp-route-PageIndex="1"
+                        class="text-decoration-none">
                             Платено на
                         </a>
                     </th>
@@ -187,7 +187,17 @@ else
                             }
                             else
                             {
-                                <button class="btn btn-primary btn-sm" onclick="openPaymentModal(@rp.ID)">Плати вноска</button>
+                               @*  <button class="btn btn-primary btn-sm" onclick="openPaymentModal(@rp.ID)">Плати вноска</button> *@
+                                @if (User.IsInRole("Client"))
+                                {
+                                    <button class="btn btn-primary btn-sm" type="button" onclick="openPaymentModal(@rp.ID)">Плати вноска</button>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-page-handler="Pay" asp-route-id="@rp.ID" class="d-inline">
+                                        <button type="submit" class="btn btn-primary btn-sm"> Плати вноска </button>
+                                    </form>
+                                }
                             }
                         </td>
                     </tr>
@@ -199,94 +209,97 @@ else
 
 @if (Model.TotalPages > 1)
 {
-<nav aria-label="Page navigation" class="mt-4">
-    <ul class="pagination justify-content-end">
-        <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
-            <a class="page-link"
-               asp-page="./Index"
-               asp-route-PageIndex="@(Model.PageIndex - 1)"
-               asp-route-sortOrder="@Model.SortOrder"
-               asp-route-CreditId="@Model.CreditId"
-               asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-               asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))">
-                Предишна
-            </a>
-        </li>
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-end">
+            <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
                 <a class="page-link"
-                   asp-page="./Index"
-                   asp-route-PageIndex="@i"
-                   asp-route-sortOrder="@Model.SortOrder"
-                   asp-route-CreditId="@Model.CreditId"
-                   asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-                   asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))">
-                    @i
+                asp-page="./Index"
+                asp-route-PageIndex="@(Model.PageIndex - 1)"
+                asp-route-sortOrder="@Model.SortOrder"
+                asp-route-CreditId="@Model.CreditId"
+                asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))">
+                    Предишна
                 </a>
             </li>
-        }
-        <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
-            <a class="page-link"
-               asp-page="./Index"
-               asp-route-PageIndex="@(Model.PageIndex + 1)"
-               asp-route-sortOrder="@Model.SortOrder"
-               asp-route-CreditId="@Model.CreditId"
-               asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
-               asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))">
-                Следваща
-            </a>
-        </li>
-    </ul>
-</nav>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link"
+                    asp-page="./Index"
+                    asp-route-PageIndex="@i"
+                    asp-route-sortOrder="@Model.SortOrder"
+                    asp-route-CreditId="@Model.CreditId"
+                    asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                    asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))">
+                        @i
+                    </a>
+                </li>
+            }
+            <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+                <a class="page-link"
+                asp-page="./Index"
+                asp-route-PageIndex="@(Model.PageIndex + 1)"
+                asp-route-sortOrder="@Model.SortOrder"
+                asp-route-CreditId="@Model.CreditId"
+                asp-route-SearchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))">
+                    Следваща
+                </a>
+            </li>
+        </ul>
+    </nav>
 }
 
-<form method="post" asp-page-handler="Pay" id="hiddenPayForm">
-    <input type="hidden" name="id" id="paymentInstallmentId" />
-    @if (Model.CreditId.HasValue)
-    {
-        <input type="hidden" name="CreditId" value="@Model.CreditId" />
-    }
-</form>
+@if (User.IsInRole("Client"))
+{
+    <form method="post" asp-page-handler="Pay" id="hiddenPayForm">
+        <input type="hidden" name="id" id="paymentInstallmentId" />
+        @if (Model.CreditId.HasValue)
+        {
+            <input type="hidden" name="CreditId" value="@Model.CreditId" />
+        }
+    </form>
 
-<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Форма за плащане</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
-            </div>
-            <div class="modal-body">
-                <form id="uiPaymentForm">
-                    <div class="mb-3">
-                        <label for="cardholderName" class="form-label">Име на картодържател</label>
-                        <input type="text" class="form-control text-uppercase" id="cardholderName" placeholder="JOHN DOE" required />
-                        <div class="invalid-feedback">Моля въведете име на картодържателя</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cardNumber" class="form-label">Номер на карта</label>
-                        <input type="text" class="form-control" id="cardNumber" placeholder="0000 0000 0000 0000" required maxlength="19" />
-                        <div class="invalid-feedback">Невалиден номер на карта</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="expiryDate" class="form-label">Валидност</label>
-                        <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" pattern="^(0[1-9]|1[0-2])\/\d{2}$" required />
-                        <div class="invalid-feedback">Моля въведете валидна дата във формат MM/YY</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cvv" class="form-label">CVV2</label>
-                        <input type="password" class="form-control" id="cvv" maxlength="4" pattern="\d{3,4}" required />
-                        <div class="invalid-feedback">Моля въведете валиден CVV код</div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отказ</button>
-                <button type="button" class="btn btn-primary" onclick="confirmPayment()">Потвърди</button>
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Форма за плащане</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="uiPaymentForm">
+                        <div class="mb-3">
+                            <label for="cardholderName" class="form-label">Име на картодържател</label>
+                            <input type="text" class="form-control text-uppercase" id="cardholderName" placeholder="JOHN DOE" required />
+                            <div class="invalid-feedback">Моля въведете име на картодържателя</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Номер на карта</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="0000 0000 0000 0000" required maxlength="19" />
+                            <div class="invalid-feedback">Невалиден номер на карта</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="expiryDate" class="form-label">Валидност</label>
+                            <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" pattern="^(0[1-9]|1[0-2])\/\d{2}$" required />
+                            <div class="invalid-feedback">Моля въведете валидна дата във формат MM/YY</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cvv" class="form-label">CVV2</label>
+                            <input type="password" class="form-control" id="cvv" maxlength="4" pattern="\d{3,4}" required />
+                            <div class="invalid-feedback">Моля въведете валиден CVV код</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отказ</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmPayment()">Потвърди</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 
 @section Scripts {
     <script>
@@ -297,6 +310,7 @@ else
             const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
             modal.show();
         }
+
 
         function luhnCheck(cardNumber) {
             const digits = cardNumber.replace(/\D/g, '');
@@ -321,7 +335,6 @@ else
             const expiry = document.getElementById('expiryDate');
             const cvv = document.getElementById('cvv');
 
-            // Cardholder Name
             if (!name.value.trim()) {
                 name.classList.add("is-invalid");
                 isValid = false;
@@ -329,7 +342,6 @@ else
                 name.classList.remove("is-invalid");
             }
 
-            // Card Number (with Luhn check)
             if (!cardNumber.value.trim() || !luhnCheck(cardNumber.value)) {
                 cardNumber.classList.add("is-invalid");
                 isValid = false;
@@ -337,7 +349,6 @@ else
                 cardNumber.classList.remove("is-invalid");
             }
 
-            // Expiry Date
             const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
             if (!expiryRegex.test(expiry.value.trim())) {
                 expiry.classList.add("is-invalid");
@@ -346,7 +357,6 @@ else
                 expiry.classList.remove("is-invalid");
             }
 
-            // CVV
             const cvvRegex = /^\d{3,4}$/;
             if (!cvvRegex.test(cvv.value.trim())) {
                 cvv.classList.add("is-invalid");
@@ -359,7 +369,6 @@ else
                 return;
             }
 
-            // Everything is valid - proceed with post
             document.getElementById('paymentInstallmentId').value = selectedInstallmentId;
             document.getElementById('hiddenPayForm').submit();
         }
