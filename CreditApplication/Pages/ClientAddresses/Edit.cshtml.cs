@@ -63,6 +63,8 @@ namespace CreditApplication.Pages.ClientAddresses
                     .CurrentValues
                     .SetValues(ClientAddress);
 
+            _context.Entry(addressToUpdate).Property(a => a.CreatedOn).IsModified = false;
+
 
             try
             {

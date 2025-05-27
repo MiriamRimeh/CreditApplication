@@ -45,14 +45,20 @@ namespace CreditApplication.Pages.ClientFinancials
         
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                PopulateClients();
-                await LoadEmploymentTypesAsync();
-                return Page();
-            }
 
-            _context.Attach(ClientFinancial).State = EntityState.Modified;
+            //if (!ModelState.IsValid)
+            //{
+            //    PopulateClients();
+            //    await LoadEmploymentTypesAsync();
+            //    return Page();
+            //}
+
+
+            _context.Attach(ClientFinancial);
+            var entry = _context.Entry(ClientFinancial);
+            entry.State = EntityState.Modified;
+            entry.Property(c => c.CreatedOn).IsModified = false;
+
 
             try
             {

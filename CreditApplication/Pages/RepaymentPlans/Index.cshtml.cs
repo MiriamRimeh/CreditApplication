@@ -132,6 +132,7 @@ namespace CreditApplication.Pages.RepaymentPlans
                 return NotFound();
 
             rp.PayedOnDate = DateTime.Today;
+            rp.ModifiedOn = DateTime.Now;
 
             var finOp = new FinancialOperation
             {

@@ -59,12 +59,17 @@ namespace CreditApplication.Pages.Clients
                 );
             }
 
+
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Client).State = EntityState.Modified;
+            _context.Attach(Client);
+            var entry = _context.Entry(Client);
+            entry.State = EntityState.Modified;
+            entry.Property(c => c.CreatedOn).IsModified = false;
 
             try
             {

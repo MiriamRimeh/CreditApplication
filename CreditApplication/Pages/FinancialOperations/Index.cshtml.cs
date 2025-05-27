@@ -51,7 +51,7 @@ namespace CreditApplication.Pages.FinancialOperations
 
         public IList<FinancialOperation> FinancialOperation { get; set; } = default!;
 
-
+        public HashSet<int> ReversedOperationIds { get; set; } = new();
         public async Task OnGetAsync()
         {
             SortId = String.IsNullOrEmpty(SortOrder) ? "SortId" : "";
@@ -123,6 +123,11 @@ namespace CreditApplication.Pages.FinancialOperations
                 .Skip((PageIndex - 1) * PageSize)
                 .Take(PageSize)
                 .ToListAsync();
+
+            ReversedOperationIds = FinancialOperation
+            .Where(f => f.OperationType == 203 && f.RepaymentPlanID.HasValue)
+            .Select(f => f.RepaymentPlanID!.Value)
+            .ToHashSet();
         }
 
         public async Task<IActionResult> OnPostStornoAsync(int id)
@@ -148,6 +153,7 @@ namespace CreditApplication.Pages.FinancialOperations
 
                 bool hasInstallments = await _context.FinancialOperations
                     .AnyAsync(f => f.CreditID == originalOp.CreditID && f.OperationType == 202);
+
                 if (hasInstallments)
                 {
                     StatusMessage = "Не може да сторнирате усвояване, тъй като има платени вноски по кредита.";
@@ -156,6 +162,7 @@ namespace CreditApplication.Pages.FinancialOperations
 
                 int nonStornoCount = await _context.FinancialOperations
                     .CountAsync(f => f.CreditID == originalOp.CreditID && f.OperationType != 203);
+
                 if (nonStornoCount == 1)
                 {
                     var credit = await _context.Credits.FindAsync(originalOp.CreditID);
@@ -188,6 +195,7 @@ namespace CreditApplication.Pages.FinancialOperations
                 if (rp != null)
                 {
                     rp.PayedOnDate = null;
+                    rp.ModifiedOn = DateTime.Now;
                     _context.RepaymentPlans.Update(rp);
                 }
             }
