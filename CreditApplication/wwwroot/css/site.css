@@ -31,46 +31,41 @@ body {
 }
 
 .btn-primary {
-    --bs-btn-color: #212529; /* Text color */
-    --bs-btn-bg: var(--bs-primary); /* Background color, uses your custom primary */
-    --bs-btn-border-color: var(--bs-primary); /* Border color */
+    --bs-btn-color: #212529; 
+    --bs-btn-bg: var(--bs-primary); 
+    --bs-btn-border-color: var(--bs-primary); 
 
-    --bs-btn-hover-color: #212529; /* Text color on hover */
-    --bs-btn-hover-bg: #E6B200; /* Slightly darker yellow for hover */
-    --bs-btn-hover-border-color: #E6B200; /* Border color on hover */
+    --bs-btn-hover-color: #212529; 
+    --bs-btn-hover-bg: #E6B200;
+    --bs-btn-hover-border-color: #E6B200;
 
-    --bs-btn-active-color: #212529; /* Text color when active */
-    --bs-btn-active-bg: #D9A800; /* Even darker yellow for active */
-    --bs-btn-active-border-color: #D9A800; /* Border color when active */
-
-    --bs-btn-disabled-color: #212529; /* Text color when disabled */
-    --bs-btn-disabled-bg: var(--bs-primary); /* Background color when disabled */
-    --bs-btn-disabled-border-color: var(--bs-primary); /* Border color when disabled */
-    /* For focus ring if Bootstrap uses a variable for it within btn-primary */
+    --bs-btn-active-color: #212529; 
+    --bs-btn-active-bg: #D9A800; 
+    --bs-btn-active-border-color: #D9A800;
+    --bs-btn-disabled-color: #212529; 
+    --bs-btn-disabled-bg: var(--bs-primary); 
+    --bs-btn-disabled-border-color: var(--bs-primary); 
     --bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
 }
 
 .text-primary {
-    color: var(--bs-primary) !important; /* Use !important for text utilities if needed, due to Bootstrap's !important */
+    color: var(--bs-primary) !important; 
 }
 
-/* For bg-primary */
 .bg-primary {
     background-color: var(--bs-primary) !important;
 }
 
-/* For border-primary */
 .border-primary {
     border-color: var(--bs-primary) !important;
 }
 
-/* For form-check-input:checked */
 .form-check-input:checked {
     background-color: var(--bs-primary);
     border-color: var(--bs-primary);
 }
 
-/* For active nav-links/tabs */
+
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
     background-color: var(--bs-primary);
@@ -82,7 +77,7 @@ body {
     border-color: var(--bs-primary); /* Only border, not background for tabs */
 }
 
-/* For alert-primary */
+
 .alert-primary {
     --bs-alert-color: var(--bs-primary-text-emphasis);
     --bs-alert-bg: var(--bs-primary-bg-subtle);
@@ -95,8 +90,47 @@ body {
     color: #212529;
 }
 
-.btn-secondary-miriam{
+.btn-secondary-miriam {
+    background-color: #2A444D;
+    color: #FEFEFE;
+}
 
+.btn-create-miriam {
+    background-color: #1C2F35;
+    color: #FEFEFE;
+}
+
+.alert-info-miriam {
+    background-color: #FFDE77;
+    color: #212529;
+}
+
+.pagination-miriam .page-link {
+    color: #212529; 
+    background-color: #FEFEFE; 
+    border: 1px solid #F9C101; 
+}
+
+
+.pagination-miriam .page-link:hover {
+    background-color: #F9C101; 
+    color: #212529;
+    border-color: #F9C101;
+}
+
+.pagination-miriam .page-item.active .page-link {
+    background-color: #F9C101;
+    color: #212529; 
+    border-color: #F9C101;
+}
+
+
+.pagination-miriam .page-item.disabled .page-link,
+.pagination-miriam .page-item.disabled .page-link:hover {
+    background-color: transparent;
+    color: #6c757d; 
+    border-color: #dee2e6;
+    cursor: not-allowed;
 }
 
 .text-primary-miriam {

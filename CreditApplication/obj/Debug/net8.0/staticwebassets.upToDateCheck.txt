@@ -3,7 +3,12 @@ wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\images\403.jpg
 wwwroot\images\404.jpg
+wwwroot\images\approaval_2.jpg
+wwwroot\images\easy_application.jpg
+wwwroot\images\fast_approaval.jpg
+wwwroot\images\flexible_conditions.jpg
 wwwroot\images\homePage.jpg
+wwwroot\images\logo_2.png
 wwwroot\js\calculator.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css

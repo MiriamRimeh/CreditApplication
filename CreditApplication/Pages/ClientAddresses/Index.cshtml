@@ -11,7 +11,7 @@
         @using Microsoft.AspNetCore.Identity
         @if (User.IsInRole("Admin"))
         {
-            <a asp-page="Create" class="btn btn-primary">Създай нов</a>
+            <a asp-page="Create" class="btn btn-create-miriam">Създай нов</a>
         }
     </div>
 
@@ -35,7 +35,7 @@
                     <input asp-for="SearchPostalCode" class="form-control" placeholder="Въведете код..." />
                 </div>
                 <div class="col-sm-2 d-grid">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary-miriam">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
@@ -66,7 +66,7 @@
                            asp-route-SearchClientId="@Model.SearchClientId"
                            asp-route-SearchCity="@Model.SearchCity"
                            asp-route-SearchPostalCode="@Model.SearchPostalCode"
-                           class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Клиент №
                             @if (String.IsNullOrEmpty(Model.SortOrder))
                             {
@@ -88,7 +88,7 @@
                            asp-route-SearchClientId="@Model.SearchClientId"
                            asp-route-SearchCity="@Model.SearchCity"
                            asp-route-SearchPostalCode="@Model.SearchPostalCode"
-                           class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Населено място
                             @if (Model.SortOrder == "City")
                             {
@@ -109,7 +109,7 @@
                            asp-route-SearchClientId="@Model.SearchClientId"
                            asp-route-SearchCity="@Model.SearchCity"
                            asp-route-SearchPostalCode="@Model.SearchPostalCode"
-                           class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Улица/Квартал
                             @if (Model.SortOrder == "Street")
                             {
@@ -133,7 +133,7 @@
                            asp-route-SearchClientId="@Model.SearchClientId"
                            asp-route-SearchCity="@Model.SearchCity"
                            asp-route-SearchPostalCode="@Model.SearchPostalCode"
-                           class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Пощенски код
                             @if (Model.SortOrder == "PostalCode")
                             {
@@ -196,7 +196,7 @@
 @if (Model.TotalPages > 1)
 {
     <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-end pagination-miriam">
             <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
                 <a class="page-link"
                    asp-route-PageIndex="@(Model.PageIndex - 1)"

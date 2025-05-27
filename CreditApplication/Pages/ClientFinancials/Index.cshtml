@@ -12,7 +12,7 @@
         @using Microsoft.AspNetCore.Identity
         @if (User.IsInRole("Admin"))
         {
-            <a asp-page="Create" class="btn btn-primary">Създай нов</a>
+            <a asp-page="Create" class="btn btn-create-miriam">Създай нов</a>
         }
     </div>
 <div class="card mb-4">
@@ -39,7 +39,7 @@
                 <input asp-for="SearchEmploymentType" class="form-control" placeholder="Въведете тип..." />
             </div>
             <div class="col-sm-2 d-grid">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary-miriam">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
@@ -71,16 +71,20 @@
                        asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
                        asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
                        asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
-                       class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                         Клиент №
                         @if (String.IsNullOrEmpty(Model.SortOrder))
                         {
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
-                        }
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                </svg>
+                            }
                         else if (Model.SortOrder == "clientid_desc")
                         {
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
-                        }
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                </svg>
+                            }
                     </a>
                 </th>
                 <th>ЕГН</th>
@@ -90,15 +94,19 @@
                            asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
                            asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
                            asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
-                           class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Доход
                             @if (Model.SortOrder == "monthlyincome")
                             {
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                </svg>
                             }
                             else if (Model.SortOrder == "monthlyincome_desc")
                             {
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                </svg>
                             }
                         </a>
                 </th>
@@ -108,15 +116,19 @@
                            asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
                            asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
                            asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
-                           class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Разходи
                             @if (Model.SortOrder == "monthlyexpenses")
                             {
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                </svg>
                             }
                             else if (Model.SortOrder == "monthlyexpenses_desc")
                             {
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                </svg>
                             }
                     </a>
                 </th>
@@ -126,15 +138,19 @@
                            asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome"
                            asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses"
                            asp-route-SearchEmploymentType="@Model.SearchEmploymentType"
-                           class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Вид заетост
                             @if (Model.SortOrder == "employmenttype")
                             {
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.480a1 1 0 0 1-1.506 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                </svg>
                             }
                             else if (Model.SortOrder == "employmenttype_desc")
                             {
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.480a1 1 0 0 0-1.506 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                </svg>
                             }
                     </a>
                 </th>
@@ -184,7 +200,7 @@
 @if (Model.TotalPages > 1)
 {
     <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-end">
+            <ul class="pagination justify-content-end pagination-miriam">
             <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
                 <a class="page-link" asp-route-PageIndex="@(Model.PageIndex - 1)" asp-route-SearchClientId="@Model.SearchClientId" asp-route-SearchMonthlyIncome="@Model.SearchMonthlyIncome" asp-route-SearchMonthlyExpenses="@Model.SearchMonthlyExpenses" asp-route-SearchEmploymentType="@Model.SearchEmploymentType">‹ Предишна</a>
             </li>

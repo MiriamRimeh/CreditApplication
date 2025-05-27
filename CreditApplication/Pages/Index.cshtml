@@ -5,35 +5,6 @@
 }
 
 
-@* <div class="container mt-5">
-    <div class="row" >
-        <div class="col-md-5">
-            <h2 class="mb-6">Калкулатор</h2>
-            <div class="card shadow-sm p-4">
-                <div class="mb-3">
-                    <label asp-for="Amount" class="form-label">Сума (лв.)</label>
-                    <input asp-for="Amount" type="number" class="form-control" id="amount" min="300" max="5000" step="100" />
-                </div>
-                <div class="mb-3">
-                    <label asp-for="PeriodMonths" class="form-label">Период (месеци)</label>
-                    <input asp-for="PeriodMonths" type="number" class="form-control" id="period" min="5" max="24" step="1" />
-                </div>
-                <div class="mt-4 p-3 bg-light rounded">
-                    <p>Месечна вноска: <strong id="monthlyPayment">0.00 лв.</strong></p>
-                    <p>Общо за плащане: <strong id="totalPayment">0.00 лв.</strong></p>
-                    <p class="text-secondary"><small>ГЛП: 40% </small></p>
-
-                </div>
-                <div class="mt-4 text-end">
-                    <a class="btn btn-primary-miriam btn-lg rounded-pill " href="/ApplicationForm/Step1_Personal">Вземи сега</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-7 d-flex align-items-center justify-content-center h-100 overflow-auto p-0">
-            <img src="~/images/homePage.jpg" class="img-fluid" style="object-fit: cover;" alt="Начална страница" />
-        </div>
-    </div>  
-</div> *@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-5">
@@ -90,31 +61,46 @@
 <section class="py-5 bg-light">
     <div class="container">
         <h3 class="text-center mb-4">Защо да изберете нас?</h3>
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-white rounded shadow-sm h-100">
-                    <i class="fas fa-clock fa-2x mb-3 text-primary"></i>
+        <div class="row text-center g-4 justify-content-center">
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="p-4 bg-white rounded shadow-sm h-100 d-flex flex-column align-items-center">
+                    <img src="~/images/easy_application.jpg"
+                         alt="Лесно кандидатстване"
+                         class="img-fluid mb-3"
+                         style="max-width: 200px; height: auto; object-fit: cover;" />
+                    <h5>Лесно кандидатстване</h5>
+                    <p>Кандидатствай онлайн от комфорта на твоя дом.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="p-4 bg-white rounded shadow-sm h-100 d-flex flex-column align-items-center">
+                    <img src="~/images/fast_approaval.jpg"
+                         alt="Бързо одобрение"
+                         class="img-fluid mb-3"
+                         style="max-width: 200px; height: auto; object-fit: cover;" />
                     <h5>Бързо одобрение</h5>
-                    <p>Получавате отговор в рамките на минути без дълги формалности.</p>
+                    <p>Получаваш одобрение в рамките на минути без допълнителни формалности.</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-white rounded shadow-sm h-100">
-                    <i class="fas fa-hand-holding-usd fa-2x mb-3 text-primary"></i>
+
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="p-4 bg-white rounded shadow-sm h-100 d-flex flex-column align-items-center">
+                    <img src="~/images/flexible_conditions.jpg"
+                         alt="Гъвкави условия"
+                         class="img-fluid mb-3"
+                         style="max-width: 200px; height: auto; object-fit: cover;" />
                     <h5>Гъвкави условия</h5>
-                    <p>Изберете срок и сума според нуждите си с подробни условия.</p>
+                    <p>Избери срок и сума според нуждите си.</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-white rounded shadow-sm h-100">
-                    <i class="fas fa-shield-alt fa-2x mb-3 text-primary"></i>
-                    <h5>Сигурност и прозрачност</h5>
-                    <p>Вашите данни са защитени, а всички такси са ясно посочени.</p>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>
+
 
 <section class="py-5">
     <div class="container">
@@ -123,22 +109,22 @@
             <div class="col-md-4 mb-4">
                 <div class="px-3">
                     <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width:60px; height:60px;">1</div>
-                    <h6>Попълнете формата</h6>
-                    <p>Въведете желаната сума и период с няколко клика.</p>
+                    <h4>Попълнете формата</h4>
+                    <p>Въведи своите данни, желаната сума и период с няколко клика.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="px-3">
                     <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width:60px; height:60px;">2</div>
-                    <h6>Одобрение</h6>
-                    <p>Получете парите си до минути.</p>
+                    <h4>Одобрение</h4>
+                    <p>Изчакай да прегледаме и одобрим кандидатурата ти.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="px-3">
                     <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width:60px; height:60px;">3</div>
-                    <h6>Получете сумата</h6>
-                    <p>Парите са по вашата банкова сметка до 24 часа.</p>
+                    <h4>Получете сумата</h4>
+                    <p>Получаваш парите до минути.</p>
                 </div>
             </div>
         </div>
@@ -152,6 +138,7 @@
         <h3 class="text-center mb-4">Често задавани въпроси</h3>
         <div class="accordion" id="faqAccordion">
             <div class="accordion-item">
+
                 <h2 class="accordion-header" id="faqHeading1">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">
                         Как се изчислява лихвата?
@@ -159,10 +146,13 @@
                 </h2>
                 <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Лихвата се изчислява спрямо Годишния процент на разходите (ГПР), който е 40%.
+                        Лихвата се изчислява спрямо номиналния годишен лихвен процент (ГЛП), който е 40%, разпределен на месечна база.<br />
+                        Формулата за месечна вноска е анюитетна:
+                        <pre>вноска = (главница × (ГЛП/12)) / (1 − (1 + ГЛП/12)<sup>−месеци</sup>)</pre>
                     </div>
                 </div>
             </div>
+
             <div class="accordion-item">
                 <h2 class="accordion-header" id="faqHeading2">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
@@ -175,37 +165,51 @@
                     </div>
                 </div>
             </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading3">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                        Мога ли да кандидатствам за кредит отново, ако при предходно кандидатстване получа отказ?
+                    </button>
+                </h2>
+                <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Да, Вие можете да кандидатствате за кредит неограничен брой пъти. За да кандидатствате отново след отказ, трябва да се е променило нещо във Вашия икономически и социален статус (например да е отпаднал някакъв Ваш разход, да имате допълнителен приход, нова месторабота и т.н.).
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading4">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                        Как мога да погася вноската по кредита си?
+                    </button>
+                </h2>
+                <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Можете да погасите вноската си бързо и лесно през Профила си на сайта. Влезте в Профил > Моите кредити > Активни > План. Там ще видите всички вноски по Вашия кредит. Изберете вноска и въведете нужната информация.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading5">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                        Мога ли да погася няколко вноски наведнъж?
+                    </button>
+                </h2>
+                <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Да, можете да погасите колкото вноски искате наведнъж спрямо възможностите Ви.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 
 @section Scripts {
-@*     <script>
-        const amountInput = document.getElementById('amount');
-        const periodInput = document.getElementById('period');
-        const monthlyLabel = document.getElementById('monthlyPayment');
-        const totalLabel = document.getElementById('totalPayment');
-        const interestRate = 0.40; 
-
-        function calculate() {
-            const principal = parseFloat(amountInput.value) || 0;
-            const months = parseInt(periodInput.value) || 0;
-            if (principal < 300 || principal > 5000 || months < 5 || months > 24) {
-                monthlyLabel.textContent = '0.00 лв.';
-                totalLabel.textContent = '0.00 лв.';
-                return;
-            }
-            const monthlyRate = interestRate / 12;
-            const monthly = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-            const total = monthly * months;
-            monthlyLabel.textContent = monthly.toFixed(2) + ' лв.';
-            totalLabel.textContent = total.toFixed(2) + ' лв.';
-        }
-
-        amountInput.addEventListener('input', calculate);
-        periodInput.addEventListener('input', calculate);
-    </script> *@
 
     <script>
         const annualRate = 0.40;

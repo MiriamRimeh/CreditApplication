@@ -81,11 +81,11 @@
                     @using Microsoft.AspNetCore.Identity
                     @if (User.IsInRole("Admin"))
                     {
-                        <a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="btn btn-primary me-2">
+                        <a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="btn btn-primary-miriam me-2">
                              Редактирай
                         </a>
                     }
-                    <a asp-page="./Index" class="btn btn-dark me-2">Назад</a>
+                    <a asp-page="./Index" class="btn btn-secondary-miriam me-2">Назад</a>
                 </div>
             </div>
         </div>

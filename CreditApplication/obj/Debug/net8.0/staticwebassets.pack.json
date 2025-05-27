@@ -25,8 +25,28 @@
       "PackagePath": "staticwebassets\\images\\404.jpg"
     },
     {
+      "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\approaval_2.jpg",
+      "PackagePath": "staticwebassets\\images\\approaval_2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\easy_application.jpg",
+      "PackagePath": "staticwebassets\\images\\easy_application.jpg"
+    },
+    {
+      "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\fast_approaval.jpg",
+      "PackagePath": "staticwebassets\\images\\fast_approaval.jpg"
+    },
+    {
+      "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\flexible_conditions.jpg",
+      "PackagePath": "staticwebassets\\images\\flexible_conditions.jpg"
+    },
+    {
       "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\homePage.jpg",
       "PackagePath": "staticwebassets\\images\\homePage.jpg"
+    },
+    {
+      "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\logo_2.png",
+      "PackagePath": "staticwebassets\\images\\logo_2.png"
     },
     {
       "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\calculator.js",

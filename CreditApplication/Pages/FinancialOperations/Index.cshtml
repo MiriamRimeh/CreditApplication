@@ -9,7 +9,7 @@
 
 @if (!string.IsNullOrEmpty(@Model.StatusMessage))
 {
-    <div class="alert alert-info">@Model.StatusMessage</div>
+    <div class="alert alert-info-miriam">@Model.StatusMessage</div>
 }
 
 <div class="container py-4">
@@ -38,7 +38,7 @@
                     <input asp-for="SearchOperationType" type="text" class="form-control" placeholder="Въведете тип на операция..." />
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary-miriam">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg> Търси
@@ -83,7 +83,7 @@
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
                         asp-route-PageIndex="1"
-                        class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Oперация
                         </a>
                     </th>
@@ -94,11 +94,11 @@
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
                         asp-route-PageIndex="1"
-                        class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Kредит
                         </a>
                     </th>
-                    <th scope="col">№ в ПП</th>
+                    <th scope="col">№ в План</th>
                     <th scope="col">
                         <a asp-page="./Index"
                         asp-route-sortOrder="@Model.PayedOnDateSort"
@@ -106,7 +106,7 @@
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
                         asp-route-PageIndex="1"
-                        class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Дата на плащане
                         </a>
                     </th>
@@ -117,7 +117,7 @@
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
                         asp-route-PageIndex="1"
-                        class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Сума
                         </a>
                     </th>
@@ -128,7 +128,7 @@
                         asp-route-SearchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
                         asp-route-OperationType="@Model.SearchOperationType"
                         asp-route-PageIndex="1"
-                        class="text-decoration-none">
+                           class="text-decoration-underline text-black">
                             Тип операция
                         </a>
                     </th>
@@ -192,7 +192,7 @@
  @if (Model.TotalPages > 1)
     {
         <nav aria-label="Page navigation" class="mt-4">
-            <ul class="pagination justify-content-end">
+            <ul class="pagination justify-content-end pagination-miriam">
             <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
                 <a class="page-link"
                    asp-page="./Index"
@@ -207,7 +207,7 @@
             @for (int i = 1; i <= Model.TotalPages; i++)
             {
                 <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                    <a class="page-link"
+                        <a class="page-link"
                        asp-page="./Index"
                        asp-route-PageIndex="@i"
                        asp-route-sortOrder="@Model.SortOrder"
@@ -219,7 +219,7 @@
                 </li>
             }
             <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
-                <a class="page-link"
+                    <a class="page-link"
                    asp-page="./Index"
                    asp-route-PageIndex="@(Model.PageIndex + 1)"
                    asp-route-sortOrder="@Model.SortOrder"

@@ -59,16 +59,16 @@
                         </div>
 
                         <div class="form-group col-12 text-center mt-4">
-                            <input type="submit" value="Запази" class="btn btn-primary px-5" />
+                            <input type="submit" value="Запази" class="btn btn-primary-miriam px-5" />
 
                             @using Microsoft.AspNetCore.Identity
                             @if (!User.IsInRole("Client"))
                             {
-                                <a asp-page="./Index" class="btn btn-dark px-4 ms-2">Назад</a>
+                                <a asp-page="./Index" class="btn btn-secondary-miriam px-4 ms-2">Назад</a>
                             }
                             else
                             {
-                                <a asp-page="/Accounts/Profile" class="btn btn-dark px-4 ms-2">Назад</a>
+                                <a asp-page="/Accounts/Profile" class="btn btn-secondary-miriam px-4 ms-2">Назад</a>
                             }
                         </div>
                     </form>
