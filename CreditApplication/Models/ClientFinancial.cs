@@ -25,7 +25,10 @@ namespace CreditApplication.Models
         [ForeignKey("EmploymentType")]
         public Nomenclature EmploymentTypeNomenclature { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+        [Column("ModifiedOn_21180011")]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
     }
 }

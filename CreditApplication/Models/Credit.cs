@@ -22,9 +22,13 @@ namespace CreditApplication.Models
 
         [ForeignKey("Status")]
         public Nomenclature StatusNavigation { get; set; }
+
         [Required]
-        public DateTime? CreatedOn { get; set; } = DateTime.Now;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime? CreatedOn { get; set; }
+
         [Required]
+        [Column("ModifiedOn_21180011")]
         public DateTime? ModifiedOn { get; set; } = DateTime.Now;
         
         public ICollection<FinancialOperation> FinancialOperations { get; set; } = new List<FinancialOperation>();

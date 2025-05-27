@@ -61,7 +61,11 @@ namespace CreditApplication.Pages.Credits
                 return Page();
             }
 
-            _context.Attach(Credit).State = EntityState.Modified;
+            _context.Attach(Credit);
+            var entry = _context.Entry(Credit);
+            entry.State = EntityState.Modified;
+            entry.Property(c => c.CreatedOn).IsModified = false;
+            entry.Property(c => c.Status).IsModified = false;
 
             try
             {

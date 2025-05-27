@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CreditApplication.Models
 {
@@ -9,18 +10,22 @@ namespace CreditApplication.Models
         public int CreditID { get; set; }
         public Credit Credit { get; set; }
 
-        public int? InstallmentNumber { get; set; } // Number of the installment in the repayment plan
+        public int? InstallmentNumber { get; set; } 
 
-        public DateOnly? InstallmentDate { get; set; } // Date when the installment is due
-        public decimal? InstallmentAmount { get; set; } // Amount to be paid in each installment (total)
-        public decimal? Principal { get; set; } // Amount of the principal in the installment from the total
-        public decimal? Interest { get; set; } // Amount of the interest in the installment from the total
+        public DateOnly? InstallmentDate { get; set; } 
+        public decimal? InstallmentAmount { get; set; } 
+        public decimal? Principal { get; set; } 
+        public decimal? Interest { get; set; } 
 
-        public bool? isPaid { get; set; } = false; // Indicates if the installment has been paid
-        public DateTime? PayedOnDate { get; set; } // Date when the installment is due
+        public bool? isPaid { get; set; } = false; 
+        public DateTime? PayedOnDate { get; set; } 
+
         [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
+
         [Required]
+        [Column("ModifiedOn_21180011")]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
     }
 }

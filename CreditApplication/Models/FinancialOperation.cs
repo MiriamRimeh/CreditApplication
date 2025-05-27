@@ -22,8 +22,11 @@ namespace CreditApplication.Models
         public RepaymentPlan? RepaymentPlan { get; set; }
 
         [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
+
         [Required]
+        [Column("ModifiedOn_21180011")]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
     }
 }

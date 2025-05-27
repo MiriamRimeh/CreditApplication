@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CreditApplication.Models
 {
@@ -22,7 +23,11 @@ namespace CreditApplication.Models
         [Required(ErrorMessage = "Моля, въведете пощенски код.")]
         [MaxLength(20)]
         public string PostCode { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+        [Column("ModifiedOn_21180011")]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
     }
 }

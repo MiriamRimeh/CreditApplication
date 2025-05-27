@@ -12,7 +12,10 @@ namespace CreditApplication.Models
         [MaxLength(255)]
         public string Description { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+        [Column("ModifiedOn_21180011")]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CreditApplication.Models
 {
@@ -46,7 +47,10 @@ namespace CreditApplication.Models
         [MaxLength(50)]
         public string IDIssuer { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+        [Column("ModifiedOn_21180011")]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
 
         public ICollection<Credit> Credits { get; set; } = new List<Credit>();

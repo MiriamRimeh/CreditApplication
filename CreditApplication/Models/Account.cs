@@ -1,4 +1,5 @@
 ﻿using CreditApplication.Data;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,7 +23,10 @@ namespace CreditApplication.Models
         [Required]
         public AccountRole Role { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }
+
+        [Column("ModifiedOn_21180011")]
         public DateTime? ModifiedOn21180011 { get; set; }
         public bool IsActive { get; set; }
 
