@@ -1,8 +1,10 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
 @model CreditApplication.Pages.Credits.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редакция на кредит";
 }
 
 

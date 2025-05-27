@@ -21,6 +21,7 @@
                             <input asp-for="Account.Username" class="form-control" />
                             <span asp-validation-for="Account.Username" class="text-danger"></span>
                         </div>
+
                         @if (Model.Account.Role == CreditApplication.Data.AccountRole.Client)
                         {
                             <div class="form-group col-12 mt-2">

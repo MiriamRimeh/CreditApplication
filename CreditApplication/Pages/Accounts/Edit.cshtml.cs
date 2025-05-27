@@ -65,13 +65,13 @@ namespace CreditApplication.Pages.Accounts
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                PopulateDropdowns();
-                return Page();
-            }
+            _context.Attach(Account);
+            var entry = _context.Entry(Account);
+            entry.State = EntityState.Modified;
 
-            _context.Attach(Account).State = EntityState.Modified;
+            entry.Property(a => a.PasswordHash).IsModified = false;
+            entry.Property(a => a.PasswordSalt).IsModified = false;
+            entry.Property(a => a.CreatedAt).IsModified = false;
 
             try
             {

@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Client,Employee,Admin")]
 @model CreditApplication.Pages.Step4Model
 
 @{

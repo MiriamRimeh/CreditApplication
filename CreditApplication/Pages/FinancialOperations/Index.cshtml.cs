@@ -135,13 +135,13 @@ namespace CreditApplication.Pages.FinancialOperations
             var originalOp = await _context.FinancialOperations.FindAsync(id);
             if (originalOp == null) return NotFound();
 
-            bool alreadyReversed = await _context.FinancialOperations
-                                                 .AnyAsync(f => f.OperationType == 203 && f.RepaymentPlanID == originalOp.ID);
-            if (alreadyReversed)
-            {
-                StatusMessage = "Тази операция вече е сторнирана и не може да се сторнира повторно.";
-                return RedirectToPage();
-            }
+            //bool alreadyReversed = await _context.FinancialOperations
+            //                                     .AnyAsync(f => f.OperationType == 203 && f.RepaymentPlanID == originalOp.ID);
+            //if (alreadyReversed)
+            //{
+            //    StatusMessage = "Тази операция вече е сторнирана и не може да се сторнира повторно.";
+            //    return RedirectToPage();
+            //}
 
             if (originalOp.OperationType == 201)
             {

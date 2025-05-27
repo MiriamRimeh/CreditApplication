@@ -1,70 +1,76 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
 @model CreditApplication.Pages.Accounts.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="h4 mb-0">Изтриване на потребител</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                            <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146
+                                     4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394
+                                     4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5
+                                     0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zM8 4c.535 0 .954.462.9.995l-.35
+                                     3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0
+                                     1 1 0 2 1 1 0 0 1 0-2" />
+                        </svg>
+                        Сигурни ли сте, че искате да изтриете този потребител?
+                    </div>
+                    <dl class="row g-3 mb-0">
+                        <dt class="col-md-4">Потребителско име</dt>
+                        <dd class="col-md-8">@Model.Account.Username</dd>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Account</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Account.Username)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Account.Username)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Account.PasswordHash)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Account.PasswordHash)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Account.PasswordSalt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Account.PasswordSalt)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Account.Role)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Account.Role)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Account.CreatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Account.CreatedAt)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Account.ModifiedOn21180011)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Account.ModifiedOn21180011)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Account.IsActive)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Account.IsActive)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Account.Client)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Account.Client.EGN)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Account.ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+
+                        @if (Model.Account.Role == CreditApplication.Data.AccountRole.Client)
+                        {
+                            <dt class="col-md-4">Номер на клиент</dt>
+                            <dd class="col-md-8">@Model.Account.Client</dd>
+                            
+                            <dt class="col-md-4">ЕГН на клиент</dt>
+                            <dd class="col-md-8">@Model.Account.Client?.EGN</dd>
+                        }
+                        <dt class="col-md-4">Роля в системата</dt>
+                        <dd class="col-md-8">
+                            @{
+                                var roleName = Model.Account.Role switch
+                                {
+                                    CreditApplication.Data.AccountRole.Client => "Клиент",
+                                    CreditApplication.Data.AccountRole.Employee => "Служител",
+                                    CreditApplication.Data.AccountRole.Admin => "Администратор",
+                                    _ => Model.Account.Role.ToString()
+                                };
+                            }
+                            @roleName
+                        </dd>
+                        <dt class="col-md-4">Създаден на</dt>
+                        <dd class="col-md-8">@Model.Account.CreatedAt.ToString("dd.MM.yyyy HH:mm:ss")</dd>
+
+                        <dt class="col-md-4">Последна промяна</dt>
+                        <dd class="col-md-8">@Model.Account.ModifiedOn21180011?.ToString("dd.MM.yyyy HH:mm:ss")</dd>
+
+                        <dt class="col-md-4">Статус на акаунта</dt>
+                        <dd class="col-md-8">@(Model.Account.IsActive ? "Активен" : "Неактивен")</dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-center">
+                    <form method="post" lass="d-inline">
+                        <input type="hidden" asp-for="Account.ID" />
+                        <button type="submit" class="btn btn-danger btn-sm me-2">Изтрий</button>
+                        <a asp-page="./Index" class="btn btn-dark btn-sm">Назад</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

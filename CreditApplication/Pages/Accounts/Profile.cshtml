@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Client,Employee,Admin")]
 @model CreditApplication.Pages.Accounts.ProfileModel
 @{
     ViewData["Title"] = "Профил";

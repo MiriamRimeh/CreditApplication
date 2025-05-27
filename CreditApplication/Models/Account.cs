@@ -27,7 +27,7 @@ namespace CreditApplication.Models
         public DateTime CreatedAt { get; set; }
 
         [Column("ModifiedOn_21180011")]
-        public DateTime? ModifiedOn21180011 { get; set; }
+        public DateTime? ModifiedOn21180011 { get; set; } = DateTime.Now;
         public bool IsActive { get; set; }
 
         [ForeignKey(nameof(ClientID))]

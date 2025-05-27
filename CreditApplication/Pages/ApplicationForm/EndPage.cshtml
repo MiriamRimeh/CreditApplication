@@ -1,17 +1,18 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Client,Employee,Admin")]
 @model CreditApplication.Pages.ApplicationForm.EndPageModel
 @using System.Globalization
 @{
     ViewData["Title"] = "Успешно заявление!";
 }
-<div class="card mb-4">
-    <div class="card-body">
-        <div class="alert alert-success mb-0">
-            <h5 class="mb-2"><strong>Поздравления!</strong></h5>
-            <p class="mb-0">Кандидатурата е записана успешно и очаква решение.</p>
-        </div>
+
+    <div class="alert alert-success mb-0">
+        <h5 class="mb-2"><strong>Поздравления!</strong></h5>
+        <p class="mb-0">Кандидатурата е записана успешно и очаква решение.</p>
     </div>
-</div>
+
+
 
 @if (Model.Client != null)
 {
