@@ -36,14 +36,13 @@ namespace CreditApplication.Pages.ApplicationForm
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.ClientID == ClientId);
 
-            // Взимаме **най-скоро** подаденото заявление
             Credit = await _context.Credits
                 .AsNoTracking()
                 .Where(c => c.ClientID == ClientId)
-                .OrderByDescending(c => c.ID)  // или .OrderByDescending(c => c.ID)
+                .OrderByDescending(c => c.ID)
                 .FirstOrDefaultAsync();
 
-            if (Credit != null)
+            if (Financial != null && Credit != null)
             {
                 CreditStatusDescription = await _context.Nomenclatures
                     .Where(n => n.NomCode == Credit.Status)

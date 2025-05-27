@@ -10,6 +10,7 @@ using CreditApplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace CreditApplication.Pages.ApplicationForm
 {
@@ -80,10 +81,35 @@ namespace CreditApplication.Pages.ApplicationForm
                 );
             }
 
+            if (string.IsNullOrWhiteSpace(Client.EGN) ||
+               !Regex.IsMatch(Client.EGN, @"^\d{10}$"))
+            {
+                ModelState.AddModelError(
+                    "Client.EGN",
+                    "ЕГН трябва да съдържа точно 10 цифри."
+                );
+            }
+            else
+            {
+                bool exists = await _context.Clients
+                    .AnyAsync(c => c.EGN == Client.EGN && c.ID != account.ClientID);
+
+                if (exists)
+                {
+                    ModelState.AddModelError(
+                        "Client.EGN",
+                        "Вече съществува клиент с това ЕГН."
+                    );
+                }
+            }
+
+            if (!ModelState.IsValid) return Page();
+
             if (account.ClientID == null)
             {
                 _context.Clients.Add(Client);
                 await _context.SaveChangesAsync();
+                //TempData.Keep("ClientId");
 
                 account.ClientID = Client.ID;
                 ClientId = Client.ID;
@@ -105,9 +131,7 @@ namespace CreditApplication.Pages.ApplicationForm
                 ClientId = existing.ID;
             }
 
-            if (!ModelState.IsValid) return Page();
-
-            return RedirectToPage("Step2_Address");
+            return RedirectToPage("Step2_Address",new { clientId = ClientId });
         }
     }
 }

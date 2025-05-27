@@ -1,5 +1,6 @@
 ﻿// Pages/Step4.cshtml.cs
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,34 +18,50 @@ namespace CreditApplication.Pages
         [BindProperty]
         public Credit Credit { get; set; } = default!;
 
-        [TempData]
+
+        [BindProperty]
         public int ClientId { get; set; }
 
         public IActionResult OnGet(int clientId)
         {
-            TempData.Keep("ClientId");
+
+            if (!_context.Clients.Any(c => c.ID == clientId))
+            {
+                return NotFound("Client not found.");
+            }
+
+            ClientId = clientId; 
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if(Credit.CreditAmount < 300 || Credit.CreditAmount > 5000)
+            if (!_context.Clients.Any(c => c.ID == ClientId))
             {
-                ModelState.AddModelError(
-                    "Credit.CreditAmount",
-                    "Сумата на кредита трябва да бъде между 300 лв и 5000 лв."
-                );
+                ModelState.AddModelError("", "Invalid Client ID.");
+                return Page();
+            }
+
+            if (!_context.Clients.Any(c => c.ID == ClientId))
+            {
+                ModelState.AddModelError("", "Invalid Client ID.");
+                return Page();
+            }
+
+            if (Credit.CreditAmount < 300 || Credit.CreditAmount > 5000)
+            {
+                ModelState.AddModelError("Credit.CreditAmount",
+                    "Сумата на кредита трябва да бъде между 300 лв и 5000 лв.");
                 return Page();
             }
 
             if (Credit.CreditPeriod < 5 || Credit.CreditPeriod > 24)
             {
-                ModelState.AddModelError(
-                    "Credit.CreditPeriod",
-                    "Периодът на кредита трябва да е между 5 и 24 месеца."
-                );
+                ModelState.AddModelError("Credit.CreditPeriod",
+                    "Периодът на кредита трябва да е между 5 и 24 месеца.");
                 return Page();
             }
+
 
             Credit.ClientID = ClientId;
             Credit.CreatedOn = DateTime.Now;
@@ -54,9 +71,7 @@ namespace CreditApplication.Pages
 
             decimal monthlyRate = Credit.InterestRate.Value / 12M;
             decimal monthly = (Credit.CreditAmount * monthlyRate)
-                                / (1 - (decimal)Math.Pow(
-                                      (double)(1 + monthlyRate),
-                                      -Credit.CreditPeriod.Value));
+                / (1 - (decimal)Math.Pow((double)(1 + monthlyRate), -Credit.CreditPeriod.Value));
             decimal total = monthly * Credit.CreditPeriod.Value;
 
             Credit.MonthlyInstallment = monthly;

@@ -22,21 +22,22 @@ namespace CreditApplication.Pages
         }
 
         [BindProperty]
-        public ClientFinancial ClientFinancial { get; set; } = default!;
-        [TempData]
+        public ClientFinancial Financial { get; set; } = default!;
+
+        [BindProperty]
         public int ClientId { get; set; }
 
         public SelectList EmploymentTypes { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int clientId)
         {
-            TempData.Keep("ClientId");
-            var existing = await _context.ClientFinancials
-                .AsNoTracking()
-                .FirstOrDefaultAsync(f => f.ClientID == ClientId);
+            if (!_context.Clients.Any(c => c.ID == clientId))
+                return NotFound("Client not found.");
+            ClientId = clientId;
 
-            if (existing != null)
-                ClientFinancial = existing;
+
+            var existing = await _context.ClientFinancials.FirstOrDefaultAsync(f => f.ClientID == ClientId);
+            Financial = existing ?? new ClientFinancial();
 
             var nomList = await _context.Nomenclatures
                 .AsNoTracking()
@@ -47,32 +48,34 @@ namespace CreditApplication.Pages
             EmploymentTypes = new SelectList(nomList, "NomCode", "Description");
             ViewData["EmploymentTypes"] = EmploymentTypes;
 
-
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid) return Page();
+            if (!_context.Clients.Any(c => c.ID == ClientId))
+            {
+                ModelState.AddModelError("", "Invalid Client ID.");
+                return Page();
+            }
 
-            var existing = await _context.ClientFinancials
-                            .FirstOrDefaultAsync(f => f.ClientID == ClientId);
+            var existing = await _context.ClientFinancials.FirstOrDefaultAsync(f => f.ClientID == ClientId);
 
             if (existing == null)
             {
-                ClientFinancial.ClientID = ClientId;
-                _context.ClientFinancials.Add(ClientFinancial);
+                Financial.ClientID = ClientId;
+                _context.ClientFinancials.Add(Financial);
             }
             else
             {
-                existing.MontlyIncome = ClientFinancial.MontlyIncome;
-                existing.MontlyExpenses = ClientFinancial.MontlyExpenses;
-                existing.EmploymentType = ClientFinancial.EmploymentType;
+                existing.MontlyIncome = Financial.MontlyIncome;
+                existing.MontlyExpenses = Financial.MontlyExpenses;
+                existing.EmploymentType = Financial.EmploymentType;
                 _context.ClientFinancials.Update(existing);
             }
 
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("Step4_Credit");
+            return RedirectToPage("Step4_Credit", new { clientId = ClientId });
         }
 
         private async Task LoadEmploymentTypesAsync()

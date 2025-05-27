@@ -20,29 +20,30 @@
                 </div>
                 <div class="card-body">
                     <form method="post" class="row g-3 needs-validation" novalidate>
+                        <input type="hidden" asp-for="ClientId" value="@Model.ClientId" />
                         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
-                            <label asp-for="ClientAddress.City" class="control-label">Населено място:</label>
-                            <input asp-for="ClientAddress.City" class="form-control" required="" />
-                            <span asp-validation-for="ClientAddress.City" class="text-danger"></span>
+                            <label asp-for="Address.City" class="control-label">Населено място:</label>
+                            <input asp-for="Address.City" class="form-control" required="" />
+                            <span asp-validation-for="Address.City" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
-                            <label asp-for="ClientAddress.StreetNeighbourhood" class="control-label">Улица/Жилищен Комплекс:</label>
-                            <input asp-for="ClientAddress.StreetNeighbourhood" class="form-control" required="" />
-                            <span asp-validation-for="ClientAddress.StreetNeighbourhood" class="text-danger"></span>
+                            <label asp-for="Address.StreetNeighbourhood" class="control-label">Улица/Жилищен Комплекс:</label>
+                            <input asp-for="Address.StreetNeighbourhood" class="form-control" required="" />
+                            <span asp-validation-for="Address.StreetNeighbourhood" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
-                            <label asp-for="ClientAddress.Number" class="control-label">Номер:</label>
-                            <input asp-for="ClientAddress.Number" class="form-control" required="" />
-                            <span asp-validation-for="ClientAddress.Number" class="text-danger"></span>
+                            <label asp-for="Address.Number" class="control-label">Номер:</label>
+                            <input asp-for="Address.Number" class="form-control" required="" />
+                            <span asp-validation-for="Address.Number" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
-                            <label asp-for="ClientAddress.PostCode" class="control-label">Пощенски код:</label>
-                            <input asp-for="ClientAddress.PostCode" class="form-control" required="" />
-                            <span asp-validation-for="ClientAddress.PostCode" class="text-danger"></span>
+                            <label asp-for="Address.PostCode" class="control-label">Пощенски код:</label>
+                            <input asp-for="Address.PostCode" class="form-control" required="" />
+                            <span asp-validation-for="Address.PostCode" class="text-danger"></span>
                         </div>
                         <div class="col-12 text-center mt-4">
                             <button type="submit" class="btn btn-primary-miriam float-md-end">Напред</button>
