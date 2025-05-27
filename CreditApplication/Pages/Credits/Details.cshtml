@@ -6,78 +6,83 @@
 }
 
 
-<div class="container py-4">
-    <div class="card shadow-sm">
-        <div class="card-header text-center">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
             <h2 class="h4 mb-0">Детайли на кредит</h2>
         </div>
-        <div class="card-body">
-            <dl class="row g-3 mb-0">
-                <dt class="col-md-4">Номер на кредит</dt>
-                <dd class="col-md-8">@Model.Credit.ID</dd>
+                <div class="card-body">
+                    <dl class="row g-3 mb-0">
+                        <dt class="col-md-4">Номер на кредит</dt>
+                        <dd class="col-md-8">@Model.Credit.ID</dd>
 
-                <dt class="col-md-4">Клиент</dt>
-                <dd class="col-md-8">
-                    <a asp-page="/Clients/Details" asp-route-id="@Model.Credit.ClientID">
-                        @Model.Credit.Client.EGN
-                    </a>
-                </dd>
+                        <dt class="col-md-4">Клиент</dt>
+                        <dd class="col-md-8">
+                            <a asp-page="/Clients/Details" asp-route-id="@Model.Credit.ClientID">
+                                @Model.Credit.Client.EGN
+                            </a>
+                        </dd>
 
-                <dt class="col-md-4">Сума на кредит</dt>
-                <dd class="col-md-8">@Model.Credit.CreditAmount</dd>
+                        <dt class="col-md-4">Сума на кредит</dt>
+                        <dd class="col-md-8">@Model.Credit.CreditAmount.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</dd>
 
-                <dt class="col-md-4">Начална дата на кредит</dt>
-                <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditBeginDate?.ToString("dd.MM.yyyy")</dd>
+                        <dt class="col-md-4">Начална дата на кредит</dt>
+                        <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditBeginDate?.ToString("dd.MM.yyyy")</dd>
 
-                <dt class="col-md-4">Крайна дата на кредит</dt>
-                <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditEndDate?.ToString("dd.MM.yyyy")</dd>
+                        <dt class="col-md-4">Крайна дата на кредит</dt>
+                        <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditEndDate?.ToString("dd.MM.yyyy")</dd>
 
-                <dt class="col-md-4">Лихва по кредит</dt>
-                <dd class="col-md-8">@Model.Credit.InterestRate?.ToString("P")</dd>
+                        <dt class="col-md-4">Лихва по кредит</dt>
+                        <dd class="col-md-8">@Model.Credit.InterestRate?.ToString("P")</dd>
 
-                <dt class="col-md-4">Статус на кредит</dt>
-                <dd class="col-md-8">@Model.Credit.StatusNavigation.Description</dd>
+                        <dt class="col-md-4">Статус на кредит</dt>
+                        <dd class="col-md-8">@Model.Credit.StatusNavigation.Description</dd>
 
-                <dt class="col-md-4">Създадено на</dt>
-                <dd class="col-md-8">@Model.Credit.CreatedOn?.ToString("dd.MM.yyyy HH:mm:ss")</dd>
+                        <dt class="col-md-4">Създадено на</dt>
+                        <dd class="col-md-8">@Model.Credit.CreatedOn?.ToString("dd.MM.yyyy HH:mm:ss")</dd>
 
-                <dt class="col-md-4">Последна промяна</dt>
-                <dd class="col-md-8">@Model.Credit.ModifiedOn?.ToString("dd.MM.yyyy HH:mm:ss")</dd>
-            </dl>
-        </div>
-
-
+                        <dt class="col-md-4">Последна промяна</dt>
+                        <dd class="col-md-8">@Model.Credit.ModifiedOn?.ToString("dd.MM.yyyy HH:mm:ss")</dd>
+                    </dl>
+                </div>
 
 
 
-        <div class="card-footer text-center">
-            @* Само при "Очакващ решение" (101) *@
-            @if (Model.Credit.Status == 101)
-            {
-                <form method="post" asp-page-handler="Approve" asp-route-id="@Model.Credit.ID" class="d-inline">
-                    <button type="submit" class="btn btn-success btn-sm me-2">Одобри</button>
-                </form>
-                <form method="post" asp-page-handler="Reject" asp-route-id="@Model.Credit.ID" class="d-inline">
-                    <button type="submit" class="btn btn-danger btn-sm me-2">Откажи</button>
-                </form>
-            }
-            @* Само при "Активен" (102) *@
-            else if (Model.Credit.Status == 102)
-            {
-                <form method="post" asp-page-handler="Finish" asp-route-id="@Model.Credit.ID" class="d-inline">
-                    <button type="submit" class="btn btn-danger btn-sm me-2">Приключи</button>
-                    <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@Model.Credit.ID" class="btn btn-secondary btn-sm me-2">План</a>
-                </form>
-            }
-            <span class="me-2 text-secondary">|</span>
-            @if (Model.Credit.Status == 101)
-            {
-                <a asp-page="./Edit" asp-route-id="@Model.Credit.ID" class="btn btn-primary btn-sm me-2">Редактирай</a>
-            }
-            <a asp-page="./Index" class="btn btn-dark btn-sm">Назад</a>
+
+
+                <div class="card-footer text-center">
+                    @* Очакващ решение (101) *@
+                    @if (Model.Credit.Status == 101)
+                    {
+                        <form method="post" asp-page-handler="Approve" asp-route-id="@Model.Credit.ID" class="d-inline">
+                            <button type="submit" class="btn btn-success btn-sm me-2">Одобри</button>
+                        </form>
+                        <form method="post" asp-page-handler="Reject" asp-route-id="@Model.Credit.ID" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm me-2">Откажи</button>
+                        </form>
+                    }
+                    @* Активен (102) *@
+                    else if (Model.Credit.Status == 102)
+                    {
+                        <form method="post" asp-page-handler="Finish" asp-route-id="@Model.Credit.ID" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm me-2">Приключи</button>
+                            <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@Model.Credit.ID" class="btn btn-secondary btn-sm me-2">План</a>
+                        </form>
+                    }
+                    <span class="me-2 text-secondary">|</span>
+                    @if (Model.Credit.Status == 101)
+                    {
+                        <a asp-page="./Edit" asp-route-id="@Model.Credit.ID" class="btn btn-primary btn-sm me-2">Редактирай</a>
+                    }
+                    <a asp-page="./Index" class="btn btn-dark btn-sm">Назад</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     @{

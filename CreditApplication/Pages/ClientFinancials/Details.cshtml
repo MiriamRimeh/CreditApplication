@@ -1,55 +1,80 @@
 ﻿@page
 @model CreditApplication.Pages.ClientFinancials.DetailsModel
 
+@using System.Globalization
+
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли на финансови данни";
 }
 
-<h1>Details</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="h4 mb-0">Детайли на финансови данни</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row g-3 mb-0">
+                        <dt class="col-md-4">Клиент</dt>
+                        <dd class="col-md-8">
+                            @if (Model.ClientFinancial.ClientID != null)
+                            {
+                                <a asp-page="/Clients/Details" asp-route-id="@Model.ClientFinancial.ClientID">
+                                    @Model.ClientFinancial.Client.EGN
+                                </a>
+                            }
+                            else
+                            {
+                                <span> </span>
+                            }
 
-<div>
-    <h4>ClientFinancial</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientFinancial.ClientID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientFinancial.ClientID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientFinancial.MontlyIncome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientFinancial.MontlyIncome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientFinancial.MontlyExpenses)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientFinancial.MontlyExpenses)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientFinancial.EmploymentType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientFinancial.EmploymentType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientFinancial.CreatedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientFinancial.CreatedOn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientFinancial.ModifiedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientFinancial.ModifiedOn)
-        </dd>
-    </dl>
+                        </dd>
+
+                        <dt class="col-md-4">Месечни приходи</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientFinancial.MontlyIncome.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))
+                        </dd>
+
+                        <dt class="col-md-4">Месечни разходи</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientFinancial.MontlyExpenses.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))
+                        </dd>
+
+                        <dt class="col-md-4">Тип заетост</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientFinancial.EmploymentTypeNomenclature.Description
+                        </dd>
+
+                        <dt class="col-md-4">Създадено на</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientFinancial.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")
+                        </dd>
+
+                        <dt class="col-md-4">Последна промяна</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientFinancial.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-page="./Edit"
+                       asp-route-id="@Model.ClientFinancial.ID"
+                       class="btn btn-primary btn-sm me-2">
+                        Редактирай
+                    </a>
+                    <a asp-page="./Index"
+                       class="btn btn-dark btn-sm">
+                        Назад
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.ClientFinancial.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

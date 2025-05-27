@@ -23,7 +23,9 @@ namespace CreditApplication.Pages.ClientFinancials
         [BindProperty]
         public ClientFinancial ClientFinancial { get; set; } = default!;
 
+        public SelectList ClientList { get; set; } = default!;
         public SelectList EmploymentTypes { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -31,19 +33,12 @@ namespace CreditApplication.Pages.ClientFinancials
                 return NotFound();
             }
 
-            var nomList = await _context.Nomenclatures
-                .AsNoTracking()
-                .Where(n => n.NomCode >= 301 && n.NomCode <= 306)
-                .OrderBy(n => n.Description)
-                .ToListAsync();
-
             var clientfinancial =  await _context.ClientFinancials.FirstOrDefaultAsync(m => m.ID == id);
-            if (clientfinancial == null)
-            {
-                return NotFound();
-            }
+            if (clientfinancial == null)return NotFound();
+
             ClientFinancial = clientfinancial;
-           ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
+            PopulateClients();
+            await LoadEmploymentTypesAsync();
             return Page();
         }
 
@@ -52,6 +47,8 @@ namespace CreditApplication.Pages.ClientFinancials
         {
             if (!ModelState.IsValid)
             {
+                PopulateClients();
+                await LoadEmploymentTypesAsync();
                 return Page();
             }
 
@@ -88,14 +85,23 @@ namespace CreditApplication.Pages.ClientFinancials
             return _context.ClientFinancials.Any(e => e.ID == id);
         }
 
+        private void PopulateClients()
+        {
+            ClientList = new SelectList(
+                _context.Clients
+                        .OrderBy(c => c.EGN)
+                        .Select(c => new { c.ID, c.EGN }),
+                "ID", "EGN");
+        }
+
         private async Task LoadEmploymentTypesAsync()
         {
             var employmentTypes = await _context.Nomenclatures
-                .Where(n => n.NomCode >= 301 && n.NomCode <= 306) // Fixed property name from 'ID' to 'NomCode'
+                .Where(n => n.NomCode >= 301 && n.NomCode <= 306) 
                 .OrderBy(n => n.Description)
                 .ToListAsync();
 
-            ViewData["EmploymentTypes"] = new SelectList(employmentTypes, "NomCode", "Description"); // Updated to match the correct property
+            ViewData["EmploymentTypes"] = new SelectList(employmentTypes, "NomCode", "Description"); 
         }
     }
 }

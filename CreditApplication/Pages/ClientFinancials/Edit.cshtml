@@ -16,14 +16,26 @@
                     <form method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="ClientFinancial.ID" />
+
                         @using Microsoft.AspNetCore.Identity
                         @if (!User.IsInRole("Client"))
                         {
-                            <div class="form-group col-12">
-                                <label asp-for="ClientFinancial.ClientID" class="control-label">Изберете клиент</label>
-                                <select asp-for="ClientFinancial.ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
-                                <span asp-validation-for="ClientFinancial.ClientID" class="text-danger"></span>
-                            </div> 
+                        <div class="form-group col-12">
+                            <label for="searchEGN">Търсене по ЕГН на клиента:</label>
+                            <input type="text" id="searchEGN" class="form-control" placeholder="Въведете ЕГН..." />
+                        </div>
+  
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientFinancial.ClientID" class="control-label">Изберете клиент:</label>
+                            <select asp-for="ClientFinancial.ClientID"
+                                    id="ClientSelect"
+                                    class="form-control"
+                                    asp-items="Model.ClientList">
+                                <option value="">-- Изберете --</option>
+                            </select>
+                            <span asp-validation-for="ClientFinancial.ClientID" class="text-danger"></span>
+                        </div>
                         }
 
                         <div class="form-group col-12">
@@ -40,7 +52,8 @@
 
                         <div class="form-group col-12">
                             <label asp-for="ClientFinancial.EmploymentType" class="control-label">Тип заетост</label>
-                            <select asp-for="ClientFinancial.EmploymentType" class="form-control" asp-items="ViewBag.EmploymentTypes" />
+                            <select asp-for="ClientFinancial.EmploymentType" class="form-control" asp-items="ViewBag.EmploymentTypes">
+                            </select>
                             <span asp-validation-for="ClientFinancial.EmploymentType" class="text-danger"></span>
                         </div>
 
@@ -51,13 +64,11 @@
                             @if (!User.IsInRole("Client"))
                             {
                                 <a asp-page="./Index" class="btn btn-dark px-4 ms-2">Назад</a>
-
                             }
                             else
                             {
                                 <a asp-page="/Accounts/Profile" class="btn btn-dark px-4 ms-2">Назад</a>
                             }
-
                         </div>
                     </form>
                 </div>
@@ -66,8 +77,19 @@
     </div>
 </div>
 
-
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.getElementById('searchEGN').addEventListener('input', function () {
+            var filter = this.value.toLowerCase();
+            var options = document.getElementById('ClientSelect').options;
+            for (var i = 0; i < options.length; i++) {
+                var text = options[i].text.toLowerCase();
+                options[i].style.display = text.includes(filter) ? '' : 'none';
+            }
+        });
+    </script>
 }

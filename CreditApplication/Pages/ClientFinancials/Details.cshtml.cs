@@ -24,19 +24,16 @@ namespace CreditApplication.Pages.ClientFinancials
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var clientfinancial = await _context.ClientFinancials.FirstOrDefaultAsync(m => m.ID == id);
-            if (clientfinancial == null)
-            {
+            ClientFinancial = await _context.ClientFinancials
+                .Include(cf => cf.Client)
+                .Include(cf => cf.EmploymentTypeNomenclature)
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (ClientFinancial == null)
                 return NotFound();
-            }
-            else
-            {
-                ClientFinancial = clientfinancial;
-            }
+
             return Page();
         }
     }

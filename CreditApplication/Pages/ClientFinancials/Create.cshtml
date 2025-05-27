@@ -2,61 +2,87 @@
 @model CreditApplication.Pages.ClientFinancials.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Създаване на финансови данни";
 }
 
-<h1>Create</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="mb-0">Нови финансови данни</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="row g-3">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4>ClientFinancial</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientFinancial.ClientID" class="control-label"></label>
-                <select asp-for="ClientFinancial.ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+                        <div class="form-group col-12">
+                            <label for="searchEGN">Търсене по ЕГН на клиента:</label>
+                            <input type="text" id="searchEGN" class="form-control" placeholder="Въведете ЕГН..." />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientFinancial.ClientID" class="control-label">Изберете клиент:</label>
+                            <select asp-for="ClientFinancial.ClientID"
+                                    id="ClientSelect"
+                                    class="form-control"
+                                    asp-items="Model.ClientList">
+                                <option value="">-- Изберете --</option>
+                            </select>
+                            <span asp-validation-for="ClientFinancial.ClientID" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientFinancial.MontlyIncome" class="control-label">Месечни приходи</label>
+                            <input asp-for="ClientFinancial.MontlyIncome" class="form-control" />
+                            <span asp-validation-for="ClientFinancial.MontlyIncome" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientFinancial.MontlyExpenses" class="control-label">Месечни разходи</label>
+                            <input asp-for="ClientFinancial.MontlyExpenses" class="form-control" />
+                            <span asp-validation-for="ClientFinancial.MontlyExpenses" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <span class="text-danger">*</span>
+                            <label asp-for="ClientFinancial.EmploymentType" class="control-label">Тип заетост</label>
+                            <select asp-for="ClientFinancial.EmploymentType"
+                                    class="form-control"
+                                    asp-items="Model.EmploymentTypes">
+                                <option value="">-- Изберете --</option>
+                            </select>
+                            <span asp-validation-for="ClientFinancial.EmploymentType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-12 text-center mt-4">
+                            <input type="submit" value="Създай" class="btn btn-primary px-5" />
+                            <a asp-page="./Index" class="btn btn-dark px-4 ms-2">Назад</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientFinancial.MontlyIncome" class="control-label"></label>
-                <input asp-for="ClientFinancial.MontlyIncome" class="form-control" />
-                <span asp-validation-for="ClientFinancial.MontlyIncome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientFinancial.MontlyExpenses" class="control-label"></label>
-                <input asp-for="ClientFinancial.MontlyExpenses" class="form-control" />
-                <span asp-validation-for="ClientFinancial.MontlyExpenses" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="ClientFinancial.EmploymentType" class="control-label"></label>
-                <input asp-for="ClientFinancial.EmploymentType" class="form-control" />
-                <span asp-validation-for="ClientFinancial.EmploymentType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClientFinancial.CreatedOn" class="control-label"></label>
-                <input asp-for="ClientFinancial.CreatedOn" class="form-control" />
-                <span asp-validation-for="ClientFinancial.CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClientFinancial.ModifiedOn" class="control-label"></label>
-                <input asp-for="ClientFinancial.ModifiedOn" class="form-control" />
-                <span asp-validation-for="ClientFinancial.ModifiedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        document.getElementById('searchEGN').addEventListener('input', function () {
+            var filter = this.value.toLowerCase();
+            var options = document.getElementById('ClientSelect').options;
+            for (var i = 0; i < options.length; i++) {
+                var text = options[i].text.toLowerCase();
+                options[i].style.display = text.includes(filter) ? '' : 'none';
+            }
+        });
+    </script>
 }
