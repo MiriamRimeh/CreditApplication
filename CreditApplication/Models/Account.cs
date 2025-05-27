@@ -28,5 +28,6 @@ namespace CreditApplication.Models
 
         [ForeignKey(nameof(ClientID))]
         public virtual Client Client { get; set; }
+
     }
 }

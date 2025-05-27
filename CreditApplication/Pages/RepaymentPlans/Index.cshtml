@@ -195,7 +195,7 @@ else
                                 else
                                 {
                                     <form method="post" asp-page-handler="Pay" asp-route-id="@rp.ID" class="d-inline">
-                                        <button type="submit" class="btn btn-primary btn-sm"> Плати вноска </button>
+                                        <button type="submit" class="btn btn-primary btn-sm" onclick="confirmAdminPay('@rp.ID')">Плати вноска </button>
                                     </form>
                                 }
                             }
@@ -371,6 +371,13 @@ else
 
             document.getElementById('paymentInstallmentId').value = selectedInstallmentId;
             document.getElementById('hiddenPayForm').submit();
+        }
+
+
+            function confirmAdminPay(id) {
+            if (confirm("Сигурни ли сте, че искате да платите тази вноска?")) {
+                document.getElementById("payForm-" + id).submit();
+            }
         }
     </script>
 }

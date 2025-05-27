@@ -2,71 +2,53 @@
 @model CreditApplication.Pages.Accounts.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редактиране на акаунт";
 }
 
-<h1>Edit</h1>
-
-<h4>Account</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Account.ID" />
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Account.Username" class="control-label"></label>
-                <input asp-for="Account.Username" class="form-control" />
-                <span asp-validation-for="Account.Username" class="text-danger"></span>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="mb-0">Редактиране на акаунт</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Account.ID" />
+                        <div class="form-group col-12 mt-2">
+                            <label asp-for="Account.Username" class="control-label">Потребителско име</label>
+                            <input asp-for="Account.Username" class="form-control" />
+                            <span asp-validation-for="Account.Username" class="text-danger"></span>
+                        </div>
+                        @if (Model.Account.Role == CreditApplication.Data.AccountRole.Client)
+                        {
+                            <div class="form-group col-12 mt-2">
+                                <label asp-for="Account.ClientID" class="control-label">ЕГН на клиент</label>
+                                <select asp-for="Account.ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
+                                <span asp-validation-for="Account.ClientID" class="text-danger"></span>
+                            </div>
+                        }
+   
+                        <div class="form-group col-12 mt-2">
+                            <label asp-for="Account.Role" class="control-label">Роля в системата</label>
+                            <select asp-for="Account.Role" class="form-control" asp-items="ViewBag.Roles"></select>
+                            <span asp-validation-for="Account.Role" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check mt-2">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Account.IsActive" /> Активен акаунт?
+                            </label>
+                        </div>
+                        <div class="form-group col-12 text-center mt-4">
+                            <input type="submit" value="Запази" class="btn btn-primary px-5" />
+                            <a asp-page="./Index" class="btn btn-dark px-4 ms-2">Назад</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Account.ClientID" class="control-label"></label>
-                <select asp-for="Account.ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
-                <span asp-validation-for="Account.ClientID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Account.PasswordHash" class="control-label"></label>
-                <input asp-for="Account.PasswordHash" class="form-control" />
-                <span asp-validation-for="Account.PasswordHash" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Account.PasswordSalt" class="control-label"></label>
-                <input asp-for="Account.PasswordSalt" class="form-control" />
-                <span asp-validation-for="Account.PasswordSalt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Account.Role" class="control-label"></label>
-                <select asp-for="Account.Role" class="form-control"></select>
-                <span asp-validation-for="Account.Role" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.CreatedAt" class="control-label"></label>
-                <input asp-for="Account.CreatedAt" class="form-control" />
-                <span asp-validation-for="Account.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.ModifiedOn21180011" class="control-label"></label>
-                <input asp-for="Account.ModifiedOn21180011" class="form-control" />
-                <span asp-validation-for="Account.ModifiedOn21180011" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Account.IsActive" /> @Html.DisplayNameFor(model => model.Account.IsActive)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {

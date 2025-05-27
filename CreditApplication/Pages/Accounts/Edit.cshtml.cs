@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,39 +12,62 @@ namespace CreditApplication.Pages.Accounts
 {
     public class EditModel : PageModel
     {
-        private readonly CreditApplication.Data.CreditApplicationDbContext _context;
+        private readonly CreditApplicationDbContext _context;
 
-        public EditModel(CreditApplication.Data.CreditApplicationDbContext context)
+        public EditModel(CreditApplicationDbContext context)
         {
             _context = context;
         }
 
         [BindProperty]
         public CreditApplication.Models.Account Account { get; set; } = default!;
+        private void PopulateDropdowns()
+        {
+            var selectedRole = Account != null ? (int)Account.Role : (int?)null;
+            var selectedClientID = Account?.ClientID;
+
+            ViewData["Roles"] = new SelectList(
+                Enum.GetValues(typeof(AccountRole))
+                    .Cast<AccountRole>()
+                    .Select(r => new { Id = (int)r,
+                        Name = r switch
+                        {
+                            AccountRole.Client => "Клиент",
+                            AccountRole.Employee => "Служител",
+                            AccountRole.Admin => "Администратор",
+                            _ => r.ToString()
+                        }
+                    }),
+                "Id", "Name",
+                selectedRole
+            );
+
+            ViewData["ClientID"] = new SelectList(
+                _context.Clients,
+                "ID", "EGN",
+                selectedClientID
+            );
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var account =  await _context.Accounts.FirstOrDefaultAsync(m => m.ID == id);
-            if (account == null)
-            {
-                return NotFound();
-            }
+            var account = await _context.Accounts.FirstOrDefaultAsync(m => m.ID == id);
+            if (account == null) return NotFound();
+
             Account = account;
-           ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
+
+            PopulateDropdowns();
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+                PopulateDropdowns();
                 return Page();
             }
 
@@ -71,8 +93,6 @@ namespace CreditApplication.Pages.Accounts
         }
 
         private bool AccountExists(int id)
-        {
-            return _context.Accounts.Any(e => e.ID == id);
-        }
+            => _context.Accounts.Any(e => e.ID == id);
     }
 }
