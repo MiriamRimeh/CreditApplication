@@ -17,6 +17,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\403.jpg",
+      "PackagePath": "staticwebassets\\images\\403.jpg"
+    },
+    {
+      "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\404.jpg",
+      "PackagePath": "staticwebassets\\images\\404.jpg"
+    },
+    {
       "Id": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\homePage.jpg",
       "PackagePath": "staticwebassets\\images\\homePage.jpg"
     },

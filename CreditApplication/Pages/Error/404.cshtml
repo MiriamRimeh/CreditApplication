@@ -1,0 +1,19 @@
+﻿@page
+@model CreditApplication.Pages.Error._404Model
+@{
+    Response.StatusCode = 404;
+}
+
+
+<div class="text-center">
+    <img src="~/images/404.jpg"
+         alt="Страница не намерена"
+         class="img-fluid"
+         style="max-width:50%; height:auto;" />
+
+    <h1>404 – Страницата не беше намерена</h1>
+    <p>Съжаляваме, но търсената страница не съществува или е преместена.</p>
+    <a asp-page="/Index" class="btn btn-primary-miriam mt-3">
+        Върни се на началната страница
+    </a>
+</div>

@@ -21,6 +21,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Entrance/Login";
     options.LogoutPath = "/Entrance/Logout";
+    options.AccessDeniedPath = "/Error/403";
     options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     options.SlidingExpiration = true;
 });
@@ -43,12 +44,18 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
+
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 

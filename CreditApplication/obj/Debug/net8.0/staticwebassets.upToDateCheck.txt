@@ -1,6 +1,8 @@
 wwwroot\css\custom.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\403.jpg
+wwwroot\images\404.jpg
 wwwroot\images\homePage.jpg
 wwwroot\js\calculator.js
 wwwroot\js\site.js

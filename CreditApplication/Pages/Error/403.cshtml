@@ -1,0 +1,16 @@
+﻿@page
+@model CreditApplication.Pages.Error._403Model
+@{
+    Response.StatusCode = 403;
+}
+
+
+<div class="text-center">
+    <img src="~/images/403.jpg" 
+         alt="Достъп отказан" 
+         class="img-fluid"
+         style="max-width:50%; height:auto;" />
+    <h1>403 – Достъпът е отказан</h1>
+    <p>Нямате права да виждате тази страница.</p>
+    <a asp-page="/Index" class="btn btn-primary-miriam mt-3">Върнете се на началната</a>
+</div>

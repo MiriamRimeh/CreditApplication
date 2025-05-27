@@ -5,7 +5,7 @@
 }
 
 
-<div class="container mt-5">
+@* <div class="container mt-5">
     <div class="row" >
         <div class="col-md-5">
             <h2 class="mb-6">Калкулатор</h2>
@@ -33,6 +33,58 @@
             <img src="~/images/homePage.jpg" class="img-fluid" style="object-fit: cover;" alt="Начална страница" />
         </div>
     </div>  
+</div> *@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5">
+            <h2 class="mb-6">Калкулатор</h2>
+            <div class="card shadow-sm p-4">
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between">
+                        <label for="amount" class="form-label">Сума (лв.)</label>
+                        <strong id="amountDisplay">300 лв.</strong>
+                    </div>
+                    <input asp-for="Amount"
+                           type="range"
+                           class="form-range"
+                           id="amount"
+                           min="300"
+                           max="5000"
+                           step="100"
+                           value="300" />
+                </div>
+
+                <!-- Период -->
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between">
+                        <label for="period" class="form-label">Период (месеци)</label>
+                        <strong id="periodDisplay">5 м.</strong>
+                    </div>
+                    <input asp-for="PeriodMonths"
+                           type="range"
+                           class="form-range"
+                           id="period"
+                           min="5"
+                           max="24"
+                           step="1"
+                           value="5" />
+                </div>
+
+                <div class="mt-4 p-3 bg-light rounded">
+                    <p>Месечна вноска: <strong id="monthlyPayment">0.00</strong> лв.</p>
+                    <p>Общо за плащане: <strong id="totalPayment">0.00</strong> лв.</p>
+                    <p class="text-secondary"><small>ГЛП: 40%</small></p>
+                </div>
+
+                <div class="mt-4 text-end">
+                    <a class="btn btn-primary-miriam btn-lg rounded-pill" href="/ApplicationForm/Step1_Personal">Вземи сега</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 d-flex align-items-center justify-content-center h-100 overflow-auto p-0">
+            <img src="~/images/homePage.jpg" class="img-fluid" style="object-fit: cover;" alt="Начална страница" />
+        </div>
+    </div>
 </div>
 
 <section class="py-5 bg-light">
@@ -64,7 +116,6 @@
     </div>
 </section>
 
-<!-- How It Works -->
 <section class="py-5">
     <div class="container">
         <h3 class="text-center mb-4">Как работи</h3>
@@ -80,7 +131,7 @@
                 <div class="px-3">
                     <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width:60px; height:60px;">2</div>
                     <h6>Одобрение</h6>
-                    <p>Получете бързо уведомление по имейл и SMS.</p>
+                    <p>Получете парите си до минути.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
@@ -94,26 +145,6 @@
     </div>
 </section>
 
-<!-- Testimonials -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <h3 class="text-center mb-4">Отзиви от клиенти</h3>
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card p-4 shadow-sm">
-                    <p>„Много лесен процес и парите бяха при мен още същия ден. Препоръчвам!“</p>
-                    <p class="text-end"><strong>- Мария Петрова</strong></p>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="card p-4 shadow-sm">
-                    <p>„Разгледах различни предложения и тази платформа беше най-прозрачната. Без скрити такси.“</p>
-                    <p class="text-end"><strong>- Иван Георгиев</strong></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- FAQ -->
 <section class="py-5">
@@ -150,7 +181,7 @@
 
 
 @section Scripts {
-    <script>
+@*     <script>
         const amountInput = document.getElementById('amount');
         const periodInput = document.getElementById('period');
         const monthlyLabel = document.getElementById('monthlyPayment');
@@ -174,5 +205,37 @@
 
         amountInput.addEventListener('input', calculate);
         periodInput.addEventListener('input', calculate);
+    </script> *@
+
+    <script>
+        const annualRate = 0.40;
+
+        const amountSlider = document.getElementById('amount');
+        const periodSlider = document.getElementById('period');
+
+        const amountDisplay = document.getElementById('amountDisplay');
+        const periodDisplay = document.getElementById('periodDisplay');
+
+        const monthlyPaymentEl = document.getElementById('monthlyPayment');
+        const totalPaymentEl = document.getElementById('totalPayment');
+
+        function calculate() {
+          const principal = parseFloat(amountSlider.value);
+          const months = parseInt(periodSlider.value, 10);
+
+          amountDisplay.textContent = principal.toLocaleString() + ' лв.';
+          periodDisplay.textContent = months + ' м.';
+
+          const monthlyRate = annualRate / 12;
+          const payment = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+
+          monthlyPaymentEl.textContent = payment.toFixed(2);
+          totalPaymentEl.textContent = (payment * months).toFixed(2);
+        }
+
+        amountSlider.addEventListener('input', calculate);
+        periodSlider.addEventListener('input', calculate);
+
+        calculate();
     </script>
 }

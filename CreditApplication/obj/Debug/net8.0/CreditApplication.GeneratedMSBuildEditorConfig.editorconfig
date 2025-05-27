@@ -168,6 +168,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Error/403.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3JcNDAzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/Error/404.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3JcNDA0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/miria/source/repos/CreditApplication/CreditApplication/Pages/FinancialOperations/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmluYW5jaWFsT3BlcmF0aW9uc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
