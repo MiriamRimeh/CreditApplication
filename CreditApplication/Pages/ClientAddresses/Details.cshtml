@@ -1,61 +1,84 @@
 ﻿@page
 @model CreditApplication.Pages.ClientAddresses.DetailsModel
 
+@using System.Globalization
+
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли на адрес";
 }
 
-<h1>Details</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h2 class="h4 mb-0">Детайли на адрес</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row g-3 mb-0">
+                        <dt class="col-md-4">Клиент</dt>
+                        <dd class="col-md-8">
+                            @if (Model.ClientAddress.ClientID != null)
+                            {
+                                <a asp-page="/Clients/Details" asp-route-id="@Model.ClientAddress.ClientID">
+                                    @Model.ClientAddress.Client.EGN
+                                </a>
+                            }
+                            else
+                            {
+                                <span> </span>
+                            }
+                        </dd>
 
-<div>
-    <h4>ClientAddress</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientAddress.ClientID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientAddress.ClientID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientAddress.City)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientAddress.City)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientAddress.StreetNeighbourhood)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientAddress.StreetNeighbourhood)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientAddress.Number)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientAddress.Number)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientAddress.PostCode)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientAddress.PostCode)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientAddress.CreatedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientAddress.CreatedOn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientAddress.ModifiedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientAddress.ModifiedOn)
-        </dd>
-    </dl>
+                        <dt class="col-md-4">Населено място</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientAddress.City
+                        </dd>
+
+                        <dt class="col-md-4">Улица/Квартал</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientAddress.StreetNeighbourhood
+                        </dd>
+
+                        <dt class="col-md-4">Номер</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientAddress.Number
+                        </dd>
+
+                        <dt class="col-md-4">Пощенски код</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientAddress.PostCode
+                        </dd>
+
+                        <dt class="col-md-4">Създадено на</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientAddress.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")
+                        </dd>
+
+                        <dt class="col-md-4">Последна промяна</dt>
+                        <dd class="col-md-8">
+                            @Model.ClientAddress.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-page="./Edit"
+                       asp-route-id="@Model.ClientAddress.ID"
+                       class="btn btn-primary btn-sm me-2">
+                        Редактирай
+                    </a>
+                    <a asp-page="./Index"
+                       class="btn btn-dark btn-sm">
+                        Назад
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.ClientAddress.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

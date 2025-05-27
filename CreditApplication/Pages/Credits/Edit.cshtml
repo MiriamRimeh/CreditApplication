@@ -21,20 +21,17 @@
                         <input type="hidden" asp-for="Credit.ID" />
 
                         <div class="form-group col-12">
-                            <span class="text-danger">*</span>
                             <label asp-for="Credit.ClientID" class="control-label">ЕГН на клиент</label>
                             <select asp-for="Credit.ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
                             <span asp-validation-for="Credit.ClientID" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-12">
-                            <span class="text-danger">*</span>
                             <label asp-for="Credit.CreditAmount" class="control-label">Желана сума на кредит:</label>
                             <input asp-for="Credit.CreditAmount" class="form-control" />
                             <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
-                            <span class="text-danger">*</span>
                             <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита (месеци):</label>
                             <input asp-for="Credit.CreditPeriod" class="form-control" />
                             <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>

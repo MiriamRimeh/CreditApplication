@@ -20,7 +20,7 @@
                         <dd class="col-md-8">
                             @if (Model.ClientFinancial.ClientID != null)
                             {
-                                <a asp-page="/Clients/Details" asp-route-id="@Model.ClientFinancial.ClientID">
+                                <a asp-page="/Clients/Details" asp-route-id="@Model.ClientFinancial.ClientID" class="text-decoration-none">
                                     @Model.ClientFinancial.Client.EGN
                                 </a>
                             }

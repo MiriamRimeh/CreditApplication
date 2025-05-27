@@ -24,19 +24,15 @@ namespace CreditApplication.Pages.ClientAddresses
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var clientaddress = await _context.ClientAddresses.FirstOrDefaultAsync(m => m.ID == id);
-            if (clientaddress == null)
-            {
+            ClientAddress = await _context.ClientAddresses
+                .Include(ca => ca.Client)
+                .FirstOrDefaultAsync(ca => ca.ID == id);
+
+            if (ClientAddress == null)
                 return NotFound();
-            }
-            else
-            {
-                ClientAddress = clientaddress;
-            }
+
             return Page();
         }
     }
