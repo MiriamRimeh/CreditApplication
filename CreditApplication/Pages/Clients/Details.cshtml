@@ -46,35 +46,38 @@
                         <dt class="col-md-4">Издадена от</dt>
                         <dd class="col-md-8">@Model.Client.IDIssuer</dd>
 
+                        @{
+                            var addr = Model.Client.ClientAddresses.FirstOrDefault();
+                        }
                         <dt class="col-md-4">Адрес</dt>
                         <dd class="col-md-8">
-                            @(Model.Client.ClientAddress != null
-                                    ? $"{Model.Client.ClientAddress.City}, {Model.Client.ClientAddress.StreetNeighbourhood}, {Model.Client.ClientAddress.Number}"
+                            @(Model.Client.ClientAddresses != null
+                                ? $"{addr.City}, {addr.StreetNeighbourhood}, {addr.Number}"
                                     : string.Empty)
 
-                            <dt class="col-md-4">Месечен доход</dt>
-                            <dd class="col-md-8">
-                                @(Model.Client.ClientFinancial?.MontlyIncome != null
-                                    ? Model.Client.ClientFinancial.MontlyIncome.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))
-                                        : string.Empty)
+                            @{
+                                var fin = Model.Client.ClientFinancials.FirstOrDefault();
+                            }
+                            @if (fin != null)
+                            {
 
+                                <dt class="col-md-4">Месечен доход</dt>
+                                <dd class="col-md-8">@fin.MontlyIncome.ToString("C", CultureInfo.GetCultureInfo("bg-BG"));</dd>
                                 <dt class="col-md-4">Месечни разходи</dt>
-                                <dd class="col-md-8">
-                                    @(Model.Client.ClientFinancial?.MontlyExpenses != null
-                                        ? Model.Client.ClientFinancial.MontlyExpenses.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))
-                                        : string.Empty)
-                                </dd>
+                                <dd class="col-md-8">@fin.MontlyExpenses.ToString("C", CultureInfo.GetCultureInfo("bg-BG"));</dd>
                                 <dt class="col-md-4">Трудов статус</dt>
+                                <dt class="col-md-4">Вид заетост</dt>
                                 <dd class="col-md-8">
-                                    @(Model.Client.ClientFinancial?.EmploymentTypeNomenclature != null
-                                            ? Model.Client.ClientFinancial.EmploymentTypeNomenclature.Description
-                                            : string.Empty)
+                                    @(fin.EmploymentTypeNomenclature != null
+                                        ? fin.EmploymentTypeNomenclature.Description
+                                        : string.Empty)</dd>
+                            }
+                           
+                        <dt class="col-md-4">Създадено на</dt>
+                        <dd class="col-md-8">@Model.Client.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
 
-                                    <dt class="col-md-4">Създадено на</dt>
-                                    <dd class="col-md-8">@Model.Client.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
-
-                                    <dt class="col-md-4">Последна промяна</dt>
-                                    <dd class="col-md-8">@Model.Client.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
+                        <dt class="col-md-4">Последна промяна</dt>
+                        <dd class="col-md-8">@Model.Client.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
                     </dl>
                 </div>
                 <div class="card-footer text-center">

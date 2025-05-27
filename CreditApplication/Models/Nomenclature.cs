@@ -17,5 +17,9 @@ namespace CreditApplication.Models
 
         [Column("ModifiedOn_21180011")]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
+
+        public ICollection<ClientFinancial> ClientFinancials { get; set; }
+        public ICollection<Credit> CreditsByStatus { get; set; }
+        public ICollection<FinancialOperation> FinancialOperationsByType { get; set; }
     }
 }

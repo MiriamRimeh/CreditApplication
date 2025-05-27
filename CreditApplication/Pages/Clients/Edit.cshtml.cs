@@ -61,11 +61,6 @@ namespace CreditApplication.Pages.Clients
 
 
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
             _context.Attach(Client);
             var entry = _context.Entry(Client);
             entry.State = EntityState.Modified;

@@ -7,6 +7,8 @@ namespace CreditApplication.Models
     {
         [Key]
         public int ID { get; set; }
+
+        [ForeignKey(nameof(Credit))]
         public int CreditID { get; set; }
         public Credit Credit { get; set; }
 

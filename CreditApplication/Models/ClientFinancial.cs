@@ -8,7 +8,7 @@ namespace CreditApplication.Models
     {
         public int ID { get; set; }
 
-        [TempData]
+        [ForeignKey(nameof(Client))]
         public int ClientID { get; set; }
         [BindProperty]
         public Client Client { get; set; }

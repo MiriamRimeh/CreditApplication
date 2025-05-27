@@ -23,6 +23,7 @@ namespace CreditApplication.Models
         [MaxLength(10)]
         public string EGN { get; set; }
 
+        [MaxLength(100), EmailAddress]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "Моля, въведете телефонен номер.")]
@@ -53,12 +54,10 @@ namespace CreditApplication.Models
         [Column("ModifiedOn_21180011")]
         public DateTime ModifiedOn { get; set; } = DateTime.Now;
 
-        public ICollection<Credit> Credits { get; set; } = new List<Credit>();
-
-        public ClientAddress? ClientAddress { get; set; }
-        public ClientFinancial? ClientFinancial { get; set; }
-
-        //public ICollection<ClientAddress> Addresses { get; set; }
+        public ICollection<Credit> Credits { get; set; }
+        public ICollection<ClientFinancial> ClientFinancials { get; set; }
+        public ICollection<ClientAddress> ClientAddresses { get; set; }
+        public ICollection<Account> Accounts { get; set; }
 
 
     }

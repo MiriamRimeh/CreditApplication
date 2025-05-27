@@ -12,7 +12,9 @@ namespace CreditApplication.Models
         [Required, EmailAddress, MaxLength(256)]
         public string Username { get; set; }
 
+        [ForeignKey(nameof(Client))]
         public int? ClientID { get; set; }
+        public Client Client { get; set; }
 
         [Required]
         public byte[] PasswordHash { get; set; }
@@ -30,8 +32,7 @@ namespace CreditApplication.Models
         public DateTime? ModifiedOn21180011 { get; set; } = DateTime.Now;
         public bool IsActive { get; set; }
 
-        [ForeignKey(nameof(ClientID))]
-        public virtual Client Client { get; set; }
+
 
     }
 }

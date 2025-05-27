@@ -30,6 +30,9 @@
                         <dt class="col-md-4">Сума на кредит</dt>
                         <dd class="col-md-8">@Model.Credit.CreditAmount.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</dd>
 
+                        <dt class="col-md-4">Период на кредит</dt>
+                        <dt class="col-md-8">@Model.Credit.CreditPeriod</dt>
+
                         <dt class="col-md-4">Начална дата на кредит</dt>
                         <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditBeginDate?.ToString("dd.MM.yyyy")</dd>
 

@@ -1,6 +1,6 @@
 ﻿@page
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize(Roles = "Client,Admin")]
+@attribute [Authorize(Roles = "Client,Employee,Admin")]
 @model CreditApplication.Pages.ClientAddresses.EditModel
 
 @{
@@ -18,6 +18,12 @@
                     <form method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="ClientAddress.ID" />
+
+                        @using Microsoft.AspNetCore.Identity
+                        @if (User.IsInRole("Client"))
+                        {
+                            <input type="hidden" asp-for="ClientAddress.ClientID" />
+                        }
 
                         @using Microsoft.AspNetCore.Identity
                         @if (!User.IsInRole("Client"))
