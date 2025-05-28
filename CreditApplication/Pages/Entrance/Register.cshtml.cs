@@ -48,17 +48,18 @@ namespace CreditApplication.Pages.Account
                 return Page();
             }
 
-            // Генериране на сол и хеш
+            
             using var derive = new Rfc2898DeriveBytes(Input.Password, 16, 100_000, HashAlgorithmName.SHA256);
-            var salt = derive.Salt; // Convert byte[] to string
-            var hash = derive.GetBytes(32); // Convert byte[] to string
+            var salt = derive.Salt; 
+            var hash = derive.GetBytes(32); 
 
+            // Служебни имейли, може да го махна?
             AccountRole role;
-            if (Input.Email.EndsWith("@emp.creditapp.bg", StringComparison.OrdinalIgnoreCase))
+            if (Input.Email.EndsWith("@emp.flashpay.bg", StringComparison.OrdinalIgnoreCase))
             {
                 role = AccountRole.Employee;
             }
-            else if (Input.Email.EndsWith("@admin.creditapp.bg", StringComparison.OrdinalIgnoreCase))
+            else if (Input.Email.EndsWith("@admin.flashpay.bg", StringComparison.OrdinalIgnoreCase))
             {
                 role = AccountRole.Admin;
             }
@@ -67,13 +68,12 @@ namespace CreditApplication.Pages.Account
                 role = AccountRole.Client;
             }
 
-            bool isEmployee = Input.Email.EndsWith("@unwe.bg",
-                                         StringComparison.OrdinalIgnoreCase);
+            
 
             var account = new CreditApplication.Models.Account
             {
                 Username = Input.Email,
-                ClientID = null,                   // няма Client профил още
+                ClientID = null,                   
                 PasswordSalt = salt,
                 PasswordHash = hash,
                 Role = role,
