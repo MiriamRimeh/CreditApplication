@@ -12,7 +12,7 @@
         <div class="col-lg-6">
             <div class="card shadow-sm">
                 <div class="card-header text-center">
-                    <h2 class="h4 mb-0">Детайли на клиент</h2>
+                    <h4 class="h4 mb-0">Детайли на клиент</h4>
                 </div>
                 <div class="card-body">
                     <dl class="row g-3 mb-0">
@@ -24,6 +24,7 @@
 
                         @{
                             var addr = Model.Client.ClientAddresses.FirstOrDefault();
+                            
                         }
 
                         @if (addr != null)
@@ -31,8 +32,8 @@
                             <dt class="col-md-4">Адрес</dt>
                             <dd class="col-md-8">
                                 @(Model.Client.ClientAddresses != null
-                                    ? $"{addr.City}, {addr.StreetNeighbourhood}, {addr.Number}"
-                                    : string.Empty)
+                                        ? $"{addr.City}, {addr.StreetNeighbourhood}, {addr.Number}"
+                                        : string.Empty)
                             </dd>
                         }
 
@@ -54,12 +55,26 @@
                         <dt class="col-md-4">Издадена от</dt>
                         <dd class="col-md-8">@Model.Client.IDIssuer</dd>
 
-                        <hr />
+                        <dt class="col-md-4">Създаден на</dt>
+                        <dd class="col-md-8">@Model.Client.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
 
-                        @{
-                            var fin = Model.Client.ClientFinancials.FirstOrDefault();
-                            var diff = fin?.MontlyIncome - fin?.MontlyExpenses;
-                        }
+                        <dt class="col-md-4">Последна промяна</dt>
+                        <dd class="col-md-8">@Model.Client.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
+
+                    </dl>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-header text-center">
+                        <h4 class="h4 mb-0">Финансови данни на клиент</h4>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row g-3 mb-0">
+                            @{
+                                var fin = Model.Client.ClientFinancials.FirstOrDefault();
+                                var diff = fin?.MontlyIncome - fin?.MontlyExpenses;
+                                
+                            }
 
                         @if (fin != null)
                         {
@@ -78,25 +93,38 @@
                                     ? fin.EmploymentTypeNomenclature.Description
                                     : string.Empty)</dd>
                         }
-                          
-                        <hr />
-
-                        <dt class="col-md-4">Създадено на</dt>
-                        <dd class="col-md-8">@Model.Client.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
-
-                        <dt class="col-md-4">Последна промяна</dt>
-                        <dd class="col-md-8">@Model.Client.ModifiedOn.ToString("dd.MM.yyyy HH:mm:ss")</dd>
+                      
                     </dl>
                 </div>
-                <div class="card-footer text-center">
+                    <div class="card-footer d-inline-flex justify-content-center">
                     @using Microsoft.AspNetCore.Identity
                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                     {
-                        <a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="btn btn-primary-miriam me-2">
-                            Редактирай лични данни
+
+                        <div class="dropdown">
+                                <a class="btn btn btn-primary-miriam dropdown-toggle me-2" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Редактирай
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="dropdown-item">Лични данни</a></li>
+                                    <li><a asp-page="/ClientAddresses/Edit" asp-route-id="@addr?.ID" class="dropdown-item">Адрес</a></li>
+                                    <li><a asp-page="/ClientFinancials/Edit" asp-route-id="@fin?.ID" class="dropdown-item">Финансови данни</a></li>
+                                </ul>
+
+                        </div>
+@*                         <a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="btn btn-sm btn-primary-miriam me-2">
+                            Лични данни
                         </a>
+                        <a asp-page="/ClientAddress/Edit" asp-route-id="@Model.Client.ID" class="btn btn-sm btn-primary-miriam me-2">
+                            
+                            Адрес
+                        </a>
+                        <a asp-page="/ClientFinancials/Edit" asp-route-id="@Model.Client.ID" class="btn btn-sm btn-primary-miriam me-2">
+                            
+                            Финансови данни
+                        </a> *@
                     }
-                    <a asp-page="./Index" class="btn btn-secondary-miriam me-2">Назад</a>
+                    <a asp-page="./Index" class="btn btn btn-secondary-miriam me-2">Назад</a>
                 </div>
             </div>
         </div>

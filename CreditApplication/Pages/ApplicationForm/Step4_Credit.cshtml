@@ -27,6 +27,7 @@
                             <span class="text-danger">*</span>
                             <label asp-for="Credit.CreditAmount" class="control-label">Жeлана сума на кредит:</label>
                             <input asp-for="Credit.CreditAmount" class="form-control" type="number" required />
+                            <span class="text-secondary">Въведете сума между 300 лв. и 5000 лв.</span>
                             <span asp-validation-for="Credit.CreditAmount" class="text-danger"></span>
                         </div>
 
@@ -34,6 +35,7 @@
                             <span class="text-danger">*</span>
                             <label asp-for="Credit.CreditPeriod" class="control-label">Период на кредита:</label>
                             <input asp-for="Credit.CreditPeriod" class="form-control" type="number" required />
+                            <span class="text-secondary">Въведете период между 5 и 24 месеца.</span>
                             <span asp-validation-for="Credit.CreditPeriod" class="text-danger"></span>
                         </div>
 

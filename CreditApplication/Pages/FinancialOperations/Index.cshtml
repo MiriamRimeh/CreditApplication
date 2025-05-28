@@ -4,7 +4,7 @@
 @model CreditApplication.Pages.FinancialOperations.IndexModel
 
 @{
-    ViewData["Title"] = "Финансови операции";
+    ViewData["Title"] = "Вноски по кредити";
 }
 
 @if (!string.IsNullOrEmpty(@Model.StatusMessage))
@@ -14,30 +14,30 @@
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0">Финансови операции</h1>
+        <h2 class="h3 mb-0">Вноски по кредити</h2>
         @* <a asp-page="Create" class="btn btn-primary">Създай нов</a> *@
     </div>
 
     <div class="card mb-4">
         <div class="card-body">
             <form method="get" class="row gx-2 gy-2 align-items-end">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <label asp-for="SearchOperationId" class="form-label">Търсене по операция</label>
                     <input asp-for="SearchOperationId" type="number" class="form-control" placeholder="Въведете номер на операция..." />
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <label asp-for="CreditId" class="form-label">Търсене по кредит</label>
                     <input asp-for="CreditId" type="number" class="form-control" placeholder="Въведете номер на кредит..." />
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <label asp-for="SearchPayedOnDate" class="form-label">Търсене по дата на плащане</label>
                     <input asp-for="SearchPayedOnDate" type="date" class="form-control" />
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <label asp-for="SearchOperationType" class="form-label">Търсене по тип на операция</label>
                     <input asp-for="SearchOperationType" type="text" class="form-control" placeholder="Въведете тип на операция..." />
                 </div>
-                <div class="col-sm-3 d-grid">
+                <div class="col-sm-2 d-grid">
                     <button type="submit" class="btn btn-primary-miriam">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
@@ -98,7 +98,6 @@
                             Kредит
                         </a>
                     </th>
-                    <th scope="col">№ в План</th>
                     <th scope="col">
                         <a asp-page="./Index"
                         asp-route-sortOrder="@Model.PayedOnDateSort"
@@ -142,7 +141,6 @@
                     <tr>
                         <td align="right">@Html.DisplayFor(modelItem => item.ID)</td>
                         <td align="right">@Html.DisplayFor(modelItem => item.CreditID)</td>
-                        <td align="right">@Html.DisplayFor(modelItem => item.RepaymentPlanID)</td>
                         <td align="center">@item.PayedOnDate?.ToString("dd.MM.yyyy")</td>
                         <td align="right">@item.PayedAmount.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
                         <td align="center">@item.OperationTypeNomenclature.Description</td>

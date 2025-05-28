@@ -12,7 +12,7 @@
         <div class="col-lg-6">
             <div class="card shadow-sm">
                 <div class="card-header text-center">
-                    <h2 class="mb-0">Финансови данни</h2>
+                    <h4 class="mb-0">Финансови данни</h4>
                 </div>
                 <div class="card-body">
                     <form method="post">
@@ -65,11 +65,11 @@
                             @using Microsoft.AspNetCore.Identity
                             @if (!User.IsInRole("Client"))
                             {
-                                <a asp-page="./Index" class="btn btn-secondary-miriam px-4 ms-2">Назад</a>
+                                <a asp-page="./Index" class="btn btn-sm btn-secondary-miriam px-4 ms-2">Назад</a>
                             }
                             else
                             {
-                                <a asp-page="/Accounts/Profile" class="btn btn-secondary-miriam px-4 ms-2">Назад</a>
+                                <a asp-page="/Accounts/Profile" class="btn btn-sm btn-secondary-miriam px-4 ms-2">Назад</a>
                             }
                         </div>
                     </form>

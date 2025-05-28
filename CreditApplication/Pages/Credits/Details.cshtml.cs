@@ -62,11 +62,10 @@ namespace CreditApplication.Pages.Credits
                 OperationType = 201
             };
 
-
+            
             _context.FinancialOperations.Add(finOp);
 
             await _context.SaveChangesAsync();
-
             return RedirectToPage(new { id });
         }
 
@@ -76,6 +75,9 @@ namespace CreditApplication.Pages.Credits
             if (credit == null) return NotFound();
             credit.Status = 104;    
             credit.ModifiedOn = DateTime.Now;
+
+            
+
             await _context.SaveChangesAsync();
             return RedirectToPage(new { id });
         }
@@ -88,8 +90,8 @@ namespace CreditApplication.Pages.Credits
             credit.Status = 103;
             credit.CreditEndDate = DateTime.Now;
             credit.ModifiedOn = DateTime.Now;
-            await _context.SaveChangesAsync();
 
+            await _context.SaveChangesAsync();
             return RedirectToPage(new { id });
         }
     }

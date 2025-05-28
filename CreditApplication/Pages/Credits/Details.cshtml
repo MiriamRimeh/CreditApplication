@@ -13,7 +13,7 @@
         <div class="col-lg-6">
             <div class="card shadow-sm">
                 <div class="card-header text-center">
-                    <h2 class="h4 mb-0">Детайли на кредит</h2>
+                    <h4 class="h4 mb-0">Детайли на кредит</h4>
                 </div>
                 <div class="card-body">
                     <dl class="row g-3 mb-0">
@@ -31,10 +31,10 @@
                         <dd class="col-md-8">@Model.Credit.TotalCreditAmount?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</dd>
 
                         <dt class="col-md-4">Период на кредит</dt>
-                        <dt class="col-md-8">@Model.Credit.CreditPeriod вноски</dt>
+                        <dd class="col-md-8">@Model.Credit.CreditPeriod вноски</dd>
 
                         <dt class="col-md-4">Месечна вноска</dt>
-                        <dt class="col-md-8">@Model.Credit.MonthlyInstallment?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</dt>
+                        <dd class="col-md-8">@Model.Credit.MonthlyInstallment?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</dd>
 
                         <dt class="col-md-4">Начална дата на кредит</dt>
                         <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditBeginDate?.ToString("dd.MM.yyyy")</dd>
@@ -68,14 +68,10 @@
                             var canAffordInstallment = diff >= (monthlyInstallment + monthlyExpenses/3);
                             <hr />
                             <dt class="col-md-4">Системна проверка за платежоспособност</dt>
-                            <dt class="col-md-8">@(canAffordInstallment ? "Може да бъде одобрен за кредит" : "Да бъде отказан")</dt>
+                            <dd class="col-md-8">@(canAffordInstallment ? "Може да бъде одобрен за кредит" : "Да бъде отхвърлен")</dd>
                         }
                     </dl>
                 </div>
-
-
-
-
 
                 <div class="card-footer text-center">
                     @* Очакващ решение (101) *@
@@ -85,15 +81,16 @@
                             <button type="submit" class="btn btn-success btn-sm me-2">Одобри</button>
                         </form>
                         <form method="post" asp-page-handler="Reject" asp-route-id="@Model.Credit.ID" class="d-inline">
-                            <button type="submit" class="btn btn-danger btn-sm me-2">Откажи</button>
+                            <button type="submit" class="btn btn-danger btn-sm me-2">Отхвърли</button>
                         </form>
+                        <span class="me-2 text-secondary">|</span>
                     }
                     @* Активен (102) *@
                     else if (Model.Credit.Status == 102)
                     {
                         <form method="post" asp-page-handler="Finish" asp-route-id="@Model.Credit.ID" class="d-inline">
                             <button type="submit" class="btn btn-danger btn-sm me-2">Приключи</button>
-                            <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@Model.Credit.ID" class="btn btn-secondary btn-sm me-2">План</a>
+                            <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@Model.Credit.ID" class="btn btn-sm btn-secondary me-2">План</a>
                         </form>
                     <span class="me-2 text-secondary">|</span>
                     }
@@ -101,7 +98,7 @@
                     {
                         <a asp-page="./Edit" asp-route-id="@Model.Credit.ID" class="btn btn-primary-miriam btn-sm me-2">Редактирай</a>
                     }
-                    <a asp-page="./Index" class="btn btn-secondary-miriam btn-sm">Назад</a>
+                    <a asp-page="./Index" class="btn btn-sm btn-secondary-miriam ">Назад</a>
                 </div>
             </div>
         </div>
