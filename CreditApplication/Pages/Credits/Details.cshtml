@@ -13,8 +13,8 @@
         <div class="col-lg-6">
             <div class="card shadow-sm">
                 <div class="card-header text-center">
-            <h2 class="h4 mb-0">Детайли на кредит</h2>
-        </div>
+                    <h2 class="h4 mb-0">Детайли на кредит</h2>
+                </div>
                 <div class="card-body">
                     <dl class="row g-3 mb-0">
                         <dt class="col-md-4">Номер на кредит</dt>
@@ -28,10 +28,30 @@
                         </dd>
 
                         <dt class="col-md-4">Сума на кредит</dt>
-                        <dd class="col-md-8">@Model.Credit.CreditAmount.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</dd>
+                        <dd class="col-md-8">@Model.Credit.TotalCreditAmount?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</dd>
 
                         <dt class="col-md-4">Период на кредит</dt>
-                        <dt class="col-md-8">@Model.Credit.CreditPeriod</dt>
+                        <dt class="col-md-8">@Model.Credit.CreditPeriod вноски</dt>
+
+                        @if (Model.Credit.Status == 101)
+                        {
+
+                            var clientFinancial = Model.Credit.Client.ClientFinancials?
+                                                 .OrderByDescending(f => f.ID)
+                                                 .FirstOrDefault();
+
+                            var monthlyExpenses = clientFinancial?.MontlyExpenses ?? 2m;
+                            var monthlyIncome = clientFinancial?.MontlyIncome ?? 2m;
+                            var monthlyInstallment = Model.Credit.MonthlyInstallment ?? 2m;
+                            var diff = monthlyIncome - monthlyExpenses;
+                            var canAffordInstallment = diff >= monthlyInstallment; 
+
+                            <dt class="col-md-4">Финансово състояние на клиент</dt>
+                            <dt class="col-md-8">@(canAffordInstallment ? "Може да бъде одобрен за кредит" : "Да бъде отхвърлен")</dt>
+                        }
+
+                        <dt class="col-md-4">Месечна вноска</dt>
+                        <dt class="col-md-8">@Model.Credit.MonthlyInstallment?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</dt>
 
                         <dt class="col-md-4">Начална дата на кредит</dt>
                         <dd class="col-md-8" asp-format="{0:dd.MM.yyyy}">@Model.Credit.CreditBeginDate?.ToString("dd.MM.yyyy")</dd>

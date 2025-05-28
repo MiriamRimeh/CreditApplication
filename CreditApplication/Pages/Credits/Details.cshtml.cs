@@ -34,6 +34,7 @@ namespace CreditApplication.Pages.Credits
             var credit = await _context.Credits
                 .Include(c => c.StatusNavigation) 
                 .Include(c => c.Client)
+                .ThenInclude(c => c.ClientFinancials)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (credit == null)
             {

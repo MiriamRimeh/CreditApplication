@@ -157,8 +157,8 @@
                         <td align="right">@item.ID</td>
                         <td align="right">@item.ClientID</td>
                         <td align="center">@(item.Client?.EGN ?? " ")</td>
-                        <td align="right">@item.CreditAmount.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
-                        <td align="right">@item.CreditPeriod</td>
+                        <td align="right">@item.TotalCreditAmount?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))</td>
+                        <td align="right">@item.CreditPeriod м.</td>
                         <td align="center">@item.CreditBeginDate?.ToString("dd.MM.yyyy")</td>
                         <td align="center">@item.CreditEndDate?.ToString("dd.MM.yyyy")</td>
                         <td>
