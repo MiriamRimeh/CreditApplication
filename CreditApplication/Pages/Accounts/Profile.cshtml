@@ -6,12 +6,22 @@
     ViewData["Title"] = "Профил";
 }
 
+@if(Model.Account.ClientID == null)
+{
+    <div class="alert alert-info-miriam">
+        <h4>Здравейте, @Model.Account.Username !</h4>
+        Когато регистриране кандидатура за кредит, Вашите данни ще се покажат тук.
+    </div>
+}
+else
+{
+    
 @if (Model.NextInstallment != null)
 {
     <div class="alert alert-info-miriam">
         <strong>Следваща вноска:</strong>
         @Model.NextInstallment.InstallmentAmount?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))
-        на @Model.NextInstallment.InstallmentDate?.ToString("dd.MM.yyyy")
+        на @Model.NextInstallment.InstallmentDate?.ToString("dd.MM.yyyy") по кредит №@Model.NextInstallment.CreditID
     </div>
 }
 
@@ -131,7 +141,7 @@ else
             {
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        @c.CreditAmount лв.
+                        @c.TotalCreditAmount лв.
                         <span class="badge bg-warning ms-2">@c.StatusNavigation.Description</span>
                     </div>
                     Кандидатурата е подадена на @c.CreatedOn?.ToString("dd.MM.yyyy HH:mm")
@@ -146,13 +156,13 @@ else
             {
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        @c.CreditAmount лв
+                        @c.TotalCreditAmount лв
                         <span class="badge bg-success ms-2">@c.StatusNavigation.Description</span>
 
                     </div>
                     <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@c.ID"
                        class="btn btn-sm btn-outline-secondary rounded-pill">
-                        Погасителен план
+                        Погасителен план по кредит №@c.ID
                     </a>
                 </li>
             }
@@ -165,7 +175,7 @@ else
             {
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        @c.CreditAmount лв.
+                        @c.TotalCreditAmount лв.
                         <span class="badge bg-danger ms-2">@c.StatusNavigation.Description</span>
                     </div>
                     <a asp-page="/RepaymentPlans/Index" asp-route-creditId="@c.ID"
@@ -183,7 +193,7 @@ else
             {
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        @c.CreditAmount лв.
+                        @c.TotalCreditAmount лв.
                         <span class="badge bg-dark ms-2">@c.StatusNavigation.Description</span>
                     </div>
                 </li>
@@ -191,3 +201,4 @@ else
         </ul>
     </div>
 </div>
+}

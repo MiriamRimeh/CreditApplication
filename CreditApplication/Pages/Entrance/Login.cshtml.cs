@@ -58,7 +58,7 @@ namespace CreditApplication.Pages.Account
             }
 
             // логваме с ролята като ClaimTypes.Role
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, account.ID.ToString()),
                 new Claim(ClaimTypes.Name, account.Username),
@@ -75,7 +75,7 @@ namespace CreditApplication.Pages.Account
 
             await HttpContext.SignInAsync("Identity.Application", principal, props);
 
-            return RedirectToPage("/Accounts/Profile");
+            return RedirectToPage("/Index");
         }
     }
 }

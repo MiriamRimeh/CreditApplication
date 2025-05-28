@@ -37,7 +37,7 @@ namespace CreditApplication.Pages.Accounts
                 .FirstOrDefaultAsync(a => a.ID == userId && a.Role == AccountRole.Client);
 
             if (Account?.ClientID == null)
-                return RedirectToPage("/Index");
+                return RedirectToPage("/Accounts/Profile");
 
             Client = await _context.Clients
                                  .AsNoTracking()

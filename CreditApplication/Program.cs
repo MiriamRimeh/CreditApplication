@@ -60,19 +60,19 @@ app.UseAuthorization();
 
 
 
-app.Use(async (context, next) =>
-{
-    if (hasAppJustStarted)
-    {
-        if (context.User.Identity.IsAuthenticated)
-        {
-            await context.SignOutAsync("Identity.Application");
-        }
-        hasAppJustStarted = false;
-    }
+//app.Use(async (context, next) =>
+//{
+//    if (hasAppJustStarted)
+//    {
+//        if (context.User.Identity.IsAuthenticated)
+//        {
+//            await context.SignOutAsync("Identity.Application");
+//        }
+//        hasAppJustStarted = false;
+//    }
 
-    await next();
-});
+//    await next();
+//});
 
 app.MapRazorPages();
 

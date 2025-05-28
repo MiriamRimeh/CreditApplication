@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace CreditApplication.Pages.ApplicationForm
 {
+    [Authorize]
     public class Step1Model : PageModel
     {
         private readonly CreditApplication.Data.CreditApplicationDbContext _context;
@@ -26,7 +27,7 @@ namespace CreditApplication.Pages.ApplicationForm
         [BindProperty]
         public Client Client { get; set; }
 
-        [TempData]
+        [BindProperty]
         public int ClientId { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -48,7 +49,6 @@ namespace CreditApplication.Pages.ApplicationForm
                         ?? new Client();
                 }
             }
-
             return Page();
         }
 
@@ -66,20 +66,7 @@ namespace CreditApplication.Pages.ApplicationForm
             if (account == null)
                 return Forbid();
 
-            if (Client.IDValidityDate < Client.IDIssueDate)
-            {
-                ModelState.AddModelError(
-                    "Client.IDValidityDate",
-                    "Дата на валидност трябва да бъде след датата на издаване."
-                );
-            }
-            if (!(Client.IDValidityDate == Client.IDIssueDate.AddYears(10)))
-            {
-                ModelState.AddModelError(
-                    "Client.IDValidityDate",
-                    "Дата на валидност трябва да бъде 10 години след датата на издаване."
-                );
-            }
+            ClientId = account.ClientID ?? 0;
 
             if (string.IsNullOrWhiteSpace(Client.EGN) ||
                !Regex.IsMatch(Client.EGN, @"^\d{10}$"))
@@ -88,6 +75,7 @@ namespace CreditApplication.Pages.ApplicationForm
                     "Client.EGN",
                     "ЕГН трябва да съдържа точно 10 цифри."
                 );
+                return Page();
             }
             else
             {
@@ -100,16 +88,36 @@ namespace CreditApplication.Pages.ApplicationForm
                         "Client.EGN",
                         "Вече съществува клиент с това ЕГН."
                     );
+                    return Page();
                 }
             }
 
-            if (!ModelState.IsValid) return Page();
+            if (Client.IDValidityDate < Client.IDIssueDate)
+            {
+                ModelState.AddModelError(
+                    "Client.IDValidityDate",
+                    "Дата на валидност трябва да бъде след датата на издаване."
+                );
+                return Page();
+            }
+
+            if (!(Client.IDValidityDate == Client.IDIssueDate.AddYears(10)))
+            {
+                ModelState.AddModelError(
+                    "Client.IDValidityDate",
+                    "Дата на валидност трябва да бъде 10 години след датата на издаване."
+                );
+                return Page();
+            }
+
+            //if (!ModelState.IsValid)
+            //    return Page();
 
             if (account.ClientID == null)
             {
                 _context.Clients.Add(Client);
                 await _context.SaveChangesAsync();
-                //TempData.Keep("ClientId");
+                
 
                 account.ClientID = Client.ID;
                 ClientId = Client.ID;
