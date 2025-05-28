@@ -90,10 +90,10 @@
                 </div>
                 <div class="card-footer text-center">
                     @using Microsoft.AspNetCore.Identity
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                     {
                         <a asp-page="./Edit" asp-route-id="@Model.Client.ID" class="btn btn-primary-miriam me-2">
-                             Редактирай
+                            Редактирай лични данни
                         </a>
                     }
                     <a asp-page="./Index" class="btn btn-secondary-miriam me-2">Назад</a>

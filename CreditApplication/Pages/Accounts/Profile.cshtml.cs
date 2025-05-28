@@ -14,6 +14,7 @@ namespace CreditApplication.Pages.Accounts
         private readonly CreditApplicationDbContext _context;
         public ProfileModel(CreditApplicationDbContext context) => _context = context;
 
+        public RepaymentPlan? NextInstallment { get; set; }
         public Models.Account Account { get; set; }
         public Client Client { get; set; }
         public ClientAddress Address { get; set; }
@@ -53,7 +54,15 @@ namespace CreditApplication.Pages.Accounts
                                 .AsNoTracking()
                                 .FirstOrDefaultAsync(f => f.ClientID == Account.ClientID.Value) ?? new ClientFinancial();
 
+            var clientId = Account.ClientID;
 
+            NextInstallment = await _context.RepaymentPlans
+                .Include(r => r.Credit)
+                .Where(r => r.Credit.ClientID == clientId
+                            && (r.isPaid == false || r.isPaid == null)
+                            && r.InstallmentDate >= DateOnly.FromDateTime(DateTime.Today))
+                .OrderBy(r => r.InstallmentDate)
+                .FirstOrDefaultAsync();
 
             var creditsQuery = _context.Credits
                 .Where(c => c.ClientID == Account.ClientID.Value)

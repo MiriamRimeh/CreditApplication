@@ -6,6 +6,14 @@
     ViewData["Title"] = "Профил";
 }
 
+@if (Model.NextInstallment != null)
+{
+    <div class="alert alert-info-miriam">
+        <strong>Следваща вноска:</strong>
+        @Model.NextInstallment.InstallmentAmount?.ToString("C", CultureInfo.GetCultureInfo("bg-BG"))
+        на @Model.NextInstallment.InstallmentDate?.ToString("dd.MM.yyyy")
+    </div>
+}
 
 @if (Model.Client != null)
 {
