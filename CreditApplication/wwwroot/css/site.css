@@ -90,12 +90,28 @@ body {
     color: #212529;
 }
 
+.btn-primary-miriam:hover {
+    background-color: #FFEFBC;
+    color: #212529;
+}
+
+
 .btn-secondary-miriam {
     background-color: #2A444D;
     color: #FEFEFE;
 }
 
+.btn-secondary-miriam:hover {
+    background-color: #F7F7F7;
+    color: #2A444D;
+}
+
 .btn-create-miriam {
+    background-color: #1C2F35;
+    color: #FEFEFE;
+}
+
+.btn-create-miriam:hover {
     background-color: #1C2F35;
     color: #FEFEFE;
 }

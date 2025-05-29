@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "pISkHKDwkwgTiDAqPT4L4a6q7W9nSYFSGfwdZ95vuLs=",
+  "Hash": "roT0Bj+IqcSSOe7N9RuZl1L0olK+fpu8M9e6sDIomzM=",
   "Source": "CreditApplication",
   "BasePath": "_content/CreditApplication",
   "Mode": "Default",
@@ -94,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "qni790tuqa",
-      "Integrity": "yqyRlOSW9ZSm3CRO69C1BBF5X2iGJ6hXNEE2d/mBD+0=",
+      "Fingerprint": "xwl8y9trp2",
+      "Integrity": "8dZzxrnPbpBWGLUZlAp04wkzIkKJfkLw5JhQAcq6PEw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -288,6 +288,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\logo_2.png"
+    },
+    {
+      "Identity": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\no_profile.jpg",
+      "SourceId": "CreditApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\",
+      "BasePath": "_content/CreditApplication",
+      "RelativePath": "images/no_profile#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "95l7n96h64",
+      "Integrity": "zUHVSj2cDe43R1Ufg8f42CAsPx63tPFahGLs0R3uEv4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\no_profile.jpg"
     },
     {
       "Identity": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\js\\calculator.js",
@@ -1787,7 +1808,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3097"
+          "Value": "3361"
         },
         {
           "Name": "Content-Type",
@@ -1795,11 +1816,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yqyRlOSW9ZSm3CRO69C1BBF5X2iGJ6hXNEE2d/mBD+0=\""
+          "Value": "\"8dZzxrnPbpBWGLUZlAp04wkzIkKJfkLw5JhQAcq6PEw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 28 May 2025 11:47:37 GMT"
+          "Value": "Thu, 29 May 2025 16:53:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1809,12 +1830,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-yqyRlOSW9ZSm3CRO69C1BBF5X2iGJ6hXNEE2d/mBD+0="
+          "Value": "sha256-8dZzxrnPbpBWGLUZlAp04wkzIkKJfkLw5JhQAcq6PEw="
         }
       ]
     },
     {
-      "Route": "css/site.qni790tuqa.css",
+      "Route": "css/site.xwl8y9trp2.css",
       "AssetFile": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1824,7 +1845,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3097"
+          "Value": "3361"
         },
         {
           "Name": "Content-Type",
@@ -1832,11 +1853,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yqyRlOSW9ZSm3CRO69C1BBF5X2iGJ6hXNEE2d/mBD+0=\""
+          "Value": "\"8dZzxrnPbpBWGLUZlAp04wkzIkKJfkLw5JhQAcq6PEw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 28 May 2025 11:47:37 GMT"
+          "Value": "Thu, 29 May 2025 16:53:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1846,7 +1867,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qni790tuqa"
+          "Value": "xwl8y9trp2"
         },
         {
           "Name": "label",
@@ -1854,7 +1875,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-yqyRlOSW9ZSm3CRO69C1BBF5X2iGJ6hXNEE2d/mBD+0="
+          "Value": "sha256-8dZzxrnPbpBWGLUZlAp04wkzIkKJfkLw5JhQAcq6PEw="
         }
       ]
     },
@@ -2593,6 +2614,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-Ad5i1k6zff7n1M3a77IFLDtuzH7hVdyKyZPvXUtWtDw="
+        }
+      ]
+    },
+    {
+      "Route": "images/no_profile.95l7n96h64.jpg",
+      "AssetFile": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\no_profile.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "171080"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zUHVSj2cDe43R1Ufg8f42CAsPx63tPFahGLs0R3uEv4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 29 May 2025 09:00:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "95l7n96h64"
+        },
+        {
+          "Name": "label",
+          "Value": "images/no_profile.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zUHVSj2cDe43R1Ufg8f42CAsPx63tPFahGLs0R3uEv4="
+        }
+      ]
+    },
+    {
+      "Route": "images/no_profile.jpg",
+      "AssetFile": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\wwwroot\\images\\no_profile.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "171080"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zUHVSj2cDe43R1Ufg8f42CAsPx63tPFahGLs0R3uEv4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 29 May 2025 09:00:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-zUHVSj2cDe43R1Ufg8f42CAsPx63tPFahGLs0R3uEv4="
         }
       ]
     },

@@ -22,7 +22,19 @@
                             <span asp-validation-for="Account.Username" class="text-danger"></span>
                         </div>
 
-                        @if (Model.Account.Role == CreditApplication.Data.AccountRole.Client)
+                        <div class="form-group col-12 mt-2">
+                            <label asp-for="NewPassword" class="control-label">Нова парола</label>
+                            <input asp-for="NewPassword" class="form-control" />
+                            <span asp-validation-for="NewPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-12 mt-2">
+                            <label asp-for="ConfirmPassword" class="control-label">Потвърдете новата парола</label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        @if (Model.Account.Role == CreditApplication.Data.AccountRole.Client && Model.Account.ClientID != null)
                         {
                             <div class="form-group col-12 mt-2">
                                 <label asp-for="Account.ClientID" class="control-label">ЕГН на клиент</label>

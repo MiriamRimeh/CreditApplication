@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CreditApplication.Data;
 using CreditApplication.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 
 namespace CreditApplication.Pages.Accounts
 {
@@ -21,6 +23,20 @@ namespace CreditApplication.Pages.Accounts
 
         [BindProperty]
         public CreditApplication.Models.Account Account { get; set; } = default!;
+
+
+        [BindProperty, DataType(DataType.Password)]
+        [Display(Name = "Нова парола")]
+        public string? NewPassword { get; set; }
+
+        [BindProperty, DataType(DataType.Password)]
+        [Display(Name = "Повтори паролата")]
+        [Compare(nameof(NewPassword),
+         ErrorMessage = "Паролите не съвпадат.")]
+        public string? ConfirmPassword { get; set; }
+
+
+
         private void PopulateDropdowns()
         {
             var selectedRole = Account != null ? (int)Account.Role : (int?)null;
@@ -65,13 +81,42 @@ namespace CreditApplication.Pages.Accounts
 
         public async Task<IActionResult> OnPostAsync()
         {
-            _context.Attach(Account);
-            var entry = _context.Entry(Account);
-            entry.State = EntityState.Modified;
+            //_context.Attach(Account);
+            //var entry = _context.Entry(Account);
+            //entry.State = EntityState.Modified;
 
-            entry.Property(a => a.PasswordHash).IsModified = false;
-            entry.Property(a => a.PasswordSalt).IsModified = false;
-            entry.Property(a => a.CreatedAt).IsModified = false;
+            //entry.Property(a => a.PasswordHash).IsModified = false;
+            //entry.Property(a => a.PasswordSalt).IsModified = false;
+            //entry.Property(a => a.CreatedAt).IsModified = false;
+
+            PopulateDropdowns();
+
+            if (!ModelState.IsValid)
+                return Page();
+
+            var acct = await _context.Accounts
+                          .FirstOrDefaultAsync(a => a.ID == Account.ID);
+            if (acct == null) return NotFound();
+
+            acct.Username = Account.Username;
+            acct.Role = Account.Role;
+            acct.IsActive = Account.IsActive;
+            acct.ClientID = Account.Role == AccountRole.Client
+                             ? Account.ClientID
+                             : null;
+
+            if (!string.IsNullOrEmpty(NewPassword))
+            {
+                using var derive = new Rfc2898DeriveBytes(
+                    NewPassword,
+                    saltSize: 16,
+                    iterations: 100_000,
+                    HashAlgorithmName.SHA256);
+
+                acct.PasswordSalt = derive.Salt;
+                acct.PasswordHash = derive.GetBytes(32);
+            }
+
 
             try
             {

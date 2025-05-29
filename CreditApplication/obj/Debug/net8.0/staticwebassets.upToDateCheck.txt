@@ -9,6 +9,7 @@ wwwroot\images\fast_approaval.jpg
 wwwroot\images\flexible_conditions.jpg
 wwwroot\images\homePage.jpg
 wwwroot\images\logo_2.png
+wwwroot\images\no_profile.jpg
 wwwroot\js\calculator.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
