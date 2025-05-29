@@ -31,18 +31,20 @@ namespace CreditApplication.Pages.Credits
             }
 
             var credit =  await _context.Credits.FirstOrDefaultAsync(m => m.ID == id);
+
             if (credit == null)
             {
                 return NotFound();
             }
             Credit = credit;
-           ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
+           //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
+
+           //ViewData["ClientID"] = new SelectList(_context.Clients, "ID", "EGN");
 
             if (Credit.CreditAmount < 300 || Credit.CreditAmount > 5000)
             {
@@ -61,11 +63,22 @@ namespace CreditApplication.Pages.Credits
                 return Page();
             }
 
-            _context.Attach(Credit);
-            var entry = _context.Entry(Credit);
-            entry.State = EntityState.Modified;
-            entry.Property(c => c.CreatedOn).IsModified = false;
-            entry.Property(c => c.Status).IsModified = false;
+            var originalCredit = await _context.Credits.FindAsync(Credit.ID);
+            if (originalCredit == null)
+            {
+                return NotFound();
+            }
+
+            originalCredit.CreditAmount = Credit.CreditAmount;
+            originalCredit.CreditPeriod = Credit.CreditPeriod;
+            originalCredit.TotalCreditAmount = Credit.TotalCreditAmount;
+            originalCredit.MonthlyInstallment = Credit.MonthlyInstallment;
+
+            //_context.Attach(Credit);
+            //var entry = _context.Entry(Credit);
+            //entry.State = EntityState.Modified;
+            //entry.Property(c => c.CreatedOn).IsModified = false;
+            //entry.Property(c => c.Status).IsModified = false;
 
             try
             {
@@ -82,6 +95,7 @@ namespace CreditApplication.Pages.Credits
                     throw;
                 }
             }
+
 
             return RedirectToPage("./Index");
         }

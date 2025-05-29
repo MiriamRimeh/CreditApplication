@@ -37,7 +37,7 @@ namespace CreditApplication.Pages.Accounts
                 .FirstOrDefaultAsync(a => a.ID == userId && a.Role == AccountRole.Client);
 
             if (Account?.ClientID == null)
-                return RedirectToPage("/Accounts/Profile");
+                return RedirectToPage("/Accounts/NoProfile");
 
             Client = await _context.Clients
                                  .AsNoTracking()
@@ -59,7 +59,7 @@ namespace CreditApplication.Pages.Accounts
             NextInstallment = await _context.RepaymentPlans
                 .Include(r => r.Credit)
                 .Where(r => r.Credit.ClientID == clientId
-                            && (r.isPaid == false || r.isPaid == null)
+                            && (r.PayedOnDate == null)
                             && r.InstallmentDate >= DateOnly.FromDateTime(DateTime.Today))
                 .OrderBy(r => r.InstallmentDate)
                 .FirstOrDefaultAsync();

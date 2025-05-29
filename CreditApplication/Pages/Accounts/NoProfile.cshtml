@@ -1,0 +1,23 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Client,Employee,Admin")]
+@model CreditApplication.Pages.Accounts.NoProfileModel
+@{
+    ViewData["Title"] = "Профил";
+}
+
+@if (Model.Account != null)
+{
+    <div class="alert alert-info-miriam">
+        <h4>Здравейте, @Model.Account.Username !</h4>
+        <p></p>
+        <p>В момента във Вашия профил няма налична информация.</p>
+        <p>Когато попълните и изпратите кандидатура за кредит, Вашите данни ще се покажат тук.</p>
+    </div>
+    <div class="text-center">
+        <img src="~/images/no_profile.jpg" class="img-fluid"
+             style="max-width:75%; height:auto;" alt="Празен профил" />
+
+    </div>
+    
+}

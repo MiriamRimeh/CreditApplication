@@ -193,8 +193,25 @@ else
                                 }
                                 else
                                 {
-                                    <form method="post" asp-page-handler="Pay" asp-route-id="@rp.ID" class="d-inline">
+                                    @* <form method="post" asp-page-handler="Pay" asp-route-id="@rp.ID" class="d-inline">
                                         <button type="submit" class="btn btn-primary-miriam btn-sm" onclick="confirmAdminPay('@rp.ID')">Плати вноска </button>
+                                    </form> *@
+                                    <form method="post"
+                                          asp-page-handler="Pay"
+                                          asp-route-id="@rp.ID"
+                                          asp-route-creditId="@Model.CreditId"
+                                          asp-route-searchInstallmentDate="@(Model.SearchInstallmentDate?.ToString("yyyy-MM-dd"))"
+                                          asp-route-searchPayedOnDate="@(Model.SearchPayedOnDate?.ToString("yyyy-MM-dd"))"
+                                          asp-route-sortOrder="@Model.SortOrder"
+                                          asp-route-pageIndex="@Model.PageIndex"
+                                          id="payForm-@rp.ID"
+                                          class="d-inline">
+                                        <!-- Сега бутонът е type="button", за да не презивиква submit по подразбиране -->
+                                        <button type="button"
+                                                class="btn btn-primary-miriam btn-sm"
+                                                onclick="confirmAdminPay('@rp.ID')">
+                                            Плати вноска
+                                        </button>
                                     </form>
                                 }
                             }

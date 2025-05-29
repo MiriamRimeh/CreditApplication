@@ -39,6 +39,7 @@ namespace CreditApplication.Pages.Clients
                     "Client.IDValidityDate",
                     "Дата на валидност трябва да бъде след датата на издаване."
                 );
+                return Page();
             }
             if (!(Client.IDValidityDate == Client.IDIssueDate.AddYears(10)))
             {
@@ -46,6 +47,7 @@ namespace CreditApplication.Pages.Clients
                     "Client.IDValidityDate",
                     "Дата на валидност трябва да бъде 10 години след датата на издаване."
                 );
+                return Page();
             }
 
             if (string.IsNullOrWhiteSpace(Client.EGN) ||
@@ -55,6 +57,7 @@ namespace CreditApplication.Pages.Clients
                     "Client.EGN",
                     "ЕГН трябва да съдържа точно 10 цифри."
                 );
+                return Page();
             }
             else
             {
@@ -67,13 +70,11 @@ namespace CreditApplication.Pages.Clients
                         "Client.EGN",
                         "Вече съществува клиент с това ЕГН."
                     );
+                    return Page();
                 }
+                
             }
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             _context.Clients.Add(Client);
             await _context.SaveChangesAsync();

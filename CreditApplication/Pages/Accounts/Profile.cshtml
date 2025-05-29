@@ -6,16 +6,7 @@
     ViewData["Title"] = "Профил";
 }
 
-@if(Model.Account.ClientID == null)
-{
-    <div class="alert alert-info-miriam">
-        <h4>Здравейте, @Model.Account.Username !</h4>
-        Когато регистриране кандидатура за кредит, Вашите данни ще се покажат тук.
-    </div>
-}
-else
-{
-    
+
 @if (Model.NextInstallment != null)
 {
     <div class="alert alert-info-miriam">
@@ -201,4 +192,3 @@ else
         </ul>
     </div>
 </div>
-}

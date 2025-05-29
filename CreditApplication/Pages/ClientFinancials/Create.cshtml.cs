@@ -34,12 +34,10 @@ namespace CreditApplication.Pages.ClientFinancials
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                PopulateClients();
-                await LoadEmploymentTypesAsync();
-                return Page();
-            }
+
+            PopulateClients();
+            await LoadEmploymentTypesAsync();
+  
 
             _context.ClientFinancials.Add(ClientFinancial);
             await _context.SaveChangesAsync();
