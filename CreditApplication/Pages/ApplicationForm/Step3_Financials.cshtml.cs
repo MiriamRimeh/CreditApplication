@@ -58,22 +58,24 @@ namespace CreditApplication.Pages
                 return Page();
             }
 
-            if(Financial.MontlyIncome == null)
+            if(Financial.MontlyIncome is (decimal)0.00)
             {
                 ModelState.AddModelError(
                     "Financial.MontlyIncome",
                     "Моля, въведете размер на доходи."
                 );
+                await LoadEmploymentTypesAsync();
                 return Page();
             }
 
 
-            if (Financial.MontlyExpenses == null)
+            if (Financial.MontlyExpenses is(decimal)0.00)
             {
                 ModelState.AddModelError(
                     "Financial.MontlyExpenses",
                     "Моля, въведете размер на разходи."
                 );
+                await LoadEmploymentTypesAsync();
                 return Page();
             }
 
