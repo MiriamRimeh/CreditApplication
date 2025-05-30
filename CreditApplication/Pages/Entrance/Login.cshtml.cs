@@ -24,10 +24,10 @@ namespace CreditApplication.Pages.Account
 
         public class InputModel
         {
-            [Required, EmailAddress]
+            [Required(ErrorMessage = "Въведете имейл адрес."), EmailAddress(ErrorMessage = "Въведете валиден имейл адрес. Пример: example@example.com.")]
             public string Email { get; set; }
 
-            [Required, DataType(DataType.Password)]
+            [Required(ErrorMessage = "Въведете парола."), DataType(DataType.Password)]
             public string Password { get; set; }
         }
 

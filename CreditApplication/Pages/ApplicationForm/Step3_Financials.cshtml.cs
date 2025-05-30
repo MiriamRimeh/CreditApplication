@@ -58,6 +58,27 @@ namespace CreditApplication.Pages
                 return Page();
             }
 
+            if(Financial.MontlyIncome == null)
+            {
+                ModelState.AddModelError(
+                    "Financial.MontlyIncome",
+                    "Моля, въведете размер на доходи."
+                );
+                return Page();
+            }
+
+
+            if (Financial.MontlyExpenses == null)
+            {
+                ModelState.AddModelError(
+                    "Financial.MontlyExpenses",
+                    "Моля, въведете размер на разходи."
+                );
+                return Page();
+            }
+
+
+
             var existing = await _context.ClientFinancials.FirstOrDefaultAsync(f => f.ClientID == ClientId);
 
             if (existing == null)

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CreditApplication.Models
@@ -23,7 +24,7 @@ namespace CreditApplication.Models
         [MaxLength(10)]
         public string EGN { get; set; }
 
-        [MaxLength(100), EmailAddress]
+        [MaxLength(100), EmailAddress(ErrorMessage = "Въведете валиден имейл адрес. Пример: example@example.com.")]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "Моля, въведете телефонен номер.")]

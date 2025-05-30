@@ -23,14 +23,14 @@ namespace CreditApplication.Pages.Account
 
         public class InputModel
         {
-            [Required, EmailAddress]
+            [Required(ErrorMessage = "Въведете имейл адрес."), EmailAddress(ErrorMessage = "Въведете валиден имейл адрес. Пример: example@example.com.")]
             public string Email { get; set; }
 
-            [Required, StringLength(100, MinimumLength = 6)]
+            [Required(ErrorMessage = "Въведете парола."), StringLength(100, MinimumLength = 6, ErrorMessage = "Паролата трябва да е с дължима между 6 и 100 символа.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Required, Compare("Password")]
+            [Required(ErrorMessage = "Въведете парола."), Compare("Password", ErrorMessage = "Паролата не съвпада.")]
             [DataType(DataType.Password)]
             public string ConfirmPassword { get; set; }
         }
@@ -53,7 +53,6 @@ namespace CreditApplication.Pages.Account
             var salt = derive.Salt; 
             var hash = derive.GetBytes(32); 
 
-            // Служебни имейли, може да го махна?
             AccountRole role;
             if (Input.Email.EndsWith("@emp.flashpay.bg", StringComparison.OrdinalIgnoreCase))
             {

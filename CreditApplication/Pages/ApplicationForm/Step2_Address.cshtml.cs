@@ -10,6 +10,7 @@ using CreditApplication.Models;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace CreditApplication.Pages.ApplicationForm
 {
@@ -47,7 +48,32 @@ namespace CreditApplication.Pages.ApplicationForm
                 return Page();
             }
 
-            
+            if(Address.City == null)
+            {
+                ModelState.AddModelError(
+                    "Address.City",
+                    "Моля, въведете населено място."
+                );
+                return Page();
+            }
+
+            if (Address.StreetNeighbourhood == null)
+            {
+                ModelState.AddModelError(
+                    "Address.StreetNeighbourhood",
+                    "Моля, въведете улица/жилищен комплекс."
+                );
+                return Page();
+            }
+
+            if (Address.PostCode == null)
+            {
+                ModelState.AddModelError(
+                    "Address.PostCode",
+                    "Моля, въведете пощенски код."
+                );
+                return Page();
+            }
 
             var existingAddress = await _context.ClientAddresses.FirstOrDefaultAsync(a => a.ClientID == ClientId);
             if (existingAddress == null)

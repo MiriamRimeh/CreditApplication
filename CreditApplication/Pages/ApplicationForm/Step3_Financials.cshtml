@@ -26,21 +26,21 @@
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Financial.MontlyIncome" class="control-label">Размер на месечни доходи:</label>
-                            <input asp-for="Financial.MontlyIncome" class="form-control" required="" />
+                            <input asp-for="Financial.MontlyIncome" class="form-control" required />
                             <span asp-validation-for="Financial.MontlyIncome" class="text-danger"></span>
                             
                         </div>
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Financial.MontlyExpenses" class="control-label">Размер на месечени разходи:</label>
-                            <input asp-for="Financial.MontlyExpenses" class="form-control" required="" />
+                            <input asp-for="Financial.MontlyExpenses" class="form-control" required />
                             <span asp-validation-for="Financial.MontlyExpenses" class="text-danger"></span>
                             
                         </div>
                         <div class="form-group col-12">
                             <span class="text-danger">*</span>
                             <label asp-for="Financial.EmploymentType" class="control-label">Вид заетост:</label>
-                            <select asp-for="Financial.EmploymentType" class="form-control" required="" asp-items="ViewBag.EmploymentTypes"></select>
+                            <select asp-for="Financial.EmploymentType" class="form-control" required asp-items="ViewBag.EmploymentTypes"></select>
                             <span asp-validation-for="Financial.EmploymentType" class="text-danger"></span>
                             
                         </div>
