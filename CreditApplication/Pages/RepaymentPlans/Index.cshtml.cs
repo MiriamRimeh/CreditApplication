@@ -147,6 +147,20 @@ namespace CreditApplication.Pages.RepaymentPlans
 
             await _context.SaveChangesAsync();
 
+            var remaining = await _context.RepaymentPlans.AnyAsync(p => p.CreditID == rp.CreditID && p.PayedOnDate == null);
+
+            if (!remaining)
+            {
+                var credit = await _context.Credits.FindAsync(rp.CreditID);
+                if (credit != null)
+                {
+                    credit.Status = 103;
+                    credit.CreditEndDate = rp.PayedOnDate;
+                    credit.ModifiedOn = DateTime.Now;
+                    await _context.SaveChangesAsync();
+                }
+            }
+
 
             if (rp.InstallmentDate.HasValue)
             {

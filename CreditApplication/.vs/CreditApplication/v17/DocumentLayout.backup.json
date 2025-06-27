@@ -72,7 +72,7 @@
               "RelativeDocumentMoniker": "Pages\\ApplicationForm\\Step3_Financials.cshtml.cs",
               "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\ApplicationForm\\Step3_Financials.cshtml.cs",
               "RelativeToolTip": "Pages\\ApplicationForm\\Step3_Financials.cshtml.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAcwEgAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-30T17:22:16.816Z",
               "EditorCaption": ""
@@ -87,8 +87,7 @@
               "RelativeToolTip": "Pages\\ApplicationForm\\Step3_Financials.cshtml",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAACwAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-30T17:22:14.678Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T17:22:14.678Z"
             },
             {
               "$type": "Document",
@@ -98,10 +97,9 @@
               "RelativeDocumentMoniker": "Pages\\ApplicationForm\\Step2_Address.cshtml.cs",
               "ToolTip": "C:\\Users\\miria\\source\\repos\\CreditApplication\\CreditApplication\\Pages\\ApplicationForm\\Step2_Address.cshtml.cs",
               "RelativeToolTip": "Pages\\ApplicationForm\\Step2_Address.cshtml.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAswDoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAADwvzoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T17:10:52.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T17:10:52.172Z"
             },
             {
               "$type": "Document",
@@ -149,7 +147,8 @@
               "RelativeToolTip": "Pages\\ApplicationForm\\Step1_Personal.cshtml.cs",
               "ViewState": "AgIAAJoAAAAAAAAAAAAcwLAAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T16:37:20.554Z"
+              "WhenOpened": "2025-05-30T16:37:20.554Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
