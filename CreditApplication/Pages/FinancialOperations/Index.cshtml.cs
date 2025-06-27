@@ -152,7 +152,10 @@ namespace CreditApplication.Pages.FinancialOperations
                 }
 
                 bool hasInstallments = await _context.FinancialOperations
-                    .AnyAsync(f => f.CreditID == originalOp.CreditID && f.OperationType == 202);
+                   .AnyAsync(f => f.CreditID == originalOp.CreditID
+                                   && f.OperationType == 202
+                                   && !_context.FinancialOperations.Any(s => s.OperationType == 203
+                                                                          && s.RepaymentPlanID == f.ID));
 
                 if (hasInstallments)
                 {
@@ -161,7 +164,10 @@ namespace CreditApplication.Pages.FinancialOperations
                 }
 
                 int nonStornoCount = await _context.FinancialOperations
-                    .CountAsync(f => f.CreditID == originalOp.CreditID && f.OperationType != 203);
+                     .CountAsync(f => f.CreditID == originalOp.CreditID
+                                     && f.OperationType != 203
+                                     && !_context.FinancialOperations.Any(s => s.OperationType == 203
+                                                                            && s.RepaymentPlanID == f.ID));
 
                 if (nonStornoCount == 1)
                 {
